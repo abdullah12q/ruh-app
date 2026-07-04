@@ -1,26 +1,236 @@
 @import "tailwindcss";
 
+/* CSS Custom Properties (Light Mode defaults) */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #F9FAFB;
+  --surface: #FFFFFF;
+  --surface-glass: rgba(255, 255, 255, 0.7);
+  --surface-glass-border: rgba(0, 0, 0, 0.06);
+  --text-primary: #111827;
+  --text-secondary: #4B5563;
+  --accent: #0D9488;
+  --accent-glow: rgba(13, 148, 136, 0.3);
+  --shadow-soft: 0 4px 32px rgba(0, 0, 0, 0.08);
+  --shadow-card: 0 8px 40px rgba(0, 0, 0, 0.06);
+}
+
+/* Dark Mode ("Deep Sanctuary") */
+.dark {
+  --background: #050505;
+  --surface: rgba(255, 255, 255, 0.03);
+  --surface-glass: rgba(255, 255, 255, 0.03);
+  --surface-glass-border: rgba(255, 255, 255, 0.08);
+  --text-primary: #F3F4F6;
+  --text-secondary: #9CA3AF;
+  --accent: #14B8A6;
+  --accent-glow: rgba(20, 184, 166, 0.4);
+  --shadow-soft: 0 4px 32px rgba(0, 0, 0, 0.6);
+  --shadow-card: 0 8px 40px rgba(0, 0, 0, 0.4);
 }
 
 @theme inline {
+  /* Color Tokens */
   --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-surface: var(--surface);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-accent: var(--accent);
+  --color-accent-glow: var(--accent-glow);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Rُuh Brand Palette (Static) */
+  --color-Rُuh-teal-50: #f0fdfa;
+  --color-Rُuh-teal-100: #ccfbf1;
+  --color-Rُuh-teal-200: #99f6e4;
+  --color-Rُuh-teal-400: #2dd4bf;
+  --color-Rُuh-teal-500: #14b8a6;
+  --color-Rُuh-teal-600: #0d9488;
+  --color-Rُuh-teal-700: #0f766e;
+  --color-Rُuh-teal-900: #134e4a;
+  --color-Rُuh-obsidian: #050505;
+  --color-Rُuh-charcoal: #111827;
+
+  /* Font Families (mapped via CSS variables from fonts.js) */
+  --font-jakarta: var(--font-jakarta);
+  --font-inter: var(--font-inter);
+  --font-arabic-ui: var(--font-arabic-ui);
+  /* Quranic font — falls back lw uthmanicHafs failed */
+  --font-quran: "Traditional Arabic", "Scheherazade New", "Amiri", serif;
+
+  /* Custom Shadows */
+  --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  --shadow-glow-teal: 0 0 40px rgba(20, 184, 166, 0.25), 0 0 80px rgba(20, 184, 166, 0.1);
+
+  /* Keyframes */
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-glow-pulse: glow-pulse 3s ease-in-out infinite;
+  --animate-shimmer: shimmer 2.5s linear infinite;
+  --animate-fade-up: fade-up 0.6s ease-out forwards;
+  --animate-fade-in: fade-in 0.5s ease-out forwards;
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+
+    50% {
+      transform: translateY(-12px);
+    }
+  }
+
+  @keyframes glow-pulse {
+
+    0%,
+    100% {
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    50% {
+      box-shadow: 0 0 40px var(--accent-glow), 0 0 60px var(--accent-glow);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
   }
 }
 
+/* Global Base Styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--background);
+  color: var(--text-primary);
+  font-family: var(--font-jakarta), var(--font-inter), system-ui, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+}
+
+/* Glassmorphism Utility Classes */
+.glass {
+  background: var(--surface-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--surface-glass-border);
+  box-shadow: var(--shadow-glass);
+}
+
+.glass-light {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-card);
+}
+
+.dark .glass-light {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glow-accent {
+  box-shadow: var(--shadow-glow-teal);
+}
+
+/* Arabic & Quranic Text Utilities */
+.font-quran {
+  font-family: var(--font-quran), 'Traditional Arabic', serif;
+  direction: rtl;
+  text-align: right;
+  line-height: 2.2;
+  font-feature-settings: "liga" 1, "calt" 1;
+}
+
+.font-arabic-ui {
+  font-family: var(--font-arabic-ui), 'Segoe UI', sans-serif;
+  direction: rtl;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--surface-glass-border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* Selection */
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Gradient Text Utility */
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent), #6ee7df);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.dark .gradient-text {
+  background: linear-gradient(135deg, #14b8a6, #67e8f9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Shimmer Loading Skeleton */
+.skeleton {
+  background: linear-gradient(90deg,
+      var(--surface-glass) 25%,
+      rgba(255, 255, 255, 0.08) 50%,
+      var(--surface-glass) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2.5s linear infinite;
+  border-radius: 8px;
 }

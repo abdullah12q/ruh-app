@@ -1,0 +1,58 @@
+import { BookOpen, Clock, Star, Moon } from "lucide-react";
+
+export const features = [
+  {
+    icon: BookOpen,
+    title: "Quran",
+    titleAr: "القرآن",
+    description:
+      "Read and listen to the Holy Quran with word-by-word translations and authentic recitations.",
+    href: "/quran",
+    gradient: "from-teal-500/10 to-cyan-500/10",
+    iconColor: "text-[var(--accent)]",
+  },
+  {
+    icon: Clock,
+    title: "Prayer Times",
+    titleAr: "أوقات الصلاة",
+    description:
+      "Accurate prayer times for your location with Azan notifications and Qibla direction.",
+    href: "/prayer-times",
+    gradient: "from-indigo-500/10 to-violet-500/10",
+    iconColor: "text-indigo-400",
+  },
+  {
+    icon: Star,
+    title: "Hadith",
+    titleAr: "الحديث",
+    description:
+      "Explore authentic Hadiths from the major collections, curated for daily reflection.",
+    href: "/hadith",
+    gradient: "from-amber-500/10 to-orange-500/10",
+    iconColor: "text-amber-400",
+  },
+  {
+    icon: Moon,
+    title: "Focus Mode",
+    titleAr: "وضع التركيز",
+    description:
+      "Distraction-free reading environment designed for deep focus and spiritual immersion.",
+    href: "/quran",
+    gradient: "from-emerald-500/10 to-teal-500/10",
+    iconColor: "text-emerald-400",
+  },
+];
+
+export const stats = [
+  { value: "114", label: "Surahs", labelAr: "سورة" },
+  { value: "6,236", label: "Ayahs", labelAr: "آية" },
+  { value: "99", label: "Names of Allah", labelAr: "أسماء الله" },
+  { value: "30", label: "Juz", labelAr: "جزء" },
+];
+
+// h5leha dynamic later
+export const dailyVerse = {
+  arabic: "إِنَّ مَعَ الْعُسْرِ يُسْرًا",
+  translation: "Indeed, with hardship [will be] ease.",
+  reference: "Surah Ash-Sharh, 94:6",
+};
