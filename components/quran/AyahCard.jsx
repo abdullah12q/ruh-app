@@ -111,9 +111,7 @@ export default function AyahCard({ ayah, surahId }) {
         ) : translationText ? (
           <p
             className={`text-sm sm:text-base text-text-secondary leading-relaxed ${
-              lang === "ar"
-                ? "font-arabic-ui text-right"
-                : "font-inter"
+              lang === "ar" ? "font-arabic-ui text-right" : "font-inter"
             }`}
             dir={lang === "ar" ? "rtl" : "ltr"}
             lang={lang === "ar" ? "ar" : "en"}

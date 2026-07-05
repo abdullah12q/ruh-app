@@ -46,7 +46,7 @@ export default function SignInForm() {
         className="fixed inset-0 overflow-hidden pointer-events-none"
         aria-hidden="true"
       >
-        <div className="absolute top-1/3 -left-20 w-64 h-64 bg-accent opacity-[0.05] rounded-full blur-3xl" />
+        <div className="absolute top-1/3 -left-20 size-64 bg-accent opacity-[0.05] rounded-full blur-3xl" />
         <div className="absolute bottom-1/3 -right-20 w-80 h-80 bg-cyan-500 opacity-[0.04] rounded-full blur-3xl" />
       </div>
 
@@ -131,7 +131,7 @@ export default function SignInForm() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@example.com"
                   required
-                  className="w-full glass rounded-xl pl-11 pr-4 py-3 text-sm text-text-primary placeholder:text-(--text-secondary)/50 font-inter transition-all duration-200 focus:outline-none focus:border-accent!"
+                  className="w-full glass rounded-xl pl-11 pr-4 py-3 text-sm text-text-primary placeholder:text-text-secondary/50 font-inter transition-all duration-200 focus:outline-none focus:border-accent!"
                 />
               </div>
             </div>
@@ -156,7 +156,7 @@ export default function SignInForm() {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
                   required
-                  className="w-full glass rounded-xl pl-11 pr-12 py-3 text-sm text-text-primary placeholder:text-(--text-secondary)/50 font-inter transition-all duration-200 focus:outline-none focus:border-accent!"
+                  className="w-full glass rounded-xl pl-11 pr-12 py-3 text-sm text-text-primary placeholder:text-text-secondary/50 font-inter transition-all duration-200 focus:outline-none focus:border-accent!"
                 />
                 <button
                   type="button"

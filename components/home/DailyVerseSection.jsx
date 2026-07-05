@@ -2,16 +2,64 @@
 
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
-import { dailyVerse } from "@/data/homeData";
+import { useState } from "react";
+import {
+  DAILY_VERSE_KEY,
+  useAyahTranslation,
+  useRandomVerse,
+  useSurah,
+} from "@/lib/queries/quran";
+import useUIStore from "@/lib/store/useUIStore";
+
+import DailyVerseHeader from "./DailyVerseHeader";
+import DailyVerseContent from "./DailyVerseContent";
+import DailyVerseControls from "./DailyVerseControls";
+import { useMediaQuery } from "@custom-react-hooks/use-media-query";
 
 export default function DailyVerseSection() {
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
+  const {
+    data: verse,
+    isLoading: verseLoading,
+    refetch: refetchVerse,
+  } = useRandomVerse();
+  const { data: surah } = useSurah(verse?.surah);
+
+  const {
+    translationLang,
+    setTranslationLang,
+    selectedReciter,
+    setSelectedReciter,
+    favoriteReciters,
+    toggleFavoriteReciter,
+  } = useUIStore();
+
+  const {
+    text: translationText,
+    isLoading: translationLoading,
+    isError: translationError,
+    lang,
+  } = useAyahTranslation(verse?.surah, verse?.sequence.surah);
+
+  // Clears the localStorage cache and fetches a brand-new random verse
+  async function handleGetNewVerse() {
+    try {
+      localStorage.removeItem(DAILY_VERSE_KEY);
+    } catch {}
+
+    await refetchVerse();
+  }
+
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, scale: 0.85 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, amount: 0.6 }}
+          viewport={{ once: true, amount: isMobile ? 0.3 : 0.6 }}
           transition={{ type: "spring", duration: 1.4 }}
         >
           {/* Section Label */}
@@ -21,33 +69,47 @@ export default function DailyVerseSection() {
           </div>
 
           {/* Glass Card */}
-          <div className="glass rounded-3xl p-8 sm:p-12 relative overflow-hidden">
-            {/* Decorative glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-accent opacity-[0.04] rounded-full blur-3xl pointer-events-none" />
+          <div className="glass rounded-3xl px-8 pb-8 pt-4 sm:px-12 sm:pb-12 sm:pt-6 relative">
+            {verseLoading ? (
+              <div className="space-y-2 animate-pulse">
+                <div className="h-3 bg-(--surface-glass-border) rounded-full w-full" />
+                <div className="h-3 bg-(--surface-glass-border) rounded-full w-4/5" />
+                <div className="h-3 bg-(--surface-glass-border) rounded-full w-full" />
+                <div className="h-3 bg-(--surface-glass-border) rounded-full w-4/5" />
+              </div>
+            ) : (
+              <>
+                {/* Top bar: Reciter + Language */}
+                <DailyVerseHeader
+                  selectedReciter={selectedReciter}
+                  favoriteReciters={favoriteReciters}
+                  onSelectReciter={setSelectedReciter}
+                  onToggleFavoriteReciter={toggleFavoriteReciter}
+                  translationLang={translationLang}
+                  onSetTranslationLang={setTranslationLang}
+                />
 
-            <div className="relative z-10">
-              {/* Arabic Ayah */}
-              <p
-                className="font-quran text-3xl sm:text-4xl md:text-5xl text-text-primary mb-8 leading-loose text-center!"
-                dir="rtl"
-                lang="ar"
-              >
-                {dailyVerse.arabic}
-              </p>
+                {/* Decorative glow */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-64 bg-accent opacity-[0.07] rounded-full blur-3xl pointer-events-none" />
 
-              {/* Divider */}
-              <div className="w-16 h-px bg-(--accent)/40 mx-auto mb-6" />
+                <div className="relative z-10">
+                  <DailyVerseContent
+                    verse={verse}
+                    surah={surah}
+                    translationText={translationText}
+                    translationLoading={translationLoading}
+                    translationError={translationError}
+                    lang={lang}
+                  />
 
-              {/* Translation */}
-              <p className="font-inter text-lg text-text-secondary italic mb-4">
-                &ldquo;{dailyVerse.translation}&rdquo;
-              </p>
-
-              {/* Reference */}
-              <p className="text-sm text-accent font-medium font-jakarta">
-                — {dailyVerse.reference}
-              </p>
-            </div>
+                  <DailyVerseControls
+                    isPlaying={isPlaying}
+                    onPlayPauseToggle={() => setIsPlaying((p) => !p)}
+                    onGetNewVerse={handleGetNewVerse}
+                  />
+                </div>
+              </>
+            )}
           </div>
         </motion.div>
       </div>

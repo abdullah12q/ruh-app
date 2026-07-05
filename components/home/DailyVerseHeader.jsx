@@ -1,0 +1,28 @@
+import imamList from "@/imam.json";
+import LanguageToggle from "../quran/LanguageToggle";
+import ReciterDropdown from "../quran/ReciterDropdown";
+
+export default function DailyVerseHeader({
+  selectedReciter,
+  favoriteReciters,
+  onSelectReciter,
+  onToggleFavoriteReciter,
+  translationLang,
+  onSetTranslationLang,
+}) {
+  return (
+    <div className="flex items-center justify-between mb-2 sm:mb-4">
+      <ReciterDropdown
+        reciters={imamList}
+        selectedReciter={selectedReciter}
+        favoriteReciters={favoriteReciters}
+        onSelect={onSelectReciter}
+        onToggleFavorite={onToggleFavoriteReciter}
+      />
+      <LanguageToggle
+        translationLang={translationLang}
+        setTranslationLang={onSetTranslationLang}
+      />
+    </div>
+  );
+}

@@ -20,7 +20,7 @@ export default function AuthErrorView() {
         className="fixed inset-0 overflow-hidden pointer-events-none"
         aria-hidden="true"
       >
-        <div className="absolute top-1/3 -left-20 w-64 h-64 bg-red-500 opacity-[0.04] rounded-full blur-3xl" />
+        <div className="absolute top-1/3 -left-20 size-64 bg-red-500 opacity-[0.04] rounded-full blur-3xl" />
         <div className="absolute bottom-1/3 -right-20 w-80 h-80 bg-accent opacity-[0.03] rounded-full blur-3xl" />
       </div>
 

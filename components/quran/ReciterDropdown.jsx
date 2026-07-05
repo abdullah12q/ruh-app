@@ -61,7 +61,7 @@ export default function ReciterDropdown({
         aria-haspopup="listbox"
         aria-expanded={dropdownOpen}
         aria-label="Select reciter"
-        className="flex items-center gap-2 glass rounded-xl px-3 py-2 text-xs text-text-secondary hover:text-text-primary transition-all cursor-pointer min-w-40 max-w-55"
+        className="flex items-center gap-2 glass rounded-xl px-3 py-2 text-xs text-text-secondary hover:text-text-primary transition-all w-35 sm:w-auto cursor-pointer"
       >
         <Mic size={13} className="text-accent shrink-0" />
         <span className="truncate flex-1 text-left font-medium text-text-primary">

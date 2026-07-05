@@ -49,10 +49,3 @@ export const stats = [
   { value: "99", label: "Names of Allah", labelAr: "أسماء الله" },
   { value: "30", label: "Juz", labelAr: "جزء" },
 ];
-
-// h5leha dynamic later
-export const dailyVerse = {
-  arabic: "إِنَّ مَعَ الْعُسْرِ يُسْرًا",
-  translation: "Indeed, with hardship [will be] ease.",
-  reference: "Surah Ash-Sharh, 94:6",
-};

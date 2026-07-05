@@ -19,7 +19,7 @@ export default function CTASection() {
           className="glass rounded-3xl p-10 sm:p-14 relative overflow-hidden"
         >
           {/* Decorative background */}
-          <div className="absolute inset-0 bg-linear-to-br from-(--accent)/5 to-transparent rounded-3xl pointer-events-none" />
+          <div className="absolute inset-0 bg-linear-to-br from-accent/5 to-transparent rounded-3xl pointer-events-none" />
           <div className="absolute -top-24 -right-24 w-48 h-48 bg-accent opacity-[0.06] rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative z-10">
