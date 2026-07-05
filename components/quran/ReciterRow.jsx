@@ -1,13 +1,11 @@
-"use client";
-
 import { Star } from "lucide-react";
 
 export default function ReciterRow({
   reciter,
   isSelected,
-  isFavourite,
+  isFavorite,
   onSelect,
-  onToggleFavourite,
+  onToggleFavorite,
 }) {
   return (
     <div
@@ -44,22 +42,20 @@ export default function ReciterRow({
         </p>
       </div>
 
-      {/* Favourite star */}
+      {/* Favorite star */}
       <button
         onClick={(e) => {
           e.stopPropagation();
-          onToggleFavourite(reciter.id);
+          onToggleFavorite(reciter.id);
         }}
-        aria-label={
-          isFavourite ? "Remove from favourites" : "Add to favourites"
-        }
+        aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
         className={`shrink-0 p-1 rounded-lg transition-all duration-150 ${
-          isFavourite
+          isFavorite
             ? "text-amber-400 hover:text-amber-300"
             : "text-transparent group-hover:text-text-secondary/40 hover:text-amber-400!"
         } cursor-pointer`}
       >
-        <Star size={12} fill={isFavourite ? "currentColor" : "none"} />
+        <Star size={12} fill={isFavorite ? "currentColor" : "none"} />
       </button>
     </div>
   );

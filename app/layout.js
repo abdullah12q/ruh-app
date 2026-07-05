@@ -6,7 +6,7 @@ import "./globals.css";
 const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 
 export const metadata = {
-  metadataBase: new URL(appUrl), // this is used for defining the base url for the website and for social media open graph images and links and twitter images and links in cards , for exmaple when you share the link on social media
+  metadataBase: new URL(appUrl), // this is used for defining the base url for the website and for social media open graph images and links and twitter images and links in cards , for example when you share the link on social media
   title: {
     default: "Rُuh | رُوح — Feed your soul, distraction-free.",
     template: "%s | Rُuh رُوح",

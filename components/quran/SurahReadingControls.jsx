@@ -69,7 +69,7 @@ export default function SurahReadingControls({ surahId }) {
           selectedReciter={selectedReciter}
           favoriteReciters={favoriteReciters}
           onSelect={setSelectedReciter}
-          onToggleFavourite={toggleFavoriteReciter}
+          onToggleFavorite={toggleFavoriteReciter}
         />
 
         {/* Language Toggle */}

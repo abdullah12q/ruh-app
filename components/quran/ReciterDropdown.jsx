@@ -11,7 +11,7 @@ export default function ReciterDropdown({
   selectedReciter,
   favoriteReciters,
   onSelect,
-  onToggleFavourite,
+  onToggleFavorite,
 }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [search, setSearch] = useState("");
@@ -43,14 +43,14 @@ export default function ReciterDropdown({
     setSearch("");
   }
 
-  // Filter and split by favourites
+  // Filter and split by favorites
   const q = search.trim().toLowerCase();
   const filtered = reciters.filter(
     (r) =>
       r.name.toLowerCase().includes(q) || r.nameArabic.includes(search.trim()),
   );
   const favSet = new Set(favoriteReciters);
-  const favouritesInList = filtered.filter((r) => favSet.has(r.id));
+  const favoritesInList = filtered.filter((r) => favSet.has(r.id));
   const othersInList = filtered.filter((r) => !favSet.has(r.id));
 
   return (
@@ -127,20 +127,20 @@ export default function ReciterDropdown({
                 </p>
               )}
 
-              {/* Favourites section */}
-              {favouritesInList.length > 0 && (
+              {/* Favorites section */}
+              {favoritesInList.length > 0 && (
                 <>
                   <p className="px-4 py-1.5 text-[10px] font-semibold uppercase tracking-widest text-accent/70">
-                    ★ Favourites
+                    ★ Favorites
                   </p>
-                  {favouritesInList.map((reciter) => (
+                  {favoritesInList.map((reciter) => (
                     <ReciterRow
                       key={reciter.id}
                       reciter={reciter}
                       isSelected={selectedReciter?.id === reciter.id}
-                      isFavourite
+                      isFavorite
                       onSelect={handleSelect}
-                      onToggleFavourite={onToggleFavourite}
+                      onToggleFavorite={onToggleFavorite}
                     />
                   ))}
                   {othersInList.length > 0 && (
@@ -152,7 +152,7 @@ export default function ReciterDropdown({
               {/* All reciters */}
               {othersInList.length > 0 && (
                 <>
-                  {favouritesInList.length > 0 && (
+                  {favoritesInList.length > 0 && (
                     <p className="px-4 py-1.5 text-[10px] font-semibold uppercase tracking-widest text-text-secondary/50">
                       All Reciters
                     </p>
@@ -162,9 +162,9 @@ export default function ReciterDropdown({
                       key={reciter.id}
                       reciter={reciter}
                       isSelected={selectedReciter?.id === reciter.id}
-                      isFavourite={false}
+                      isFavorite={false}
                       onSelect={handleSelect}
-                      onToggleFavourite={onToggleFavourite}
+                      onToggleFavorite={onToggleFavorite}
                     />
                   ))}
                 </>

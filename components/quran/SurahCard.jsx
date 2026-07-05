@@ -10,7 +10,7 @@ export default function SurahCard({ surah }) {
       className="group glass rounded-2xl p-5 flex items-center gap-4 hover:border-(--accent)/30 transition-all duration-200 hover:shadow-[0_0_20px_rgba(20,184,166,0.08)]"
     >
       {/* Surah Number Badge */}
-      <div className="size-11 shrink-0 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-sm font-bold font-jakarta text-accent group-hover:bg-(--accent)/20 transition-colors duration-200">
+      <div className="size-11 shrink-0 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-sm font-bold font-jakarta text-accent group-hover:bg-accent/20 transition-colors duration-200">
         {surah.id}
       </div>
 
