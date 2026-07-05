@@ -29,14 +29,16 @@ export default function FeatureCard({ feature }) {
 
         <div className="relative z-10">
           {/* Icon */}
-          <div
-            className={`w-11 h-11 rounded-xl glass flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 ${iconColor}`}
-          >
-            <Icon size={20} />
+          <div className="flex justify-center sm:justify-start">
+            <div
+              className={`size-11 rounded-xl glass flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 ${iconColor}`}
+            >
+              <Icon size={20} />
+            </div>
           </div>
 
           {/* Title */}
-          <div className="flex items-baseline gap-2 mb-2">
+          <div className="flex items-baseline justify-center sm:justify-start gap-2 mb-2">
             <h3 className="text-base font-bold text-text-primary font-jakarta">
               {title}
             </h3>
@@ -46,7 +48,7 @@ export default function FeatureCard({ feature }) {
           </div>
 
           {/* Description */}
-          <p className="text-sm text-text-secondary font-inter leading-relaxed">
+          <p className="text-sm text-text-secondary text-center sm:text-start font-inter leading-relaxed">
             {description}
           </p>
 

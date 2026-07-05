@@ -87,7 +87,7 @@ export default function HeroSection() {
           </p>
 
           {/* CTA Buttons */}
-          <div className="hero-cta flex flex-wrap gap-4">
+          <div className="hero-cta flex gap-4">
             <Link
               href="/quran"
               className="flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-accent text-white font-semibold font-jakarta text-sm hover:opacity-90 hover:shadow-[0_0_30px_rgba(20,184,166,0.4)] active:scale-95 transition-all duration-200"

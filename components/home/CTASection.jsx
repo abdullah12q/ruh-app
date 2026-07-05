@@ -3,15 +3,18 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
+import { useMediaQuery } from "@custom-react-hooks/use-media-query";
 
 export default function CTASection() {
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.6 }}
+          viewport={{ once: true, amount: isMobile ? 0.5 : 0.6 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="glass rounded-3xl p-10 sm:p-14 relative overflow-hidden"
         >

@@ -4,8 +4,11 @@ import { motion } from "framer-motion";
 import { fadeUp, staggerContainer } from "@/data/animationVariants";
 import { features } from "@/data/homeData";
 import FeatureCard from "./FeatureCard";
+import { useMediaQuery } from "@custom-react-hooks/use-media-query";
 
 export default function FeaturesSection() {
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -32,7 +35,7 @@ export default function FeaturesSection() {
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.6 }}
+          viewport={{ once: true, amount: isMobile ? 0.3 : 0.6 }}
           className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4"
         >
           {features.map((feature) => (
