@@ -54,7 +54,7 @@ export default function ReciterDropdown({
   const othersInList = filtered.filter((r) => !favSet.has(r.id));
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="relative text-start" ref={dropdownRef}>
       <button
         id="reciter-dropdown-trigger"
         onClick={() => setDropdownOpen((p) => !p)}
