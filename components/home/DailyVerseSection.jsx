@@ -24,6 +24,7 @@ export default function DailyVerseSection() {
   const {
     data: verse,
     isLoading: verseLoading,
+    isFetching: isFetchingVerse,
     refetch: refetchVerse,
   } = useRandomVerse();
   const { data: surah } = useSurah(verse?.surah);
@@ -105,6 +106,7 @@ export default function DailyVerseSection() {
                   <DailyVerseControls
                     isPlaying={isPlaying}
                     onPlayPauseToggle={() => setIsPlaying((p) => !p)}
+                    isFetchingVerse={isFetchingVerse}
                     onGetNewVerse={handleGetNewVerse}
                   />
                 </div>

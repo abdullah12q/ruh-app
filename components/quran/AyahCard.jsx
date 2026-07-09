@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import useUIStore from "@/lib/store/useUIStore";
 import { useAyahTranslation } from "@/lib/queries/quran";
 import { Bookmark, Play, Pause } from "lucide-react";
@@ -109,15 +109,22 @@ export default function AyahCard({ ayah, surahId }) {
             Translation unavailable.
           </p>
         ) : translationText ? (
-          <p
-            className={`text-sm sm:text-base text-text-secondary leading-relaxed ${
-              lang === "ar" ? "font-arabic-ui text-right" : "font-inter"
-            }`}
-            dir={lang === "ar" ? "rtl" : "ltr"}
-            lang={lang === "ar" ? "ar" : "en"}
-          >
-            {translationText}
-          </p>
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={translationText}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className={`text-sm sm:text-base text-text-secondary leading-relaxed ${
+                lang === "ar" ? "font-arabic-ui text-right" : "font-inter"
+              }`}
+              dir={lang === "ar" ? "rtl" : "ltr"}
+              lang={lang === "ar" ? "ar" : "en"}
+            >
+              {translationText}
+            </motion.p>
+          </AnimatePresence>
         ) : null}
       </div>
 

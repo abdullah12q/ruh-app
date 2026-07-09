@@ -4,6 +4,7 @@ import { Play, Pause, RefreshCw } from "lucide-react";
 export default function DailyVerseControls({
   isPlaying,
   onPlayPauseToggle,
+  isFetchingVerse,
   onGetNewVerse,
 }) {
   return (
@@ -52,8 +53,9 @@ export default function DailyVerseControls({
         whileHover={{ scale: 1.06 }}
         whileTap={{ scale: 1 }}
         onClick={onGetNewVerse}
+        disabled={isFetchingVerse}
         aria-label="Get another random verse"
-        className="flex items-center gap-2 px-5 py-2.5 rounded-full glass border border-(--surface-glass-border) hover:border-accent/40 text-text-secondary hover:text-accent transition-colors duration-200 text-sm font-jakarta font-medium cursor-pointer"
+        className="flex items-center gap-2 px-5 py-2.5 rounded-full glass border border-(--surface-glass-border) hover:border-accent/40 text-text-secondary hover:text-accent transition-colors duration-200 text-sm font-jakarta font-medium cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <RefreshCw size={14} />
         New Verse

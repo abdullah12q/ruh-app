@@ -54,7 +54,7 @@ export default function DailyVerseContent({
               dir={lang === "ar" ? "rtl" : "ltr"}
               lang={lang === "ar" ? "ar" : "en"}
             >
-              &ldquo; {translationText} &rdquo;
+              &ldquo; {translationText} {""} &rdquo;
             </motion.p>
           </AnimatePresence>
         ) : null}

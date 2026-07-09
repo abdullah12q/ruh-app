@@ -70,8 +70,8 @@ export default async function SurahPage({ params }) {
     notFound();
   }
 
-  const prevSurah = id > 1 ? id - 1 : null;
-  const nextSurah = id < 114 ? id + 1 : null;
+  const prevSurah = id > 1 ? await getSurah(id - 1) : null;
+  const nextSurah = id < 114 ? await getSurah(id + 1) : null;
 
   return (
     <div
