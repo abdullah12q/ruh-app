@@ -1,4 +1,4 @@
-export default function SurahHeader({ surah }) {
+export default function SurahHeader({ surah, startJuz, endJuz }) {
   return (
     <header className="glass rounded-3xl p-8 sm:p-10 text-center mb-8 relative overflow-hidden">
       {/* Decorative glow */}
@@ -31,15 +31,27 @@ export default function SurahHeader({ surah }) {
 
         {/* Meta Pills */}
         <div className="flex items-center justify-center gap-3 flex-wrap">
-          <span className="px-3 py-1 rounded-full glass text-xs font-medium text-text-secondary">
+          <p className="px-3 py-1 rounded-full glass text-xs font-medium text-text-secondary">
             {surah.verses_count} Verses
-          </span>
-          <span className="px-3 py-1 rounded-full glass text-xs font-medium text-text-secondary capitalize">
+          </p>
+          <p className="px-3 py-1 rounded-full glass text-xs font-medium text-text-secondary capitalize">
             {surah.revelation_place}
-          </span>
-          <span className="px-3 py-1 rounded-full glass text-xs font-medium text-text-secondary">
-            Juz {surah.pages?.[0]}+
-          </span>
+          </p>
+          {surah.revelation_order && (
+            <p className="px-3 py-1 rounded-full glass text-xs font-medium text-text-secondary">
+              Revelation Order: {surah.revelation_order}
+            </p>
+          )}
+          {startJuz && (
+            <p className="px-3 py-1 rounded-full glass text-xs font-medium text-text-secondary">
+              Juz: {startJuz} {endJuz !== startJuz && `- ${endJuz}`}
+            </p>
+          )}
+          <p className="px-3 py-1 rounded-full glass text-xs font-medium text-text-secondary">
+            {surah.pages?.[0] === surah.pages?.[1]
+              ? `Page: ${surah.pages?.[0]}`
+              : `Pages: ${surah.pages?.[0]} - ${surah.pages?.[1]}`}
+          </p>
         </div>
       </div>
     </header>

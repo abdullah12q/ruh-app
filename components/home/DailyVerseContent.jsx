@@ -1,4 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
+import { BookOpen, Layers } from "lucide-react";
 
 export default function DailyVerseContent({
   verse,
@@ -18,7 +19,7 @@ export default function DailyVerseContent({
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.4 }}
-          className="font-quran text-3xl text-text-primary mb-8 leading-loose text-center!"
+          className="font-quran text-3xl text-text-primary mb-6 leading-loose text-center!"
           dir="rtl"
           lang="ar"
         >
@@ -61,9 +62,52 @@ export default function DailyVerseContent({
       </div>
 
       {/* Reference */}
-      <p className="text-sm text-accent font-medium font-jakarta mb-8">
-        Surah {surah?.name_simple}, {verse?.surah}:{verse?.sequence?.surah}
-      </p>
+      <div className="flex flex-col items-center gap-3 mb-6">
+        <div className="flex items-center justify-center gap-4 w-full">
+          <div className="w-12 h-px bg-linear-to-r from-transparent to-(--accent)/40" />
+          {surah?.name_arabic && (
+            <h3
+              className="font-arabic-ui text-xl text-text-primary/90 font-medium"
+              dir="rtl"
+              lang="ar"
+            >
+              {surah.name_arabic}
+            </h3>
+          )}
+          <div className="w-12 h-px bg-linear-to-l from-transparent to-(--accent)/40" />
+        </div>
+
+        <div className="flex items-center gap-2.5 font-jakarta">
+          {surah?.name_simple && (
+            <p className="text-sm text-text-secondary/90 tracking-wide">
+              {surah.name_simple}
+            </p>
+          )}
+          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold bg-accent/10 text-accent border border-accent/20">
+            <p>Surah {verse?.surah}</p>
+            <p className="opacity-50">•</p>
+            <p>Ayah {verse?.sequence?.surah}</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Metadata Badges: Juz & Page */}
+      {(verse?.juz || verse?.page) && (
+        <div className="flex items-center justify-center gap-3 mb-8">
+          {verse?.juz && (
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full glass text-xs text-text-secondary/70 font-jakarta">
+              <Layers size={11} className="text-accent/70" />
+              Juz {verse.juz}
+            </span>
+          )}
+          {verse?.page && (
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full glass text-xs text-text-secondary/70 font-jakarta">
+              <BookOpen size={11} className="text-accent/70" />
+              Page {verse.page}
+            </span>
+          )}
+        </div>
+      )}
     </>
   );
 }

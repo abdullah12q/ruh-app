@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import useUIStore from "@/lib/store/useUIStore";
 import { useAyahTranslation } from "@/lib/queries/quran";
 import { Bookmark, Play, Pause } from "lucide-react";
+import { FootnoteFormatter } from "./FootnoteFormatter";
 
 export default function AyahCard({ ayah, surahId }) {
   const { activeAyah, setActiveAyah, audioPlaying, toggleAudio, fontSize } =
@@ -12,6 +13,7 @@ export default function AyahCard({ ayah, surahId }) {
 
   const {
     text: translationText,
+    footnotes,
     isLoading: translationLoading,
     isError: translationError,
     lang,
@@ -27,7 +29,7 @@ export default function AyahCard({ ayah, surahId }) {
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.6 }}
       transition={{ type: "spring", damping: 100, stiffness: 300 }}
@@ -51,7 +53,7 @@ export default function AyahCard({ ayah, surahId }) {
       {/* Ayah Number Badge */}
       <div className="flex items-start justify-between gap-4 mb-6">
         <div
-          className={`shrink-0 w-9 h-9 rounded-xl flex items-center justify-center text-xs font-bold border transition-colors duration-200 ${
+          className={`shrink-0 size-9 rounded-xl flex items-center justify-center text-xs font-bold border transition-colors duration-200 ${
             isActive
               ? "bg-accent text-white border-transparent"
               : "bg-accent/10 text-accent border-accent/20"
@@ -110,7 +112,7 @@ export default function AyahCard({ ayah, surahId }) {
           </p>
         ) : translationText ? (
           <AnimatePresence mode="wait">
-            <motion.p
+            <motion.div
               key={translationText}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -123,7 +125,18 @@ export default function AyahCard({ ayah, surahId }) {
               lang={lang === "ar" ? "ar" : "en"}
             >
               {translationText}
-            </motion.p>
+              {footnotes && lang === "en" && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="mt-2 p-3 bg-(--surface-glass-border) rounded-lg"
+                >
+                  <FootnoteFormatter text={footnotes} />
+                </motion.div>
+              )}
+            </motion.div>
           </AnimatePresence>
         ) : null}
       </div>

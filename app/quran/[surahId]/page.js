@@ -73,6 +73,10 @@ export default async function SurahPage({ params }) {
   const prevSurah = id > 1 ? await getSurah(id - 1) : null;
   const nextSurah = id < 114 ? await getSurah(id + 1) : null;
 
+  const startJuz = verses?.[0]?.juz_number;
+  const endJuz =
+    verses.length > 0 ? verses[verses.length - 1].juz_number : null;
+
   return (
     <div
       className={`min-h-screen pt-28 pb-24 px-4 sm:px-6 lg:px-8 ${uthmanicHafs.variable}`}
@@ -91,7 +95,7 @@ export default async function SurahPage({ params }) {
           <span className="text-text-primary">{surah.name_simple}</span>
         </nav>
 
-        <SurahHeader surah={surah} />
+        <SurahHeader surah={surah} startJuz={startJuz} endJuz={endJuz} />
         <SurahReadingControls surahId={id} />
         <BismillahCard surahId={id} />
         <AyahList verses={verses} surahId={id} />
