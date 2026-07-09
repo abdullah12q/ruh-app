@@ -40,6 +40,7 @@ export default function DailyVerseSection() {
 
   const {
     text: translationText,
+    footnotes,
     isLoading: translationLoading,
     isError: translationError,
     lang,
@@ -98,6 +99,7 @@ export default function DailyVerseSection() {
                     verse={verse}
                     surah={surah}
                     translationText={translationText}
+                    footnotes={footnotes}
                     translationLoading={translationLoading}
                     translationError={translationError}
                     lang={lang}

@@ -1,10 +1,12 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { BookOpen, Layers } from "lucide-react";
+import { FileText, Layers } from "lucide-react";
+import { FootnoteFormatter } from "../quran/FootnoteFormatter";
 
 export default function DailyVerseContent({
   verse,
   surah,
   translationText,
+  footnotes,
   translationLoading,
   translationError,
   lang,
@@ -43,7 +45,7 @@ export default function DailyVerseContent({
           </p>
         ) : translationText ? (
           <AnimatePresence mode="wait">
-            <motion.p
+            <motion.div
               key={translationText}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -56,7 +58,18 @@ export default function DailyVerseContent({
               lang={lang === "ar" ? "ar" : "en"}
             >
               &ldquo; {translationText} {""} &rdquo;
-            </motion.p>
+              {footnotes && lang === "en" && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="mt-2 p-3 bg-(--surface-glass-border) rounded-lg"
+                >
+                  <FootnoteFormatter text={footnotes} />
+                </motion.div>
+              )}
+            </motion.div>
           </AnimatePresence>
         ) : null}
       </div>
@@ -102,7 +115,7 @@ export default function DailyVerseContent({
           )}
           {verse?.page && (
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full glass text-xs text-text-secondary/70 font-jakarta">
-              <BookOpen size={11} className="text-accent/70" />
+              <FileText size={11} className="text-accent/70" />
               Page {verse.page}
             </span>
           )}

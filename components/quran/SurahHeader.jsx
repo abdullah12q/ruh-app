@@ -1,3 +1,5 @@
+import { BookOpen, MapPin, Sparkles, Layers, FileText } from "lucide-react";
+
 export default function SurahHeader({ surah, startJuz, endJuz }) {
   return (
     <header className="glass rounded-3xl p-8 sm:p-10 text-center mb-8 relative overflow-hidden">
@@ -31,27 +33,36 @@ export default function SurahHeader({ surah, startJuz, endJuz }) {
 
         {/* Meta Pills */}
         <div className="flex items-center justify-center gap-3 flex-wrap">
-          <p className="px-3 py-1 rounded-full glass text-xs font-medium text-text-secondary">
-            {surah.verses_count} Verses
-          </p>
-          <p className="px-3 py-1 rounded-full glass text-xs font-medium text-text-secondary capitalize">
-            {surah.revelation_place}
-          </p>
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full glass text-xs font-medium text-text-secondary">
+            <BookOpen size={13} className="text-accent/80" />
+            <span>{surah.verses_count} Verses</span>
+          </span>
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full glass text-xs font-medium text-text-secondary capitalize">
+            <MapPin size={13} className="text-accent/80" />
+            <span>{surah.revelation_place}</span>
+          </span>
           {surah.revelation_order && (
-            <p className="px-3 py-1 rounded-full glass text-xs font-medium text-text-secondary">
-              Revelation Order: {surah.revelation_order}
-            </p>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full glass text-xs font-medium text-text-secondary">
+              <Sparkles size={13} className="text-accent/80" />
+              <span>Revelation Order: {surah.revelation_order}</span>
+            </span>
           )}
           {startJuz && (
-            <p className="px-3 py-1 rounded-full glass text-xs font-medium text-text-secondary">
-              Juz: {startJuz} {endJuz !== startJuz && `- ${endJuz}`}
-            </p>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full glass text-xs font-medium text-text-secondary">
+              <Layers size={13} className="text-accent/80" />
+              <span>
+                Juz: {startJuz} {endJuz !== startJuz && `- ${endJuz}`}
+              </span>
+            </span>
           )}
-          <p className="px-3 py-1 rounded-full glass text-xs font-medium text-text-secondary">
-            {surah.pages?.[0] === surah.pages?.[1]
-              ? `Page: ${surah.pages?.[0]}`
-              : `Pages: ${surah.pages?.[0]} - ${surah.pages?.[1]}`}
-          </p>
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full glass text-xs font-medium text-text-secondary">
+            <FileText size={13} className="text-accent/80" />
+            <span>
+              {surah.pages?.[0] === surah.pages?.[1]
+                ? `Page: ${surah.pages?.[0]}`
+                : `Pages: ${surah.pages?.[0]} - ${surah.pages?.[1]}`}
+            </span>
+          </span>
         </div>
       </div>
     </header>
