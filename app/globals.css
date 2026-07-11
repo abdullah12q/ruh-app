@@ -55,6 +55,8 @@
   --font-arabic-ui: var(--font-arabic-ui);
   /* Quranic font — falls back lw uthmanicHafs failed */
   --font-quran: "Traditional Arabic", "Scheherazade New", "Amiri", serif;
+  /* Surah Header font */
+  --font-surah-header: var(--font-surah-header);
 
   /* Custom Shadows */
   --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.1);
@@ -87,7 +89,7 @@
     }
 
     50% {
-      box-shadow: 0 0 40px var(--accent-glow), 0 0 60px var(--accent-glow);
+      box-shadow: 0 0 20px var(--accent-glow), 0 0 10px var(--accent-glow);
     }
   }
 
@@ -178,6 +180,11 @@ body {
   text-align: right;
   line-height: 2.2;
   font-feature-settings: "liga" 1, "calt" 1;
+}
+
+.font-surah-header {
+  font-family: var(--font-surah-header), 'Traditional Arabic', serif;
+  filter: drop-shadow(0 0 12px var(--accent-glow));
 }
 
 .font-arabic-ui {

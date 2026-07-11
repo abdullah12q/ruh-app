@@ -37,3 +37,10 @@ export const qpcHafs = localFont({
   variable: "--font-quran",
   display: "swap",
 });
+
+// dah font le esm el sora hy5ly shkl esm elsora a7la
+export const surahHeader = localFont({
+  src: "../public/fonts/QCF_SurahHeader_COLOR-Regular.woff2",
+  variable: "--font-surah-header",
+  display: "swap",
+});

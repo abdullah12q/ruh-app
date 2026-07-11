@@ -1,4 +1,10 @@
-import { plusJakartaSans, inter, ibmPlexSansArabic, qpcHafs } from "./fonts";
+import {
+  plusJakartaSans,
+  inter,
+  ibmPlexSansArabic,
+  qpcHafs,
+  surahHeader,
+} from "./fonts";
 import Providers from "./providers";
 import Navbar from "@/components/layout/Navbar";
 import "./globals.css";
@@ -62,6 +68,7 @@ export default function RootLayout({ children }) {
     inter.variable,
     ibmPlexSansArabic.variable,
     qpcHafs.variable,
+    surahHeader.variable,
   ].join(" ");
 
   return (

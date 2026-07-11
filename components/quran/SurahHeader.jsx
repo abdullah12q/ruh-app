@@ -1,68 +1,138 @@
 import { BookOpen, MapPin, Sparkles, Layers, FileText } from "lucide-react";
+import { Stat } from "./Stat";
+import ligaturesData from "@/ligatures.json";
 
 export default function SurahHeader({ surah, startJuz, endJuz }) {
+  const lookupKey = `surah-${surah.id}`;
+  const surahGlyph = ligaturesData[lookupKey];
+
   return (
-    <header className="glass rounded-3xl p-8 sm:p-10 text-center mb-8 relative overflow-hidden">
-      {/* Decorative glow */}
-      <div className="absolute inset-0 bg-linear-to-b from-accent/5 to-transparent pointer-events-none rounded-3xl" />
+    <header className="relative mb-10 overflow-hidden rounded-4xl glass p-8 sm:p-14 text-center animate-fade-up">
+      {/* Geometric texture */}
+      <svg
+        className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.05]"
+        aria-hidden="true"
+      >
+        <defs>
+          <pattern
+            id="ruh-star"
+            width="48"
+            height="48"
+            patternUnits="userSpaceOnUse"
+          >
+            <path
+              d="M24 4 L28 20 L44 24 L28 28 L24 44 L20 28 L4 24 L20 20 Z"
+              fill="none"
+              stroke="var(--accent)"
+              strokeWidth="0.75"
+            />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#ruh-star)" />
+      </svg>
+
+      {/* Ambient glow */}
+      <div className="pointer-events-none absolute -top-24 left-1/2 size-105 -translate-x-1/2 rounded-full bg-accent/10 blur-[110px]" />
 
       <div className="relative z-10">
-        {/* Surah Number */}
-        <div className="inline-flex items-center justify-center size-12 rounded-2xl bg-accent/10 border border-accent/20 text-accent font-bold font-jakarta text-lg mb-4">
-          {surah.id}
+        {/* Position in the quran */}
+        <div className="mb-8 flex items-center justify-center">
+          <span className="font-jakarta text-[11px] uppercase tracking-[0.25em] text-text-secondary">
+            Surah {String(surah.id).padStart(3, "0")}
+          </span>
+          <span className="h-px w-10 bg-surface-glass-border" />
+          <span className="font-jakarta text-[11px] uppercase tracking-[0.25em] text-text-secondary/60">
+            of 114
+          </span>
         </div>
 
-        {/* Arabic Name */}
+        {/* Signature: mihrab-arch frame around the surah's calligraphic glyph */}
+        <div className="relative mx-auto mb-8 flex size-40 items-center justify-center sm:size-48">
+          <svg
+            viewBox="0 0 200 200"
+            className="absolute inset-0 size-full animate-glow-pulse"
+            aria-hidden="true"
+          >
+            <defs>
+              <linearGradient id="ruh-arch" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="var(--accent)" stopOpacity="0.9" />
+                <stop
+                  offset="100%"
+                  stopColor="var(--accent)"
+                  stopOpacity="0.15"
+                />
+              </linearGradient>
+            </defs>
+            <path
+              d="M100 18 C60 18 34 54 34 98 L34 178 L166 178 L166 98 C166 54 140 18 100 18 Z"
+              fill="var(--surface-glass)"
+              stroke="url(#ruh-arch)"
+              strokeWidth="1.5"
+            />
+          </svg>
+          {surahGlyph ? (
+            <span
+              className="relative z-10 select-none font-surah-header text-6xl sm:text-7xl"
+              aria-hidden="true"
+            >
+              {surahGlyph}
+            </span>
+          ) : (
+            <BookOpen
+              className="relative z-10 text-accent/60"
+              size={40}
+              strokeWidth={1.25}
+            />
+          )}
+        </div>
+
+        {/* Names */}
         <h1
-          className="font-arabic-ui text-4xl sm:text-5xl text-text-primary mb-2"
+          className="mb-3 font-arabic-ui text-4xl leading-tight text-text-primary sm:text-6xl"
           dir="rtl"
           lang="ar"
         >
           {surah.name_arabic}
         </h1>
-
-        {/* Transliteration */}
-        <h2 className="font-jakarta font-bold text-xl text-text-primary mb-1">
+        <h2 className="mb-1 font-jakarta text-lg font-semibold tracking-tight text-text-primary sm:text-xl">
           {surah.name_simple}
         </h2>
-
-        {/* Translated Name */}
-        <p className="font-inter text-text-secondary text-sm mb-5">
+        <p className="mb-10 font-inter text-sm text-text-secondary">
           {surah.translated_name?.name}
         </p>
 
-        {/* Meta Pills */}
-        <div className="flex items-center justify-center gap-3 flex-wrap">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full glass text-xs font-medium text-text-secondary">
-            <BookOpen size={13} className="text-accent/80" />
-            <span>{surah.verses_count} Verses</span>
-          </span>
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full glass text-xs font-medium text-text-secondary capitalize">
-            <MapPin size={13} className="text-accent/80" />
-            <span>{surah.revelation_place}</span>
-          </span>
-          {surah.revelation_order && (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full glass text-xs font-medium text-text-secondary">
-              <Sparkles size={13} className="text-accent/80" />
-              <span>Revelation Order: {surah.revelation_order}</span>
-            </span>
-          )}
+        {/* Stat strip */}
+        <div className="glass-light mx-auto flex max-w-lg flex-wrap items-stretch justify-center divide-x divide-(--surface-glass-border) overflow-hidden rounded-2xl">
+          <Stat icon={BookOpen} label="Verses" value={surah.verses_count} />
+          <Stat
+            icon={MapPin}
+            label="Revealed"
+            value={surah.revelation_place}
+            capitalize
+          />
           {startJuz && (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full glass text-xs font-medium text-text-secondary">
-              <Layers size={13} className="text-accent/80" />
-              <span>
-                Juz: {startJuz} {endJuz !== startJuz && `- ${endJuz}`}
-              </span>
-            </span>
+            <Stat
+              icon={Layers}
+              label="Juz"
+              value={startJuz === endJuz ? startJuz : `${startJuz} - ${endJuz}`}
+            />
           )}
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full glass text-xs font-medium text-text-secondary">
-            <FileText size={13} className="text-accent/80" />
-            <span>
-              {surah.pages?.[0] === surah.pages?.[1]
-                ? `Page: ${surah.pages?.[0]}`
-                : `Pages: ${surah.pages?.[0]} - ${surah.pages?.[1]}`}
-            </span>
-          </span>
+          <Stat
+            icon={FileText}
+            label={surah.pages?.[0] === surah.pages?.[1] ? "Page" : "Pages"}
+            value={
+              surah.pages?.[0] === surah.pages?.[1]
+                ? surah.pages?.[0]
+                : `${surah.pages?.[0]} - ${surah.pages?.[1]}`
+            }
+          />
+          {surah.revelation_order && (
+            <Stat
+              icon={Sparkles}
+              label="Order"
+              value={surah.revelation_order}
+            />
+          )}
         </div>
       </div>
     </header>
