@@ -1,4 +1,4 @@
-import { plusJakartaSans, inter, ibmPlexSansArabic } from "./fonts";
+import { plusJakartaSans, inter, ibmPlexSansArabic, qpcHafs } from "./fonts";
 import Providers from "./providers";
 import Navbar from "@/components/layout/Navbar";
 import "./globals.css";
@@ -57,13 +57,11 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  // uthmanicHafs is intentionally excluded from the root layout
-  // to avoid loading the large Quranic font globally.
-  // It is imported and applied only on Quran reading pages.
   const fontClasses = [
     plusJakartaSans.variable,
     inter.variable,
     ibmPlexSansArabic.variable,
+    qpcHafs.variable,
   ].join(" ");
 
   return (

@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { BookOpen } from "lucide-react";
-import { uthmanicHafs } from "@/app/fonts";
 
 import SurahHeader from "@/components/quran/SurahHeader";
 import SurahReadingControls from "@/components/quran/SurahReadingControls";
@@ -25,7 +24,7 @@ async function getSurah(id) {
 // hshelha later w hst5dm el custom hook bdlha
 async function getVerses(id) {
   const res = await fetch(
-    `https://api.quran.com/api/v4/verses/by_chapter/${id}?language=en&fields=text_uthmani,verse_key,verse_number&per_page=300`,
+    `https://api.quran.com/api/v4/verses/by_chapter/${id}?language=en&fields=text_qpc_hafs,verse_key,verse_number&per_page=300`,
     { next: { revalidate: 3600 } }, // Cache verses for 1 hour
   );
   if (!res.ok) return [];
@@ -78,9 +77,7 @@ export default async function SurahPage({ params }) {
     verses.length > 0 ? verses[verses.length - 1].juz_number : null;
 
   return (
-    <div
-      className={`min-h-screen pt-28 pb-24 px-4 sm:px-6 lg:px-8 ${uthmanicHafs.variable}`}
-    >
+    <div className="min-h-screen pt-28 pb-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-sm text-text-secondary mb-8 font-jakarta">

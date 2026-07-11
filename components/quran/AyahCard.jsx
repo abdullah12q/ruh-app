@@ -86,13 +86,13 @@ export default function AyahCard({ ayah, surahId }) {
         </div>
       </div>
 
-      {/* Arabic Text (Uthmanic Script) */}
+      {/* Arabic Text (qpc-hafs Script) */}
       <p
         className={`font-quran ${fontSize} text-text-primary text-right leading-loose mb-6`}
         dir="rtl"
         lang="ar"
       >
-        {ayah.text_uthmani}
+        {ayah.text_qpc_hafs}
       </p>
 
       {/* Divider */}

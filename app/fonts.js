@@ -32,8 +32,8 @@ export const ibmPlexSansArabic = IBM_Plex_Sans_Arabic({
 // dah font 3rby lel ayat bt3t el quran
 // lw 7sl moshkla fel font aw ay error hy3ml fallback lel traditional arabic
 // "traditional arabic" ely howa fe --font-quran fe globals.css
-export const uthmanicHafs = localFont({
-  src: "../public/fonts/UthmanicHafs1Ver18.woff2",
+export const qpcHafs = localFont({
+  src: "../public/fonts/QPCHafs_V22.woff2",
   variable: "--font-quran",
   display: "swap",
 });
