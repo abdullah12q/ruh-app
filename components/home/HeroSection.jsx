@@ -4,10 +4,7 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { BookOpen, ChevronRight, Sparkles } from "lucide-react";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function HeroSection() {
   const heroTextRef = useRef(null);

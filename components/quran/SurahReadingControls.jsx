@@ -35,7 +35,7 @@ export default function SurahReadingControls({ surahId }) {
   return (
     <>
       {/* ── Controls Bar ── */}
-      <div className="flex items-center justify-between glass rounded-2xl px-5 py-3 mb-6 gap-3 flex-wrap">
+      <div className="sticky top-16.75 sm:top-16.25 z-30 backdrop-blur-xl flex flex-wrap items-center justify-between glass rounded-2xl px-5 py-3 gap-3 mb-6">
         {/* Font Size */}
         <div className="flex items-center gap-1">
           <span className="text-xs text-text-secondary font-jakarta mr-2">
