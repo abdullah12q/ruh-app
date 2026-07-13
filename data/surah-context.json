@@ -1,0 +1,918 @@
+{
+  "1": {
+    "summary": "أعظم سور القرآن، وهي الشافية والكافية. تجمع بين مقاصد القرآن كلها من توحيد، وعبادة، ودعاء بالهداية إلى الصراط المستقيم.",
+    "summary_english": "The greatest surah in the Quran, both a cure and sufficiency in itself. It gathers all the Quran's core purposes: monotheism, worship, and a plea for guidance to the straight path.",
+    "revelation_reason": "نزلت في بدايات البعثة لتكون ركنًا أساسيًا في الصلاة، ومناجاة يومية بين العبد وربه.",
+    "revelation_reason_english": "Revealed early in the Prophet's mission to become an essential pillar of prayer, a daily conversation between the servant and his Lord.",
+    "core_themes": ["التوحيد", "الدعاء", "العبادة"],
+    "other_names": ["أم الكتاب", "السبع المثاني"]
+  },
+  "2": {
+    "summary": "تؤسس لأركان التشريع في المجتمع المسلم الجديد، وتقص قصة بني إسرائيل وبقرتهم عبرة للمتدبرين، وتضع أحكام العبادات والمعاملات اليومية.",
+    "summary_english": "Establishes the pillars of law for the new Muslim community, recounts the story of the Israelites and their cow as a lesson for the reflective, and lays out rulings for worship and daily dealings.",
+    "revelation_reason": "نزلت تباعًا في السنوات الأولى بعد الهجرة إلى المدينة، لبناء مجتمع مسلم متماسك ومواجهة جدل اليهود والمنافقين.",
+    "revelation_reason_english": "Revealed gradually in the first years after the migration to Medina, to build a cohesive Muslim society and respond to disputes with the Jews and hypocrites.",
+    "core_themes": ["التشريع", "القصص القرآني", "الإيمان"],
+    "other_names": ["فسطاط القرآن"]
+  },
+  "3": {
+    "summary": "تعالج الحوار العقدي مع أهل الكتاب، وتستعرض قصة آل عمران ومريم وعيسى عليهما السلام، وتستخلص دروس الثبات من محنة غزوة أحد.",
+    "summary_english": "Addresses theological dialogue with the People of the Book, recounts the story of the family of Imran, Mary, and Jesus, and draws lessons of steadfastness from the trial of the Battle of Uhud.",
+    "revelation_reason": "نزلت عقب وفد نصارى نجران وبعد غزوة أحد، لتثبيت المؤمنين وتوضيح حقيقة عيسى عليه السلام.",
+    "revelation_reason_english": "Revealed following the delegation of Najran's Christians and after the Battle of Uhud, to steady the believers and clarify the true nature of Jesus, peace be upon him.",
+    "core_themes": ["الجدل مع أهل الكتاب", "الثبات", "الابتلاء"],
+    "other_names": []
+  },
+  "4": {
+    "summary": "تفصّل أحكام الأسرة والمواريث وحقوق النساء واليتامى، وترسي دعائم العدل الاجتماعي داخل المجتمع المسلم الناشئ.",
+    "summary_english": "Details the laws of family, inheritance, and the rights of women and orphans, laying foundations of social justice within the emerging Muslim community.",
+    "revelation_reason": "نزلت لمعالجة قضايا اجتماعية ملحّة بعد غزوة أحد، لا سيما ما يخص أيتام الشهداء وتوزيع المواريث.",
+    "revelation_reason_english": "Revealed to address pressing social issues after the Battle of Uhud, particularly concerning the orphans of martyrs and the distribution of inheritance.",
+    "core_themes": ["الأسرة", "العدل", "المواريث"],
+    "other_names": []
+  },
+  "5": {
+    "summary": "تختم التشريع بأحكام دقيقة في العقود والحلال والحرام، وتؤكد اكتمال الدين وتمام النعمة على المؤمنين.",
+    "summary_english": "Closes out legislation with precise rulings on contracts and what is lawful and unlawful, affirming the completion of the religion and the fullness of God's favor upon the believers.",
+    "revelation_reason": "نزلت في أواخر العهد المدني قرب حجة الوداع، لتستقر بها آخر الأحكام التشريعية الكبرى.",
+    "revelation_reason_english": "Revealed in the final phase of the Medinan period, near the Farewell Pilgrimage, settling the last of the major legal rulings.",
+    "core_themes": ["الوفاء بالعهود", "التشريع", "كمال الدين"],
+    "other_names": []
+  },
+  "6": {
+    "summary": "تتمحور حول تثبيت التوحيد ودحض الشرك، وتفنّد عادات المشركين الباطلة في الأنعام، وتدعو للتفكر في آيات الكون.",
+    "summary_english": "Centers on affirming monotheism and refuting polytheism, dismantles the false customs of the polytheists regarding cattle, and calls for reflection on the signs of the universe.",
+    "revelation_reason": "نزلت جملة واحدة في مكة في مرحلة اشتداد الجدل العقدي مع المشركين حول وحدانية الله.",
+    "revelation_reason_english": "Revealed all at once in Mecca during a period of intense theological dispute with the polytheists over God's oneness.",
+    "core_themes": ["التوحيد", "إبطال الشرك", "التفكر"],
+    "other_names": []
+  },
+  "7": {
+    "summary": "تسرد قصص الأنبياء مع أقوامهم عبرة متكررة لقريش، وتصف مشهد الأعراف يوم القيامة، حاجزًا بين الجنة والنار.",
+    "summary_english": "Recounts the stories of the prophets with their peoples as a recurring lesson for Quraysh, and describes the scene of Al-A'raf on Judgment Day, a barrier between Paradise and Hell.",
+    "revelation_reason": "نزلت في مكة لتذكير قريش بمصير الأمم السابقة التي كذّبت رسلها فحلّ بها العذاب.",
+    "revelation_reason_english": "Revealed in Mecca to remind Quraysh of the fate of past nations that denied their messengers and were struck by punishment.",
+    "core_themes": ["قصص الأنبياء", "الإنذار", "يوم القيامة"],
+    "other_names": []
+  },
+  "8": {
+    "summary": "تناقش أحكام الغنائم وآداب القتال، وتستخلص العبر من غزوة بدر الكبرى ونصر الله للفئة المؤمنة القليلة.",
+    "summary_english": "Discusses the rulings on spoils of war and the etiquette of combat, drawing lessons from the great Battle of Badr and God's victory for the small band of believers.",
+    "revelation_reason": "نزلت عقب غزوة بدر الكبرى لتنظيم قسمة الغنائم وترسيخ معاني التوكل والنصر الإلهي.",
+    "revelation_reason_english": "Revealed following the Battle of Badr to organize the division of spoils and reinforce the meaning of reliance on God and divine victory.",
+    "core_themes": ["الجهاد", "التوكل", "الغنائم"],
+    "other_names": ["بدر"]
+  },
+  "9": {
+    "summary": "تفضح مواقف المنافقين والمتخلفين عن الجهاد، وتضع أسس العلاقة مع غير المسلمين في أواخر العهد النبوي.",
+    "summary_english": "Exposes the positions of the hypocrites and those who stayed behind from jihad, and lays down the foundations for relations with non-Muslims in the final period of prophethood.",
+    "revelation_reason": "نزلت بعد غزوة تبوك لكشف حقيقة المنافقين وتوبيخ من تخلف عن الجهاد دون عذر.",
+    "revelation_reason_english": "Revealed after the Battle of Tabuk to unmask the hypocrites and rebuke those who stayed behind from jihad without excuse.",
+    "core_themes": ["النفاق", "الجهاد", "البراءة"],
+    "other_names": ["براءة", "الفاضحة"]
+  },
+  "10": {
+    "summary": "تؤكد وحدانية الله وصدق الوحي، وتعرض قصة يونس عليه السلام نموذجًا فريدًا لقوم آمنوا بعد رؤية مقدمات العذاب.",
+    "summary_english": "Affirms God's oneness and the truth of revelation, and presents the story of Jonah as a unique case of a people who believed after seeing the first signs of punishment.",
+    "revelation_reason": "نزلت في أواخر العهد المكي لتثبيت المؤمنين وسط تصاعد تكذيب قريش للرسالة.",
+    "revelation_reason_english": "Revealed in the late Meccan period to steady the believers amid Quraysh's escalating denial of the message.",
+    "core_themes": ["الوحدانية", "الوحي", "التوبة"],
+    "other_names": []
+  },
+  "11": {
+    "summary": "تسرد قصص عدد من الأنبياء مع أقوامهم المكذبة إنذارًا لقريش، وتؤكد أن سنة الله في إهلاك الظالمين واحدة عبر التاريخ.",
+    "summary_english": "Recounts the stories of several prophets with their denying peoples as a warning to Quraysh, affirming that God's pattern in destroying wrongdoers is constant throughout history.",
+    "revelation_reason": "نزلت في فترة قاسية من حياة النبي ﷺ عُرفت بعام الحزن، حتى قال إنها شيّبته.",
+    "revelation_reason_english": "Revealed during a harsh period of the Prophet's life known as the Year of Sorrow, so difficult he said it had aged him.",
+    "core_themes": ["قصص الأنبياء", "الصبر", "سنن الله"],
+    "other_names": []
+  },
+  "12": {
+    "summary": "تروي أجمل قصص القرآن، قصة يوسف عليه السلام، بما فيها من كيد وصبر وابتلاء وتمكين، لتؤكد أن العاقبة للمتقين.",
+    "summary_english": "Tells the most beautiful story in the Quran, that of Joseph, with its scheming, patience, trials, and eventual empowerment, affirming that the outcome belongs to the God-conscious.",
+    "revelation_reason": "نزلت في أواخر العهد المكي تسلية للنبي ﷺ بعد وفاة عمه أبي طالب وزوجته خديجة في عام الحزن.",
+    "revelation_reason_english": "Revealed in the late Meccan period to console the Prophet after the deaths of his uncle Abu Talib and his wife Khadijah in the Year of Sorrow.",
+    "core_themes": ["الصبر", "القصص", "التمكين"],
+    "other_names": ["أحسن القصص"]
+  },
+  "13": {
+    "summary": "تتحدث عن عظمة الخالق في آيات الكون الكبرى، وتقارن بين طمأنينة المؤمنين وجدل أهل الكفر وتعنتهم.",
+    "summary_english": "Speaks of the Creator's majesty through the great signs of the universe, contrasting the tranquility of believers with the disputation and obstinacy of disbelievers.",
+    "revelation_reason": "نزلت ردًا على تعنت المشركين في طلب معجزات حسية، مستدلة بآيات الكون على قدرة الله.",
+    "revelation_reason_english": "Revealed in response to the polytheists' obstinate demands for tangible miracles, arguing instead from the signs of the cosmos for God's power.",
+    "core_themes": ["قدرة الله", "الطمأنينة", "الكون"],
+    "other_names": []
+  },
+  "14": {
+    "summary": "تبرز دعوة إبراهيم عليه السلام وموقفه من أبيه وقومه، وتقارن بين ظلمة الكفر ونور الإيمان والشكر.",
+    "summary_english": "Highlights Abraham's call and his stance toward his father and people, contrasting the darkness of disbelief with the light of faith and gratitude.",
+    "revelation_reason": "نزلت في مكة لتثبيت المؤمنين بذكر ثبات الأنبياء من قبل، وعلى رأسهم إبراهيم عليه السلام.",
+    "revelation_reason_english": "Revealed in Mecca to steady the believers by recalling the steadfastness of earlier prophets, foremost among them Abraham.",
+    "core_themes": ["التوحيد", "الشكر", "الثبات"],
+    "other_names": []
+  },
+  "15": {
+    "summary": "تتناول قصة أصحاب الحجر من قوم صالح عبرة لقريش، وتؤكد تكفّل الله بحفظ كتابه من كل تحريف أو تبديل.",
+    "summary_english": "Addresses the story of the people of Al-Hijr, the people of Salih, as a lesson for Quraysh, and affirms that God has taken it upon Himself to protect His Book from any distortion or alteration.",
+    "revelation_reason": "نزلت لتثبيت النبي ﷺ في مواجهة استهزاء المشركين، وتأكيد أن القرآن محفوظ مهما حاولوا طمسه.",
+    "revelation_reason_english": "Revealed to steady the Prophet against the mockery of the polytheists, affirming that the Quran is preserved no matter how they try to bury it.",
+    "core_themes": ["حفظ القرآن", "الإنذار", "الصبر"],
+    "other_names": []
+  },
+  "16": {
+    "summary": "تعدد نعم الله الظاهرة في الكون من النحل والأنعام والنبات، وتدعو للتفكر فيها شكرًا لا جحودًا وكفرًا.",
+    "summary_english": "Enumerates God's visible blessings in the universe, from bees to livestock to plants, calling for reflection on them in gratitude rather than denial and ingratitude.",
+    "revelation_reason": "نزلت في مكة لتذكير المشركين بنعم الله الجليّة عليهم رغم إشراكهم وجحودهم.",
+    "revelation_reason_english": "Revealed in Mecca to remind the polytheists of God's manifest blessings upon them despite their idolatry and ingratitude.",
+    "core_themes": ["النعم", "الشكر", "التفكر"],
+    "other_names": ["سورة النعم"]
+  },
+  "17": {
+    "summary": "تفتتح بذكر معجزة الإسراء والمعراج، وتضع دستورًا أخلاقيًا جامعًا لحقوق الوالدين والأقارب والمجتمع.",
+    "summary_english": "Opens with the miracle of the Night Journey and Ascension, and lays out a comprehensive moral code covering the rights of parents, relatives, and society.",
+    "revelation_reason": "نزلت عقب رحلة الإسراء والمعراج، الحدث الاستثنائي الذي خفف عن النبي ﷺ بعد سنوات الحصار والألم.",
+    "revelation_reason_english": "Revealed following the Night Journey and Ascension, the extraordinary event that eased the Prophet's burden after years of siege and hardship.",
+    "core_themes": ["الإسراء والمعراج", "الأخلاق", "حقوق الوالدين"],
+    "other_names": ["سورة بني إسرائيل"]
+  },
+  "18": {
+    "summary": "تجمع أربع قصص عظيمة عن أهل الكهف وصاحب الجنتين وموسى والخضر وذي القرنين، حصنًا من فتن الدين والمال والعلم والسلطة.",
+    "summary_english": "Gathers four great stories, the People of the Cave, the owner of the two gardens, Moses and Al-Khidr, and Dhul-Qarnayn, as a shield against the trials of faith, wealth, knowledge, and power.",
+    "revelation_reason": "نزلت ردًا على أسئلة اختبر بها اليهود صدق النبوة، متعلقة بقصص غابرة لم يكن يعلمها أحد من قريش.",
+    "revelation_reason_english": "Revealed in response to questions the Jews used to test the truth of prophethood, concerning ancient stories unknown to anyone in Quraysh.",
+    "core_themes": ["الفتن", "الإيمان", "العلم"],
+    "other_names": []
+  },
+  "19": {
+    "summary": "تروي قصة ميلاد يحيى وعيسى عليهما السلام بأسلوب رقيق يلامس القلب، وتؤكد قدرة الله على خرق نواميس العادة.",
+    "summary_english": "Recounts the births of John and Jesus in a tender style that touches the heart, affirming God's power to break the ordinary laws of nature.",
+    "revelation_reason": "نزلت قبيل هجرة أصحاب النبي ﷺ إلى الحبشة، وتليت على النجاشي فتأثر بها وحمى المهاجرين.",
+    "revelation_reason_english": "Revealed shortly before the Prophet's companions migrated to Abyssinia, and was recited to the Negus, who was moved by it and protected the migrants.",
+    "core_themes": ["القدرة الإلهية", "الرحمة", "الإيمان"],
+    "other_names": []
+  },
+  "20": {
+    "summary": "تسرد قصة موسى عليه السلام مع فرعون بتفصيل مؤثر، وتواسي النبي ﷺ في تبليغ رسالته رغم إعراض قومه.",
+    "summary_english": "Recounts the story of Moses and Pharaoh in moving detail, and consoles the Prophet in conveying his message despite his people's rejection.",
+    "revelation_reason": "نزلت تسلية للنبي ﷺ في مكة، ويُروى أنها كانت سببًا مباشرًا في إسلام عمر بن الخطاب رضي الله عنه.",
+    "revelation_reason_english": "Revealed to console the Prophet in Mecca, and is reported to have been a direct cause of Umar ibn al-Khattab's conversion to Islam.",
+    "core_themes": ["التثبيت", "القصص", "الرحمة"],
+    "other_names": []
+  },
+  "21": {
+    "summary": "تستعرض قصص عدد كبير من الأنبياء بإيجاز بديع، مؤكدة وحدة الرسالة ووحدة الغاية عبر التاريخ الإنساني.",
+    "summary_english": "Surveys the stories of many prophets in remarkable brevity, affirming the unity of the message and the unity of purpose across human history.",
+    "revelation_reason": "نزلت في مكة لتثبيت أن جميع الرسل بشر يوحى إليهم، ردًا على استغراب قريش من بشرية النبي ﷺ.",
+    "revelation_reason_english": "Revealed in Mecca to establish that all messengers were human beings receiving revelation, in response to Quraysh's astonishment at the Prophet's humanity.",
+    "core_themes": ["وحدة الرسالة", "النبوة", "التوحيد"],
+    "other_names": []
+  },
+  "22": {
+    "summary": "تتناول أحكام الحج ومناسكه وحكمه العظيمة، وتأذن للمظلومين بالقتال دفاعًا عن دينهم وأنفسهم.",
+    "summary_english": "Addresses the rulings and profound wisdom of the pilgrimage rites, and permits the wronged to fight in defense of their faith and their lives.",
+    "revelation_reason": "نزلت في مرحلة انتقالية بين مكة والمدينة، متضمنة أول إذن بالقتال بعد سنوات من الصبر على الأذى.",
+    "revelation_reason_english": "Revealed in a transitional phase between Mecca and Medina, containing the first permission to fight after years of enduring harm patiently.",
+    "core_themes": ["الحج", "الجهاد", "العبادة"],
+    "other_names": []
+  },
+  "23": {
+    "summary": "ترسم صفات المؤمنين الفائزين من خشوع وعفة وأمانة، وتذكّر بأطوار خلق الإنسان دليلًا على البعث.",
+    "summary_english": "Portrays the qualities of the successful believers, humility, chastity, and trustworthiness, and recalls the stages of human creation as evidence for resurrection.",
+    "revelation_reason": "نزلت في مكة لبيان صفات النخبة المؤمنة التي تستحق الفلاح وسط مجتمع يغلب عليه الكفر.",
+    "revelation_reason_english": "Revealed in Mecca to describe the qualities of the believing elite who deserve success amid a society dominated by disbelief.",
+    "core_themes": ["صفات المؤمنين", "الفلاح", "البعث"],
+    "other_names": []
+  },
+  "24": {
+    "summary": "تضع تشريعات صارمة لحفظ الأعراض وآداب الاستئذان والحجاب، وتصف نور الله الذي يهدي به من يشاء.",
+    "summary_english": "Sets strict legislation to protect honor and the etiquette of seeking permission and modesty, and describes the light of God by which He guides whom He wills.",
+    "revelation_reason": "نزلت عقب حادثة الإفك التي اتُّهمت فيها أم المؤمنين عائشة رضي الله عنها ظلمًا، فبرّأها الله من فوق سبع سماوات.",
+    "revelation_reason_english": "Revealed following the slander incident in which Mother of the Believers Aisha was falsely accused, whom God then cleared from above seven heavens.",
+    "core_themes": ["العفة", "الحجاب", "براءة الأعراض"],
+    "other_names": []
+  },
+  "25": {
+    "summary": "ترد على شبهات المشركين حول القرآن والرسول، وتصف عباد الرحمن بصفاتهم الرفيعة في القول والعمل.",
+    "summary_english": "Responds to the polytheists' doubts about the Quran and the Messenger, and describes the servants of the Most Merciful by their noble qualities in word and deed.",
+    "revelation_reason": "نزلت ردًا على مزاعم قريش بأن القرآن أساطير الأولين، وتشكيكهم في بشرية الرسول وحاجته للطعام والمشي في الأسواق.",
+    "revelation_reason_english": "Revealed in response to Quraysh's claims that the Quran was tales of the ancients, and their doubts about the Prophet's humanity in needing food and walking through markets.",
+    "core_themes": [
+      "التمييز بين الحق والباطل",
+      "صفات المؤمنين",
+      "الرد على الشبهات"
+    ],
+    "other_names": []
+  },
+  "26": {
+    "summary": "تكرر قصص الأنبياء مع أقوامهم بنمط متشابه ليؤكد أن التكذيب يقود دومًا إلى الهلاك، وتبرئ القرآن من الشعر.",
+    "summary_english": "Repeats the stories of the prophets with their peoples in a similar pattern to affirm that denial always leads to ruin, and clears the Quran of being poetry.",
+    "revelation_reason": "نزلت ردًا على اتهام قريش للنبي ﷺ بأنه شاعر، مبينة الفرق الجوهري بين وحي القرآن وكلام الشعراء.",
+    "revelation_reason_english": "Revealed in response to Quraysh accusing the Prophet of being a poet, clarifying the essential difference between Quranic revelation and the words of poets.",
+    "core_themes": ["تكذيب الرسل", "براءة القرآن من الشعر", "الإنذار"],
+    "other_names": []
+  },
+  "27": {
+    "summary": "تروي قصة سليمان عليه السلام مع النملة والهدهد وملكة سبأ، مبرزة حكمة الملك حين يقترن بالإيمان.",
+    "summary_english": "Tells the story of Solomon with the ant and the hoopoe and the Queen of Sheba, highlighting the wisdom of kingship when joined with faith.",
+    "revelation_reason": "نزلت في مكة لتقديم نموذج الملك الصالح المتواضع لله رغم عظيم ملكه وسلطانه.",
+    "revelation_reason_english": "Revealed in Mecca to present the model of a righteous king, humble before God despite his immense dominion and authority.",
+    "core_themes": ["الحكمة", "الملك الصالح", "الشكر"],
+    "other_names": []
+  },
+  "28": {
+    "summary": "تفصّل قصة موسى عليه السلام منذ ولادته وحتى نجاته من فرعون، وتؤكد أن العاقبة والتمكين للمستضعفين الصابرين.",
+    "summary_english": "Details the story of Moses from his birth to his escape from Pharaoh, affirming that the outcome and empowerment belong to the patient, oppressed.",
+    "revelation_reason": "نزلت تثبيتًا للمستضعفين من المسلمين في مكة بذكر كيف مكّن الله لموسى بعد ضعف واستضعاف شديدين.",
+    "revelation_reason_english": "Revealed to steady the oppressed Muslims in Mecca by recalling how God empowered Moses after severe weakness and oppression.",
+    "core_themes": ["الاستضعاف", "التمكين", "الصبر"],
+    "other_names": []
+  },
+  "29": {
+    "summary": "تؤكد أن الإيمان الحقيقي لا بد أن يُختبر بالابتلاء، وتشبّه أوهن العلاقات بغير الله ببيت العنكبوت الهش.",
+    "summary_english": "Affirms that true faith must be tested through trial, likening the weakest of bonds apart from God to the fragile web of the spider.",
+    "revelation_reason": "نزلت لتثبيت من عانى من الفتنة والأذى بسبب إيمانه في مكة، مؤكدة أن الابتلاء سنة الله في المؤمنين.",
+    "revelation_reason_english": "Revealed to steady those who suffered persecution and harm for their faith in Mecca, affirming that trial is God's way with believers.",
+    "core_themes": ["الابتلاء", "الإيمان", "التوكل"],
+    "other_names": []
+  },
+  "30": {
+    "summary": "تتنبأ بانتصار الروم بعد هزيمتهم، وتذكّر بآيات الله في خلق السماوات والأرض واختلاف الألسنة والألوان.",
+    "summary_english": "Prophesies the Romans' victory after their defeat, and recalls God's signs in the creation of the heavens and earth and the diversity of languages and colors.",
+    "revelation_reason": "نزلت بعد هزيمة الروم أمام الفرس، متنبئة بغلبة الروم لاحقًا، وقد تحققت النبوءة بعد سنوات قليلة.",
+    "revelation_reason_english": "Revealed after the Romans' defeat by the Persians, prophesying the Romans' eventual triumph, a prophecy fulfilled within a few years.",
+    "core_themes": ["النبوءة", "آيات الكون", "القدرة الإلهية"],
+    "other_names": []
+  },
+  "31": {
+    "summary": "تنقل وصايا لقمان الحكيم لابنه، جامعة بين التوحيد وبر الوالدين والتواضع، دستورًا تربويًا خالدًا.",
+    "summary_english": "Conveys the wise counsel of Luqman to his son, combining monotheism, kindness to parents, and humility, an enduring charter of upbringing.",
+    "revelation_reason": "نزلت في مكة لتقديم نموذج التربية الإيمانية السليمة عبر حكمة رجل صالح غير نبي.",
+    "revelation_reason_english": "Revealed in Mecca to present a model of sound faith-based upbringing through the wisdom of a righteous man who was not a prophet.",
+    "core_themes": ["الحكمة", "التربية", "التوحيد"],
+    "other_names": []
+  },
+  "32": {
+    "summary": "تتحدث عن عظمة الخلق وإحكامه، وتصف تهجد المؤمنين الصادقين بالليل خوفًا وطمعًا في رحمة ربهم.",
+    "summary_english": "Speaks of the majesty and precision of creation, and describes the night devotion of sincere believers who rise in fear and hope of their Lord's mercy.",
+    "revelation_reason": "نزلت في مكة لتقرير حقيقة البعث والخلق أمام من أنكرها من المشركين.",
+    "revelation_reason_english": "Revealed in Mecca to establish the truth of resurrection and creation before those among the polytheists who denied it.",
+    "core_themes": ["الخلق", "البعث", "قيام الليل"],
+    "other_names": []
+  },
+  "33": {
+    "summary": "تسجل أحداث غزوة الأحزاب ونصر الله للمؤمنين رغم قلة عددهم، وتضع آدابًا خاصة ببيت النبوة وأمهات المؤمنين.",
+    "summary_english": "Records the events of the Battle of the Confederates and God's victory for the believers despite their small numbers, and sets specific etiquettes for the house of prophethood and the Mothers of the Believers.",
+    "revelation_reason": "نزلت خلال وبعد غزوة الخندق حين تحزبت القبائل واليهود لغزو المدينة فردهم الله بريح وجنود لم تُرَ.",
+    "revelation_reason_english": "Revealed during and after the Battle of the Trench, when the tribes and Jews allied to besiege Medina, only to be repelled by a wind and unseen forces.",
+    "core_themes": ["النصر الإلهي", "الثبات", "آداب بيت النبوة"],
+    "other_names": []
+  },
+  "34": {
+    "summary": "تروي قصة نعمة سبأ وزوالها بسبب الكفران، وتقارن بين نعيم الشكر وعاقبة الجحود عبر مُلك داود وسليمان.",
+    "summary_english": "Tells the story of the blessing of Sheba and its loss through ingratitude, contrasting the bliss of gratitude with the consequence of denial through the kingdom of David and Solomon.",
+    "revelation_reason": "نزلت في مكة معتبرة بمصير أمة سبأ التي كفرت بالنعمة فأرسل الله عليها سيل العرم.",
+    "revelation_reason_english": "Revealed in Mecca as a lesson from the fate of the nation of Sheba, which denied the blessing and was struck by the flood of Al-Arim.",
+    "core_themes": ["الشكر", "زوال النعم", "التوحيد"],
+    "other_names": []
+  },
+  "35": {
+    "summary": "تفتتح بصفة الله الخالق الفاطر للسماوات والأرض، وتقسّم الناس في التعامل مع القرآن إلى ظالم ومقتصد وسابق بالخيرات.",
+    "summary_english": "Opens with God's attribute as the Originator of the heavens and earth, and divides people in their dealing with the Quran into the wrongful, the moderate, and those foremost in good deeds.",
+    "revelation_reason": "نزلت في مكة لتقرير قدرة الله المطلقة في الخلق والإبداع أمام إنكار المشركين للبعث.",
+    "revelation_reason_english": "Revealed in Mecca to establish God's absolute power in creation before the polytheists' denial of resurrection.",
+    "core_themes": ["الخلق", "النعم", "مراتب الناس"],
+    "other_names": ["الملائكة"]
+  },
+  "36": {
+    "summary": "تعد قلب القرآن لما فيها من تثبيت للرسالة وتذكير بالبعث، وتروي قصة صاحب القرية الذي آمن ونصح قومه فقُتل.",
+    "summary_english": "Considered the heart of the Quran for its reinforcement of the message and reminder of resurrection, and tells the story of the man of the town who believed and advised his people, only to be killed.",
+    "revelation_reason": "نزلت في مكة لتثبيت قلب النبي ﷺ وسط إعراض قومه، مؤكدة صدق الرسالة ووقوع البعث حتمًا.",
+    "revelation_reason_english": "Revealed in Mecca to steady the Prophet's heart amid his people's rejection, affirming the truth of the message and the certainty of resurrection.",
+    "core_themes": ["البعث", "تثبيت الرسالة", "الإنذار"],
+    "other_names": ["قلب القرآن"]
+  },
+  "37": {
+    "summary": "تصف صفوف الملائكة المسبحة، وتروي قصة إبراهيم مع ابنه إسماعيل في الذبح العظيم نموذجًا للتسليم الكامل.",
+    "summary_english": "Describes the ranks of glorifying angels, and tells the story of Abraham and his son Ishmael in the great act of sacrifice, a model of complete submission.",
+    "revelation_reason": "نزلت في مكة لتثبيت التوحيد عبر مشهد الملائكة المسبّحة وقصص الأنبياء الصادقين مع ربهم.",
+    "revelation_reason_english": "Revealed in Mecca to establish monotheism through the scene of glorifying angels and the stories of prophets true to their Lord.",
+    "core_themes": ["التسليم لله", "التوحيد", "قصص الأنبياء"],
+    "other_names": []
+  },
+  "38": {
+    "summary": "تروي قصة داود وسليمان وابتلاء أيوب عليهم السلام، مبرزة قيمة التوبة والصبر لدى الأنبياء الصالحين.",
+    "summary_english": "Tells the story of David and Solomon and the trial of Job, highlighting the value of repentance and patience among righteous prophets.",
+    "revelation_reason": "نزلت في مكة ردًا على تعجب قريش من دعوة النبي ﷺ إلى إله واحد، مستشهدة بصبر الأنبياء من قبله.",
+    "revelation_reason_english": "Revealed in Mecca in response to Quraysh's astonishment at the Prophet's call to a single God, citing the patience of prophets before him.",
+    "core_themes": ["الصبر", "التوبة", "الابتلاء"],
+    "other_names": []
+  },
+  "39": {
+    "summary": "تدعو إلى إخلاص الدين لله وحده، وتصور مشهد الناس زمرًا يوم القيامة بين فائز إلى الجنة وخاسر إلى النار.",
+    "summary_english": "Calls for devoting religion sincerely to God alone, and portrays people in groups on Judgment Day, some triumphant to Paradise, others lost to Hell.",
+    "revelation_reason": "نزلت في مكة لتثبيت معنى الإخلاص التام لله في زمن اشتد فيه إغراء المشركين للنبي ﷺ بالمداهنة.",
+    "revelation_reason_english": "Revealed in Mecca to establish the meaning of complete sincerity to God at a time when the polytheists intensified their attempts to entice the Prophet toward compromise.",
+    "core_themes": ["الإخلاص", "يوم القيامة", "التوحيد"],
+    "other_names": []
+  },
+  "40": {
+    "summary": "تروي موقف رجل مؤمن من آل فرعون كتم إيمانه ودافع عن موسى بالحكمة، وتفتح باب الرجاء بذكر سعة مغفرة الله.",
+    "summary_english": "Tells of a believing man from Pharaoh's household who concealed his faith and defended Moses with wisdom, opening a door of hope by describing the vastness of God's forgiveness.",
+    "revelation_reason": "نزلت في مكة لتشجيع من يخفي إيمانه خوفًا من أذى قومه، مستلهمة قصة المؤمن الشجاع في قوم فرعون.",
+    "revelation_reason_english": "Revealed in Mecca to encourage those who hide their faith out of fear of their people's harm, drawing on the story of the courageous believer among Pharaoh's people.",
+    "core_themes": ["المغفرة", "الشجاعة في الحق", "الجدال بالحسنى"],
+    "other_names": ["الطول"]
+  },
+  "41": {
+    "summary": "تصف القرآن بأنه كتاب فُصّلت آياته إحكامًا وبيانًا، وتصور شهادة الجلود والجوارح على أصحابها يوم القيامة.",
+    "summary_english": "Describes the Quran as a book whose verses have been made detailed in precision and clarity, and portrays the skin and limbs bearing witness against their owners on Judgment Day.",
+    "revelation_reason": "نزلت في مكة ردًا على من طلب من المشركين آيات بلغة أعجمية، مؤكدة وضوح القرآن وإحكام بيانه.",
+    "revelation_reason_english": "Revealed in Mecca in response to a demand from the polytheists for verses in a foreign tongue, affirming the Quran's clarity and precise exposition.",
+    "core_themes": ["إعجاز القرآن", "الشهادة يوم القيامة", "الاستقامة"],
+    "other_names": ["حم السجدة"]
+  },
+  "42": {
+    "summary": "تؤسس لمبدأ الشورى بين المؤمنين ركيزة أساسية في شؤونهم، وتصف صفات الذين استجابوا لربهم وتوكلوا عليه.",
+    "summary_english": "Establishes the principle of mutual consultation among believers as a core pillar of their affairs, and describes the qualities of those who respond to their Lord and rely upon Him.",
+    "revelation_reason": "نزلت في مكة لترسيخ قيمة التشاور بين المؤمنين في وقت كانوا فيه قلة مستضعفة تحتاج تماسكًا داخليًا.",
+    "revelation_reason_english": "Revealed in Mecca to root the value of consultation among believers at a time when they were a vulnerable minority in need of internal cohesion.",
+    "core_themes": ["الشورى", "التوكل", "المغفرة"],
+    "other_names": []
+  },
+  "43": {
+    "summary": "تبين أن زخرف الدنيا لا وزن له عند الله، وتروي قصة إبراهيم مع أبيه وموسى مع فرعون تسفيهًا لمعايير أهل الكفر المادية.",
+    "summary_english": "Shows that the ornaments of worldly life carry no weight with God, and tells the story of Abraham with his father and Moses with Pharaoh, refuting the disbelievers' materialistic standards.",
+    "revelation_reason": "نزلت ردًا على استكبار صناديد قريش الذين احتجوا بأن الرسالة يجب أن تنزل على رجل ذي مال وجاه.",
+    "revelation_reason_english": "Revealed in response to the arrogance of Quraysh's chiefs who argued that the message should have been sent to a man of wealth and status.",
+    "core_themes": ["زهد الدنيا", "التوحيد", "القيم الحقيقية"],
+    "other_names": []
+  },
+  "44": {
+    "summary": "تصف ليلة نزول القرآن المباركة، وتنذر بعذاب الدخان الذي أصاب قريشًا عقوبة على عنادها وتكذيبها.",
+    "summary_english": "Describes the blessed night on which the Quran was revealed, and warns of the punishment of smoke that struck Quraysh as a penalty for their obstinacy and denial.",
+    "revelation_reason": "نزلت حين أصاب قريشًا قحط شديد رأوا فيه كالدخان من شدة الجوع، فطلبوا الفرج ثم عادوا لكفرهم.",
+    "revelation_reason_english": "Revealed when Quraysh suffered a severe famine that made things appear like smoke from the intensity of hunger, so they pleaded for relief and then returned to disbelief.",
+    "core_themes": ["ليلة القدر", "الإنذار", "العقاب"],
+    "other_names": []
+  },
+  "45": {
+    "summary": "تصف هول يوم القيامة حين تجثو الأمم على ركبها انتظارًا للحساب، وتدعو للتفكر في آيات الله المبثوثة في الكون.",
+    "summary_english": "Describes the terror of Judgment Day when nations kneel awaiting the reckoning, and calls for reflection on God's signs scattered throughout the universe.",
+    "revelation_reason": "نزلت في مكة لتذكير المكذبين بيوم لا ينفع فيه إلا الإيمان والعمل الصالح.",
+    "revelation_reason_english": "Revealed in Mecca to remind those in denial of a day when nothing avails except faith and righteous deeds.",
+    "core_themes": ["يوم القيامة", "التفكر", "الحساب"],
+    "other_names": []
+  },
+  "46": {
+    "summary": "تروي قصة عاد قوم هود في الأحقاف عبرة لقريش، وتوصي ببر الوالدين توصية مؤثرة تلامس الوجدان.",
+    "summary_english": "Tells the story of Aad, the people of Hud, in the sand dunes as a lesson for Quraysh, and offers a moving recommendation of kindness to parents.",
+    "revelation_reason": "نزلت في أواخر العهد المكي لتحذير قريش من مصير مماثل لمصير عاد الذين أهلكتهم ريح صرصر عاتية.",
+    "revelation_reason_english": "Revealed in the late Meccan period to warn Quraysh of a fate similar to that of Aad, destroyed by a violent, howling wind.",
+    "core_themes": ["بر الوالدين", "الإنذار", "الصبر"],
+    "other_names": []
+  },
+  "47": {
+    "summary": "تتناول أحكام القتال والجهاد في سبيل الله، وتقارن بين مصير الذين آمنوا وعملوا الصالحات والذين كفروا.",
+    "summary_english": "Addresses the rulings of fighting and jihad in God's cause, contrasting the fate of those who believed and did righteous deeds with those who disbelieved.",
+    "revelation_reason": "نزلت في المدينة في سياق تشريع أحكام القتال، مثبتة قلوب المؤمنين المقبلين على مواجهة أعدائهم.",
+    "revelation_reason_english": "Revealed in Medina in the context of legislating the rulings of combat, steadying the hearts of believers about to face their enemies.",
+    "core_themes": ["الجهاد", "الثبات", "الإيمان والعمل"],
+    "other_names": ["القتال"]
+  },
+  "48": {
+    "summary": "تبشر بفتح مبين عظيم عقب صلح الحديبية، وتصف بيعة الرضوان التي رضي الله فيها عن المؤمنين تحت الشجرة.",
+    "summary_english": "Announces a manifest victory following the Treaty of Hudaybiyyah, and describes the Pledge of the Tree, with which God was pleased with the believers.",
+    "revelation_reason": "نزلت في طريق العودة من صلح الحديبية، الذي بدا في ظاهره تنازلًا لكنه كان فتحًا مبينًا في حقيقته.",
+    "revelation_reason_english": "Revealed on the return journey from the Treaty of Hudaybiyyah, which appeared outwardly as a concession but was in truth a clear victory.",
+    "core_themes": ["النصر", "البيعة", "الرضا الإلهي"],
+    "other_names": []
+  },
+  "49": {
+    "summary": "ترسي آداب التعامل الرفيع مع النبي ﷺ ومع المؤمنين، وتحذر من السخرية والغيبة وتؤكد أن الكرامة بالتقوى لا بالنسب.",
+    "summary_english": "Establishes refined etiquette in dealing with the Prophet and with fellow believers, warning against mockery and backbiting, and affirming that honor lies in God-consciousness, not lineage.",
+    "revelation_reason": "نزلت لتأديب بعض الوفود والصحابة في مواقف تتعلق برفع الصوت والتحقق من الأخبار والتعامل بين الناس.",
+    "revelation_reason_english": "Revealed to correct certain delegations and companions in situations involving raised voices, verifying news, and how people treat one another.",
+    "core_themes": ["الأخلاق", "الأخوة", "التقوى"],
+    "other_names": []
+  },
+  "50": {
+    "summary": "تقرر حقيقة البعث ردًا على استغراب المشركين، وتصف قرب الله من الإنسان أقرب من حبل الوريد.",
+    "summary_english": "Establishes the truth of resurrection in response to the polytheists' astonishment, and describes God's nearness to man as closer than the jugular vein.",
+    "revelation_reason": "نزلت في مكة ردًا على تعجب المشركين من إمكانية إحياء الموتى بعد أن صاروا ترابًا.",
+    "revelation_reason_english": "Revealed in Mecca in response to the polytheists' astonishment at the possibility of reviving the dead after they had turned to dust.",
+    "core_themes": ["البعث", "قرب الله", "الإنذار"],
+    "other_names": []
+  },
+  "51": {
+    "summary": "تقسم بالرياح المذاريات تأكيدًا لصدق البعث والجزاء، وتصف كرم إبراهيم عليه السلام مع ضيوفه من الملائكة.",
+    "summary_english": "Swears by the scattering winds to affirm the truth of resurrection and recompense, and describes Abraham's generosity toward his guests, who were angels.",
+    "revelation_reason": "نزلت في مكة لتأكيد وعد الله بالرزق والجزاء، مستدلة بآيات الكون الدالة على قدرته.",
+    "revelation_reason_english": "Revealed in Mecca to affirm God's promise of provision and recompense, drawing on the signs of the universe as evidence of His power.",
+    "core_themes": ["الرزق", "البعث", "الكرم"],
+    "other_names": []
+  },
+  "52": {
+    "summary": "تقسم بجبل الطور وأحداث القيامة الكبرى، وتفند شبهات المشركين حول أصل الخلق ومصدر الرسالة.",
+    "summary_english": "Swears by Mount Tur and the great events of resurrection, and refutes the polytheists' confused claims about the origin of creation and the source of revelation.",
+    "revelation_reason": "نزلت ردًا على تخبط المشركين في تفسير أصل الكون والإنسان، مثبتة أن لا مفر من خالق حكيم.",
+    "revelation_reason_english": "Revealed in response to the polytheists' confusion in explaining the origin of the universe and man, affirming that a wise Creator cannot be escaped.",
+    "core_themes": ["يوم القيامة", "الرد على الشبهات", "التوحيد"],
+    "other_names": []
+  },
+  "53": {
+    "summary": "تصف رحلة المعراج ورؤية النبي ﷺ لجبريل في صورته الحقيقية، وتفند عبادة الأصنام كاللات والعزى ومناة.",
+    "summary_english": "Describes the journey of Ascension and the Prophet's sight of Gabriel in his true form, and refutes the worship of idols such as Al-Lat, Al-Uzza, and Manat.",
+    "revelation_reason": "نزلت لتأكيد صدق ما رآه النبي ﷺ ليلة المعراج، وردًا على تسمية المشركين لبناتهم آلهة من دون الله.",
+    "revelation_reason_english": "Revealed to affirm the truth of what the Prophet saw on the Night of Ascension, and in response to the polytheists naming their daughters as gods besides God.",
+    "core_themes": ["المعراج", "إبطال الشرك", "الوحي"],
+    "other_names": []
+  },
+  "54": {
+    "summary": "تفتتح بمعجزة انشقاق القمر التي شهدتها قريش رأي العين، وتكرر مصير الأمم المكذبة تسهيلًا وتيسيرًا لفهم القرآن.",
+    "summary_english": "Opens with the miracle of the moon splitting, witnessed firsthand by Quraysh, and repeats the fate of denying nations to ease and simplify the Quran's understanding.",
+    "revelation_reason": "نزلت عقب معجزة انشقاق القمر التي طلبها المشركون فرأوها ثم أصروا على تكذيبها ووصفها بالسحر.",
+    "revelation_reason_english": "Revealed following the miracle of the moon splitting, which the polytheists had demanded, saw, and then persisted in denying, calling it magic.",
+    "core_themes": ["المعجزات", "الإنذار", "يسر القرآن"],
+    "other_names": []
+  },
+  "55": {
+    "summary": "تعدد آلاء الرحمن المتكررة بنغم آسر، من خلق الإنسان إلى نعيم الجنتين، مذكرة الثقلين بأي آلاء ربهما يكذبان.",
+    "summary_english": "Enumerates the recurring blessings of the Most Merciful in a captivating rhythm, from the creation of man to the bliss of the two gardens, reminding both mankind and jinn which of their Lord's favors they would deny.",
+    "revelation_reason": "نزلت لتقرير نعم الله المتوالية على الإنس والجن، بأسلوب يجمع بين الترغيب والتذكير بالشكر.",
+    "revelation_reason_english": "Revealed to establish God's continuous blessings upon humans and jinn, in a style combining encouragement with a reminder of gratitude.",
+    "core_themes": ["النعم", "الشكر", "الجنة"],
+    "other_names": ["عروس القرآن"]
+  },
+  "56": {
+    "summary": "تصور يوم القيامة الواقع لا محالة، وتقسم الناس إلى ثلاثة أصناف: السابقين وأصحاب اليمين وأصحاب الشمال.",
+    "summary_english": "Portrays the inevitable Day of Judgment, dividing people into three groups: the foremost, the companions of the right, and the companions of the left.",
+    "revelation_reason": "نزلت في مكة لتثبيت اليقين بوقوع الساعة وتقسيم مصائر الناس فيها بحسب أعمالهم.",
+    "revelation_reason_english": "Revealed in Mecca to establish certainty in the coming of the Hour and to divide people's fates within it according to their deeds.",
+    "core_themes": ["يوم القيامة", "الرزق", "مراتب الناس"],
+    "other_names": []
+  },
+  "57": {
+    "summary": "تدعو للإنفاق في سبيل الله وتحيي القلوب باليقين، وتذكر بإنزال الحديد فيه بأس شديد ومنافع للناس.",
+    "summary_english": "Calls for spending in God's cause and reviving hearts with certainty, and mentions the sending down of iron, in which lies great strength and benefits for people.",
+    "revelation_reason": "نزلت في المدينة لحث المؤمنين على الإنفاق والبذل في وقت كانت الأمة بحاجة لدعم الجهاد.",
+    "revelation_reason_english": "Revealed in Medina to urge believers to spend and give generously at a time when the community needed support for jihad.",
+    "core_themes": ["الإنفاق", "اليقين", "الحياة الدنيا"],
+    "other_names": []
+  },
+  "58": {
+    "summary": "تستجيب لشكوى امرأة ظُلمت بالظهار من زوجها، مبطلة عادة جاهلية ظالمة، ومؤسسة لكفارة عادلة بدلًا منها.",
+    "summary_english": "Responds to the plea of a woman wronged through her husband's unjust vow of separation, nullifying a pagan custom and establishing a fair expiation in its place.",
+    "revelation_reason": "نزلت في خولة بنت ثعلبة حين جادلت النبي ﷺ في أمر زوجها الذي ظاهر منها، فسمع الله شكواها من فوق سبع سماوات.",
+    "revelation_reason_english": "Revealed regarding Khawlah bint Tha'labah when she pleaded with the Prophet about her husband's vow, and God heard her complaint from above seven heavens.",
+    "core_themes": ["العدل", "حقوق المرأة", "التشريع"],
+    "other_names": []
+  },
+  "59": {
+    "summary": "تروي إجلاء بني النضير اليهود عن المدينة عقابًا على غدرهم، وتختم بأسماء الله الحسنى في مقطع بديع مؤثر.",
+    "summary_english": "Recounts the expulsion of the Jewish tribe of Banu al-Nadir from Medina as punishment for their treachery, closing with a beautiful, moving passage on God's most beautiful names.",
+    "revelation_reason": "نزلت عقب نقض بني النضير عهدهم مع النبي ﷺ ومحاولتهم الغدر به، فأُجلوا عن المدينة.",
+    "revelation_reason_english": "Revealed following Banu al-Nadir's breach of their covenant with the Prophet and their attempt to betray him, leading to their expulsion from Medina.",
+    "core_themes": ["الغدر", "الوحدة", "أسماء الله الحسنى"],
+    "other_names": ["بني النضير"]
+  },
+  "60": {
+    "summary": "تضع ضوابط الولاء والبراء مع الأعداء المحاربين، وتأمر باختبار إيمان المهاجرات قبل قبولهن في المجتمع المسلم.",
+    "summary_english": "Sets the boundaries of loyalty and disavowal with warring enemies, and commands testing the faith of migrating women before accepting them into the Muslim community.",
+    "revelation_reason": "نزلت حين كاتب حاطب بن أبي بلتعة قريشًا سرًا مخبرًا بخروج النبي ﷺ لفتح مكة، فعاتبه الله وبيّن حكم الولاء.",
+    "revelation_reason_english": "Revealed when Hatib ibn Abi Balta'ah secretly wrote to Quraysh informing them of the Prophet's plan to conquer Mecca, prompting God's rebuke and clarification of loyalty.",
+    "core_themes": ["الولاء والبراء", "الاختبار", "العلاقة مع الأعداء"],
+    "other_names": []
+  },
+  "61": {
+    "summary": "تحث المؤمنين على الجهاد الصادق قولًا وفعلًا، وتبشر بنصر الله لمن ينصر دينه كما نصر أنصار عيسى عليه السلام.",
+    "summary_english": "Urges believers toward sincere jihad in word and deed, and promises God's victory to whoever supports His religion, as the disciples once supported Jesus.",
+    "revelation_reason": "نزلت لتوبيخ من قال ما لا يفعل من المؤمنين، وحثهم على مطابقة القول بالعمل في نصرة الدين.",
+    "revelation_reason_english": "Revealed to rebuke believers who said what they did not do, urging them to match word with action in supporting the faith.",
+    "core_themes": ["الجهاد", "الصدق", "النصرة"],
+    "other_names": []
+  },
+  "62": {
+    "summary": "تبين فضل بعثة النبي ﷺ في الأميين، وتضع آداب صلاة الجمعة وتحذر من الانشغال بالتجارة عن ذكر الله.",
+    "summary_english": "Highlights the merit of the Prophet's mission among the unlettered, and establishes the etiquette of Friday prayer while warning against being distracted by trade from remembering God.",
+    "revelation_reason": "نزلت حين انفض بعض الصحابة عن خطبة الجمعة لقدوم قافلة تجارية، فعاتبهم الله على ذلك.",
+    "revelation_reason_english": "Revealed when some companions left the Friday sermon for the arrival of a trade caravan, and God rebuked them for it.",
+    "core_themes": ["صلاة الجمعة", "العلم", "الانشغال بالدنيا"],
+    "other_names": []
+  },
+  "63": {
+    "summary": "تفضح تناقض المنافقين بين ظاهرهم وباطنهم، وتحذر المؤمنين من الانشغال بالمال والأولاد عن ذكر الله.",
+    "summary_english": "Exposes the contradiction between the hypocrites' outward appearance and inner reality, warning believers against being distracted by wealth and children from remembering God.",
+    "revelation_reason": "نزلت في عبد الله بن أبي ابن سلول رأس المنافقين وقوله المشين في غزوة بني المصطلق.",
+    "revelation_reason_english": "Revealed concerning Abdullah ibn Ubayy ibn Salul, the chief hypocrite, and his shameful remarks during the expedition against Banu al-Mustaliq.",
+    "core_themes": ["النفاق", "التحذير", "الإخلاص"],
+    "other_names": []
+  },
+  "64": {
+    "summary": "تصف يوم التغابن حين يظهر الفائزون والخاسرون، وتحذر من أن تكون الأموال والأولاد فتنة تصرف عن طاعة الله.",
+    "summary_english": "Describes the Day of Mutual Loss and Gain when the winners and losers are revealed, warning that wealth and children may become a trial that diverts from obeying God.",
+    "revelation_reason": "نزلت في المدينة لتذكير المؤمنين بأن الابتلاء بالأهل والمال قد يكون سببًا للتقصير في الدين.",
+    "revelation_reason_english": "Revealed in Medina to remind believers that trial through family and wealth can become a cause of shortcoming in religion.",
+    "core_themes": ["يوم القيامة", "الفتنة بالمال والأهل", "التوكل"],
+    "other_names": []
+  },
+  "65": {
+    "summary": "تفصّل أحكام الطلاق والعدة بدقة وعدل، وتؤكد أن من يتق الله يجعل له مخرجًا ويرزقه من حيث لا يحتسب.",
+    "summary_english": "Details the rulings of divorce and the waiting period with precision and justice, affirming that whoever is mindful of God, He will make a way out and provide from where they do not expect.",
+    "revelation_reason": "نزلت لتصحيح بعض الممارسات الخاطئة في الطلاق، وضبط أحكامه بما يحفظ حقوق الطرفين.",
+    "revelation_reason_english": "Revealed to correct certain flawed practices in divorce and regulate its rulings in a way that preserves the rights of both parties.",
+    "core_themes": ["أحكام الطلاق", "التقوى", "الرزق"],
+    "other_names": []
+  },
+  "66": {
+    "summary": "تعالج موقفًا أسريًا في بيت النبوة، وتضرب مثلين متقابلين بامرأتي نوح ولوط وامرأة فرعون ومريم في الإيمان والكفر.",
+    "summary_english": "Addresses a family matter within the household of prophethood, drawing two contrasting parables of the wives of Noah and Lot and of the wife of Pharaoh and Mary, in disbelief and faith.",
+    "revelation_reason": "نزلت في واقعة تحريم النبي ﷺ على نفسه شيئًا مباحًا إرضاءً لبعض أزواجه، فعاتبه الله برفق.",
+    "revelation_reason_english": "Revealed regarding the Prophet's forbidding himself something lawful to please some of his wives, for which God gently corrected him.",
+    "core_themes": ["التوبة", "بيت النبوة", "الإيمان الفردي"],
+    "other_names": []
+  },
+  "67": {
+    "summary": "تعظّم ملك الله المطلق على الكون، وتحث على التفكر في دقة الخلق، وهي وقاية من عذاب القبر لمن واظب عليها.",
+    "summary_english": "Magnifies God's absolute dominion over the universe, urges reflection on the precision of creation, and serves as a protection from the punishment of the grave for whoever recites it regularly.",
+    "revelation_reason": "نزلت في مكة لتقرير كمال ملك الله وقدرته، وقد وردت فضائل عظيمة في تلاوتها ليلًا.",
+    "revelation_reason_english": "Revealed in Mecca to establish the perfection of God's dominion and power, and great virtues have been narrated regarding its recitation at night.",
+    "core_themes": ["الملك الإلهي", "التفكر", "الموت"],
+    "other_names": ["المنجية", "الواقية"]
+  },
+  "68": {
+    "summary": "تقسم بالقلم وما يسطرون تكريمًا للعلم والكتابة، وتثني على خُلق النبي ﷺ العظيم ردًا على اتهامات المشركين له بالجنون.",
+    "summary_english": "Swears by the pen and what it writes, honoring knowledge and writing, and praises the Prophet's magnificent character in response to accusations of madness by the polytheists.",
+    "revelation_reason": "نزلت في بدايات الوحي ردًا على وصف قريش للنبي ﷺ بالجنون بسبب دعوته الجديدة.",
+    "revelation_reason_english": "Revealed in the early period of revelation in response to Quraysh describing the Prophet as mad because of his new call.",
+    "core_themes": ["العلم", "الخلق العظيم", "الصبر على الأذى"],
+    "other_names": ["ن"]
+  },
+  "69": {
+    "summary": "تصف يوم القيامة بأنه الحاقة التي لا ريب فيها، وتسرد مصير الأمم المكذبة، وتؤكد أن القرآن كلام الله لا كلام شاعر.",
+    "summary_english": "Describes the Day of Judgment as the undeniable Reality, recounts the fate of denying nations, and affirms that the Quran is the word of God, not the words of a poet.",
+    "revelation_reason": "نزلت في مكة لتقرير حتمية وقوع الساعة، وتفنيد اتهام القرآن بأنه شعر أو كهانة.",
+    "revelation_reason_english": "Revealed in Mecca to establish the certainty of the coming Hour, and to refute the accusation that the Quran was poetry or soothsaying.",
+    "core_themes": ["يوم القيامة", "براءة القرآن", "الإنذار"],
+    "other_names": []
+  },
+  "70": {
+    "summary": "تصف طول يوم القيامة وشدة هوله، وتعدد صفات المصلين الخاشعين الذين ينجون من الجزع والهلع في ذلك اليوم.",
+    "summary_english": "Describes the length and severity of the Day of Judgment, and lists the qualities of the devout worshippers who are spared its anguish and terror.",
+    "revelation_reason": "نزلت ردًا على استعجال أحد المشركين بالعذاب استهزاءً، فبيّن الله أن العذاب واقع في وقته المقدر.",
+    "revelation_reason_english": "Revealed in response to a polytheist mockingly demanding the punishment be hastened, clarifying that punishment occurs at its appointed time.",
+    "core_themes": ["يوم القيامة", "الصلاة", "الصبر"],
+    "other_names": []
+  },
+  "71": {
+    "summary": "تروي دعوة نوح عليه السلام الطويلة لقومه ليلًا ونهارًا، سرًا وجهارًا، وصبره العظيم رغم عنادهم وإصرارهم على الكفر.",
+    "summary_english": "Recounts Noah's long call to his people by night and day, secretly and openly, and his immense patience despite their stubbornness and insistence on disbelief.",
+    "revelation_reason": "نزلت في مكة تسلية للنبي ﷺ بذكر صبر نوح عليه السلام الذي دعا قومه ألف سنة إلا خمسين عامًا.",
+    "revelation_reason_english": "Revealed in Mecca to console the Prophet by recalling Noah's patience, who called his people for nearly a thousand years.",
+    "core_themes": ["الصبر", "الدعوة", "الاستغفار"],
+    "other_names": []
+  },
+  "72": {
+    "summary": "تحكي استماع نفر من الجن للقرآن وإيمانهم به عجبًا، كاشفة عالمًا غيبيًا آمن بسرعة بينما تمادى كثير من الإنس في الجحود.",
+    "summary_english": "Tells of a group of jinn listening to the Quran and believing in it with wonder, revealing an unseen world that came to faith swiftly while many humans persisted in denial.",
+    "revelation_reason": "نزلت حين استمع نفر من الجن للنبي ﷺ وهو يقرأ القرآن في طريقه من الطائف، فآمنوا وعادوا لإنذار قومهم.",
+    "revelation_reason_english": "Revealed when a group of jinn overheard the Prophet reciting the Quran on his way back from Ta'if, so they believed and returned to warn their people.",
+    "core_themes": ["عالم الجن", "الإيمان", "التوحيد"],
+    "other_names": []
+  },
+  "73": {
+    "summary": "تأمر النبي ﷺ بقيام الليل إعدادًا لحمل أمانة الرسالة الثقيلة، وتصف القرآن بأنه قول ثقيل يستوجب الاستعداد الروحي.",
+    "summary_english": "Commands the Prophet to pray at night in preparation for bearing the heavy trust of the message, describing the Quran as weighty words requiring spiritual readiness.",
+    "revelation_reason": "نزلت في بدايات الوحي حين كان النبي ﷺ يتزمل بثيابه من هول ما لقيه، فأمره الله بقيام الليل تثبيتًا له.",
+    "revelation_reason_english": "Revealed in the early period of revelation when the Prophet wrapped himself in his garments from the awe of what he had encountered, so God commanded night prayer to steady him.",
+    "core_themes": ["قيام الليل", "الإعداد الروحي", "الصبر"],
+    "other_names": []
+  },
+  "74": {
+    "summary": "تأمر النبي ﷺ بالقيام والإنذار في أولى مراحل الدعوة الجهرية، وتصف موقف الوليد بن المغيرة المتعنت من القرآن.",
+    "summary_english": "Commands the Prophet to rise and warn in the earliest stage of public preaching, and describes the obstinate stance of Al-Walid ibn Al-Mughirah toward the Quran.",
+    "revelation_reason": "نزلت بعد فترة انقطاع الوحي، آمرة النبي ﷺ بالنهوض لبدء الإنذار العلني بعد سكون الوحي.",
+    "revelation_reason_english": "Revealed after a pause in revelation, commanding the Prophet to rise and begin public warning after the stillness of revelation.",
+    "core_themes": ["بداية الدعوة", "الإنذار", "التطهر"],
+    "other_names": []
+  },
+  "75": {
+    "summary": "تقسم بيوم القيامة وبالنفس اللوامة، وتصف دقة جمع القرآن في صدر النبي ﷺ وأهوال ساعة الاحتضار والبعث.",
+    "summary_english": "Swears by the Day of Resurrection and the self-reproaching soul, and describes the precision of the Quran's gathering in the Prophet's chest and the terrors of the moment of death and resurrection.",
+    "revelation_reason": "نزلت في مكة لتثبيت اليقين بالبعث ردًا على من استبعد إعادة جمع العظام بعد تفرقها.",
+    "revelation_reason_english": "Revealed in Mecca to establish certainty in resurrection, in response to those who doubted the reassembly of scattered bones.",
+    "core_themes": ["البعث", "النفس اللوامة", "جمع القرآن"],
+    "other_names": []
+  },
+  "76": {
+    "summary": "تصف نعيم الأبرار في الجنة جزاء إطعامهم المسكين واليتيم والأسير خالصًا لوجه الله دون رياء أو انتظار جزاء.",
+    "summary_english": "Describes the bliss awaiting the righteous in Paradise as reward for feeding the needy, the orphan, and the captive, purely for God's sake, without seeking praise or reward.",
+    "revelation_reason": "نزلت في إطار الثناء على أهل البيت حين آثروا طعامهم على المسكين واليتيم والأسير ثلاثة أيام متتالية.",
+    "revelation_reason_english": "Revealed in praise of the Prophet's household when they gave their food to the needy, the orphan, and the captive for three consecutive days.",
+    "core_themes": ["الإيثار", "الجنة", "الإخلاص"],
+    "other_names": ["الدهر"]
+  },
+  "77": {
+    "summary": "تقسم بالرياح المرسلات عرفًا، وتكرر عبارة \"ويل يومئذ للمكذبين\" جرسًا مؤثرًا ينذر بهول يوم الفصل.",
+    "summary_english": "Swears by the winds sent forth successively, and repeats the phrase 'woe that day to the deniers' as a moving refrain warning of the momentous Day of Separation.",
+    "revelation_reason": "نزلت في مكة لتهديد المكذبين بيوم الفصل العظيم بأسلوب قسمي مؤثر يهز القلوب.",
+    "revelation_reason_english": "Revealed in Mecca to threaten the deniers with the great Day of Separation in a moving, oath-laden style that stirs the heart.",
+    "core_themes": ["يوم الفصل", "الإنذار", "آيات الكون"],
+    "other_names": []
+  },
+  "78": {
+    "summary": "تجيب عن تساؤل المشركين حول النبأ العظيم، أي البعث، وتعدد آيات الكون دليلًا على قدرة الله على الإحياء.",
+    "summary_english": "Answers the polytheists' questioning about the great news, namely resurrection, and enumerates the signs of the universe as evidence of God's power to give life.",
+    "revelation_reason": "نزلت ردًا على تساؤل قريش واختلافهم حول خبر البعث الذي كان يشغل حديثهم في مكة.",
+    "revelation_reason_english": "Revealed in response to Quraysh's questioning and disagreement over the news of resurrection, which occupied their conversations in Mecca.",
+    "core_themes": ["البعث", "آيات الكون", "الجزاء"],
+    "other_names": []
+  },
+  "79": {
+    "summary": "تقسم بالملائكة قابضة الأرواح، وتروي قصة موسى مع فرعون الذي طغى وادعى الألوهية فأخذه الله نكال الآخرة والأولى.",
+    "summary_english": "Swears by the angels who seize souls, and tells the story of Moses with Pharaoh, who transgressed and claimed divinity, so God seized him with the punishment of both this life and the next.",
+    "revelation_reason": "نزلت في مكة تحذيرًا من الطغيان مستشهدة بمصير فرعون الذي ادعى الربوبية فأهلكه الله.",
+    "revelation_reason_english": "Revealed in Mecca as a warning against tyranny, citing the fate of Pharaoh who claimed lordship and was destroyed by God.",
+    "core_themes": ["الطغيان", "البعث", "قصة موسى وفرعون"],
+    "other_names": []
+  },
+  "80": {
+    "summary": "تعاتب موقفًا إنسانيًا رقيقًا حين انشغل النبي ﷺ عن رجل أعمى مقبل على الهدى بسادة قريش، مؤكدة أن ميزان الله هو التقوى لا الجاه.",
+    "summary_english": "Gently rebukes a human moment when the Prophet turned away from a blind man seeking guidance to attend to Quraysh's chiefs, affirming that God's measure is God-consciousness, not status.",
+    "revelation_reason": "نزلت حين جاء ابن أم مكتوم الأعمى يسأل النبي ﷺ وهو منشغل بدعوة كبراء قريش، فعاتبه الله برفق.",
+    "revelation_reason_english": "Revealed when Ibn Umm Maktum, a blind man, came asking the Prophet questions while he was occupied with inviting Quraysh's leaders, and God gently corrected him.",
+    "core_themes": ["العدل", "التواضع", "قيمة الإنسان"],
+    "other_names": []
+  },
+  "81": {
+    "summary": "ترسم مشاهد انطواء الكون وتغير نظامه يوم القيامة، وتؤكد أن القرآن وحي من الله لا كلام شيطان رجيم.",
+    "summary_english": "Paints scenes of the universe folding up and its order changing on Judgment Day, affirming that the Quran is revelation from God, not the words of a cursed devil.",
+    "revelation_reason": "نزلت في أوائل العهد المكي لتصوير أهوال القيامة بأسلوب مشهدي يهز القلوب ويوقظ الغافلين.",
+    "revelation_reason_english": "Revealed in the early Meccan period to depict the terrors of the Hour in a vivid, scene-driven style that stirs the heart and awakens the heedless.",
+    "core_themes": ["يوم القيامة", "الوحي", "الكون"],
+    "other_names": []
+  },
+  "82": {
+    "summary": "تصف انشقاق السماء وانتثار الكواكب، وتذكّر الإنسان بكرم الله عليه رغم اغتراره وإهماله شأن آخرته.",
+    "summary_english": "Describes the sky splitting apart and the stars scattering, reminding man of God's generosity toward him despite his delusion and neglect of his hereafter.",
+    "revelation_reason": "نزلت في مكة لتذكير الإنسان بيوم يفلت فيه كل غرور، حين تنكشف الحقائق أمام كل نفس.",
+    "revelation_reason_english": "Revealed in Mecca to remind man of a day when every delusion will slip away, when the truth is revealed before every soul.",
+    "core_themes": ["يوم القيامة", "غرور الإنسان", "الحساب"],
+    "other_names": []
+  },
+  "83": {
+    "summary": "تتوعد المطففين في الكيل والميزان بويل شديد، وتقارن بين نعيم الأبرار في عليين وعذاب الفجار في سجين.",
+    "summary_english": "Threatens those who cheat in measure and weight with severe woe, contrasting the bliss of the righteous in Illiyyin with the punishment of the wicked in Sijjin.",
+    "revelation_reason": "نزلت لمعالجة ظاهرة التطفيف في التجارة التي انتشرت بين بعض أهل المدينة عند قدوم النبي ﷺ إليها.",
+    "revelation_reason_english": "Revealed to address the practice of shortchanging in trade that had spread among some people of Medina upon the Prophet's arrival there.",
+    "core_themes": ["العدل التجاري", "الجزاء", "الأبرار والفجار"],
+    "other_names": []
+  },
+  "84": {
+    "summary": "تصف انشقاق السماء وإذنها لربها، وتؤكد أن الإنسان كادح إلى ربه كدحًا فملاقيه لا محالة يوم الحساب.",
+    "summary_english": "Describes the sky splitting and submitting to its Lord, affirming that man toils toward his Lord and will surely meet Him on the Day of Reckoning.",
+    "revelation_reason": "نزلت في مكة لتقرير حقيقة اللقاء مع الله، وأن مصير كل نفس مرتبط بكتاب أعمالها.",
+    "revelation_reason_english": "Revealed in Mecca to establish the certainty of meeting God, and that every soul's fate is tied to its record of deeds.",
+    "core_themes": ["البعث", "الحساب", "الكدح إلى الله"],
+    "other_names": []
+  },
+  "85": {
+    "summary": "تروي قصة أصحاب الأخدود الذين عذبوا المؤمنين بالنار لمجرد إيمانهم بالله، تثبيتًا لكل مؤمن يُبتلى في دينه.",
+    "summary_english": "Tells the story of the People of the Ditch, who burned believers alive for their faith alone, steadying every believer tested in their religion.",
+    "revelation_reason": "نزلت في مكة تثبيتًا للمستضعفين المعذبين بذكر صبر من سبقهم من المؤمنين على أشد أنواع الفتنة.",
+    "revelation_reason_english": "Revealed in Mecca to steady the oppressed and persecuted by recalling the patience of earlier believers under the harshest of trials.",
+    "core_themes": ["الثبات على الإيمان", "الابتلاء", "قدرة الله"],
+    "other_names": []
+  },
+  "86": {
+    "summary": "تقسم بالنجم الثاقب دليلًا على أن على كل نفس حافظًا يرقبها، وتذكّر بأصل خلق الإنسان من ماء دافق مهين.",
+    "summary_english": "Swears by the piercing star as evidence that every soul has a guardian watching over it, and recalls the origin of man's creation from a gushing fluid.",
+    "revelation_reason": "نزلت في مكة لتقرير أن الإنسان مراقب دائمًا، وأن القادر على خلقه قادر على إعادته يوم القيامة.",
+    "revelation_reason_english": "Revealed in Mecca to establish that man is always watched, and that the One capable of creating him is capable of restoring him on Judgment Day.",
+    "core_themes": ["الرقابة الإلهية", "خلق الإنسان", "البعث"],
+    "other_names": []
+  },
+  "87": {
+    "summary": "تسبح باسم الله الأعلى الذي خلق فسوى وقدّر فهدى، وتيسر ذكر القرآن للمتذكرين مفضلة الآخرة الباقية على الدنيا الفانية.",
+    "summary_english": "Glorifies the name of God the Most High, who created and proportioned, who determined and guided, and eases the remembrance of the Quran for those who take heed, favoring the everlasting hereafter over the fleeting world.",
+    "revelation_reason": "نزلت في أوائل العهد المكي لتقرير تنزيه الله وتيسير القرآن للتذكرة، وقد كان النبي ﷺ يحب قراءتها في الصلاة.",
+    "revelation_reason_english": "Revealed in the early Meccan period to establish God's transcendence and the ease of the Quran for remembrance; the Prophet loved to recite it in prayer.",
+    "core_themes": ["التسبيح", "يسر القرآن", "الآخرة خير وأبقى"],
+    "other_names": []
+  },
+  "88": {
+    "summary": "تصور مشهدين متقابلين لوجوه خاشعة تعمل وتنصب في النار، ووجوه ناعمة راضية في جنة عالية، وتدعو للتفكر في الخلق.",
+    "summary_english": "Portrays two contrasting scenes: humbled faces toiling in the Fire, and serene, contented faces in a lofty Paradise, calling for reflection on creation.",
+    "revelation_reason": "نزلت في مكة لتصوير مصيري أهل النار وأهل الجنة تذكيرًا وإنذارًا للمعرضين عن الحق.",
+    "revelation_reason_english": "Revealed in Mecca to depict the fates of the people of the Fire and the people of Paradise, as a reminder and warning to those turning away from truth.",
+    "core_themes": ["يوم القيامة", "التفكر في الخلق", "الجزاء"],
+    "other_names": []
+  },
+  "89": {
+    "summary": "تقسم بالفجر ولياليه العشر، وتروي مصير عاد وثمود وفرعون الطغاة، وتخاطب النفس المطمئنة الراجعة إلى ربها راضية مرضية.",
+    "summary_english": "Swears by the dawn and its ten nights, recounts the fate of the tyrants Aad, Thamud, and Pharaoh, and addresses the reassured soul returning to its Lord, pleased and pleasing.",
+    "revelation_reason": "نزلت في مكة محذرة من الطغيان بذكر مصير الأمم الطاغية، ومبشرة النفس المطمئنة بالرضا الإلهي.",
+    "revelation_reason_english": "Revealed in Mecca as a warning against tyranny through the fate of tyrannical nations, and glad tidings of divine acceptance for the reassured soul.",
+    "core_themes": ["الطغيان", "النفس المطمئنة", "الابتلاء بالمال"],
+    "other_names": []
+  },
+  "90": {
+    "summary": "تقسم بمكة البلد الأمين، وتصف الإنسان في كبد ومكابدة، وتدعو لاقتحام عقبة الخير بفك الرقاب وإطعام المسكين.",
+    "summary_english": "Swears by Mecca, the secure city, describes man as being in a state of toil and struggle, and calls for undertaking the steep path of good by freeing captives and feeding the needy.",
+    "revelation_reason": "نزلت في مكة لتذكير الإنسان بمكابدته في الحياة، ودعوته للخير الحقيقي بدل التفاخر بالمال.",
+    "revelation_reason_english": "Revealed in Mecca to remind man of his struggle in life, calling him to true goodness instead of boasting about wealth.",
+    "core_themes": ["مكابدة الإنسان", "الإنفاق", "عقبة الخير"],
+    "other_names": []
+  },
+  "91": {
+    "summary": "تقسم بسبعة أقسام كونية متتالية تأكيدًا على فلاح من زكى نفسه وخيبة من دساها، وتروي قصة ثمود ونبيهم صالح.",
+    "summary_english": "Swears seven successive cosmic oaths to affirm the success of one who purifies their soul and the ruin of one who corrupts it, and tells the story of Thamud and their prophet Salih.",
+    "revelation_reason": "نزلت في مكة لتقرير مسؤولية الإنسان عن تزكية نفسه، مستشهدة بعاقبة ثمود حين عقروا الناقة.",
+    "revelation_reason_english": "Revealed in Mecca to establish man's responsibility for purifying his own soul, citing the fate of Thamud when they hamstrung the she-camel.",
+    "core_themes": ["تزكية النفس", "المسؤولية", "قصة ثمود"],
+    "other_names": []
+  },
+  "92": {
+    "summary": "تقسم بالليل والنهار لتؤكد اختلاف مساعي الناس بين معطٍ متقٍ وبخيل مستغنٍ، ويبشر بتيسير طريق كل منهما لما هو عليه.",
+    "summary_english": "Swears by the night and day to affirm the difference in people's pursuits, between the God-conscious giver and the self-sufficient miser, promising each an ease suited to their path.",
+    "revelation_reason": "نزلت في مكة موازنة بين طريقين متناقضين للإنسان: التقوى والبذل، أو البخل والاستغناء عن الله.",
+    "revelation_reason_english": "Revealed in Mecca contrasting two opposing paths for man: God-consciousness and giving, or miserliness and self-sufficiency apart from God.",
+    "core_themes": ["الإنفاق", "التقوى", "التيسير للعمل"],
+    "other_names": []
+  },
+  "93": {
+    "summary": "تواسي النبي ﷺ برقة بالغة بعد فترة انقطاع الوحي، مذكّرة إياه بنعم الله عليه منذ يتمه، وآمرة إياه بالإحسان لليتيم والسائل.",
+    "summary_english": "Consoles the Prophet with great tenderness after a pause in revelation, reminding him of God's favors upon him since his orphanhood, and commanding him to be kind to the orphan and the petitioner.",
+    "revelation_reason": "نزلت بعد فترة توقف الوحي التي أحزنت النبي ﷺ وشمت بها المشركون، فطمأنه الله أنه لم يودعه ولم يقله.",
+    "revelation_reason_english": "Revealed after a pause in revelation that had saddened the Prophet and gladdened the polytheists, so God reassured him that He had neither forsaken nor abandoned him.",
+    "core_themes": ["التسلية", "النعم", "الإحسان لليتيم"],
+    "other_names": []
+  },
+  "94": {
+    "summary": "تبشر بأن مع العسر يسرًا، وتذكّر النبي ﷺ بشرح الله لصدره ورفع ذكره، دعوة للثقة بالفرج بعد كل ضيق.",
+    "summary_english": "Promises that with hardship comes ease, and reminds the Prophet of God expanding his chest and raising his renown, an invitation to trust in relief after every difficulty.",
+    "revelation_reason": "نزلت عقب سورة الضحى مواصلة لتطمين النبي ﷺ وسط ضيق الدعوة في بداياتها بمكة.",
+    "revelation_reason_english": "Revealed following Surah Ad-Duha, continuing to reassure the Prophet amid the hardship of the early call in Mecca.",
+    "core_themes": ["الفرج بعد الضيق", "شرح الصدر", "الأمل"],
+    "other_names": []
+  },
+  "95": {
+    "summary": "تقسم بالتين والزيتون وطور سينين والبلد الأمين، مؤكدة أن الله خلق الإنسان في أحسن تقويم ثم رده لأسفل إن كفر.",
+    "summary_english": "Swears by the fig, the olive, Mount Sinai, and the secure city, affirming that God created man in the best form, then reduced him to the lowest if he disbelieves.",
+    "revelation_reason": "نزلت في مكة لتقرير كرامة الإنسان الأصلية، وأن الانحطاط إنما يكون بسبب الكفر والبعد عن الإيمان.",
+    "revelation_reason_english": "Revealed in Mecca to establish man's original dignity, and that degradation comes only through disbelief and distance from faith.",
+    "core_themes": ["كرامة الإنسان", "الإيمان والعمل الصالح", "العدل الإلهي"],
+    "other_names": []
+  },
+  "96": {
+    "summary": "أول ما نزل من القرآن في غار حراء، تأمر بالقراءة باسم الله الذي علّم الإنسان ما لم يعلم، فاتحة عهد الرسالة.",
+    "summary_english": "The first Quranic revelation, given in the Cave of Hira, commanding recitation in the name of God who taught man what he did not know, opening the era of the message.",
+    "revelation_reason": "نزلت أول مرة على النبي ﷺ في غار حراء عند بلوغه الأربعين، إيذانًا ببدء الوحي والرسالة الخاتمة.",
+    "revelation_reason_english": "Revealed for the first time to the Prophet in the Cave of Hira when he reached forty, marking the beginning of revelation and the final message.",
+    "core_themes": ["بداية الوحي", "القراءة والعلم", "خلق الإنسان"],
+    "other_names": ["اقرأ"]
+  },
+  "97": {
+    "summary": "تعظّم شأن ليلة القدر التي نزل فيها القرآن، وتصفها بأنها خير من ألف شهر، تتنزل فيها الملائكة بالسلام حتى الفجر.",
+    "summary_english": "Magnifies the status of the Night of Decree, in which the Quran was revealed, describing it as better than a thousand months, in which angels descend with peace until dawn.",
+    "revelation_reason": "نزلت لتعظيم الليلة التي ابتدأ فيها نزول القرآن، وترغيب المؤمنين في اغتنام فضلها العظيم.",
+    "revelation_reason_english": "Revealed to exalt the night in which the revelation of the Quran began, encouraging believers to seize its immense merit.",
+    "core_themes": ["ليلة القدر", "نزول القرآن", "السلام والبركة"],
+    "other_names": []
+  },
+  "98": {
+    "summary": "تؤكد أن أهل الكتاب والمشركين لم يتفرقوا إلا من بعد ما جاءتهم البينة، وتصف خير البرية بأنهم الذين آمنوا وعملوا الصالحات.",
+    "summary_english": "Affirms that the People of the Book and the polytheists did not divide until after clear evidence came to them, describing the best of creation as those who believed and did righteous deeds.",
+    "revelation_reason": "نزلت في المدينة لتوضيح أن مجيء الرسالة الخاتمة كان حجة واضحة قاطعة على أهل الكتاب والمشركين معًا.",
+    "revelation_reason_english": "Revealed in Medina to clarify that the coming of the final message was a clear, decisive proof against both the People of the Book and the polytheists.",
+    "core_themes": ["وضوح الحجة", "الإخلاص", "خير البرية"],
+    "other_names": ["لم يكن"]
+  },
+  "99": {
+    "summary": "تصور زلزال الأرض العظيم يوم القيامة وإخراجها أثقالها، وتؤكد أن مثقال ذرة من خير أو شر لن يضيع عند الله.",
+    "summary_english": "Portrays the earth's great quake on Judgment Day as it casts out its burdens, affirming that not even an atom's weight of good or evil is lost with God.",
+    "revelation_reason": "نزلت لتقرير دقة الحساب الإلهي يوم القيامة حيث لا يُغفل عن أصغر الأعمال وأدقها.",
+    "revelation_reason_english": "Revealed to establish the precision of divine reckoning on Judgment Day, where not even the smallest deeds go unnoticed.",
+    "core_themes": ["يوم القيامة", "دقة الحساب", "الزلزال"],
+    "other_names": []
+  },
+  "100": {
+    "summary": "تقسم بخيل الجهاد العاديات ضبحًا، وتصف كنود الإنسان وجحوده لنعم ربه رغم شدة حبه للمال.",
+    "summary_english": "Swears by the war-horses charging, and describes man's ingratitude and denial of his Lord's blessings despite his intense love of wealth.",
+    "revelation_reason": "نزلت في مكة لتوبيخ جحود الإنسان لنعمة ربه وانشغاله بحب المال عن شكر المنعم.",
+    "revelation_reason_english": "Revealed in Mecca to rebuke man's ingratitude toward his Lord's blessings and his preoccupation with love of wealth over gratitude to the Giver.",
+    "core_themes": ["الجهاد", "جحود الإنسان", "حب المال"],
+    "other_names": []
+  },
+  "101": {
+    "summary": "تهول من شأن القارعة يوم يكون الناس كالفراش المبثوث والجبال كالعهن المنفوش، وتزن أعمال العباد بموازين دقيقة.",
+    "summary_english": "Emphasizes the magnitude of the Striking Calamity, the day people will be like scattered moths and the mountains like carded wool, weighing deeds with precise scales.",
+    "revelation_reason": "نزلت في مكة لتصوير هول يوم القيامة بأسلوب صادم يوقظ الغافلين عن حقيقة مصيرهم.",
+    "revelation_reason_english": "Revealed in Mecca to depict the terror of Judgment Day in a striking style that awakens the heedless to the reality of their fate.",
+    "core_themes": ["يوم القيامة", "الميزان", "الإنذار"],
+    "other_names": []
+  },
+  "102": {
+    "summary": "تحذر من التفاخر بالمال والأولاد الذي يلهي عن الآخرة حتى الموت، وتؤكد أن يوم القيامة سيُسأل الإنسان عن النعيم.",
+    "summary_english": "Warns against the rivalry in wealth and children that distracts from the hereafter, even until death, affirming that on Judgment Day man will be asked about his blessings.",
+    "revelation_reason": "نزلت لتوبيخ تفاخر بعض قبائل قريش بكثرة عددهم وأموالهم حتى في زيارة المقابر مباهاة بالأموات.",
+    "revelation_reason_english": "Revealed to rebuke the boasting of some Quraysh tribes over their numbers and wealth, even in visiting graves to outdo one another over the dead.",
+    "core_themes": ["التفاخر", "الغفلة", "السؤال عن النعيم"],
+    "other_names": []
+  },
+  "103": {
+    "summary": "تقسم بالعصر لتقرر أن الإنسان في خسر إلا من جمع بين الإيمان والعمل الصالح والتواصي بالحق والصبر، في إيجاز معجز.",
+    "summary_english": "Swears by time to declare that man is in loss except those who combine faith, righteous deeds, mutual counsel toward truth, and mutual counsel toward patience, in miraculous brevity.",
+    "revelation_reason": "نزلت في مكة موجزة جامعة لمنهج النجاة كله، حتى قال الشافعي لو تدبر الناس هذه السورة لكفتهم.",
+    "revelation_reason_english": "Revealed in Mecca, concise yet encompassing the entire path to salvation, so much so that Ash-Shafi'i said that if people reflected on this surah alone, it would suffice them.",
+    "core_themes": ["الإيمان والعمل", "التواصي بالحق", "الصبر"],
+    "other_names": []
+  },
+  "104": {
+    "summary": "تتوعد كل همّاز لمّاز جمّاع للمال ظنًا منه أن ماله يخلده، بنار محطمة توقد على أفئدة الناس عقابًا لغرورهم.",
+    "summary_english": "Threatens every backbiter and slanderer who hoards wealth, thinking it will make him eternal, with a crushing fire that rises over the hearts as punishment for their arrogance.",
+    "revelation_reason": "نزلت في مكة لتوبيخ من اعتاد الغيبة والطعن في الناس وجمع المال ظنًا منه أنه سبب خلوده.",
+    "revelation_reason_english": "Revealed in Mecca to rebuke those accustomed to backbiting and slandering people while hoarding wealth, thinking it the cause of their permanence.",
+    "core_themes": ["الغيبة", "جمع المال", "العقاب"],
+    "other_names": []
+  },
+  "105": {
+    "summary": "تروي معجزة إهلاك جيش أبرهة الذي جاء بالفيلة لهدم الكعبة، فأرسل الله عليهم طيرًا أبابيل بحجارة من سجيل.",
+    "summary_english": "Recounts the miraculous destruction of Abrahah's army, which came with elephants to demolish the Kaaba, so God sent flocks of birds pelting them with stones of baked clay.",
+    "revelation_reason": "نزلت تذكيرًا بحادثة وقعت عام مولد النبي ﷺ تقريبًا، حين حاول أبرهة الحبشي هدم الكعبة فأهلكه الله.",
+    "revelation_reason_english": "Revealed as a reminder of an event that occurred roughly in the year of the Prophet's birth, when the Abyssinian Abrahah tried to demolish the Kaaba and God destroyed him.",
+    "core_themes": ["حماية البيت الحرام", "قدرة الله", "العبرة التاريخية"],
+    "other_names": []
+  },
+  "106": {
+    "summary": "تذكّر قريشًا بنعمة الإيلاف في رحلتي الشتاء والصيف وأمن الحرم، داعية إياهم لعبادة رب هذا البيت شكرًا لا كفرًا.",
+    "summary_english": "Reminds Quraysh of the blessing of their secure winter and summer journeys and the safety of the sanctuary, calling them to worship the Lord of this House in gratitude rather than disbelief.",
+    "revelation_reason": "نزلت متصلة بسورة الفيل تذكيرًا لقريش بنعمة الأمن والرزق التي حظوا بها بسبب مجاورتهم للبيت الحرام.",
+    "revelation_reason_english": "Revealed connected to Surah Al-Fil, reminding Quraysh of the blessing of security and provision they enjoyed because of their proximity to the Sacred House.",
+    "core_themes": ["النعم", "الأمن", "الشكر"],
+    "other_names": []
+  },
+  "107": {
+    "summary": "تصف المكذب بالدين بأنه من يدع اليتيم ولا يحض على إطعام المسكين، وتتوعد المصلين الغافلين المرائين بالويل.",
+    "summary_english": "Describes the one who denies the faith as one who repels the orphan and does not urge feeding the needy, and threatens heedless, showy worshippers with woe.",
+    "revelation_reason": "نزلت لتوبيخ من كان يمنع صغائر المعروف عن الناس مع تظاهره بالتدين وقسوته على اليتيم والمسكين.",
+    "revelation_reason_english": "Revealed to rebuke those who withheld even small acts of kindness from people while outwardly appearing pious, yet harsh toward the orphan and the needy.",
+    "core_themes": ["الرحمة باليتيم", "الرياء", "الإحسان"],
+    "other_names": []
+  },
+  "108": {
+    "summary": "أقصر سورة في القرآن، تبشر النبي ﷺ بنهر الكوثر في الجنة، وتؤكد أن مبغضه هو الأبتر المقطوع الذكر، لا هو.",
+    "summary_english": "The shortest surah in the Quran, it gives the Prophet glad tidings of the river of Al-Kawthar in Paradise, affirming that whoever hates him is the one truly cut off, not him.",
+    "revelation_reason": "نزلت ردًا على استهزاء بعض المشركين بالنبي ﷺ لعدم بقاء ذكور من أبنائه، فطمأنه الله بعطاء لا ينقطع.",
+    "revelation_reason_english": "Revealed in response to some polytheists mocking the Prophet for having no surviving sons, so God reassured him with an unending gift.",
+    "core_themes": ["العطاء الإلهي", "الرد على المستهزئين", "الجنة"],
+    "other_names": []
+  },
+  "109": {
+    "summary": "تعلن البراءة التامة من عبادة غير الله في مقابلة موجزة حاسمة، مقررة مبدأ لكم دينكم ولي دين دون مهادنة في العقيدة.",
+    "summary_english": "Declares complete disassociation from worshipping anything other than God in a short, decisive exchange, establishing the principle of 'you have your religion and I have mine' with no compromise on creed.",
+    "revelation_reason": "نزلت ردًا على عرض قريش على النبي ﷺ التنازل المتبادل في العبادة سنة له وسنة لآلهتهم، فرفض الله ذلك قطعًا.",
+    "revelation_reason_english": "Revealed in response to Quraysh's offer of mutual concession in worship, a year for him and a year for their idols, which God firmly rejected.",
+    "core_themes": ["البراءة من الشرك", "الحسم العقدي", "التوحيد"],
+    "other_names": []
+  },
+  "110": {
+    "summary": "تبشر بنصر الله والفتح ودخول الناس في دين الله أفواجًا، وتأمر النبي ﷺ بالتسبيح والاستغفار إيذانًا بقرب الأجل.",
+    "summary_english": "Announces God's victory, the conquest, and people entering God's religion in multitudes, and commands the Prophet to glorify and seek forgiveness, signaling the nearing of his time.",
+    "revelation_reason": "نزلت بعد فتح مكة إيذانًا بقرب وفاة النبي ﷺ، ولذا بكى العباس حين سمعها لفهمه معناها الخفي.",
+    "revelation_reason_english": "Revealed after the conquest of Mecca, signaling the Prophet's approaching passing, which is why Al-Abbas wept upon hearing it, understanding its hidden meaning.",
+    "core_themes": ["النصر", "الاستغفار", "دنو الأجل"],
+    "other_names": []
+  },
+  "111": {
+    "summary": "تتوعد أبا لهب وامرأته بالهلاك ونار ذات لهب جزاء عداوته الشديدة للنبي ﷺ وصدّه عن سبيل الله بكل وسيلة.",
+    "summary_english": "Threatens Abu Lahab and his wife with ruin and a flaming fire as punishment for his fierce hostility toward the Prophet and his obstruction of God's path by every means.",
+    "revelation_reason": "نزلت ردًا مباشرًا على أبي لهب حين تبرأ من النبي ﷺ علنًا عقب دعوته الأولى على جبل الصفا.",
+    "revelation_reason_english": "Revealed as a direct response to Abu Lahab when he publicly disowned the Prophet immediately after his first open call from Mount Safa.",
+    "core_themes": ["عداوة الحق", "العقاب الإلهي", "التبرؤ من الظلم"],
+    "other_names": ["تبت"]
+  },
+  "112": {
+    "summary": "تعدل ثلث القرآن لجمعها خالص التوحيد في آيات موجزة، مقررة أن الله أحد صمد لم يلد ولم يولد ولم يكن له كفوًا أحد.",
+    "summary_english": "Equal in weight to a third of the Quran for gathering pure monotheism in concise verses, establishing that God is One, Absolute, neither begetting nor begotten, and there is none comparable to Him.",
+    "revelation_reason": "نزلت ردًا على سؤال المشركين عن نسب الله وصفته، فجاء الجواب الإلهي الجامع المانع في أربع آيات.",
+    "revelation_reason_english": "Revealed in response to the polytheists' question about God's lineage and attributes, met with this comprehensive, conclusive divine answer in four verses.",
+    "core_themes": ["التوحيد الخالص", "صفات الله", "نفي الشبيه"],
+    "other_names": ["التوحيد"]
+  },
+  "113": {
+    "summary": "تعلّم الاستعاذة برب الفلق من شر كل مخلوق ظاهر وباطن، من غاسق وساحرات ينفثن في العقد وحاسد إذا حسد.",
+    "summary_english": "Teaches seeking refuge in the Lord of Daybreak from the evil of every visible and hidden creation, from darkness, from those who blow on knots, and from the envier when he envies.",
+    "revelation_reason": "نزلت ضمن المعوذتين لتحصين المؤمن من الشرور الخفية، وقد نزلت في سياق حادثة سحر تعرض لها النبي ﷺ.",
+    "revelation_reason_english": "Revealed as part of the two protective surahs to shield the believer from hidden harms, in the context of a sorcery incident the Prophet once faced.",
+    "core_themes": ["الاستعاذة", "الحماية من الشر", "الحسد"],
+    "other_names": ["المعوذة الأولى"]
+  },
+  "114": {
+    "summary": "خاتمة القرآن، تعلّم الاستعاذة برب الناس وملك الناس وإله الناس من شر الوسواس الخناس الذي يوسوس في صدور الناس.",
+    "summary_english": "The closing surah of the Quran, teaching seeking refuge in the Lord of mankind, the King of mankind, the God of mankind, from the evil of the retreating whisperer who whispers in the breasts of people.",
+    "revelation_reason": "نزلت مع سورة الفلق حماية ونهاية بديعة للمصحف، تحصّن القلب من الوسواس الخفي بعد التحصين من الشر الظاهر.",
+    "revelation_reason_english": "Revealed alongside Surah Al-Falaq as a protective and fitting conclusion to the Mushaf, guarding the heart from hidden whispers after protection from visible harm.",
+    "core_themes": ["الاستعاذة", "الوسواس", "ربوبية الله"],
+    "other_names": ["المعوذة الثانية"]
+  }
+}

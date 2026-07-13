@@ -1,4 +1,4 @@
-import imamList from "@/imam.json";
+import imamList from "@/data/imam.json";
 import LanguageToggle from "../quran/LanguageToggle";
 import ReciterDropdown from "../quran/ReciterDropdown";
 

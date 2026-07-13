@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Focus, ZoomIn, ZoomOut, X } from "lucide-react";
 import useUIStore from "@/lib/store/useUIStore";
-import imamList from "@/imam.json";
+import imamList from "@/data/imam.json";
 import ReciterDropdown from "./ReciterDropdown";
 import LanguageToggle from "./LanguageToggle";
 

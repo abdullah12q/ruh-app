@@ -32,6 +32,18 @@ async function getVerses(id) {
   return data.verses;
 }
 
+async function getSurahInfo(id) {
+  const res = await fetch(
+    `https://api.quranpedia.net/v1/surah/information/${id}`,
+    {
+      next: { revalidate: 86400 },
+    },
+  );
+  if (!res.ok) return null;
+  const data = await res.json();
+  return data;
+}
+
 // generateStaticParams: Pre-render the first 10 popular Surahs at build time.
 // All other Surahs will be generated on-demand (ISR).
 export async function generateStaticParams() {
@@ -63,7 +75,11 @@ export default async function SurahPage({ params }) {
     notFound();
   }
 
-  const [surah, verses] = await Promise.all([getSurah(id), getVerses(id)]);
+  const [surah, verses, surahInfo] = await Promise.all([
+    getSurah(id),
+    getVerses(id),
+    getSurahInfo(id),
+  ]);
 
   if (!surah) {
     notFound();
@@ -92,7 +108,12 @@ export default async function SurahPage({ params }) {
           <span className="text-text-primary">{surah.name_simple}</span>
         </nav>
 
-        <SurahHeader surah={surah} startJuz={startJuz} endJuz={endJuz} />
+        <SurahHeader
+          surah={surah}
+          surahInfo={surahInfo}
+          startJuz={startJuz}
+          endJuz={endJuz}
+        />
         <SurahReadingControls surahId={id} />
         <BismillahCard surahId={id} />
         <AyahList verses={verses} surahId={id} />
