@@ -8,7 +8,6 @@ export const metadata = {
 
 // Fetch all Surahs from Quran.com API v4
 // Revalidates every 24 hours (ISR)
-// hshelha later w hst5dm el custom hook bdlha
 async function getSurahList() {
   try {
     const res = await fetch(

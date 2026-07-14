@@ -1,6 +1,7 @@
 import HeroSection from "@/components/home/HeroSection";
 import FeaturesSection from "@/components/home/FeaturesSection";
 import DailyVerseSection from "@/components/home/DailyVerseSection";
+import AudioRecitationsSection from "@/components/home/AudioRecitationsSection";
 import StatsSection from "@/components/home/StatsSection";
 import CTASection from "@/components/home/CTASection";
 import Footer from "@/components/layout/Footer";
@@ -11,6 +12,7 @@ export default function HomePage() {
       <HeroSection />
       <FeaturesSection />
       <DailyVerseSection />
+      <AudioRecitationsSection />
       <StatsSection />
       <CTASection />
       <Footer />

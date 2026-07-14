@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   DAILY_VERSE_KEY,
   useAyahTranslation,
@@ -15,9 +15,15 @@ import DailyVerseHeader from "./DailyVerseHeader";
 import DailyVerseContent from "./DailyVerseContent";
 import DailyVerseControls from "./DailyVerseControls";
 import { useMediaQuery } from "@custom-react-hooks/use-media-query";
+import { formatAudioFileName } from "@/data/audioData";
 
 export default function DailyVerseSection() {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+
+  const audioRef = useRef(null);
+  const rafRef = useRef(null);
 
   const isMobile = useMediaQuery("(max-width: 768px)");
 
@@ -36,6 +42,8 @@ export default function DailyVerseSection() {
     setSelectedReciter,
     favoriteReciters,
     toggleFavoriteReciter,
+    volume,
+    setVolume,
   } = useUIStore();
 
   const {
@@ -53,6 +61,69 @@ export default function DailyVerseSection() {
     } catch {}
 
     await refetchVerse();
+  }
+
+  const audioFileName = formatAudioFileName(
+    verse?.surah,
+    verse?.sequence?.surah,
+  );
+  const audioUrl =
+    selectedReciter?.path && audioFileName
+      ? `https://everyayah.com/data/${selectedReciter.path}/${audioFileName}`
+      : null;
+
+  // Keep the live <audio> element in sync whenever global volume changes
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume;
+    }
+  }, [volume]);
+
+  // Play or Pause the audio when the `isPlaying` state changes
+  // Smoothly sync currentTime every frame while playing
+  useEffect(() => {
+    if (!isPlaying) {
+      audioRef.current?.pause();
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      return;
+    }
+
+    audioRef.current
+      ?.play()
+      .catch((err) => console.log("Audio play error:", err));
+
+    function tick() {
+      if (audioRef.current) {
+        setCurrentTime(audioRef.current.currentTime);
+      }
+      rafRef.current = requestAnimationFrame(tick);
+    }
+    rafRef.current = requestAnimationFrame(tick);
+
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [isPlaying]);
+
+  // Automatically stop playing if the user fetches a new verse or changes the reciter
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsPlaying(false);
+    setCurrentTime(0);
+  }, [verse, selectedReciter]);
+
+  function handleSeek(newTime) {
+    if (audioRef.current) {
+      audioRef.current.currentTime = newTime;
+      setCurrentTime(newTime);
+    }
+  }
+
+  function handleVolumeChange(newVolume) {
+    if (audioRef.current) {
+      audioRef.current.volume = newVolume;
+    }
+    setVolume(newVolume);
   }
 
   return (
@@ -105,11 +176,36 @@ export default function DailyVerseSection() {
                     lang={lang}
                   />
 
+                  {/* Hidden audio player */}
+                  {audioUrl && (
+                    <audio
+                      ref={audioRef}
+                      src={audioUrl}
+                      onEnded={() => setIsPlaying(false)}
+                      onPause={() => setIsPlaying(false)}
+                      onPlay={() => setIsPlaying(true)}
+                      onTimeUpdate={(e) => {
+                        // fallback sync only — rAF loop handles the smooth frame-by-frame updates
+                        if (!rafRef.current)
+                          setCurrentTime(e.target.currentTime);
+                      }}
+                      onLoadedMetadata={(e) => {
+                        setDuration(e.target.duration);
+                        e.target.volume = volume; // ensure volume persists across verses
+                      }}
+                    />
+                  )}
+
                   <DailyVerseControls
                     isPlaying={isPlaying}
                     onPlayPauseToggle={() => setIsPlaying((p) => !p)}
                     isFetchingVerse={isFetchingVerse}
                     onGetNewVerse={handleGetNewVerse}
+                    currentTime={currentTime}
+                    duration={duration}
+                    onSeek={handleSeek}
+                    volume={volume}
+                    onVolumeChange={handleVolumeChange}
                   />
                 </div>
               </>

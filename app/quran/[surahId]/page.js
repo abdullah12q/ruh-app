@@ -9,7 +9,6 @@ import AyahList from "@/components/quran/AyahList";
 import SurahNavigation from "@/components/quran/SurahNavigation";
 
 // Fetch Surah metadata from Quran.com API v4.
-// hshelha later w hst5dm el custom hook bdlha
 async function getSurah(id) {
   const res = await fetch(`https://api.quran.com/api/v4/chapters/${id}`, {
     next: { revalidate: 86400 },
@@ -21,7 +20,6 @@ async function getSurah(id) {
 
 // Fetch all verses for a Surah (Arabic text only).
 // Translation is fetched client-side per-ayah via useAyahTranslation.
-// hshelha later w hst5dm el custom hook bdlha
 async function getVerses(id) {
   const res = await fetch(
     `https://api.quran.com/api/v4/verses/by_chapter/${id}?language=en&fields=text_qpc_hafs,verse_key,verse_number&per_page=300`,

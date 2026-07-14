@@ -94,7 +94,7 @@ export default function HeroSection() {
             </Link>
             <Link
               href="/about"
-              className="flex items-center gap-2 px-6 py-3.5 rounded-2xl glass text-text-primary font-semibold font-jakarta text-sm hover:border-(--accent)/30 active:scale-95 transition-all duration-200"
+              className="flex items-center gap-2 px-6 py-3.5 rounded-2xl glass text-text-primary font-semibold font-jakarta text-sm hover:border-accent/30 active:scale-95 transition-all duration-200"
             >
               Learn More
               <ChevronRight size={16} />
