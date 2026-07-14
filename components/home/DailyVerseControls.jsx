@@ -9,6 +9,7 @@ import {
   VolumeX,
 } from "lucide-react";
 import { formatTime } from "@/data/audioData";
+import { useMediaQuery } from "@custom-react-hooks/use-media-query";
 
 export default function DailyVerseControls({
   isPlaying,
@@ -22,6 +23,8 @@ export default function DailyVerseControls({
   onVolumeChange,
 }) {
   const [volumeOpen, setVolumeOpen] = useState(false);
+
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const VolumeIcon = volume === 0 ? VolumeX : volume < 0.5 ? Volume1 : Volume2;
   const timelinePct = duration ? (currentTime / duration) * 100 : 0;
@@ -119,18 +122,43 @@ export default function DailyVerseControls({
         </motion.button>
 
         {/* Right: volume, msh bayna until hovered/focused */}
-        <div
-          className="justify-self-end flex items-center justify-end"
-          onMouseEnter={() => setVolumeOpen(true)}
-          onMouseLeave={() => setVolumeOpen(false)}
-        >
-          <motion.div
-            animate={{
-              width: volumeOpen ? 88 : 0,
-              opacity: volumeOpen ? 1 : 0,
-            }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
+        {!isMobile ? (
+          <div
+            className="justify-self-end flex items-center justify-end"
+            onMouseEnter={() => setVolumeOpen(true)}
+            onMouseLeave={() => setVolumeOpen(false)}
           >
+            <motion.div
+              animate={{
+                width: volumeOpen ? 88 : 0,
+                opacity: volumeOpen ? 1 : 0,
+              }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+            >
+              <input
+                type="range"
+                min={0}
+                max={1}
+                step={0.01}
+                value={volume}
+                onChange={(e) => onVolumeChange(Number(e.target.value))}
+                style={{ "--range-progress": `${volumePct}%` }}
+                className="range-fill always-show-thumb w-20 h-0.75 rounded-full appearance-none cursor-pointer outline-none mr-3"
+                aria-label="Adjust volume"
+              />
+            </motion.div>
+
+            <button
+              onClick={() => onVolumeChange(volume > 0 ? 0 : 1)}
+              onFocus={() => setVolumeOpen(true)}
+              aria-label="Toggle mute"
+              className="flex items-center justify-center size-9 rounded-full text-text-secondary hover:text-accent transition-colors cursor-pointer"
+            >
+              <VolumeIcon size={16} />
+            </button>
+          </div>
+        ) : (
+          <div className="justify-self-end flex items-center">
             <input
               type="range"
               min={0}
@@ -139,20 +167,11 @@ export default function DailyVerseControls({
               value={volume}
               onChange={(e) => onVolumeChange(Number(e.target.value))}
               style={{ "--range-progress": `${volumePct}%` }}
-              className="range-fill always-show-thumb w-20 h-0.75 rounded-full appearance-none cursor-pointer outline-none mr-3"
+              className="range-fill always-show-thumb w-15 h-0.75 rounded-full appearance-none cursor-pointer outline-none"
               aria-label="Adjust volume"
             />
-          </motion.div>
-
-          <button
-            onClick={() => onVolumeChange(volume > 0 ? 0 : 1)}
-            onFocus={() => setVolumeOpen(true)}
-            aria-label="Toggle mute"
-            className="flex items-center justify-center size-9 rounded-full text-text-secondary hover:text-accent transition-colors cursor-pointer"
-          >
-            <VolumeIcon size={16} />
-          </button>
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );
