@@ -20,7 +20,7 @@ export default function DailyVerseContent({
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -8 }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.1 }}
           className="font-quran text-3xl text-text-primary mb-6 leading-loose text-center!"
           dir="rtl"
           lang="ar"
@@ -97,7 +97,7 @@ export default function DailyVerseContent({
             </p>
           )}
           <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold bg-accent/10 text-accent border border-accent/20">
-            <p>Surah {verse?.surah}</p>
+            <p>Surah {verse?.surah || surah?.id}</p>
             <p className="opacity-50">•</p>
             <p>Ayah {verse?.sequence?.surah}</p>
           </div>

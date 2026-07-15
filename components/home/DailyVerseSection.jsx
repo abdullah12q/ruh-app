@@ -2,11 +2,14 @@
 
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import {
   DAILY_VERSE_KEY,
   useAyahTranslation,
-  useRandomVerse,
+  quranKeys,
+  fetchSpecificVerse,
+  useRandomOrNextVerse,
   useSurah,
 } from "@/lib/queries/quran";
 import useUIStore from "@/lib/store/useUIStore";
@@ -16,24 +19,20 @@ import DailyVerseContent from "./DailyVerseContent";
 import DailyVerseControls from "./DailyVerseControls";
 import { useMediaQuery } from "@custom-react-hooks/use-media-query";
 import { formatAudioFileName } from "@/data/audioData";
+import { calculateNextVerse } from "@/data/verseData";
 
 export default function DailyVerseSection() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [targetVerse, setTargetVerse] = useState({ surah: null, ayah: null });
 
   const audioRef = useRef(null);
   const rafRef = useRef(null);
 
-  const isMobile = useMediaQuery("(max-width: 768px)");
+  const queryClient = useQueryClient();
 
-  const {
-    data: verse,
-    isLoading: verseLoading,
-    isFetching: isFetchingVerse,
-    refetch: refetchVerse,
-  } = useRandomVerse();
-  const { data: surah } = useSurah(verse?.surah);
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const {
     translationLang,
@@ -47,30 +46,30 @@ export default function DailyVerseSection() {
   } = useUIStore();
 
   const {
+    data: verse,
+    isLoading: verseLoading,
+    isFetching: isFetchingVerse,
+  } = useRandomOrNextVerse(targetVerse.surah, targetVerse.ayah);
+
+  const activeSurahNum = verse?.surah || targetVerse.surah;
+  const activeAyahNum = verse?.sequence?.surah || targetVerse.ayah;
+
+  const { data: surah } = useSurah(activeSurahNum);
+  const {
     text: translationText,
     footnotes,
     isLoading: translationLoading,
     isError: translationError,
     lang,
-  } = useAyahTranslation(verse?.surah, verse?.sequence.surah);
+  } = useAyahTranslation(activeSurahNum, activeAyahNum);
 
-  // Clears the localStorage cache and fetches a brand-new random verse
-  async function handleGetNewVerse() {
-    try {
-      localStorage.removeItem(DAILY_VERSE_KEY);
-    } catch {}
+  const audioUrl = useMemo(() => {
+    if (!activeSurahNum || !activeAyahNum || !selectedReciter?.path) return "";
 
-    await refetchVerse();
-  }
+    const fileName = formatAudioFileName(activeSurahNum, activeAyahNum);
 
-  const audioFileName = formatAudioFileName(
-    verse?.surah,
-    verse?.sequence?.surah,
-  );
-  const audioUrl =
-    selectedReciter?.path && audioFileName
-      ? `https://everyayah.com/data/${selectedReciter.path}/${audioFileName}`
-      : null;
+    return `https://everyayah.com/data/${selectedReciter.path}/${fileName}`;
+  }, [activeSurahNum, activeAyahNum, selectedReciter]);
 
   // Keep the live <audio> element in sync whenever global volume changes
   useEffect(() => {
@@ -105,12 +104,57 @@ export default function DailyVerseSection() {
     };
   }, [isPlaying]);
 
-  // Automatically stop playing if the user fetches a new verse or changes the reciter
+  // Automatically reset the time if the user fetches a new verse or changes the reciter
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setIsPlaying(false);
     setCurrentTime(0);
-  }, [verse, selectedReciter]);
+  }, [activeSurahNum, activeAyahNum, selectedReciter]);
+
+  // PREFETCHING EFFECT
+  // This calculates the next verse and downloads the JSON and MP3 in the background silently.
+  useEffect(() => {
+    if (!activeSurahNum || !activeAyahNum || !surah || !selectedReciter?.path)
+      return;
+
+    const { surah: nextSurah, ayah: nextAyah } = calculateNextVerse(
+      activeSurahNum,
+      activeAyahNum,
+      surah.verses_count,
+    );
+
+    // Prefetch API
+    queryClient.prefetchQuery({
+      queryKey: quranKeys.specificVerse(nextSurah, nextAyah),
+      queryFn: () => fetchSpecificVerse(nextSurah, nextAyah),
+    });
+
+    // Prefetch Audio File
+    const nextFileName = formatAudioFileName(nextSurah, nextAyah);
+    if (nextFileName) {
+      const preloader = new Audio(
+        `https://everyayah.com/data/${selectedReciter.path}/${nextFileName}`,
+      );
+      preloader.preload = "auto"; // This forces the browser to download and cache the MP3
+    }
+  }, [activeSurahNum, activeAyahNum, surah, selectedReciter, queryClient]);
+
+  // Clears the localStorage cache and fetches a brand-new random verse
+  async function handleGetNewVerse() {
+    try {
+      localStorage.removeItem(DAILY_VERSE_KEY);
+    } catch {}
+
+    // Reset back to random mode before refetching
+    setTargetVerse({ surah: null, ayah: null });
+
+    // Refetch the random-verse query directly via the key, instead of the
+    // stale `refetchVerse` closure (which may still point at the old
+    // specific-verse query at the moment this runs)
+    await queryClient.refetchQueries({
+      queryKey: quranKeys.randomVerse(),
+      exact: true,
+    });
+  }
 
   function handleSeek(newTime) {
     if (audioRef.current) {
@@ -124,6 +168,18 @@ export default function DailyVerseSection() {
       audioRef.current.volume = newVolume;
     }
     setVolume(newVolume);
+  }
+
+  function handleNextVerse() {
+    if (!surah) return;
+    const { surah: nextSurah, ayah: nextAyah } = calculateNextVerse(
+      activeSurahNum,
+      activeAyahNum,
+      surah.verses_count,
+    );
+    // Updating this state triggers the hook to fetch the new verse.
+    // When the new verse arrives, el existing useEffect automatically updates the audioUrl.
+    setTargetVerse({ surah: nextSurah, ayah: nextAyah });
   }
 
   return (
@@ -177,24 +233,21 @@ export default function DailyVerseSection() {
                   />
 
                   {/* Hidden audio player */}
-                  {audioUrl && (
-                    <audio
-                      ref={audioRef}
-                      src={audioUrl}
-                      onEnded={() => setIsPlaying(false)}
-                      onPause={() => setIsPlaying(false)}
-                      onPlay={() => setIsPlaying(true)}
-                      onTimeUpdate={(e) => {
-                        // fallback sync only — rAF loop handles the smooth frame-by-frame updates
-                        if (!rafRef.current)
-                          setCurrentTime(e.target.currentTime);
-                      }}
-                      onLoadedMetadata={(e) => {
-                        setDuration(e.target.duration);
-                        e.target.volume = volume; // ensure volume persists across verses
-                      }}
-                    />
-                  )}
+                  <audio
+                    ref={audioRef}
+                    src={audioUrl || undefined}
+                    autoPlay={isPlaying}
+                    onEnded={handleNextVerse}
+                    onPlay={() => setIsPlaying(true)}
+                    onTimeUpdate={(e) => {
+                      // fallback sync only — rAF loop handles the smooth frame-by-frame updates
+                      if (!rafRef.current) setCurrentTime(e.target.currentTime);
+                    }}
+                    onLoadedMetadata={(e) => {
+                      setDuration(e.target.duration);
+                      e.target.volume = volume; // ensure volume persists across verses
+                    }}
+                  />
 
                   <DailyVerseControls
                     isPlaying={isPlaying}
