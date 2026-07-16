@@ -1,4 +1,5 @@
 import HeroSection from "@/components/home/HeroSection";
+import ContinueReadingSection from "@/components/home/ContinueReadingSection";
 import FeaturesSection from "@/components/home/FeaturesSection";
 import DailyVerseSection from "@/components/home/DailyVerseSection";
 import AudioRecitationsSection from "@/components/home/AudioRecitationsSection";
@@ -10,6 +11,7 @@ export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden">
       <HeroSection />
+      <ContinueReadingSection />
       <FeaturesSection />
       <DailyVerseSection />
       <AudioRecitationsSection />

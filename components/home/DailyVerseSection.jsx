@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import {
   DAILY_VERSE_KEY,
@@ -20,15 +20,11 @@ import DailyVerseControls from "./DailyVerseControls";
 import { useMediaQuery } from "@custom-react-hooks/use-media-query";
 import { formatAudioFileName } from "@/data/audioData";
 import { calculateNextVerse } from "@/data/verseData";
+import { useAudioPlayer } from "@/hooks/useAudioPlayer";
 
 export default function DailyVerseSection() {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
   const [targetVerse, setTargetVerse] = useState({ surah: null, ayah: null });
-
-  const audioRef = useRef(null);
-  const rafRef = useRef(null);
 
   const queryClient = useQueryClient();
 
@@ -41,8 +37,6 @@ export default function DailyVerseSection() {
     setSelectedReciter,
     favoriteReciters,
     toggleFavoriteReciter,
-    volume,
-    setVolume,
   } = useUIStore();
 
   const {
@@ -71,44 +65,19 @@ export default function DailyVerseSection() {
     return `https://everyayah.com/data/${selectedReciter.path}/${fileName}`;
   }, [activeSurahNum, activeAyahNum, selectedReciter]);
 
-  // Keep the live <audio> element in sync whenever global volume changes
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = volume;
-    }
-  }, [volume]);
-
-  // Play or Pause the audio when the `isPlaying` state changes
-  // Smoothly sync currentTime every frame while playing
-  useEffect(() => {
-    if (!isPlaying) {
-      audioRef.current?.pause();
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      return;
-    }
-
-    audioRef.current
-      ?.play()
-      .catch((err) => console.log("Audio play error:", err));
-
-    function tick() {
-      if (audioRef.current) {
-        setCurrentTime(audioRef.current.currentTime);
-      }
-      rafRef.current = requestAnimationFrame(tick);
-    }
-    rafRef.current = requestAnimationFrame(tick);
-
-    return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    };
-  }, [isPlaying]);
-
-  // Automatically reset the time if the user fetches a new verse or changes the reciter
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setCurrentTime(0);
-  }, [activeSurahNum, activeAyahNum, selectedReciter]);
+  const {
+    currentTime,
+    duration,
+    audioRef,
+    volume,
+    handleSeek,
+    handleVolumeChange,
+    onTimeUpdate,
+    onLoadedMetadata,
+  } = useAudioPlayer({
+    audioUrl,
+    isPlaying,
+  });
 
   // PREFETCHING EFFECT
   // This calculates the next verse and downloads the JSON and MP3 in the background silently.
@@ -154,20 +123,6 @@ export default function DailyVerseSection() {
       queryKey: quranKeys.randomVerse(),
       exact: true,
     });
-  }
-
-  function handleSeek(newTime) {
-    if (audioRef.current) {
-      audioRef.current.currentTime = newTime;
-      setCurrentTime(newTime);
-    }
-  }
-
-  function handleVolumeChange(newVolume) {
-    if (audioRef.current) {
-      audioRef.current.volume = newVolume;
-    }
-    setVolume(newVolume);
   }
 
   function handleNextVerse() {
@@ -239,14 +194,8 @@ export default function DailyVerseSection() {
                     autoPlay={isPlaying}
                     onEnded={handleNextVerse}
                     onPlay={() => setIsPlaying(true)}
-                    onTimeUpdate={(e) => {
-                      // fallback sync only — rAF loop handles the smooth frame-by-frame updates
-                      if (!rafRef.current) setCurrentTime(e.target.currentTime);
-                    }}
-                    onLoadedMetadata={(e) => {
-                      setDuration(e.target.duration);
-                      e.target.volume = volume; // ensure volume persists across verses
-                    }}
+                    onTimeUpdate={onTimeUpdate}
+                    onLoadedMetadata={onLoadedMetadata}
                   />
 
                   <DailyVerseControls

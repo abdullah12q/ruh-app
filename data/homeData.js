@@ -39,16 +39,6 @@ export const features = [
     gradient: "from-amber-500/10 to-orange-500/10",
     iconColor: "text-amber-400",
   },
-  {
-    icon: Moon,
-    title: "Focus Mode",
-    titleAr: "وضع التركيز",
-    description:
-      "Distraction-free reading environment designed for deep focus and spiritual immersion.",
-    href: "/quran",
-    gradient: "from-emerald-500/10 to-teal-500/10",
-    iconColor: "text-emerald-400",
-  },
 ];
 
 export const stats = [

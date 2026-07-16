@@ -5,11 +5,24 @@ import useUIStore from "@/lib/store/useUIStore";
 import { useAyahTranslation } from "@/lib/queries/quran";
 import { Bookmark, Play, Pause } from "lucide-react";
 import { FootnoteFormatter } from "./FootnoteFormatter";
+import { useEffect, useMemo } from "react";
+import { formatAudioFileName, formatTime } from "@/data/audioData";
+import { calculateNextVerse } from "@/data/verseData";
+import { useAudioPlayer } from "@/hooks/useAudioPlayer";
 
-export default function AyahCard({ ayah, surahId }) {
-  const { activeAyah, setActiveAyah, audioPlaying, toggleAudio, fontSize } =
-    useUIStore();
-  const isActive = activeAyah === ayah.verse_key;
+export default function AyahCard({ totalVerses, ayah, surahId }) {
+  const {
+    fontSize,
+    activeAyah,
+    setActiveAyah,
+    audioPlaying,
+    setAudioPlaying,
+    selectedReciter,
+  } = useUIStore();
+  const isActive =
+    surahId !== activeAyah?.surahNum
+      ? false
+      : activeAyah?.ayahNum === ayah.verse_number;
 
   const {
     text: translationText,
@@ -19,13 +32,84 @@ export default function AyahCard({ ayah, surahId }) {
     lang,
   } = useAyahTranslation(surahId, ayah.verse_number);
 
+  const audioUrl = useMemo(() => {
+    if (!surahId || !ayah.verse_number || !selectedReciter?.path) return "";
+
+    const fileName = formatAudioFileName(surahId, ayah.verse_number);
+    return `https://everyayah.com/data/${selectedReciter.path}/${fileName}`;
+  }, [surahId, ayah.verse_number, selectedReciter]);
+
+  const {
+    currentTime,
+    setCurrentTime,
+    duration,
+    audioRef,
+    handleSeek,
+    onTimeUpdate,
+    onLoadedMetadata,
+  } = useAudioPlayer({
+    audioUrl,
+    isPlaying: isActive && audioPlaying,
+  });
+
+  // PREFETCHING EFFECT
+  // This calculates the next verse and downloads the JSON and MP3 in the background silently.
+  useEffect(() => {
+    if (!isActive) return;
+    if (!surahId || !activeAyah?.ayahNum || !selectedReciter?.path) return;
+
+    const { surah: nextSurah, ayah: nextAyah } = calculateNextVerse(
+      surahId,
+      activeAyah?.ayahNum,
+      totalVerses,
+    );
+
+    // Stop prefetching if we are in the last ayah in the Surah
+    if (nextSurah > surahId) return;
+
+    // Prefetch Audio File
+    const nextFileName = formatAudioFileName(nextSurah, nextAyah);
+    if (nextFileName) {
+      const preloader = new Audio(
+        `https://everyayah.com/data/${selectedReciter.path}/${nextFileName}`,
+      );
+      preloader.preload = "auto"; // This forces the browser to download and cache the MP3
+    }
+  }, [isActive, surahId, activeAyah?.ayahNum, selectedReciter, totalVerses]);
+
   function handleAyahClick() {
-    if (isActive) {
-      toggleAudio();
+    if (!isActive) {
+      setActiveAyah(surahId, ayah.verse_number);
+      setCurrentTime(0);
+      setAudioPlaying(true);
     } else {
-      setActiveAyah(ayah.verse_key);
+      setAudioPlaying(!audioPlaying);
     }
   }
+
+  function handleNextVerse() {
+    if (!surahId || !activeAyah?.ayahNum) return;
+    setCurrentTime(0);
+    const { surah: nextSurah, ayah: nextAyah } = calculateNextVerse(
+      surahId,
+      activeAyah?.ayahNum,
+      totalVerses,
+    );
+
+    // Stop if we are in the last ayah in the Surah
+    if (nextSurah > surahId) {
+      setActiveAyah(surahId, null);
+      if (audioPlaying) {
+        setAudioPlaying(false);
+      }
+      return;
+    }
+
+    // Updating this state triggers the hook to fetch the new verse.
+    setActiveAyah(surahId, nextAyah);
+  }
+
+  const timelinePct = duration ? (currentTime / duration) * 100 : 0;
 
   return (
     <motion.article
@@ -51,7 +135,7 @@ export default function AyahCard({ ayah, surahId }) {
       )}
 
       {/* Ayah Number Badge */}
-      <div className="flex items-start justify-between gap-4 mb-6">
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
         <div
           className={`shrink-0 size-9 rounded-xl flex items-center justify-center text-xs font-bold border transition-colors duration-200 ${
             isActive
@@ -62,14 +146,39 @@ export default function AyahCard({ ayah, surahId }) {
           {ayah.verse_number}
         </div>
 
+        {/* TIMELINE */}
+        <div className="flex items-center gap-3 font-jakarta">
+          <span className="w-9 text-right text-[11px] tabular-nums text-text-secondary">
+            {formatTime(isActive ? currentTime : 0)}
+          </span>
+
+          <input
+            type="range"
+            min={0}
+            max={duration || 0}
+            step={0.1}
+            value={isActive ? currentTime : 0}
+            onChange={(e) => {
+              if (isActive) handleSeek(Number(e.target.value));
+            }}
+            style={{ "--range-progress": `${isActive ? timelinePct : 0}%` }}
+            className="range-fill flex-1 h-0.75 rounded-full appearance-none cursor-pointer outline-none"
+            aria-label="Audio timeline progress"
+          />
+
+          <span className="w-9 text-[11px] tabular-nums text-text-secondary">
+            {formatTime(isActive ? duration : 0)}
+          </span>
+        </div>
+
         {/* Action Buttons */}
-        <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+        <div className="flex items-center gap-2 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-200">
           <button
             onClick={handleAyahClick}
             aria-label={
               isActive && audioPlaying ? "Pause recitation" : "Play recitation"
             }
-            className="size-8 rounded-lg glass flex items-center justify-center text-text-secondary hover:text-accent transition-colors duration-200"
+            className="size-8 rounded-lg glass flex items-center justify-center text-text-secondary hover:text-accent transition-colors duration-200 cursor-pointer"
           >
             {isActive && audioPlaying ? (
               <Pause size={14} />
@@ -79,7 +188,7 @@ export default function AyahCard({ ayah, surahId }) {
           </button>
           <button
             aria-label="Bookmark this Ayah"
-            className="size-8 rounded-lg glass flex items-center justify-center text-text-secondary hover:text-accent transition-colors duration-200"
+            className="size-8 rounded-lg glass flex items-center justify-center text-text-secondary hover:text-accent transition-colors duration-200 cursor-pointer"
           >
             <Bookmark size={14} />
           </button>
@@ -94,6 +203,18 @@ export default function AyahCard({ ayah, surahId }) {
       >
         {ayah.text_qpc_hafs}
       </p>
+
+      {/* Hidden audio player */}
+      {isActive && (
+        <audio
+          ref={audioRef}
+          src={audioUrl || undefined}
+          autoPlay={audioPlaying}
+          onEnded={handleNextVerse}
+          onTimeUpdate={onTimeUpdate}
+          onLoadedMetadata={onLoadedMetadata}
+        />
+      )}
 
       {/* Divider */}
       <div className="w-full h-px bg-(--surface-glass-border) mb-5" />
@@ -142,7 +263,7 @@ export default function AyahCard({ ayah, surahId }) {
       </div>
 
       {/* Verse Key */}
-      <p className="mt-4 text-xs text-(--text-secondary)/40 font-jakarta">
+      <p className="mt-4 text-xs text-text-secondary/40 font-jakarta">
         {ayah.verse_key}
       </p>
     </motion.article>
