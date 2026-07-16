@@ -42,9 +42,7 @@ export default function AudioNowPlayingBar({ reciterName, onStop }) {
         <p className="text-xs text-accent font-jakarta font-semibold uppercase tracking-wider">
           Now Playing · Al-Fatiha
         </p>
-        <p className="text-sm text-text-primary font-jakarta truncate">
-          {reciterName}
-        </p>
+        <p className="text-sm text-text-primary font-jakarta">{reciterName}</p>
       </div>
 
       {/* Inline volume control */}

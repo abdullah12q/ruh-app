@@ -216,7 +216,7 @@ export default function AudioRecitationsSection() {
             {/* Grid of reciter cards */}
             <motion.div
               layout
-              className="grid grid-cols-2 sm:grid-cols-3 gap-3 max-h-130 overflow-y-hidden pr-1"
+              className="grid grid-cols-2 sm:grid-cols-3 gap-3 pr-1"
             >
               {spotlightReciters.map((reciter) => (
                 <ReciterCard
