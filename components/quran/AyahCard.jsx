@@ -98,7 +98,7 @@ export default function AyahCard({ totalVerses, ayah, surahId }) {
 
     // Stop if we are in the last ayah in the Surah
     if (nextSurah > surahId) {
-      setActiveAyah(surahId, null);
+      setActiveAyah(surahId, activeAyah?.ayahNum);
       if (audioPlaying) {
         setAudioPlaying(false);
       }
