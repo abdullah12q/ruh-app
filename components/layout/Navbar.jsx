@@ -87,7 +87,8 @@ export default function Navbar() {
               className="rounded-full"
             />
             <span className="text-xl font-extrabold font-jakarta text-text-primary tracking-tight group-hover:text-accent transition-colors duration-200">
-              Rُuh
+              <span className="sm:hidden">R ُuh</span>
+              <span className="hidden sm:inline">Rُuh</span>
             </span>
             <span className="text-lg font-bold font-arabic-ui text-accent leading-none">
               رُوح

@@ -30,7 +30,11 @@ export default function CTASection() {
 
             <h2 className="font-jakarta font-extrabold text-3xl sm:text-4xl text-text-primary mb-4 leading-tight">
               Begin your journey with{" "}
-              <span className="gradient-text">Rُuh</span> today.
+              <span className="gradient-text">
+                <span className="sm:hidden">R ُuh</span>
+                <span className="hidden sm:inline">Rُuh</span>
+              </span>{" "}
+              today.
             </h2>
 
             <p className="font-inter text-text-secondary mb-8 text-base sm:text-lg">
@@ -47,7 +51,7 @@ export default function CTASection() {
               </Link>
               <Link
                 href="/quran"
-                className="px-8 py-3.5 rounded-2xl glass text-text-primary font-semibold font-jakarta text-sm hover:border-(--accent)/30 active:scale-95 transition-all duration-200"
+                className="px-8 py-3.5 rounded-2xl glass text-text-primary font-semibold font-jakarta text-sm hover:border-accent/30 active:scale-95 transition-all duration-200"
               >
                 Browse as Guest
               </Link>

@@ -52,7 +52,7 @@ export default function ReciterRow({
         className={`shrink-0 p-1 rounded-lg transition-all duration-150 ${
           isFavorite
             ? "text-amber-400 hover:text-amber-300"
-            : "text-transparent group-hover:text-text-secondary/40 hover:text-amber-400!"
+            : "group-hover:text-text-secondary/40 sm:text-transparent sm:group-hover:text-text-secondary/40 hover:text-amber-400!"
         } cursor-pointer`}
       >
         <Star size={12} fill={isFavorite ? "currentColor" : "none"} />

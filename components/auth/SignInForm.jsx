@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { Mail, Lock, Eye, EyeOff, LogIn } from "lucide-react";
 import Image from "next/image";
 import logo from "@/app/icon.png";
+import { useMediaQuery } from "@custom-react-hooks/use-media-query";
 
 export default function SignInForm() {
   const [email, setEmail] = useState("");
@@ -14,6 +15,8 @@ export default function SignInForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   async function handleCredentialsSignIn(e) {
     e.preventDefault();
@@ -68,7 +71,7 @@ export default function SignInForm() {
                 className="rounded-full"
               />
               <span className="text-2xl font-extrabold font-jakarta text-text-primary">
-                Rُuh
+                {isMobile ? "R ُuh" : "Rُuh"}
               </span>
               <span className="text-xl font-bold font-arabic-ui text-accent">
                 رُوح
@@ -85,7 +88,7 @@ export default function SignInForm() {
           {/* Google Sign In */}
           <button
             onClick={handleGoogleSignIn}
-            className="w-full flex items-center justify-center gap-3 glass px-5 py-3.5 rounded-2xl text-sm font-semibold text-text-primary hover:border-(--accent)/30 hover:text-accent transition-all duration-200 mb-6 cursor-pointer"
+            className="w-full flex items-center justify-center gap-3 glass px-5 py-3.5 rounded-2xl text-sm font-semibold text-text-primary hover:border-accent/30 hover:text-accent transition-all duration-200 mb-6 cursor-pointer"
           >
             <Image src="/google.svg" alt="Google" width={18} height={18} />
             Continue with Google

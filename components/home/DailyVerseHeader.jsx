@@ -18,6 +18,7 @@ export default function DailyVerseHeader({
         favoriteReciters={favoriteReciters}
         onSelect={onSelectReciter}
         onToggleFavorite={onToggleFavoriteReciter}
+        inDailyVerse
       />
       <LanguageToggle
         translationLang={translationLang}

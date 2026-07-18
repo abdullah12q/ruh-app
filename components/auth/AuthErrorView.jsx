@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { AlertTriangle, ArrowLeft, RefreshCw } from "lucide-react";
 import { AUTH_ERROR_MESSAGES } from "@/data/authErrors";
+import { useMediaQuery } from "@custom-react-hooks/use-media-query";
 
 // error based on the NextAuth `error` query parameter
 export default function AuthErrorView() {
@@ -12,6 +13,8 @@ export default function AuthErrorView() {
   const errorCode = searchParams.get("error") || "Default";
   const errorInfo =
     AUTH_ERROR_MESSAGES[errorCode] || AUTH_ERROR_MESSAGES.Default;
+
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-24">
@@ -46,7 +49,7 @@ export default function AuthErrorView() {
           {/* Logo */}
           <Link href="/" className="inline-flex items-center gap-2 mb-6">
             <span className="text-xl font-extrabold font-jakarta text-text-primary">
-              Rُuh
+              {isMobile ? "R ُuh" : "Rُuh"}
             </span>
             <span className="text-lg font-bold font-arabic-ui text-accent">
               رُوح
