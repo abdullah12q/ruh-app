@@ -3,9 +3,9 @@
 import { useCallback, useEffect } from "react";
 import { ZoomIn, ZoomOut, Volume1, Volume2, VolumeX } from "lucide-react";
 import useUIStore from "@/lib/store/useUIStore";
-import imamList from "@/data/imam.json";
-import ReciterDropdown from "./ReciterDropdown";
-import LanguageToggle from "./LanguageToggle";
+import imamList from "@/data/jsons/imam.json";
+import ReciterDropdown from "@/components/ReciterDropdown";
+import LanguageToggle from "@/components/LanguageToggle";
 
 const FONT_SIZES = ["text-xl", "text-2xl", "text-3xl", "text-4xl"];
 

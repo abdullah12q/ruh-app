@@ -9,8 +9,8 @@ import {
   staggerContainer,
   cardVariant,
 } from "@/data/animationVariants";
-import reciters from "@/data/imam.json";
-import { SPOTLIGHT_IDS, audioFeatures } from "@/data/homeData";
+import reciters from "@/data/jsons/imam.json";
+import { SPOTLIGHT_IDS, audioFeatures } from "@/data/datas/homeData";
 import ReciterCard from "./ReciterCard";
 import AudioNowPlayingBar from "./AudioNowPlayingBar";
 import useUIStore from "@/lib/store/useUIStore";

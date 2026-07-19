@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
-import SurahContext from "@/data/surah-context.json";
+import SurahContext from "@/data/jsons/surah-context.json";
 import { TABS } from "./SurahTraditionalCommentary";
 import { SurahExpandablePanel } from "./SurahExpandablePanel";
 

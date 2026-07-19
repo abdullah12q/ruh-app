@@ -10,7 +10,6 @@
   --text-secondary: #4B5563;
   --accent: #0D9488;
   --accent-glow: rgba(13, 148, 136, 0.3);
-  --shadow-soft: 0 4px 32px rgba(0, 0, 0, 0.08);
   --shadow-card: 0 8px 40px rgba(0, 0, 0, 0.06);
 }
 
@@ -24,7 +23,6 @@
   --text-secondary: #9CA3AF;
   --accent: #14B8A6;
   --accent-glow: rgba(20, 184, 166, 0.4);
-  --shadow-soft: 0 4px 32px rgba(0, 0, 0, 0.6);
   --shadow-card: 0 8px 40px rgba(0, 0, 0, 0.4);
 }
 
@@ -37,18 +35,6 @@
   --color-accent: var(--accent);
   --color-accent-glow: var(--accent-glow);
 
-  /* Rُuh Brand Palette (Static) */
-  --color-Rُuh-teal-50: #f0fdfa;
-  --color-Rُuh-teal-100: #ccfbf1;
-  --color-Rُuh-teal-200: #99f6e4;
-  --color-Rُuh-teal-400: #2dd4bf;
-  --color-Rُuh-teal-500: #14b8a6;
-  --color-Rُuh-teal-600: #0d9488;
-  --color-Rُuh-teal-700: #0f766e;
-  --color-Rُuh-teal-900: #134e4a;
-  --color-Rُuh-obsidian: #050505;
-  --color-Rُuh-charcoal: #111827;
-
   /* Font Families (mapped via CSS variables from fonts.js) */
   --font-jakarta: var(--font-jakarta);
   --font-inter: var(--font-inter);
@@ -60,26 +46,10 @@
 
   /* Custom Shadows */
   --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  --shadow-glow-teal: 0 0 40px rgba(20, 184, 166, 0.25), 0 0 80px rgba(20, 184, 166, 0.1);
 
   /* Keyframes */
-  --animate-float: float 6s ease-in-out infinite;
   --animate-glow-pulse: glow-pulse 3s ease-in-out infinite;
-  --animate-shimmer: shimmer 2.5s linear infinite;
   --animate-fade-up: fade-up 0.6s ease-out forwards;
-  --animate-fade-in: fade-in 0.5s ease-out forwards;
-
-  @keyframes float {
-
-    0%,
-    100% {
-      transform: translateY(0px);
-    }
-
-    50% {
-      transform: translateY(-12px);
-    }
-  }
 
   @keyframes glow-pulse {
 
@@ -112,16 +82,6 @@
     to {
       opacity: 1;
       transform: translateY(0);
-    }
-  }
-
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-    }
-
-    to {
-      opacity: 1;
     }
   }
 }
@@ -169,11 +129,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.glow-accent {
-  box-shadow: var(--shadow-glow-teal);
-}
-
-/* Custom range slider styling — used by DailyVerseControls */
+/* Custom range slider styling — used by DailyVerseControls, AyahCard, AudioNowPlayingBar, SurahReadingControls */
 .range-fill {
   --range-progress: 0%;
   background: linear-gradient(to right,

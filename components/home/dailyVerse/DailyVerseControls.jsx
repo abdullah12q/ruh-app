@@ -8,7 +8,7 @@ import {
   Volume1,
   VolumeX,
 } from "lucide-react";
-import { formatTime } from "@/data/audioData";
+import { formatTime } from "@/data/datas/audioData";
 import { useMediaQuery } from "@custom-react-hooks/use-media-query";
 
 export default function DailyVerseControls({

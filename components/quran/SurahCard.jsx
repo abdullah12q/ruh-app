@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { revelationBadge } from "@/data/quranData";
+import { revelationBadge } from "@/data/datas/quranData";
 
 export default function SurahCard({ surah }) {
   const badge = revelationBadge[surah.revelation_place];

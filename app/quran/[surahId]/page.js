@@ -2,11 +2,11 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { BookOpen } from "lucide-react";
 
-import SurahHeader from "@/components/quran/SurahHeader";
-import SurahReadingControls from "@/components/quran/SurahReadingControls";
-import BismillahCard from "@/components/quran/BismillahCard";
-import AyahList from "@/components/quran/AyahList";
-import SurahNavigation from "@/components/quran/SurahNavigation";
+import SurahHeader from "@/components/quran/surahHeader/SurahHeader";
+import SurahReadingControls from "@/components/quran/surahReadingControls/SurahReadingControls";
+import BismillahCard from "@/components/quran/bismillahCard/BismillahCard";
+import AyahList from "@/components/quran/ayahList/AyahList";
+import SurahNavigation from "@/components/quran/surahNavigation/SurahNavigation";
 
 // Fetch Surah metadata from Quran.com API v4.
 async function getSurah(id) {

@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { fadeUp, staggerContainer } from "@/data/animationVariants";
-import { features } from "@/data/homeData";
+import { features } from "@/data/datas/homeData";
 import FeatureCard from "./FeatureCard";
 import { useMediaQuery } from "@custom-react-hooks/use-media-query";
 

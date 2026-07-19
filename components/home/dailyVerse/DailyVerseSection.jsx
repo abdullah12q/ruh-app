@@ -18,8 +18,8 @@ import DailyVerseHeader from "./DailyVerseHeader";
 import DailyVerseContent from "./DailyVerseContent";
 import DailyVerseControls from "./DailyVerseControls";
 import { useMediaQuery } from "@custom-react-hooks/use-media-query";
-import { formatAudioFileName } from "@/data/audioData";
-import { calculateNextVerse } from "@/data/verseData";
+import { formatAudioFileName } from "@/data/datas/audioData";
+import { calculateNextVerse } from "@/data/datas/verseData";
 import { useAudioPlayer } from "@/hooks/useAudioPlayer";
 
 export default function DailyVerseSection() {

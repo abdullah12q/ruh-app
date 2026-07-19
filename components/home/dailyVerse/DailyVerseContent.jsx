@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { FileText, Layers } from "lucide-react";
-import { FootnoteFormatter } from "../quran/FootnoteFormatter";
+import { FootnoteFormatter } from "@/components/FootnoteFormatter";
 
 export default function DailyVerseContent({
   verse,

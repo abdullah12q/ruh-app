@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { staggerContainer, cardVariant } from "@/data/animationVariants";
-import { stats } from "@/data/homeData";
+import { stats } from "@/data/datas/homeData";
 
 export default function StatsSection() {
   return (

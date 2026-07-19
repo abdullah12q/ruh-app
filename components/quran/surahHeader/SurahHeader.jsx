@@ -1,4 +1,4 @@
-import ligaturesData from "@/data/ligatures.json";
+import ligaturesData from "@/data/jsons/ligatures.json";
 import { SurahHeaderGlyph } from "./SurahHeaderGlyph";
 import { SurahStats } from "./SurahStats";
 import { SurahContextPanel } from "./SurahContextPanel";

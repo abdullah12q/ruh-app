@@ -4,10 +4,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import useUIStore from "@/lib/store/useUIStore";
 import { useAyahTranslation } from "@/lib/queries/quran";
 import { Bookmark, Play, Pause } from "lucide-react";
-import { FootnoteFormatter } from "./FootnoteFormatter";
+import { FootnoteFormatter } from "@/components/FootnoteFormatter";
 import { useEffect, useMemo } from "react";
-import { formatAudioFileName, formatTime } from "@/data/audioData";
-import { calculateNextVerse } from "@/data/verseData";
+import { formatAudioFileName, formatTime } from "@/data/datas/audioData";
+import { calculateNextVerse } from "@/data/datas/verseData";
 import { useAudioPlayer } from "@/hooks/useAudioPlayer";
 
 export default function AyahCard({ totalVerses, ayah, surahId }) {

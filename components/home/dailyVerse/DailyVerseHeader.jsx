@@ -1,6 +1,6 @@
-import imamList from "@/data/imam.json";
-import LanguageToggle from "../quran/LanguageToggle";
-import ReciterDropdown from "../quran/ReciterDropdown";
+import imamList from "@/data/jsons/imam.json";
+import LanguageToggle from "@/components/LanguageToggle";
+import ReciterDropdown from "@/components/ReciterDropdown";
 
 export default function DailyVerseHeader({
   selectedReciter,
