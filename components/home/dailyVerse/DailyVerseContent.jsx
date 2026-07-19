@@ -30,7 +30,7 @@ export default function DailyVerseContent({
       </AnimatePresence>
 
       {/* Divider */}
-      <div className="w-16 h-px bg-(--accent)/40 mx-auto mb-6" />
+      <div className="w-16 h-px bg-accent/40 mx-auto mb-6" />
 
       {/* Translation */}
       <div className="mb-6">
