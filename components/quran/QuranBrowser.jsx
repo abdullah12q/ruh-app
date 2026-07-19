@@ -13,11 +13,7 @@ export default function QuranBrowser({ surahs }) {
           </div>
           <h1 className="font-jakarta font-extrabold text-4xl sm:text-5xl text-text-primary mb-4">
             The Quran{" "}
-            <span
-              className="font-arabic-ui text-accent"
-              dir="rtl"
-              lang="ar"
-            >
+            <span className="font-arabic-ui text-accent" dir="rtl" lang="ar">
               القرآن الكريم
             </span>
           </h1>
@@ -28,7 +24,7 @@ export default function QuranBrowser({ surahs }) {
 
         {/* Surah Grid */}
         {surahs.length > 0 ? (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-3">
             {surahs.map((surah) => (
               <SurahCard key={surah.id} surah={surah} />
             ))}
