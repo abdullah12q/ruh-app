@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Bookmark, BookOpen } from "lucide-react";
 import Link from "next/link";
 
-export default function BookmarksEmptyState() {
+export default function BookmarksEmptyState({ onClose }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
@@ -35,6 +35,11 @@ export default function BookmarksEmptyState() {
       {/* CTA */}
       <Link
         href="/quran"
+        onClick={() => {
+          setTimeout(() => {
+            onClose();
+          }, 750);
+        }}
         className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-accent/10 border border-accent/20 text-accent text-sm font-medium font-jakarta hover:bg-accent/20 transition-all duration-200"
       >
         <BookOpen size={14} />

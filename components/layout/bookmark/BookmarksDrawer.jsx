@@ -57,7 +57,7 @@ export default function BookmarksDrawer({ isOpen, onClose }) {
             {/* Scrollable Content */}
             <div className="flex-1 overflow-y-auto px-4 py-5 space-y-1">
               {totalCount === 0 ? (
-                <BookmarksEmptyState />
+                <BookmarksEmptyState onClose={onClose} />
               ) : (
                 <AnimatePresence>
                   {surahNums.map((surahNum) => (
