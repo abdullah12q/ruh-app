@@ -2,7 +2,7 @@ import {
   BookOpen,
   Clock,
   Star,
-  Moon,
+  Bookmark,
   Headphones,
   Heart,
   Music2,
@@ -14,7 +14,7 @@ export const features = [
     title: "Quran",
     titleAr: "القرآن",
     description:
-      "Read and listen to the Holy Quran with word-by-word translations and authentic recitations.",
+      "Read, listen, and search the Holy Quran, enhanced by authentic recitations and word-by-word translations.",
     href: "/quran",
     gradient: "from-teal-500/10 to-cyan-500/10",
     iconColor: "text-[var(--accent)]",
@@ -38,6 +38,15 @@ export const features = [
     href: "/hadith",
     gradient: "from-amber-500/10 to-orange-500/10",
     iconColor: "text-amber-400",
+  },
+  {
+    icon: Bookmark,
+    title: "Bookmarks",
+    titleAr: "المرجعية",
+    description:
+      "Save your favourite Ayahs with a single tap and revisit them anytime — all in one place.",
+    gradient: "from-rose-500/10 to-pink-500/10",
+    iconColor: "text-rose-400",
   },
 ];
 

@@ -8,7 +8,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
-import { Moon, Sun, Menu, X, LogIn, LogOut } from "lucide-react";
+import { Moon, Sun, Menu, X, LogIn, LogOut, Bookmark } from "lucide-react";
 
 import logo from "@/app/icon.png";
 import navLinks from "@/data/navLinks";
@@ -16,6 +16,8 @@ import {
   mobileMenuVariants,
   mobileLinkVariants,
 } from "@/data/animationVariants";
+import BookmarksDrawer from "./bookmark/BookmarksDrawer";
+import useUIStore from "@/lib/store/useUIStore";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -25,7 +27,11 @@ export default function Navbar() {
   const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [bookmarksOpen, setBookmarksOpen] = useState(false);
   const navRef = useRef(null);
+
+  const { bookmarkedAyahs } = useUIStore();
+  const bookmarkedCount = bookmarkedAyahs.length;
 
   // Avoid hydration mismatch for theme-dependent UI
   useEffect(() => {
@@ -56,13 +62,13 @@ export default function Navbar() {
     return () => ctx.revert();
   }, []);
 
-  // Lock body scroll when mobile menu is open
+  // Lock body scroll when mobile menu or bookmarks drawer is open
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    document.body.style.overflow = mobileOpen || bookmarksOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [mobileOpen]);
+  }, [mobileOpen, bookmarksOpen]);
 
   const isDark = resolvedTheme === "dark";
 
@@ -112,6 +118,28 @@ export default function Navbar() {
 
           {/* Right Actions */}
           <div className="flex items-center gap-2">
+            {/* Bookmark Button */}
+            <button
+              onClick={() => setBookmarksOpen(true)}
+              aria-label="Open bookmarks"
+              className="relative size-9 flex items-center justify-center rounded-xl text-text-secondary hover:text-accent hover:bg-white/5 transition-all duration-200 cursor-pointer"
+            >
+              <Bookmark size={17} strokeWidth={1.75} />
+              <AnimatePresence mode="popLayout">
+                {bookmarkedCount > 0 && (
+                  <motion.span
+                    key={bookmarkedCount}
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.5 }}
+                    transition={{ type: "spring" }}
+                    className="absolute -top-0.5 -right-0.5 min-w-4 h-4 px-1 rounded-full bg-accent text-white text-[9px] font-bold font-jakarta flex items-center justify-center leading-none"
+                  >
+                    {bookmarkedCount > 99 ? "99+" : bookmarkedCount}
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </button>
             {/* Theme Toggle */}
             {mounted && (
               <button
@@ -217,6 +245,12 @@ export default function Navbar() {
           </div>
         </nav>
       </header>
+
+      {/* Bookmarks Drawer */}
+      <BookmarksDrawer
+        isOpen={bookmarksOpen}
+        onClose={() => setBookmarksOpen(false)}
+      />
 
       {/* Mobile Menu Overlay */}
       <AnimatePresence>

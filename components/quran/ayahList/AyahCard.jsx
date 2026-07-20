@@ -18,7 +18,15 @@ export default function AyahCard({ totalVerses, ayah, surahId }) {
     audioPlaying,
     setAudioPlaying,
     selectedReciter,
+    bookmarkedAyahs,
+    toggleBookmarkedAyahs,
   } = useUIStore();
+
+  const isBookmarked = bookmarkedAyahs.find(
+    (verse) =>
+      verse.surahNum === surahId && verse.ayahNum === ayah.verse_number,
+  );
+
   const isActive =
     surahId !== activeAyah?.surahNum
       ? false
@@ -187,10 +195,17 @@ export default function AyahCard({ totalVerses, ayah, surahId }) {
             )}
           </button>
           <button
-            aria-label="Bookmark this Ayah"
-            className="size-8 rounded-lg glass flex items-center justify-center text-text-secondary hover:text-accent transition-colors duration-200 cursor-pointer"
+            onClick={() => toggleBookmarkedAyahs(surahId, ayah.verse_number)}
+            aria-label={
+              isBookmarked ? "Remove from bookmarks" : "Add to bookmarks"
+            }
+            className={`size-8 rounded-lg glass flex items-center justify-center transition-colors duration-200 cursor-pointer ${
+              isBookmarked
+                ? "text-accent hover:opacity-80"
+                : "text-text-secondary hover:text-accent"
+            }`}
           >
-            <Bookmark size={14} />
+            <Bookmark size={14} fill={isBookmarked ? "currentColor" : "none"} />
           </button>
         </div>
       </div>

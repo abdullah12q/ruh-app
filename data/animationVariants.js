@@ -54,3 +54,33 @@ export const dropdownVariants = {
   visible: { opacity: 1, y: 0, scale: 1 },
   exit: { opacity: 0, y: -6, scale: 0.97 },
 };
+
+// Drawer Animation Variants
+export const drawerVariants = {
+  hidden: { x: "100%", opacity: 0 },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: { type: "spring", stiffness: 280, damping: 30 },
+  },
+  exit: {
+    x: "100%",
+    opacity: 0,
+    transition: { duration: 0.25, ease: "easeIn" },
+  },
+};
+
+export const itemVariants = {
+  hidden: { opacity: 0, x: 20 },
+  visible: (i) => ({
+    opacity: 1,
+    x: 0,
+    transition: { delay: i * 0.04, duration: 0.3, ease: "easeOut" },
+  }),
+  exit: {
+    opacity: 0,
+    scale: 0.92,
+    x: 30,
+    transition: { duration: 0.2, ease: "easeIn" },
+  },
+};
