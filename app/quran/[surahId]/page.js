@@ -9,7 +9,7 @@ import AyahList from "@/components/quran/ayahList/AyahList";
 import SurahNavigation from "@/components/quran/surahNavigation/SurahNavigation";
 
 // Fetch Surah metadata from Quran.com API v4.
-async function getSurah(id) {
+export async function getSurah(id) {
   const res = await fetch(`https://api.quran.com/api/v4/chapters/${id}`, {
     next: { revalidate: 86400 },
   });

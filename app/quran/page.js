@@ -8,7 +8,7 @@ export const metadata = {
 
 // Fetch all Surahs from Quran.com API v4
 // Revalidates every 24 hours (ISR)
-async function getSurahList() {
+export async function getSurahList() {
   try {
     const res = await fetch(
       "https://api.quran.com/api/v4/chapters?language=en",

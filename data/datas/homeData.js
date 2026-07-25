@@ -6,6 +6,9 @@ import {
   Headphones,
   Heart,
   Music2,
+  Play,
+  Download,
+  Shuffle,
 } from "lucide-react";
 
 export const features = [
@@ -80,5 +83,38 @@ export const audioFeatures = [
     bg: "bg-violet-400/10",
     title: "Browse 54 Reciters",
     desc: "From legendary scholars to contemporary voices — explore a handpicked collection of authenticated recitations.",
+  },
+];
+
+export const FEATURED_SURAHS = [
+  { id: 1, nameAr: "الفاتحة", nameEn: "Al-Fatihah", verses: 7 },
+  { id: 2, nameAr: "البقرة", nameEn: "Al-Baqarah", verses: 286 },
+  { id: 36, nameAr: "يس", nameEn: "Ya-Sin", verses: 83 },
+  { id: 55, nameAr: "الرحمن", nameEn: "Ar-Rahman", verses: 78 },
+  { id: 67, nameAr: "الملك", nameEn: "Al-Mulk", verses: 30 },
+  { id: 112, nameAr: "الإخلاص", nameEn: "Al-Ikhlas", verses: 4 },
+];
+
+export const CAPABILITIES = [
+  {
+    icon: Play,
+    color: "text-accent",
+    bg: "bg-accent/10",
+    title: "Full Continuous Playback",
+    desc: "Listen to an entire Surah from start to finish without any interruptions — one recitation, unbroken.",
+  },
+  {
+    icon: Download,
+    color: "text-violet-400",
+    bg: "bg-violet-400/10",
+    title: "Offline Download",
+    desc: "Save any Surah recitation to your device and listen anywhere, even without an internet connection.",
+  },
+  {
+    icon: Shuffle,
+    color: "text-amber-400",
+    bg: "bg-amber-400/10",
+    title: "215+ Exclusive Sheikhs",
+    desc: "Access world-renowned reciters unavailable in the verse-by-verse mode — curated full-Surah masters.",
   },
 ];

@@ -3,6 +3,7 @@ import ContinueReadingSection from "@/components/home/continueReading/ContinueRe
 import FeaturesSection from "@/components/home/features/FeaturesSection";
 import DailyVerseSection from "@/components/home/dailyVerse/DailyVerseSection";
 import AudioRecitationsSection from "@/components/home/audioRecitations/AudioRecitationsSection";
+import FullSurahSection from "@/components/home/fullSurah/FullSurahSection";
 import StatsSection from "@/components/home/stats/StatsSection";
 import CTASection from "@/components/home/cta/CTASection";
 import Footer from "@/components/layout/Footer";
@@ -15,6 +16,7 @@ export default function HomePage() {
       <FeaturesSection />
       <DailyVerseSection />
       <AudioRecitationsSection />
+      <FullSurahSection />
       <StatsSection />
       <CTASection />
       <Footer />

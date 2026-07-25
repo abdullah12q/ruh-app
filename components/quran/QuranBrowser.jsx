@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { BookOpen, ScrollText } from "lucide-react";
+import { BookOpen, ScrollText, Headphones } from "lucide-react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import SurahCard from "./SurahCard";
 import SearchInput from "./SearchInput";
@@ -107,6 +108,14 @@ export default function QuranBrowser({ surahs }) {
               <ScrollText size={14} className="relative" />
               <span className="relative">Ayahs</span>
             </button>
+            {/* Listen & Download separate page, uses Link */}
+            <Link
+              href="/quran/listen"
+              className="relative flex items-center gap-2 px-5 py-2 rounded-full font-medium text-sm text-text-secondary hover:text-accent transition-colors"
+            >
+              <Headphones size={14} />
+              <span>Listen</span>
+            </Link>
           </div>
         </div>
 
