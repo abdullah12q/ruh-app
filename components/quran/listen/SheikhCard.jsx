@@ -1,5 +1,3 @@
-"use client";
-
 import { motion, AnimatePresence } from "framer-motion";
 import { Headphones, ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
