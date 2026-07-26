@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { formatTime } from "@/data/datas/audioData";
 import useUIStore from "@/lib/store/useUIStore";
+import { ID3Writer } from "browser-id3-writer";
 
 export default function FullSurahAudioPlayer({
   fromSheikhCardClick = false,
@@ -125,14 +126,32 @@ export default function FullSurahAudioPlayer({
     setIsDownloading(true);
 
     try {
-      // Fetch the audio file as a Blob
+      // Fetch the audio file as an ArrayBuffer
       const response = await fetch(audioUrl);
       if (!response.ok) throw new Error("Network response was not ok");
 
-      const blob = await response.blob();
+      const arrayBuffer = await response.arrayBuffer();
 
-      // Create a local URL for the Blob
-      const blobUrl = window.URL.createObjectURL(blob);
+      // Initialize the ID3 Writer with the audio buffer
+      const writer = new ID3Writer(arrayBuffer);
+
+      // Set the custom metadata tags
+      writer
+        .setFrame("TIT2", `Surah ${surah.name_simple}`) // Surah Title
+        .setFrame("TPE1", [reciter.nameEn]) // Artist Name
+        .setFrame("TALB", "Ruh - The Holy Quran") // Album Name
+        .setFrame("TCON", ["Quran"]) // Genre
+        .setFrame("COMM", {
+          description: "Downloaded from",
+          text: "Ruh App",
+        });
+
+      // Build the new tags and get the modified Blob
+      writer.addTag();
+      const modifiedBlob = writer.getBlob();
+
+      // Create a local URL for the new Blob
+      const blobUrl = window.URL.createObjectURL(modifiedBlob);
 
       // Trigger the download natively
       const link = document.createElement("a");
@@ -146,7 +165,7 @@ export default function FullSurahAudioPlayer({
       window.URL.revokeObjectURL(blobUrl);
     } catch (error) {
       console.error("Blob download failed, falling back to new tab:", error);
-      // Fallback: Open in new tab if CORS blocks the fetch
+      // Fallback: Open in new tab if CORS blocks the fetch or ID3 fails
       window.open(audioUrl, "_blank", "noopener,noreferrer");
     } finally {
       setIsDownloading(false);
