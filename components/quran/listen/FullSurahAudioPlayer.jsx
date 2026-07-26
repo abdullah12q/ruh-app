@@ -293,17 +293,16 @@ export default function FullSurahAudioPlayer({
             <button
               onClick={handleDownload}
               title={`Download ${surah.name_simple} — ${reciter.nameEn}`}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-xl glass border border-white/10 text-text-secondary hover:text-accent hover:border-accent/30 transition-all duration-200 text-xs font-semibold font-jakarta cursor-pointer"
+              disabled={isDownloading}
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl glass border border-white/10 text-text-secondary hover:text-accent hover:border-accent/30 transition-all duration-300 text-xs font-semibold font-jakarta cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
             >
               {isDownloading ? (
                 <Loader2 size={13} className="animate-spin" />
               ) : (
                 <Download size={13} />
               )}
-              <span
-                className={`hidden sm:inline ${isDownloading && "opacity-30"}`}
-              >
-                Download
+              <span className="hidden sm:inline">
+                {isDownloading ? "Downloading..." : "Download"}
               </span>
             </button>
           </div>
