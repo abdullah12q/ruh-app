@@ -161,7 +161,7 @@ export default function FullSurahAudioPlayer({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 80 }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
-      className="fixed bottom-0 left-0 right-0 z-50"
+      className="fixed bottom-0 left-0 right-0 z-39"
     >
       {/* Frosted glass player bar */}
       <div className="glass backdrop-blur-sm border-t border-white/10 dark:border-white/5 px-4 sm:px-6 py-3 shadow-[0_-8px_40px_rgba(0,0,0,0.3)]">
@@ -190,7 +190,7 @@ export default function FullSurahAudioPlayer({
         <div className="flex items-center justify-between gap-4">
           {/* Left: Surah + reciter info */}
           <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 flex-wrap">
+            <div className="flex items-center gap-x-2 flex-wrap">
               <span className="font-jakarta font-semibold text-xs sm:text-sm text-text-primary">
                 {surah.name_simple}
               </span>
@@ -203,18 +203,29 @@ export default function FullSurahAudioPlayer({
               </span>
             </div>
             <div className="flex items-center gap-2 mt-0.5">
-              <p className="font-inter text-xs text-text-secondary">
-                {reciter.nameEn} <span className="text-accent"> • </span>{" "}
+              <p className="hidden sm:block font-inter text-xs text-text-secondary truncate">
+                {reciter.nameEn}
+              </p>
+              <p className="hidden sm:block text-accent/80 text-xs">•</p>
+              <p
+                className="font-quran text-xs text-text-secondary truncate"
+                dir="rtl"
+                lang="ar"
+              >
                 {reciter.nameAr}
               </p>
               {moshaf && (
                 <>
-                  <span className="text-text-secondary/30">·</span>
+                  <span className="text-text-secondary/30 mb-1">·</span>
                   <span
-                    className={`text-center text-[10px] sm:text-xs px-1.5 py-px rounded-full border font-medium ${moshafStyle.color}`}
+                    className={`flex items-center gap-1 text-xs px-2 py-0.5 rounded-full border font-medium ${moshafStyle.color}`}
                   >
-                    <span className="mx-1">{moshafStyle.label}</span>{" "}
-                    {moshafStyle.labelAr}
+                    <span className="hidden sm:block mx-1">
+                      {moshafStyle.label}
+                    </span>
+                    <span className="font-arabic-ui">
+                      {moshafStyle.labelAr}
+                    </span>
                   </span>
                 </>
               )}
@@ -226,7 +237,7 @@ export default function FullSurahAudioPlayer({
             onClick={() => setIsPlaying((v) => !v)}
             disabled={isLoading}
             aria-label={isPlaying ? "Pause" : "Play"}
-            className="size-12 rounded-full bg-accent flex items-center justify-center text-white shadow-[0_0_20px_rgba(20,184,166,0.4)] hover:scale-105 active:scale-95 transition-transform duration-150 cursor-pointer shrink-0 disabled:opacity-60"
+            className="size-10 sm:size-12 rounded-full bg-accent flex items-center justify-center text-white shadow-[0_0_20px_rgba(20,184,166,0.4)] hover:scale-105 active:scale-95 transition-transform duration-150 cursor-pointer shrink-0 disabled:opacity-60"
           >
             {isLoading ? (
               <Loader2 size={20} className="animate-spin" />
@@ -244,7 +255,7 @@ export default function FullSurahAudioPlayer({
               <button
                 onClick={() => setVolume(volume > 0 ? 0 : 0.8)}
                 aria-label="Toggle mute"
-                className=" text-text-secondary hover:text-accent transition-colors cursor-pointer"
+                className="text-text-secondary hover:text-accent transition-colors cursor-pointer"
               >
                 <VolumeIcon size={15} />
               </button>

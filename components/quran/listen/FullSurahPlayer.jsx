@@ -67,7 +67,7 @@ export default function FullSurahPlayer({ surah, reciters, surahId }) {
       <div className="relative text-center">
         {/* Ambient glow behind Arabic text */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none -z-10">
-          <div className="size-96 rounded-full bg-accent/15 blur-3xl" />
+          <div className="size-69 sm:size-96 rounded-full bg-accent/15 blur-3xl" />
         </div>
 
         <span
@@ -91,14 +91,18 @@ export default function FullSurahPlayer({ surah, reciters, surahId }) {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center gap-2 mt-4 px-4 py-1.5 rounded-full bg-accent/10 border border-accent/30 text-accent text-xs font-semibold font-jakarta whitespace-nowrap"
+            className="inline-flex items-center gap-2 mt-4 px-4 py-1.5 max-w-60 sm:max-w-max rounded-full bg-accent/10 border border-accent/30 text-accent text-xs font-semibold font-jakarta"
           >
             <span className="size-1.5 rounded-full bg-accent animate-pulse" />
-            {selectedReciter.nameEn} · {selectedReciter.nameAr}
+            <span className="truncate">{selectedReciter.nameEn}</span>
             {selectedMoshaf && (
-              <span className="opacity-60">
-                · {getMoshafStyle(selectedMoshaf.moshafType).label}
-              </span>
+              <>
+                <span>·</span>
+                <span>{getMoshafStyle(selectedMoshaf.moshafType).label}</span>
+                <span className="font-arabic-ui">
+                  {getMoshafStyle(selectedMoshaf.moshafType).labelAr}
+                </span>
+              </>
             )}
           </motion.div>
         )}

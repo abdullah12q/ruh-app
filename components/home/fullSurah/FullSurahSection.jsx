@@ -23,7 +23,7 @@ export default function FullSurahSection() {
   const [hoveredSurah, setHoveredSurah] = useState(null);
 
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <section className="py-24 px-4 sm:px-6 lg:px-8 relative">
       {/* Ambient background */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div className="absolute top-1/2 left-0 -translate-y-1/2 size-125 bg-violet-600 opacity-[0.07] rounded-full blur-3xl" />

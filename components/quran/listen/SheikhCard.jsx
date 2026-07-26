@@ -85,12 +85,12 @@ export default function SheikhCard({
 
           <div className="flex-1 min-w-0">
             {/* English name */}
-            <p className="font-jakarta font-semibold text-sm text-text-primary leading-tight truncate">
+            <p className="font-jakarta font-semibold text-sm text-text-primary leading-tight max-w-37.5 sm:max-w-max truncate">
               {reciter.nameEn}
             </p>
             {/* Arabic name */}
             <p
-              className="font-arabic-ui text-sm text-text-secondary mt-0.5 truncate"
+              className="font-quran text-sm text-left! text-text-secondary mt-0.5 truncate"
               dir="rtl"
               lang="ar"
             >
@@ -169,10 +169,10 @@ export default function SheikhCard({
                       className={`flex items-center gap-1 text-xs px-2 py-0.5 rounded-full border font-medium ${style.color}`}
                     >
                       <span className="mx-1">{style.label}</span>
-                      {style.labelAr}
+                      <span className="font-arabic-ui">{style.labelAr}</span>
                     </span>
                     <span
-                      className="font-arabic-ui text-xs text-text-secondary truncate flex-1"
+                      className="font-quran text-xs text-left! text-text-secondary truncate flex-1"
                       dir="rtl"
                       lang="ar"
                     >
