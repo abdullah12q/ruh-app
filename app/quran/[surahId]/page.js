@@ -112,7 +112,7 @@ export default async function SurahPage({ params }) {
           startJuz={startJuz}
           endJuz={endJuz}
         />
-        <SurahReadingControls surahId={id} />
+        <SurahReadingControls />
         <BismillahCard surahId={id} />
         <AyahList verses={verses} surahId={id} />
         <SurahNavigation prevSurah={prevSurah} nextSurah={nextSurah} />

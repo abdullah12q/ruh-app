@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function SearchInput({
   value,
   onChange,
-  placeholder = "Search surahs, ayahs...",
+  placeholder = "Search surahs, ayahs, or number...",
   isLoading = false,
   hint,
 }) {

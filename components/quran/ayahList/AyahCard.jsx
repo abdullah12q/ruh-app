@@ -27,10 +27,9 @@ export default function AyahCard({ totalVerses, ayah, surahId }) {
       verse.surahNum === surahId && verse.ayahNum === ayah.verse_number,
   );
 
-  const isActive =
-    surahId !== activeAyah?.surahNum
-      ? false
-      : activeAyah?.ayahNum === ayah.verse_number;
+  const activeAyahNum = activeAyah?.[surahId];
+
+  const isActive = activeAyahNum === ayah.verse_number;
 
   const {
     text: translationText,
@@ -64,11 +63,11 @@ export default function AyahCard({ totalVerses, ayah, surahId }) {
   // This calculates the next verse and downloads the JSON and MP3 in the background silently.
   useEffect(() => {
     if (!isActive) return;
-    if (!surahId || !activeAyah?.ayahNum || !selectedReciter?.path) return;
+    if (!surahId || !activeAyahNum || !selectedReciter?.path) return;
 
     const { surah: nextSurah, ayah: nextAyah } = calculateNextVerse(
       surahId,
-      activeAyah?.ayahNum,
+      activeAyahNum,
       totalVerses,
     );
 
@@ -83,7 +82,7 @@ export default function AyahCard({ totalVerses, ayah, surahId }) {
       );
       preloader.preload = "auto"; // This forces the browser to download and cache the MP3
     }
-  }, [isActive, surahId, activeAyah?.ayahNum, selectedReciter, totalVerses]);
+  }, [isActive, surahId, activeAyahNum, selectedReciter, totalVerses]);
 
   function handleAyahClick() {
     if (!isActive) {
@@ -96,17 +95,17 @@ export default function AyahCard({ totalVerses, ayah, surahId }) {
   }
 
   function handleNextVerse() {
-    if (!surahId || !activeAyah?.ayahNum) return;
+    if (!surahId || !activeAyahNum) return;
     setCurrentTime(0);
     const { surah: nextSurah, ayah: nextAyah } = calculateNextVerse(
       surahId,
-      activeAyah?.ayahNum,
+      activeAyahNum,
       totalVerses,
     );
 
     // Stop if we are in the last ayah in the Surah
     if (nextSurah > surahId) {
-      setActiveAyah(surahId, activeAyah?.ayahNum);
+      setActiveAyah(surahId, activeAyahNum);
       if (audioPlaying) {
         setAudioPlaying(false);
       }

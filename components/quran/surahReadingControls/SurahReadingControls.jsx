@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import { ZoomIn, ZoomOut, Volume1, Volume2, VolumeX } from "lucide-react";
 import useUIStore from "@/lib/store/useUIStore";
 import imamList from "@/data/jsons/imam.json";
@@ -9,11 +9,10 @@ import LanguageToggle from "@/components/LanguageToggle";
 
 const FONT_SIZES = ["text-xl", "text-2xl", "text-3xl", "text-4xl"];
 
-export default function SurahReadingControls({ surahId }) {
+export default function SurahReadingControls() {
   const {
     fontSize,
     setFontSize,
-    activeAyah,
     volume,
     setVolume,
     translationLang,
@@ -22,14 +21,9 @@ export default function SurahReadingControls({ surahId }) {
     setSelectedReciter,
     favoriteReciters,
     toggleFavoriteReciter,
-    setLastRead,
   } = useUIStore();
 
   const currentIndex = FONT_SIZES.indexOf(fontSize);
-
-  useEffect(() => {
-    setLastRead(surahId, activeAyah);
-  }, [surahId, setLastRead, activeAyah]);
 
   const VolumeIcon = volume === 0 ? VolumeX : volume < 0.5 ? Volume1 : Volume2;
   const volumePct = volume * 100;

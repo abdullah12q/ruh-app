@@ -22,7 +22,8 @@ export default function QuranBrowser({ surahs }) {
     const searchLower = query.toLowerCase();
     return (
       surah.name_simple.toLowerCase().includes(searchLower) ||
-      surah.name_arabic.includes(searchLower)
+      surah.name_arabic.includes(searchLower) ||
+      surah.id.toString().includes(searchLower)
     );
   });
 
