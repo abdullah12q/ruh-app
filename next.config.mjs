@@ -33,6 +33,15 @@ const nextConfig = {
       },
     ];
   },
+  // dah 3shan ageb el location mn https://nominatim.openstreetmap.org
+  async rewrites() {
+    return [
+      {
+        source: "/osm-api/:path*",
+        destination: "https://nominatim.openstreetmap.org/:path*",
+      },
+    ];
+  },
 };
 
 export default nextConfig;

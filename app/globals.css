@@ -11,6 +11,10 @@
   --accent: #0D9488;
   --accent-glow: rgba(13, 148, 136, 0.3);
   --shadow-card: 0 8px 40px rgba(0, 0, 0, 0.06);
+  --sun-arc-dawn: #94A3B8;
+  --sun-arc-dusk: #6366F1;
+  --sun-arc-moon: #64748B;
+  --sun-arc-star-opacity: 0;
 }
 
 /* Dark Mode ("Deep Sanctuary") */
@@ -24,6 +28,10 @@
   --accent: #14B8A6;
   --accent-glow: rgba(20, 184, 166, 0.4);
   --shadow-card: 0 8px 40px rgba(0, 0, 0, 0.4);
+  --sun-arc-dawn: #475569;
+  --sun-arc-dusk: #312e81;
+  --sun-arc-moon: #E2E8F0;
+  --sun-arc-star-opacity: 0.35;
 }
 
 @theme inline {
@@ -215,6 +223,7 @@ body {
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {

@@ -2,42 +2,34 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { useTheme } from "next-themes";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
-import { Moon, Sun, Menu, X, LogIn, LogOut, Bookmark } from "lucide-react";
 
 import logo from "@/app/icon.png";
 import navLinks from "@/data/navLinks";
-import {
-  mobileMenuVariants,
-  mobileLinkVariants,
-} from "@/data/animationVariants";
+
 import BookmarksDrawer from "./bookmark/BookmarksDrawer";
-import useUIStore from "@/lib/store/useUIStore";
+import BookmarkButton from "./bookmark/BookmarkButton";
+import ThemeToggle from "./ThemeToggle";
+import AuthButtomDesktop from "./AuthButtomDesktop";
+import MobileMenuToggle from "./MobileMenuToggle";
+import MobileMenuOverlay from "./MobileMenuOverlay";
+import { usePrayerTimes } from "@/hooks/usePrayerTimes";
+import { untilNextPrayerHintColor } from "@/data/datas/prayerTimesData";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Navbar() {
   const { data: session, status } = useSession();
   const user = session?.user;
-  const { setTheme, resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [bookmarksOpen, setBookmarksOpen] = useState(false);
   const navRef = useRef(null);
 
-  const { bookmarkedAyahs } = useUIStore();
-  const bookmarkedCount = bookmarkedAyahs.length;
-
-  // Avoid hydration mismatch for theme-dependent UI
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMounted(true);
-  }, []);
+  const { permissionDenied, nextPrayerKey, countdown } = usePrayerTimes();
 
   useEffect(() => {
     if (!navRef.current) return;
@@ -70,7 +62,7 @@ export default function Navbar() {
     };
   }, [mobileOpen, bookmarksOpen]);
 
-  const isDark = resolvedTheme === "dark";
+  const hintColor = untilNextPrayerHintColor(countdown, true);
 
   return (
     <>
@@ -111,6 +103,27 @@ export default function Navbar() {
                 >
                   {label}
                   <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-accent rounded-full group-hover:w-4 transition-all duration-300" />
+
+                  {/* Pulsing dot when prayer is (≤ 60 minutes) with HintColor */}
+                  {href === "/prayer-times" && !permissionDenied && (
+                    <AnimatePresence>
+                      {hintColor.text !== "gradient-text" && nextPrayerKey && (
+                        <motion.span
+                          key="prayer-dot"
+                          initial={{ opacity: 0, scale: 0 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          exit={{ opacity: 0, scale: 0 }}
+                          transition={{ type: "spring" }}
+                          className={`absolute top-2 right-0.5 size-2 rounded-full ${hintColor.bg}`}
+                        >
+                          {/* ripple animation */}
+                          <span
+                            className={`absolute inset-0 rounded-full ${hintColor.bg} animate-ping opacity-75`}
+                          />
+                        </motion.span>
+                      )}
+                    </AnimatePresence>
+                  )}
                 </Link>
               </li>
             ))}
@@ -119,129 +132,19 @@ export default function Navbar() {
           {/* Right Actions */}
           <div className="flex items-center gap-2">
             {/* Bookmark Button */}
-            <button
-              onClick={() => setBookmarksOpen(true)}
-              aria-label="Open bookmarks"
-              className="relative size-9 flex items-center justify-center rounded-xl text-text-secondary hover:text-accent hover:bg-white/5 transition-all duration-200 cursor-pointer"
-            >
-              <Bookmark size={17} strokeWidth={1.75} />
-              <AnimatePresence mode="popLayout">
-                {bookmarkedCount > 0 && (
-                  <motion.span
-                    key={bookmarkedCount}
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.5 }}
-                    transition={{ type: "spring" }}
-                    className="absolute -top-0.5 -right-0.5 min-w-4 h-4 px-1 rounded-full bg-accent text-white text-[9px] font-bold font-jakarta flex items-center justify-center leading-none"
-                  >
-                    {bookmarkedCount > 99 ? "99+" : bookmarkedCount}
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </button>
+            <BookmarkButton onClick={() => setBookmarksOpen(true)} />
+
             {/* Theme Toggle */}
-            {mounted && (
-              <button
-                onClick={() => setTheme(isDark ? "light" : "dark")}
-                aria-label={
-                  isDark ? "Switch to light mode" : "Switch to dark mode"
-                }
-                className="size-9 flex items-center justify-center rounded-xl text-text-secondary hover:text-accent hover:bg-white/5 transition-all duration-200 cursor-pointer"
-              >
-                <AnimatePresence mode="wait" initial={false}>
-                  {isDark ? (
-                    <motion.span
-                      key="sun"
-                      initial={{ rotate: -90, opacity: 0 }}
-                      animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: 90, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <Sun size={18} />
-                    </motion.span>
-                  ) : (
-                    <motion.span
-                      key="moon"
-                      initial={{ rotate: 90, opacity: 0 }}
-                      animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: -90, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <Moon size={18} />
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-              </button>
-            )}
+            <ThemeToggle />
 
             {/* Auth Button (Desktop) */}
-            {status === "authenticated" ? (
-              <div className="hidden md:flex items-center gap-3">
-                {user?.image ? (
-                  <Image
-                    src={user.image}
-                    alt={user.name || "User"}
-                    width={32}
-                    height={32}
-                    className="rounded-full object-cover"
-                  />
-                ) : (
-                  <div className="size-8 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center font-bold text-accent text-sm">
-                    {user?.name?.[0]?.toUpperCase() || "U"}
-                  </div>
-                )}
-                <button
-                  onClick={() => signOut()}
-                  className="flex items-center gap-1.5 text-sm font-medium text-text-secondary hover:text-accent transition-all duration-200 cursor-pointer"
-                >
-                  <LogOut size={14} />
-                  Sign Out
-                </button>
-              </div>
-            ) : status === "loading" ? (
-              <div className="hidden md:block size-8 rounded-full bg-white/5 animate-pulse" />
-            ) : (
-              <Link
-                href="/auth/signin"
-                className="hidden md:flex items-center gap-2 px-4 py-2 rounded-xl bg-accent text-white text-sm font-semibold font-jakarta hover:opacity-90 active:scale-95 transition-all duration-200"
-              >
-                <LogIn size={15} />
-                Sign In
-              </Link>
-            )}
+            <AuthButtomDesktop status={status} user={user} signOut={signOut} />
 
             {/* Mobile Menu Toggle */}
-            <button
-              onClick={() => setMobileOpen((v) => !v)}
-              aria-label="Toggle mobile menu"
-              aria-expanded={mobileOpen}
-              className="md:hidden size-9 flex items-center justify-center rounded-xl text-text-secondary hover:text-text-primary hover:bg-white/5 transition-all duration-200"
-            >
-              <AnimatePresence mode="popLayout" initial={false}>
-                {mobileOpen ? (
-                  <motion.span
-                    key="x"
-                    initial={{ rotate: -90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: 90, opacity: 0 }}
-                    transition={{ duration: 0.6 }}
-                  >
-                    <X size={20} />
-                  </motion.span>
-                ) : (
-                  <motion.span
-                    key="menu"
-                    initial={{ rotate: 90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: -90, opacity: 0 }}
-                    transition={{ duration: 0.6 }}
-                  >
-                    <Menu size={20} />
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </button>
+            <MobileMenuToggle
+              mobileOpen={mobileOpen}
+              toggleMobileMenu={() => setMobileOpen((v) => !v)}
+            />
           </div>
         </nav>
       </header>
@@ -253,115 +156,17 @@ export default function Navbar() {
       />
 
       {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              key="backdrop"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setMobileOpen(false)}
-              className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm md:hidden"
-            />
-
-            {/* Drawer */}
-            <motion.div
-              key="drawer"
-              variants={mobileMenuVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              className="fixed top-0 right-0 bottom-0 z-50 w-72 glass md:hidden flex flex-col pt-24 pb-8 px-6"
-            >
-              {/* Close Button */}
-              <button
-                onClick={() => setMobileOpen(false)}
-                className="absolute top-8 right-11 flex items-center justify-center rounded-xl text-text-secondary hover:text-text-primary hover:bg-white/5"
-              >
-                <X size={20} />
-              </button>
-
-              {/* Mobile Nav Links */}
-              <nav>
-                <ul className="space-y-1">
-                  {navLinks.map(({ href, label, icon: Icon }, i) => (
-                    <motion.li
-                      key={href}
-                      custom={i}
-                      variants={mobileLinkVariants}
-                      initial="hidden"
-                      animate="visible"
-                    >
-                      <Link
-                        href={href}
-                        onClick={() => setMobileOpen(false)}
-                        className="flex items-center gap-3 px-4 py-3 rounded-xl text-text-secondary hover:text-text-primary hover:bg-white/5 transition-all duration-200 font-medium font-jakarta"
-                      >
-                        <Icon size={18} className="text-accent" />
-                        {label}
-                      </Link>
-                    </motion.li>
-                  ))}
-                </ul>
-              </nav>
-
-              {/* Mobile Sign In / Sign Out */}
-              <div className="mt-auto">
-                {status === "authenticated" ? (
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3 px-4 py-2 rounded-xl bg-white/5">
-                      {user?.image ? (
-                        <Image
-                          src={user.image}
-                          alt={user.name || "User"}
-                          width={40}
-                          height={40}
-                          className="rounded-full object-cover"
-                        />
-                      ) : (
-                        <div className="size-10 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center font-bold text-accent text-sm">
-                          {user?.name?.[0]?.toUpperCase() || "U"}
-                        </div>
-                      )}
-                      <div className="truncate">
-                        <p className="text-sm font-semibold text-text-primary truncate">
-                          {user?.name}
-                        </p>
-                        <p className="text-xs text-text-secondary truncate">
-                          {user?.email}
-                        </p>
-                      </div>
-                    </div>
-                    <button
-                      onClick={() => {
-                        setMobileOpen(false);
-                        signOut();
-                      }}
-                      className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-text-primary font-semibold font-jakarta hover:bg-white/10 transition-all duration-200 cursor-pointer"
-                    >
-                      <LogOut size={16} className="text-accent" />
-                      Sign Out
-                    </button>
-                  </div>
-                ) : status === "loading" ? (
-                  <div className="h-12 w-full rounded-xl bg-white/5 animate-pulse" />
-                ) : (
-                  <Link
-                    href="/auth/signin"
-                    onClick={() => setMobileOpen(false)}
-                    className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-xl bg-accent text-white font-semibold font-jakarta hover:opacity-90 transition-all duration-200"
-                  >
-                    <LogIn size={16} />
-                    Sign In
-                  </Link>
-                )}
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+      <MobileMenuOverlay
+        navLinks={navLinks}
+        permissionDenied={permissionDenied}
+        hintColor={hintColor}
+        nextPrayerKey={nextPrayerKey}
+        mobileOpen={mobileOpen}
+        setMobileOpen={setMobileOpen}
+        status={status}
+        user={user}
+        signOut={signOut}
+      />
     </>
   );
 }

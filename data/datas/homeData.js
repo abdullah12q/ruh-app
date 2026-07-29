@@ -17,7 +17,7 @@ export const features = [
     title: "Quran",
     titleAr: "القرآن",
     description:
-      "Read, listen, and search the Holy Quran, enhanced by authentic recitations and word-by-word translations.",
+      "Read, listen, download, and search the Holy Quran, enhanced by authentic recitations and word-by-word translations.",
     href: "/quran",
     gradient: "from-teal-500/10 to-cyan-500/10",
     iconColor: "text-[var(--accent)]",
