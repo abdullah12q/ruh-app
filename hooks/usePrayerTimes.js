@@ -34,8 +34,11 @@ export function usePrayerTimes() {
   }, []);
 
   useEffect(() => {
-    // If we already have coords from the store, skip geolocation entirely.
+    // Wait until mounted to ensure hydration
     if (!mounted) return;
+
+    // If we already have coords from the store, skip geolocation entirely.
+    if (savedCoords?.lat && savedCoords?.lon) return;
 
     if (!navigator.geolocation) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -55,15 +58,15 @@ export function usePrayerTimes() {
           setSavedLocation(loc); // persist to store
         });
       },
-      (err) => {
-        if (savedCoords?.latitude && savedCoords?.longitude) return;
+      () => {
+        if (savedCoords?.lat && savedCoords?.lon) return;
 
-        if (err.code === err.PERMISSION_DENIED) setPermissionDenied(true);
+        setPermissionDenied(true);
       },
       { timeout: 10_000, maximumAge: 5 * 60 * 1000 },
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [mounted]);
 
   const {
     data,
