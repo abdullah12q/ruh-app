@@ -1,6 +1,7 @@
 import HeroSection from "@/components/home/hero/HeroSection";
 import ContinueReadingSection from "@/components/home/continueReading/ContinueReadingSection";
 import FeaturesSection from "@/components/home/features/FeaturesSection";
+import SurahAlKahfSection from "@/components/home/surahAlKahf/SurahAlKahfSection";
 import DailyVerseSection from "@/components/home/dailyVerse/DailyVerseSection";
 import PrayerTimesSection from "@/components/home/prayerTimes/PrayerTimesSection";
 import AudioRecitationsSection from "@/components/home/audioRecitations/AudioRecitationsSection";
@@ -15,6 +16,7 @@ export default function HomePage() {
       <HeroSection />
       <ContinueReadingSection />
       <FeaturesSection />
+      <SurahAlKahfSection />
       <DailyVerseSection />
       <PrayerTimesSection />
       <AudioRecitationsSection />

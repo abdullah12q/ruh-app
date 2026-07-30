@@ -8,7 +8,7 @@ export const PRAYER_NAMES = [
 ];
 
 /** Converts "HH:MM" 24-hour string to total minutes from midnight. */
-function timeToMinutes(timeStr) {
+export function timeToMinutes(timeStr) {
   if (!timeStr) return 0;
   const [h, m] = timeStr.split(":").map(Number);
   return h * 60 + m;

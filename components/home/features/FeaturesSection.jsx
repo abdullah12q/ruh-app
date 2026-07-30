@@ -10,7 +10,7 @@ export default function FeaturesSection() {
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8">
+    <section id="features" className="py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <motion.div

@@ -10,6 +10,7 @@ import {
   Download,
   Shuffle,
 } from "lucide-react";
+import { cleanTime, timeToMinutes } from "./prayerTimesData";
 
 export const features = [
   {
@@ -118,3 +119,59 @@ export const CAPABILITIES = [
     desc: "Access world-renowned reciters unavailable in the verse-by-verse mode — curated full-Surah masters.",
   },
 ];
+
+export const KAHF_CONTENT = {
+  badge: {
+    en: "Friday Night Reminder",
+    ar: "تذكير ليلة الجمعة",
+  },
+  heading: {
+    en: {
+      normal: "Illuminate Your",
+      highlight: "Friday Night",
+    },
+    ar: "أنِر ليلة جمعتك",
+  },
+  subheading: {
+    en: "Start reading Surat Al-Kahf — it is the Sunnah of the blessed Friday night.",
+    ar: "ابدأ بقراءة سورة الكهف — فهي سُنَّة ليلة الجمعة المباركة.",
+  },
+  surahName: {
+    arabic: "سُورَةُ الْكَهْف",
+    english: "Surat Al-Kahf • Chapter 18",
+  },
+  hadith: {
+    arabic:
+      "«مَنْ قَرَأَ سُورَةَ الْكَهْفِ فِي يَوْمِ الْجُمُعَةِ أَضَاءَ لَهُ مِنَ النُّورِ مَا بَيْنَ الْجُمُعَتَيْنِ»",
+    english:
+      '"Whoever reads Surat Al-Kahf on Friday, he will be illuminated with light between the two Fridays."',
+    source: {
+      en: "Narrated by Al-Hakim — authenticated by Al-Albani (Sahih al-Jami 6470)",
+      ar: "رواه الحاكم — وصحَّحه الألباني (صحيح الجامع ٦٤٧٠)",
+    },
+  },
+  cta: {
+    en: "Read Surat Al-Kahf",
+    ar: "اقرأ سورة الكهف",
+  },
+};
+
+export function isAlKahfTime(maghribTime) {
+  const now = new Date();
+  const dayOfWeek = now.getDay(); // 0=Sun,1=Mon,...,4=Thu,5=Fri,6=Sat
+
+  // Default Maghrib fallback: 19:00 (7 PM) — used when API hasn't loaded yet
+  const DEFAULT_MAGHRIB_MINS = 19 * 60;
+
+  const maghribMins =
+    timeToMinutes(cleanTime(maghribTime)) ?? DEFAULT_MAGHRIB_MINS;
+  const nowMins = now.getHours() * 60 + now.getMinutes();
+
+  // Thursday after Maghrib (dayOfWeek === 4 && nowMins >= maghrib)
+  const isThursdayAfterMaghrib = dayOfWeek === 4 && nowMins >= maghribMins;
+
+  // All of Friday before Maghrib (dayOfWeek === 5 && nowMins < maghrib)
+  const isFridayBeforeMaghrib = dayOfWeek === 5 && nowMins < maghribMins;
+
+  return isThursdayAfterMaghrib || isFridayBeforeMaghrib;
+}

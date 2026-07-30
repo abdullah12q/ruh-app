@@ -38,6 +38,16 @@ export default function HeroSection() {
     return () => ctx.revert();
   }, []);
 
+  function scrollToFeatures() {
+    const featuresSection = document.getElementById("features");
+    if (featuresSection) {
+      featuresSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start", // Aligns the top of the section with the top of the viewport
+      });
+    }
+  }
+
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20">
       {/* Background ambient orbs */}
@@ -78,9 +88,9 @@ export default function HeroSection() {
 
           {/* Subtext */}
           <p className="hero-subtext font-inter text-base sm:text-lg text-text-secondary max-w-lg leading-relaxed mb-10">
-            An immersive reading experience for the Quran, Hadith, and prayer —
-            crafted with intentional minimalism to help you find deep focus and
-            tranquility.
+            An immersive experience for reading and listening to the Quran,
+            tracking prayer times, and exploring Hadith — crafted with
+            intentional minimalism to help you find deep focus and tranquility.
           </p>
 
           {/* CTA Buttons */}
@@ -92,13 +102,13 @@ export default function HeroSection() {
               <BookOpen size={16} />
               Start Reading
             </Link>
-            <Link
-              href="/about"
-              className="flex items-center gap-2 px-6 py-3.5 rounded-2xl glass text-text-primary font-semibold font-jakarta text-sm hover:border-accent/30 active:scale-95 transition-all duration-200"
+            <button
+              onClick={scrollToFeatures}
+              className="flex items-center gap-2 px-6 py-3.5 rounded-2xl glass text-text-primary font-semibold font-jakarta text-sm hover:border-accent/30 active:scale-95 transition-all duration-200 cursor-pointer"
             >
               Learn More
               <ChevronRight size={16} />
-            </Link>
+            </button>
           </div>
         </div>
 
