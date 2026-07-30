@@ -28,11 +28,11 @@ export default function SearchInput({
         }`}
       >
         <div
-          className={`pl-5 transition-colors duration-300 ${
+          className={`relative transition-colors duration-300 ${
             isFocused ? "text-accent/65" : "text-text-secondary/60"
           }`}
         >
-          <Search size={20} />
+          <Search className="size-4 sm:size-5 absolute left-4 top-1/2 -translate-y-1/2 " />
         </div>
 
         <input
@@ -42,7 +42,7 @@ export default function SearchInput({
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           placeholder={placeholder}
-          className="flex-1 bg-transparent border-none outline-none py-4 px-4 text-text-primary placeholder:text-text-secondary/50 font-inter text-lg"
+          className="w-full pl-10 pr-4 py-3 outline-none text-text-primary placeholder:text-text-secondary/50 font-inter text-sm sm:text-lg"
         />
 
         <AnimatePresence mode="wait">
@@ -52,7 +52,7 @@ export default function SearchInput({
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
-              className="pr-5 pl-2 text-accent"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-accent"
             >
               <Loader2 size={18} className="animate-spin" />
             </motion.div>
@@ -64,7 +64,7 @@ export default function SearchInput({
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.8 }}
                 onClick={() => onChange("")}
-                className="pr-5 pl-2 text-text-secondary/60 hover:text-text-primary transition-colors focus:outline-none cursor-pointer"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-text-secondary/60 hover:text-text-primary transition-colors focus:outline-none cursor-pointer"
                 aria-label="Clear search"
               >
                 <div className="bg-text-secondary/10 hover:bg-text-secondary/20 p-1 rounded-full transition-colors">

@@ -7,9 +7,6 @@ export const PRAYER_NAMES = [
   { key: "Isha", label: "Isha", labelAr: "العشاء", icon: "🌃" },
 ];
 
-// Prayers we highlight (Sunrise is informational only, not a salah) 3shan lma negy n7sb el w2t bta3 el next prayer yb2a sa7
-const SALAH_KEYS = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
-
 /** Converts "HH:MM" 24-hour string to total minutes from midnight. */
 function timeToMinutes(timeStr) {
   if (!timeStr) return 0;
@@ -38,12 +35,12 @@ export function getNextPrayer(timings) {
   const now = new Date();
   const nowMins = now.getHours() * 60 + now.getMinutes();
 
-  for (const key of SALAH_KEYS) {
-    const raw = timings[key];
+  for (const prayer of PRAYER_NAMES) {
+    const raw = timings[prayer.key];
     if (!raw) continue;
     const prayerMins = timeToMinutes(cleanTime(raw));
     if (prayerMins > nowMins) {
-      return { key, minutesUntil: prayerMins - nowMins };
+      return { key: prayer.key, minutesUntil: prayerMins - nowMins };
     }
   }
 

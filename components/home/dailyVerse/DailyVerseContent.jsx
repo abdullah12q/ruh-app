@@ -52,12 +52,14 @@ export default function DailyVerseContent({
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
               className={`text-sm sm:text-base text-text-secondary leading-relaxed ${
-                lang === "ar" ? "font-arabic-ui" : "font-inter"
+                lang === "ar" ? "font-arabic-ui" : "font-jakarta"
               }`}
               dir={lang === "ar" ? "rtl" : "ltr"}
               lang={lang === "ar" ? "ar" : "en"}
             >
-              &ldquo; {translationText} {""} &rdquo;
+              {lang === "ar"
+                ? `” ${translationText} “`
+                : `“ ${translationText} ”`}
               {footnotes && lang === "en" && (
                 <motion.div
                   initial={{ opacity: 0, height: 0 }}

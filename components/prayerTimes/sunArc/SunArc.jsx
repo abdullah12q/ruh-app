@@ -177,7 +177,7 @@ export default function SunArc({ prayers, nextPrayerKey, isLoading }) {
 
       {!inRange && (
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <span className="text-xs font-inter text-text-secondary/60 tracking-wide">
+          <span className="text-[9px] sm:text-sm font-inter text-text-secondary/60 tracking-wide">
             Deep night · {nextPrayerKey} next
           </span>
         </div>
