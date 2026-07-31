@@ -7,7 +7,6 @@ export default function SheikhGrid({
   selectedReciter,
   selectedMoshaf,
   handleSelectReciter,
-  setSelectedMoshaf,
   debouncedSearch,
   styleFilter,
 }) {
@@ -31,7 +30,6 @@ export default function SheikhGrid({
                 selectedReciter?.id === reciter.id ? selectedMoshaf : null
               }
               onSelect={handleSelectReciter}
-              onSelectMoshaf={setSelectedMoshaf}
               getMoshafStyle={getMoshafStyle}
               index={i}
             />

@@ -7,7 +7,6 @@ export default function SheikhCard({
   isSelected,
   selectedMoshaf,
   onSelect,
-  onSelectMoshaf,
   getMoshafStyle,
   index,
 }) {
@@ -26,7 +25,6 @@ export default function SheikhCard({
 
   function handleMoshafClick(e, moshaf) {
     e.stopPropagation();
-    onSelectMoshaf(moshaf);
     onSelect(reciter, moshaf);
   }
 
@@ -170,7 +168,7 @@ export default function SheikhCard({
                       <span className="font-arabic-ui">{style.labelAr}</span>
                     </span>
                     <span
-                      className="font-quran text-xs text-left! text-text-secondary truncate flex-1"
+                      className="font-quran text-xs text-left! text-text-secondary truncate max-w-37.5 sm:max-w-full flex-1"
                       dir="rtl"
                       lang="ar"
                     >

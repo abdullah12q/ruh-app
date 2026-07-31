@@ -126,7 +126,7 @@ export default function AyahCard({ totalVerses, ayah, surahId }) {
       transition={{ type: "spring", damping: 100, stiffness: 300 }}
       className={`group relative glass rounded-2xl p-6 sm:p-8 transition-all duration-300 ${
         isActive
-          ? "border-(--accent)/40 shadow-[0_0_24px_rgba(20,184,166,0.12)]"
+          ? "border-accent/40 shadow-[0_0_24px_rgba(20,184,166,0.12)]"
           : "hover:border-(--surface-glass-border) hover:shadow-md"
       }`}
       id={`ayah-${ayah.verse_number}`}

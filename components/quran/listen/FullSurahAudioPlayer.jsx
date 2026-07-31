@@ -8,20 +8,19 @@ import {
   Volume2,
   VolumeX,
   Loader2,
+  X,
 } from "lucide-react";
-import { formatTime } from "@/data/datas/audioData";
+import { formatTime, getMoshafStyle } from "@/data/datas/audioData";
 import useUIStore from "@/lib/store/useUIStore";
 import { ID3Writer } from "browser-id3-writer";
 
 export default function FullSurahAudioPlayer({
-  fromSheikhCardClick = false,
   audioUrl,
   surah,
   reciter,
   moshaf,
-  getMoshafStyle,
 }) {
-  const [isPlaying, setIsPlaying] = useState(fromSheikhCardClick);
+  const [isPlaying, setIsPlaying] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -30,7 +29,7 @@ export default function FullSurahAudioPlayer({
   const audioRef = useRef(null);
   const rafRef = useRef(null);
 
-  const { volume, setVolume } = useUIStore();
+  const { volume, setVolume, clearGlobalPlayer } = useUIStore();
 
   const moshafStyle = getMoshafStyle(moshaf?.moshafType);
   const timelinePct = duration ? (currentTime / duration) * 100 : 0;
@@ -43,15 +42,15 @@ export default function FullSurahAudioPlayer({
     }
   }, [volume]);
 
-  // Reset when URL changes
+  // Reset when URL changes — always auto-play the new track
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setIsPlaying(fromSheikhCardClick);
+    setIsPlaying(true);
     setCurrentTime(0);
     setDuration(0);
     setIsLoading(false);
     if (rafRef.current) cancelAnimationFrame(rafRef.current);
-  }, [audioUrl, fromSheikhCardClick]);
+  }, [audioUrl]);
 
   // rAF loop for smooth timeline updates and playback control
   useEffect(() => {
@@ -126,14 +125,19 @@ export default function FullSurahAudioPlayer({
     setIsDownloading(true);
 
     try {
-      // Fetch the audio file as an ArrayBuffer
-      const response = await fetch(audioUrl);
-      if (!response.ok) throw new Error("Network response was not ok");
+      // Fetch both the audio file and the cover image concurrently as an ArrayBuffer
+      const [audioResponse, coverResponse] = await Promise.all([
+        fetch(audioUrl),
+        fetch("/icon.png"),
+      ]);
 
-      const arrayBuffer = await response.arrayBuffer();
+      if (!audioResponse.ok)
+        throw new Error("Audio network response was not ok");
+
+      const audioArrayBuffer = await audioResponse.arrayBuffer();
 
       // Initialize the ID3 Writer with the audio buffer
-      const writer = new ID3Writer(arrayBuffer);
+      const writer = new ID3Writer(audioArrayBuffer);
 
       // Set the custom metadata tags
       writer
@@ -145,6 +149,20 @@ export default function FullSurahAudioPlayer({
           description: "Downloaded from",
           text: "Ruh App",
         });
+
+      // If the image was fetched successfully, add it as the album cover (APIC frame)
+      if (coverResponse.ok) {
+        const coverArrayBuffer = await coverResponse.arrayBuffer();
+        writer.setFrame("APIC", {
+          type: 3, // 3 means "Cover (front)"
+          data: coverArrayBuffer,
+          description: "Ruh App Cover",
+        });
+      } else {
+        console.warn(
+          "Cover image could not be fetched. Proceeding without it.",
+        );
+      }
 
       // Build the new tags and get the modified Blob
       writer.addTag();
@@ -265,7 +283,7 @@ export default function FullSurahAudioPlayer({
             )}
           </button>
 
-          {/* Right: Volume + Download */}
+          {/* Right: Volume + Download + Close */}
           <div className="flex items-center gap-3 flex-1 justify-end">
             {/* Volume */}
             <div className="flex items-center gap-2">
@@ -304,6 +322,16 @@ export default function FullSurahAudioPlayer({
               <span className="hidden sm:inline">
                 {isDownloading ? "Downloading..." : "Download"}
               </span>
+            </button>
+
+            {/* Close player */}
+            <button
+              onClick={clearGlobalPlayer}
+              aria-label="Close audio player"
+              title="Close player"
+              className="ml-1 size-7 flex items-center justify-center rounded-full text-text-secondary hover:text-red-400 hover:bg-red-400/10 border border-white/10 hover:border-red-400/30 transition-all duration-200 cursor-pointer"
+            >
+              <X size={13} />
             </button>
           </div>
         </div>

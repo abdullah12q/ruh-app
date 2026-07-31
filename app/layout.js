@@ -7,6 +7,7 @@ import {
 } from "./fonts";
 import Providers from "./providers";
 import Navbar from "@/components/layout/Navbar";
+import GlobalAudioPlayer from "@/components/layout/GlobalAudioPlayer";
 import "./globals.css";
 
 const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
@@ -83,6 +84,7 @@ export default function RootLayout({ children }) {
         <Providers>
           <Navbar />
           <main className="flex-1">{children}</main>
+          <GlobalAudioPlayer />
         </Providers>
       </body>
     </html>

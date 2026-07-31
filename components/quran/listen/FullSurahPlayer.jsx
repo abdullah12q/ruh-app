@@ -1,20 +1,23 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import FullSurahAudioPlayer from "./FullSurahAudioPlayer";
+import { motion } from "framer-motion";
 import { useDebounce } from "@/hooks/useDebounce";
 import { getMoshafStyle } from "@/data/datas/audioData";
 import SheikhGrid from "./SheikhGrid";
 import FullSurahToolbar from "./FullSurahToolbar";
+import useUIStore from "@/lib/store/useUIStore";
 
 export default function FullSurahPlayer({ surah, reciters, surahId }) {
-  const [fromSheikhCardClick, setFromSheikhCardClick] = useState(false);
-  const [selectedReciter, setSelectedReciter] = useState(null);
-  const [selectedMoshaf, setSelectedMoshaf] = useState(null);
   const [search, setSearch] = useState("");
   const [styleFilter, setStyleFilter] = useState("all");
+
   const debouncedSearch = useDebounce(search, 300);
+  const { globalPlayer, setGlobalPlayer } = useUIStore();
+
+  const isThisPageActive = globalPlayer?.surah?.id === surah.id;
+  const activeReciter = isThisPageActive ? globalPlayer?.reciter : null;
+  const activeMoshaf = isThisPageActive ? globalPlayer?.moshaf : null;
 
   // Derive unique style filters from available reciters
   const availableStyles = useMemo(() => {
@@ -47,18 +50,23 @@ export default function FullSurahPlayer({ surah, reciters, surahId }) {
   }, [reciters, debouncedSearch, styleFilter]);
 
   function handleSelectReciter(reciter, comingMoshaf = null) {
-    if (selectedReciter?.id === reciter.id) return;
-    setSelectedReciter(reciter);
     // Auto-select the first moshaf (prefer Murattal type=11)
     const preferred =
       reciter.moshaf.find((m) => String(m.moshafType) === "11") ||
       reciter.moshaf[0];
-    setSelectedMoshaf(comingMoshaf ?? preferred);
-    setFromSheikhCardClick(true);
+    const moshaf = comingMoshaf ?? preferred;
+
+    if (activeReciter?.id === reciter.id && activeMoshaf?.id === moshaf.id)
+      return;
+
+    const audioUrl = `${moshaf.server}${String(surahId).padStart(3, "0")}.mp3`;
+
+    // Push to global store so the player survives navigation
+    setGlobalPlayer({ audioUrl, surah, reciter, moshaf });
   }
 
-  const audioUrl = selectedMoshaf
-    ? `${selectedMoshaf.server}${String(surahId).padStart(3, "0")}.mp3`
+  const activeMoshafStyle = activeMoshaf
+    ? getMoshafStyle(activeMoshaf.moshafType)
     : null;
 
   return (
@@ -87,20 +95,20 @@ export default function FullSurahPlayer({ surah, reciters, surahId }) {
           · Surah #{surah.id}
         </p>
 
-        {selectedReciter && (
+        {activeReciter && (
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             className="inline-flex items-center gap-2 mt-4 px-4 py-1.5 max-w-60 sm:max-w-max rounded-full bg-accent/10 border border-accent/30 text-accent text-xs font-semibold font-jakarta"
           >
             <span className="size-1.5 rounded-full bg-accent animate-pulse" />
-            <span className="truncate">{selectedReciter.nameEn}</span>
-            {selectedMoshaf && (
+            <span className="truncate">{activeReciter.nameEn}</span>
+            {activeMoshafStyle && (
               <>
                 <span>·</span>
-                <span>{getMoshafStyle(selectedMoshaf.moshafType).label}</span>
+                <span>{activeMoshafStyle.label}</span>
                 <span className="font-arabic-ui">
-                  {getMoshafStyle(selectedMoshaf.moshafType).labelAr}
+                  {activeMoshafStyle.labelAr}
                 </span>
               </>
             )}
@@ -123,28 +131,13 @@ export default function FullSurahPlayer({ surah, reciters, surahId }) {
         {/* Sheikh Grid */}
         <SheikhGrid
           filteredReciters={filteredReciters}
-          selectedReciter={selectedReciter}
-          selectedMoshaf={selectedMoshaf}
+          selectedReciter={activeReciter}
+          selectedMoshaf={activeMoshaf}
           handleSelectReciter={handleSelectReciter}
-          setSelectedMoshaf={setSelectedMoshaf}
           debouncedSearch={debouncedSearch}
           styleFilter={styleFilter}
         />
       </div>
-
-      {/* Sticky Audio Player */}
-      <AnimatePresence>
-        {selectedReciter && audioUrl && (
-          <FullSurahAudioPlayer
-            fromSheikhCardClick={fromSheikhCardClick}
-            audioUrl={audioUrl}
-            surah={surah}
-            reciter={selectedReciter}
-            moshaf={selectedMoshaf}
-            getMoshafStyle={getMoshafStyle}
-          />
-        )}
-      </AnimatePresence>
     </div>
   );
 }
