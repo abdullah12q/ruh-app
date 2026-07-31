@@ -1,5 +1,3 @@
-"use client";
-
 import { AnimatePresence, motion } from "framer-motion";
 import useUIStore from "@/lib/store/useUIStore";
 import { useAyahTranslation } from "@/lib/queries/quran";
@@ -17,6 +15,7 @@ export default function AyahCard({ totalVerses, ayah, surahId }) {
     setActiveAyah,
     audioPlaying,
     setAudioPlaying,
+    translationLang,
     selectedReciter,
     bookmarkedAyahs,
     toggleBookmarkedAyahs,
@@ -169,11 +168,11 @@ export default function AyahCard({ totalVerses, ayah, surahId }) {
               if (isActive) handleSeek(Number(e.target.value));
             }}
             style={{ "--range-progress": `${isActive ? timelinePct : 0}%` }}
-            className="range-fill flex-1 h-0.75 rounded-full appearance-none cursor-pointer outline-none"
+            className="range-fill flex-1 w-24 sm:w-48 h-0.75 rounded-full appearance-none cursor-pointer outline-none"
             aria-label="Audio timeline progress"
           />
 
-          <span className="w-9 text-[11px] tabular-nums text-text-secondary">
+          <span className="text-[11px] tabular-nums text-text-secondary">
             {formatTime(isActive ? duration : 0)}
           </span>
         </div>
@@ -234,47 +233,49 @@ export default function AyahCard({ totalVerses, ayah, surahId }) {
       <div className="w-full h-px bg-(--surface-glass-border) mb-5" />
 
       {/* Translation */}
-      <div className="min-h-8">
-        {translationLoading ? (
-          // Skeleton shimmer while translation loads
-          <div className="space-y-2 animate-pulse">
-            <div className="h-3 bg-(--surface-glass-border) rounded-full w-full" />
-            <div className="h-3 bg-(--surface-glass-border) rounded-full w-4/5" />
-          </div>
-        ) : translationError ? (
-          <p className="font-inter text-xs text-red-400/60 italic">
-            Translation unavailable.
-          </p>
-        ) : translationText ? (
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={translationText}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className={`text-sm sm:text-base text-text-secondary leading-relaxed ${
-                lang === "ar" ? "font-arabic-ui text-right" : "font-inter"
-              }`}
-              dir={lang === "ar" ? "rtl" : "ltr"}
-              lang={lang === "ar" ? "ar" : "en"}
-            >
-              {translationText}
-              {footnotes && lang === "en" && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="mt-2 p-3 bg-(--surface-glass-border) rounded-lg"
-                >
-                  <FootnoteFormatter text={footnotes} />
-                </motion.div>
-              )}
-            </motion.div>
-          </AnimatePresence>
-        ) : null}
-      </div>
+      {translationLang !== "hide" && (
+        <div className="min-h-8">
+          {translationLoading ? (
+            // Skeleton shimmer while translation loads
+            <div className="space-y-2 animate-pulse">
+              <div className="h-3 bg-(--surface-glass-border) rounded-full w-full" />
+              <div className="h-3 bg-(--surface-glass-border) rounded-full w-4/5" />
+            </div>
+          ) : translationError ? (
+            <p className="font-inter text-xs text-red-400/60 italic">
+              Translation unavailable.
+            </p>
+          ) : translationText ? (
+            <AnimatePresence mode="popLayout">
+              <motion.div
+                key={translationText}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className={`text-sm sm:text-base text-text-secondary leading-relaxed ${
+                  lang === "ar" ? "font-arabic-ui text-right" : "font-inter"
+                }`}
+                dir={lang === "ar" ? "rtl" : "ltr"}
+                lang={lang === "ar" ? "ar" : "en"}
+              >
+                {translationText}
+                {footnotes && lang === "en" && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="mt-2 p-3 bg-(--surface-glass-border) rounded-lg"
+                  >
+                    <FootnoteFormatter text={footnotes} />
+                  </motion.div>
+                )}
+              </motion.div>
+            </AnimatePresence>
+          ) : null}
+        </div>
+      )}
 
       {/* Verse Key */}
       <p className="mt-4 text-xs text-text-secondary/40 font-jakarta">

@@ -11,7 +11,7 @@ export default function DailyVerseHeader({
   onSetTranslationLang,
 }) {
   return (
-    <div className="flex items-center justify-between mb-2 sm:mb-4">
+    <div className="flex flex-col sm:flex-row items-center justify-between gap-y-4 mb-4">
       <ReciterDropdown
         reciters={imamList}
         selectedReciter={selectedReciter}

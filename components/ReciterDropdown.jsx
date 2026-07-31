@@ -60,7 +60,7 @@ export default function ReciterDropdown({
         aria-haspopup="listbox"
         aria-expanded={dropdownOpen}
         aria-label="Select reciter"
-        className="flex items-center gap-2 glass rounded-xl px-3 py-2 text-xs text-text-secondary hover:text-text-primary transition-all w-35 sm:w-auto cursor-pointer"
+        className="flex items-center gap-2 glass rounded-xl px-3 py-2 text-[10px] sm:text-xs text-text-secondary hover:text-text-primary transition-all w-35 sm:w-auto cursor-pointer"
       >
         <Mic size={13} className="text-accent shrink-0" />
         <span className="truncate flex-1 text-left font-medium text-text-primary">
@@ -84,7 +84,7 @@ export default function ReciterDropdown({
             animate="visible"
             exit="exit"
             transition={{ duration: 0.18, ease: "easeOut" }}
-            className={`absolute top-full mt-2 ${!inDailyVerse ? "right-0" : "left-0"} z-50 w-72 rounded-2xl overflow-hidden shadow-2xl bg-background border border-white/10`}
+            className={`absolute top-full mt-2 ${!inDailyVerse ? "right-0" : "left-1/2 translate-x-[-50%] sm:left-0 sm:translate-x-0"} z-50 w-72 rounded-2xl overflow-hidden shadow-2xl bg-background border border-white/10`}
             style={{ backdropFilter: "blur(24px)" }}
             role="listbox"
             aria-label="Reciters list"

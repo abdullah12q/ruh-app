@@ -37,10 +37,10 @@ export default function SurahReadingControls() {
 
   return (
     // ── Controls Bar ──
-    <div className="sticky top-16.75 sm:top-16.25 z-30 backdrop-blur-xl flex flex-wrap items-center justify-between glass rounded-2xl px-5 py-3 gap-3 mb-6">
+    <div className="sticky top-16.75 sm:top-16.25 z-30 backdrop-blur-xl flex flex-wrap items-center justify-between glass rounded-2xl px-5 py-3 gap-y-3 mb-6">
       {/* Font Size */}
       <div className="flex items-center gap-1">
-        <span className="text-xs text-text-secondary font-jakarta mr-2">
+        <span className="text-[9px] sm:text-xs text-text-secondary font-jakarta mr-2">
           Font Size
         </span>
         <button
@@ -49,9 +49,9 @@ export default function SurahReadingControls() {
           }
           disabled={currentIndex === 0}
           aria-label="Decrease font size"
-          className="size-8 rounded-lg glass flex items-center justify-center text-text-secondary hover:text-text-primary disabled:opacity-30 transition-all cursor-pointer"
+          className="size-6 sm:size-8 rounded-lg glass flex items-center justify-center text-text-secondary hover:text-text-primary disabled:opacity-30 transition-all cursor-pointer"
         >
-          <ZoomOut size={14} />
+          <ZoomOut className="size-3 sm:size-4" />
         </button>
         <button
           onClick={() =>
@@ -60,9 +60,9 @@ export default function SurahReadingControls() {
           }
           disabled={currentIndex === FONT_SIZES.length - 1}
           aria-label="Increase font size"
-          className="size-8 rounded-lg glass flex items-center justify-center text-text-secondary hover:text-text-primary disabled:opacity-30 transition-all cursor-pointer"
+          className="size-6 sm:size-8 rounded-lg glass flex items-center justify-center text-text-secondary hover:text-text-primary disabled:opacity-30 transition-all cursor-pointer"
         >
-          <ZoomIn size={14} />
+          <ZoomIn className="size-3 sm:size-4" />
         </button>
       </div>
 

@@ -44,7 +44,7 @@ export default function DailyVerseContent({
             Translation unavailable.
           </p>
         ) : translationText ? (
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="popLayout">
             <motion.div
               key={translationText}
               initial={{ opacity: 0 }}
