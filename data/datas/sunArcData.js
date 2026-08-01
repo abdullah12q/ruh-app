@@ -48,3 +48,19 @@ export function buildArc(prayers) {
 
   return { path, markers, xFor, yFor, tFajr, tSunrise, tMaghrib, tIsha };
 }
+
+// hya hya zy untilNextPrayerHintColor() in prayerTimesData bs bn3ml return raw colors 3shan el SVG needs hex, not classes.
+export function urgencyColor(countdown) {
+  const hoursMatch = countdown?.match(/(\d+)h/);
+  const minsMatch = countdown?.match(/^(\d+)m$/);
+
+  // More than 1 hour away
+  if (hoursMatch) return "var(--accent)";
+
+  // amber-500 Between 31 and 60 minutes away
+  if (minsMatch && parseInt(minsMatch[1]) <= 60 && parseInt(minsMatch[1]) > 30)
+    return "#F59E0B";
+
+  // rose-600 "Now" or 30 minutes or less
+  return "#E11D48";
+}

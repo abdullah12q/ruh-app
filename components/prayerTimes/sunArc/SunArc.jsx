@@ -1,15 +1,26 @@
+import { useEffect, useMemo, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   buildArc,
   HORIZON_Y,
   PAD_X,
+  urgencyColor,
   VB_HEIGHT,
   VB_WIDTH,
 } from "@/data/datas/sunArcData";
-import { useEffect, useMemo, useState } from "react";
 
-export default function SunArc({ prayers, nextPrayerKey, isLoading }) {
+export default function SunArc({
+  prayers,
+  nextPrayerKey,
+  countdown,
+  isLoading,
+}) {
   const [now, setNow] = useState(() => new Date());
   const [reduceMotion, setReduceMotion] = useState(false);
+  const [activeKey, setActiveKey] = useState(null);
+  const [pathLength, setPathLength] = useState(0);
+  const pathRef = useRef(null);
+  const hasAnimatedRef = useRef(false);
 
   useEffect(() => {
     const id = setInterval(() => setNow(new Date()), 30_000);
@@ -24,8 +35,16 @@ export default function SunArc({ prayers, nextPrayerKey, isLoading }) {
     [prayers],
   );
 
+  // Measure once so the draw-in animation only plays on first mount,
+  // not on every re-render caused by the countdown ticking.
+  useEffect(() => {
+    if (!pathRef.current || hasAnimatedRef.current) return;
+    setPathLength(pathRef.current.getTotalLength());
+    hasAnimatedRef.current = true;
+  }, [arc]);
+
   if (isLoading || !arc) {
-    return <div className="w-full h-45 sm:h-55 rounded-2xl skeleton" />;
+    return <div className="w-full aspect-800/220 rounded-2xl skeleton" />;
   }
 
   const nowMinutes = now.getHours() * 60 + now.getMinutes();
@@ -34,12 +53,14 @@ export default function SunArc({ prayers, nextPrayerKey, isLoading }) {
   const curX = arc.xFor(clamped);
   const curY = arc.yFor(clamped);
   const isDay = nowMinutes >= arc.tSunrise && nowMinutes <= arc.tMaghrib;
+  const glow = urgencyColor(countdown);
+  const activeMarker = arc.markers.find((m) => m.key === activeKey);
 
   return (
     <div className="relative w-full">
       <svg
         viewBox={`0 0 ${VB_WIDTH} ${VB_HEIGHT}`}
-        className="w-full h-45 sm:h-55"
+        className="w-full aspect-800/220"
         preserveAspectRatio="xMidYMid meet"
       >
         <defs>
@@ -107,26 +128,58 @@ export default function SunArc({ prayers, nextPrayerKey, isLoading }) {
           fill="url(#arc-fill)"
         />
 
-        {/* the sun path itself */}
+        {/* the sun path — draws itself in once on mount */}
         <path
+          ref={pathRef}
           d={arc.path}
           fill="none"
           stroke="url(#arc-stroke)"
           strokeWidth={2}
           strokeLinecap="round"
+          style={
+            reduceMotion || !pathLength
+              ? undefined
+              : {
+                  strokeDasharray: pathLength,
+                  strokeDashoffset: pathLength,
+                  animation: "sun-arc-draw 1.4s ease-out forwards",
+                }
+          }
         />
+
+        {/* live "now" guide line down to the horizon */}
+        {inRange && (
+          <line
+            x1={curX}
+            y1={curY}
+            x2={curX}
+            y2={HORIZON_Y}
+            stroke={glow}
+            strokeWidth={1}
+            strokeDasharray="2 4"
+            opacity={0.45}
+          />
+        )}
 
         {/* prayer markers */}
         {arc.markers.map((m) => (
-          <g key={m.key}>
+          <g
+            key={m.key}
+            tabIndex={0}
+            role="button"
+            aria-label={`${m.label}, ${m.formattedTime}`}
+            onMouseEnter={() => setActiveKey(m.key)}
+            onMouseLeave={() => setActiveKey((k) => (k === m.key ? null : k))}
+            onFocus={() => setActiveKey(m.key)}
+            onBlur={() => setActiveKey((k) => (k === m.key ? null : k))}
+            onClick={() => setActiveKey((k) => (k === m.key ? null : m.key))}
+            className="cursor-pointer outline-none"
+          >
+            {/* invisible hit area for touch in mobile*/}
+            <circle cx={m.x} cy={m.y} r={14} fill="transparent" />
+
             {m.isNext && (
-              <circle
-                cx={m.x}
-                cy={m.y}
-                r={9}
-                fill="var(--accent)"
-                opacity={0.22}
-              >
+              <circle cx={m.x} cy={m.y} r={9} fill={glow} opacity={0.22}>
                 {!reduceMotion && (
                   <>
                     <animate
@@ -145,13 +198,21 @@ export default function SunArc({ prayers, nextPrayerKey, isLoading }) {
                 )}
               </circle>
             )}
+
             <circle
               cx={m.x}
               cy={m.y}
-              r={m.isNext ? 5 : 3.5}
-              fill={m.isNext ? "var(--accent)" : "var(--surface)"}
-              stroke={m.isNext ? "var(--accent)" : "var(--text-secondary)"}
+              r={m.isNext || activeKey === m.key ? 5 : 3.5}
+              fill={
+                m.isNext
+                  ? glow
+                  : activeKey === m.key
+                    ? "var(--accent)"
+                    : "var(--surface)"
+              }
+              stroke={m.isNext ? glow : "var(--text-secondary)"}
               strokeWidth={1.2}
+              className="transition-all duration-200"
             />
           </g>
         ))}
@@ -175,9 +236,37 @@ export default function SunArc({ prayers, nextPrayerKey, isLoading }) {
         )}
       </svg>
 
+      {/* floating detail tooltip */}
+      <AnimatePresence>
+        {activeMarker && (
+          <motion.div
+            initial={{ opacity: 0, y: 6, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 6, scale: 0.95 }}
+            transition={{ duration: 0.15 }}
+            className="absolute backdrop-blur-xs font-jakarta text-[10px] sm:text-xs glass rounded-xl px-2 sm:px-3 py-1 sm:py-2 text-center pointer-events-none translate-x-[-50%] translate-y-[-125%]"
+            style={{
+              left: `${(activeMarker.x / VB_WIDTH) * 100}%`,
+              top: `${(activeMarker.y / VB_HEIGHT) * 100}%`,
+            }}
+          >
+            <p className="font-bold text-text-primary whitespace-nowrap">
+              {activeMarker.label}{" "}
+              <span className="font-quran text-text-secondary ml-1" dir="rtl">
+                {activeMarker.labelAr}
+              </span>
+            </p>
+            <p className="font-semibold sm:text-[11px] tabular-nums text-accent">
+              {activeMarker.formattedTime}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* deep-night state */}
       {!inRange && (
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <span className="text-[9px] sm:text-sm font-inter text-text-secondary/60 tracking-wide">
+          <span className="glass rounded-full px-3 py-1.5 text-[10px] sm:text-xs font-inter text-text-secondary tracking-wide">
             Deep night · {nextPrayerKey} next
           </span>
         </div>

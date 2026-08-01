@@ -99,11 +99,12 @@ export default function PrayerTimesHero({
       {/* Signature: the sun arc */}
       <motion.div
         variants={fadeUp}
-        className="max-w-3xl mx-auto glass rounded-3xl p-4 sm:p-6 shadow-lg border border-(--surface-glass-border)/50"
+        className="max-w-4xl mx-auto glass rounded-3xl p-4 sm:p-6 shadow-lg border border-(--surface-glass-border)/50"
       >
         <SunArc
           prayers={prayers}
           nextPrayerKey={nextPrayerKey}
+          countdown={countdown}
           isLoading={isLoading}
         />
       </motion.div>
