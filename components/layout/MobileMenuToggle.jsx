@@ -7,7 +7,7 @@ export default function MobileMenuToggle({ mobileOpen, toggleMobileMenu }) {
       onClick={toggleMobileMenu}
       aria-label="Toggle mobile menu"
       aria-expanded={mobileOpen}
-      className="md:hidden size-9 flex items-center justify-center rounded-xl text-text-secondary hover:text-text-primary hover:bg-white/5 transition-all duration-200"
+      className="lg:hidden size-9 flex items-center justify-center rounded-xl text-text-secondary hover:text-text-primary hover:bg-white/5 transition-all duration-200 cursor-pointer"
     >
       <AnimatePresence mode="popLayout" initial={false}>
         {mobileOpen ? (

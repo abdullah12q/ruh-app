@@ -3,12 +3,14 @@ import {
   Clock,
   Star,
   Bookmark,
+  Tv,
   Headphones,
   Heart,
   Music2,
   Play,
   Download,
   Shuffle,
+  Radio,
 } from "lucide-react";
 import { cleanTime, timeToMinutes } from "./prayerTimesData";
 
@@ -18,9 +20,9 @@ export const features = [
     title: "Quran",
     titleAr: "القرآن",
     description:
-      "Read, listen, download, and search the Holy Quran, enhanced by authentic recitations and word-by-word translations.",
+      "Explore the Holy Quran with word-by-word translations, authentic audio recitations, and more.",
     href: "/quran",
-    gradient: "from-teal-500/10 to-cyan-500/10",
+    gradient: "from-[var(--accent)]/10 to-green-700/10",
     iconColor: "text-[var(--accent)]",
   },
   {
@@ -51,6 +53,26 @@ export const features = [
       "Save your favourite Ayahs with a single tap and revisit them anytime — all in one place.",
     gradient: "from-rose-500/10 to-pink-500/10",
     iconColor: "text-rose-400",
+  },
+  {
+    icon: Radio,
+    title: "Islamic Radio",
+    titleAr: "الإذاعة",
+    description:
+      "Listen to 190+ Islamic radio stations live 24/7, featuring Quran recitations, tafsir, and more.",
+    href: "/radio",
+    gradient: "from-blue-500/10 to-cyan-500/10",
+    iconColor: "text-blue-400",
+  },
+  {
+    icon: Tv,
+    title: "Live TV",
+    titleAr: "البث المباشر",
+    description:
+      "Watch Islamic TV channels streaming live 24/7, including Quran Channel and Sunnah Channel.",
+    href: "/live-tv",
+    gradient: "from-fuchsia-500/10 to-purple-500/10",
+    iconColor: "text-fuchsia-400",
   },
 ];
 

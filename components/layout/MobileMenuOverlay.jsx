@@ -29,7 +29,7 @@ export default function MobileMenuOverlay({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setMobileOpen(false)}
-            className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm md:hidden"
+            className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden"
           />
 
           {/* Drawer */}
@@ -39,12 +39,12 @@ export default function MobileMenuOverlay({
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="fixed top-0 right-0 bottom-0 z-50 w-72 glass md:hidden flex flex-col pt-24 pb-8 px-6"
+            className="fixed top-0 right-0 bottom-0 z-50 w-72 glass lg:hidden flex flex-col pt-24 pb-8 px-6"
           >
             {/* Close Button */}
             <button
               onClick={() => setMobileOpen(false)}
-              className="absolute top-8 right-11 flex items-center justify-center rounded-xl text-text-secondary hover:text-text-primary hover:bg-white/5"
+              className="absolute top-8 right-11 size-7 flex items-center justify-center rounded-xl text-text-secondary hover:text-text-primary hover:bg-white/5 cursor-pointer"
             >
               <X size={20} />
             </button>

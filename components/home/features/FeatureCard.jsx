@@ -27,7 +27,7 @@ export default function FeatureCard({ feature }) {
   }, [bookmarksOpen]);
 
   const wrapperClasses =
-    "group block w-full text-left glass rounded-2xl p-6 h-full hover:border-(--accent)/30 transition-all duration-300 relative overflow-hidden cursor-pointer";
+    "group block w-full text-left glass rounded-2xl p-6 hover:border-(--accent)/30 transition-all duration-300 relative overflow-hidden cursor-pointer";
 
   const CardContent = (
     <>
