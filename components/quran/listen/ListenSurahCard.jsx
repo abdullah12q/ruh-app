@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Headphones, Mic } from "lucide-react";

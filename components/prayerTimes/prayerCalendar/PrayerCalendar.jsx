@@ -109,11 +109,7 @@ export default function PrayerCalendar({
                     <motion.div
                       layoutId="calendar-tab"
                       className="absolute inset-0 bg-accent/10 border border-accent/20 rounded-full"
-                      transition={{
-                        type: "spring",
-                        stiffness: 400,
-                        damping: 30,
-                      }}
+                      transition={{ type: "spring", damping: 20 }}
                     />
                   )}
                   <Calendar size={13} className="relative" />

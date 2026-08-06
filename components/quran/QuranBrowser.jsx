@@ -84,7 +84,7 @@ export default function QuranBrowser({ surahs }) {
                   layoutId="active-tab"
                   className="absolute inset-0 bg-accent/10 border border-accent/20 rounded-full"
                   initial={false}
-                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                  transition={{ type: "spring", damping: 20 }}
                 />
               )}
               <BookOpen size={14} className="relative" />
@@ -103,7 +103,7 @@ export default function QuranBrowser({ surahs }) {
                   layoutId="active-tab"
                   className="absolute inset-0 bg-accent/10 border border-accent/20 rounded-full"
                   initial={false}
-                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                  transition={{ type: "spring", damping: 20 }}
                 />
               )}
               <ScrollText size={14} className="relative" />

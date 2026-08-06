@@ -11,6 +11,7 @@ import {
   Wifi,
   WifiOff,
   Mic,
+  BookOpen,
 } from "lucide-react";
 import {
   fadeUp,
@@ -61,8 +62,11 @@ export default function FullSurahSection() {
             <span className="text-violet-400 font-semibold">
               215+ world-class Sheikhs
             </span>{" "}
-            with full Surah recordings, and listen or download — all in one
-            immersive experience.
+            with full Surah recordings, or explore{" "}
+            <span className="text-amber-400 font-semibold">
+              audio Tafsir (تفسير الطبري)
+            </span>{" "}
+            — all in one immersive experience.
           </p>
         </motion.div>
 
@@ -104,9 +108,9 @@ export default function FullSurahSection() {
               className="glass rounded-2xl p-4 border border-violet-400/15"
             >
               <p className="font-jakarta text-xs font-semibold text-text-secondary uppercase tracking-widest mb-3">
-                Two modes, one app
+                Three modes, one app
               </p>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-3 gap-2">
                 <div className="rounded-xl bg-accent/8 border border-accent/20 p-3">
                   <div className="flex items-center gap-1.5 mb-1.5">
                     <Headphones size={12} className="text-accent" />
@@ -127,6 +131,17 @@ export default function FullSurahSection() {
                   </div>
                   <p className="font-inter text-[10px] text-text-secondary leading-relaxed">
                     Full Surah in one continuous recitation
+                  </p>
+                </div>
+                <div className="rounded-xl bg-amber-400/8 border border-amber-400/20 p-3">
+                  <div className="flex items-center gap-1.5 mb-1.5">
+                    <BookOpen size={12} className="text-amber-400" />
+                    <span className="font-jakarta text-[11px] font-bold text-amber-400">
+                      Tafsir Audio
+                    </span>
+                  </div>
+                  <p className="font-inter text-[10px] text-text-secondary leading-relaxed">
+                    Audio tafsir segments by Imam Al-Tabari
                   </p>
                 </div>
               </div>

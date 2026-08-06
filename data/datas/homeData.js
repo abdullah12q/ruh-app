@@ -131,14 +131,14 @@ export const CAPABILITIES = [
     color: "text-violet-400",
     bg: "bg-violet-400/10",
     title: "Offline Download",
-    desc: "Save any Surah recitation to your device and listen anywhere, even without an internet connection.",
+    desc: "Save any Surah recitation or tafsir to your device and listen anywhere, even without an internet connection.",
   },
   {
     icon: Shuffle,
     color: "text-amber-400",
     bg: "bg-amber-400/10",
-    title: "215+ Exclusive Sheikhs",
-    desc: "Access world-renowned reciters unavailable in the verse-by-verse mode — curated full-Surah masters.",
+    title: "215+ Sheikhs & Tafsir Audio",
+    desc: "Access world-renowned reciters unavailable in the verse-by-verse mode and audio Tafsir (تفسير الطبري) — both exclusive to the Listen & Download mode.",
   },
 ];
 

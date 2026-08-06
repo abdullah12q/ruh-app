@@ -95,6 +95,10 @@ export default function FullSurahAudioPlayer({
     };
   }, [isPlaying, audioUrl]);
 
+  const fileNameSuffix = reciter.segmentId
+    ? `الايات ${reciter.segmentId.trim()} Audio Tafsir`
+    : reciter.nameEn.trim();
+
   const handleSeek = useCallback((newTime) => {
     if (audioRef.current) {
       audioRef.current.currentTime = newTime;
@@ -142,7 +146,7 @@ export default function FullSurahAudioPlayer({
       // Set the custom metadata tags
       writer
         .setFrame("TIT2", `Surah ${surah.name_simple}`) // Surah Title
-        .setFrame("TPE1", [reciter.nameEn]) // Artist Name
+        .setFrame("TPE1", [fileNameSuffix]) // Artist Name
         .setFrame("TALB", "Ruh - The Holy Quran") // Album Name
         .setFrame("TCON", ["Quran"]) // Genre
         .setFrame("COMM", {
@@ -174,7 +178,7 @@ export default function FullSurahAudioPlayer({
       // Trigger the download natively
       const link = document.createElement("a");
       link.href = blobUrl;
-      link.download = `${surah.name_simple}-${reciter.nameEn}.mp3`;
+      link.download = `${surah.name_simple} - ${fileNameSuffix}.mp3`;
       document.body.appendChild(link);
       link.click();
 
@@ -188,7 +192,7 @@ export default function FullSurahAudioPlayer({
     } finally {
       setIsDownloading(false);
     }
-  }, [audioUrl, surah, reciter]);
+  }, [audioUrl, surah.name_simple, fileNameSuffix]);
 
   return (
     <motion.div
@@ -310,7 +314,7 @@ export default function FullSurahAudioPlayer({
             {/* Download */}
             <button
               onClick={handleDownload}
-              title={`Download ${surah.name_simple} — ${reciter.nameEn}`}
+              title={`Download ${surah.name_simple} - ${fileNameSuffix}`}
               disabled={isDownloading}
               className="flex items-center gap-1.5 px-3 py-2 rounded-xl glass border border-white/10 text-text-secondary hover:text-accent hover:border-accent/30 transition-all duration-300 text-xs font-semibold font-jakarta cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
             >

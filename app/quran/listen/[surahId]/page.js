@@ -54,6 +54,31 @@ async function getReciters() {
   }
 }
 
+// Fetch tafsir audio segments from mp3quran.net and filter by surahId
+async function getTafsirSegments(surahId) {
+  try {
+    const res = await fetch("https://www.mp3quran.net/api/v3/tafsir", {
+      next: { revalidate: 86400 }, // cache for 24 hours
+    });
+
+    if (!res.ok) throw new Error("Failed to fetch tafsir");
+
+    const data = await res.json();
+    const tafsirName = data.tafasir?.name ?? "";
+    const allSegments = data.tafasir?.soar ?? [];
+
+    // Filter to only segments for this surah
+    const segments = allSegments
+      .filter((s) => s.sura_id === surahId)
+      .map((s) => ({ id: s.id, name: s.name, url: s.url }));
+
+    return { segments, tafsirName };
+  } catch (error) {
+    console.error("Tafsir fetch error:", error);
+    return { segments: [], tafsirName: "" };
+  }
+}
+
 // generateStaticParams: pre-render popular Surahs
 export async function generateStaticParams() {
   const popularSurahs = [1, 2, 18, 36, 55, 56, 67, 78, 112, 114];
@@ -79,7 +104,11 @@ export default async function ListenSurahPage({ params }) {
     notFound();
   }
 
-  const [surah, reciters] = await Promise.all([getSurah(id), getReciters()]);
+  const [surah, reciters, tafsirData] = await Promise.all([
+    getSurah(id),
+    getReciters(),
+    getTafsirSegments(id),
+  ]);
 
   if (!surah) {
     notFound();
@@ -121,6 +150,8 @@ export default async function ListenSurahPage({ params }) {
           surah={surah}
           reciters={availableReciters}
           surahId={id}
+          tafsirSegments={tafsirData.segments}
+          tafsirName={tafsirData.tafsirName}
         />
       </div>
     </div>

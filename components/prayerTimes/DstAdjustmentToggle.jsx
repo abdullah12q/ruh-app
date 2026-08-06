@@ -40,7 +40,7 @@ export default function DstAdjustmentToggle() {
                 <motion.span
                   layoutId="dst-active-pill"
                   className="absolute inset-0 rounded-full bg-accent/20 border border-accent/40 shadow-sm"
-                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  transition={{ type: "spring", damping: 20 }}
                 />
               )}
 

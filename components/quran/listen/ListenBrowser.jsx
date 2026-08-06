@@ -59,7 +59,7 @@ export default function ListenBrowser({ surahs }) {
             Listen & <span className="gradient-text">Download</span>
           </h1>
           <p className="font-inter text-text-secondary text-lg max-w-xl mx-auto mb-10">
-            Choose a Surah · Select your Sheikh · Listen or Download
+            Choose a Surah · Select your Sheikh or Tafsir · Listen or Download
           </p>
 
           {/* Search */}

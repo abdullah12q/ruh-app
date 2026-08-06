@@ -1,14 +1,23 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useDebounce } from "@/hooks/useDebounce";
-import { getMoshafStyle } from "@/data/datas/audioData";
-import SheikhGrid from "./SheikhGrid";
-import FullSurahToolbar from "./FullSurahToolbar";
 import useUIStore from "@/lib/store/useUIStore";
+import { getMoshafStyle } from "@/data/datas/audioData";
+import SheikhGrid from "./Recitation/SheikhGrid";
+import FullSurahToolbar from "./Recitation/FullSurahToolbar";
+import TafsirPanel from "./Tafsir/TafsirPanel";
+import ModeToggle from "./ModeToggle";
 
-export default function FullSurahPlayer({ surah, reciters, surahId }) {
+export default function FullSurahPlayer({
+  surah,
+  reciters,
+  surahId,
+  tafsirSegments = [],
+  tafsirName = "",
+}) {
+  const [activeMode, setActiveMode] = useState("recitation");
   const [search, setSearch] = useState("");
   const [styleFilter, setStyleFilter] = useState("all");
 
@@ -116,28 +125,55 @@ export default function FullSurahPlayer({ surah, reciters, surahId }) {
         )}
       </div>
 
-      {/* Sheikh Selector */}
-      <div>
-        {/* Toolbar */}
-        <FullSurahToolbar
-          filteredReciters={filteredReciters}
-          availableStyles={availableStyles}
-          styleFilter={styleFilter}
-          setStyleFilter={setStyleFilter}
-          search={search}
-          setSearch={setSearch}
-        />
+      {/* Mode Toggle */}
+      <ModeToggle activeMode={activeMode} setActiveMode={setActiveMode} />
 
-        {/* Sheikh Grid */}
-        <SheikhGrid
-          filteredReciters={filteredReciters}
-          selectedReciter={activeReciter}
-          selectedMoshaf={activeMoshaf}
-          handleSelectReciter={handleSelectReciter}
-          debouncedSearch={debouncedSearch}
-          styleFilter={styleFilter}
-        />
-      </div>
+      {/* Mode Content */}
+      <AnimatePresence mode="popLayout">
+        {activeMode === "recitation" ? (
+          <motion.div
+            key="recitation"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.3 }}
+          >
+            {/* Toolbar */}
+            <FullSurahToolbar
+              filteredReciters={filteredReciters}
+              availableStyles={availableStyles}
+              styleFilter={styleFilter}
+              setStyleFilter={setStyleFilter}
+              search={search}
+              setSearch={setSearch}
+            />
+
+            {/* Sheikh Grid */}
+            <SheikhGrid
+              filteredReciters={filteredReciters}
+              selectedReciter={activeReciter}
+              selectedMoshaf={activeMoshaf}
+              handleSelectReciter={handleSelectReciter}
+              debouncedSearch={debouncedSearch}
+              styleFilter={styleFilter}
+            />
+          </motion.div>
+        ) : (
+          <motion.div
+            key="tafsir"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.3 }}
+          >
+            <TafsirPanel
+              segments={tafsirSegments}
+              tafsirName={tafsirName}
+              surah={surah}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

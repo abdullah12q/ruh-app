@@ -56,7 +56,7 @@ export default function SheikhCard({
             layoutId="selected-sheikh-bar"
             className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-accent to-transparent"
             initial={false}
-            transition={{ type: "spring", stiffness: 400, damping: 30 }}
+            transition={{ type: "spring", damping: 20 }}
           />
         )}
 
