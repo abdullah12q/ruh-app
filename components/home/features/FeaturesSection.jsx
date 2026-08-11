@@ -35,7 +35,7 @@ export default function FeaturesSection() {
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: isMobile ? 0.3 : 0.6 }}
+          viewport={{ once: true, amount: isMobile ? 0.175 : 0.6 }}
           className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
         >
           {features.map((feature) => (

@@ -71,6 +71,7 @@ export function getMoshafStyle(moshafType) {
   return {
     label: "Recitation",
     labelAr: "تلاوة",
-    color: "text-text-secondary bg-surface-glass border-surface-glass-border",
+    color:
+      "text-text-secondary bg-(--surface-glass) border-(--surface-glass-border)",
   };
 }

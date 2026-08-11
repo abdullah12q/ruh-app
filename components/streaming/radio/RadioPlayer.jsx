@@ -31,7 +31,7 @@ export default function RadioPlayer({
   if (!station) return null;
 
   return (
-    <div className="relative rounded-3xl overflow-hidden glass border border-accent/20 shadow-[0_0_60px_rgba(13,148,136,0.12)]">
+    <div className="relative rounded-3xl overflow-hidden glass shadow-[0_0_60px_rgba(13,148,136,0.12)]!">
       <audio ref={audioRef} preload="none" />
 
       {/* Top Bar */}

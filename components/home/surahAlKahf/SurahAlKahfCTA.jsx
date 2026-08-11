@@ -14,7 +14,6 @@ export default function SurahAlKahfCTA({ kahfContent }) {
     >
       <Link
         href="/quran/18"
-        id="kahf-read-btn"
         className="group inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-jakarta font-semibold text-white text-sm sm:text-base transition-all duration-300 relative overflow-hidden shadow-lg hover:shadow-amber-500/20 hover:shadow-2xl hover:-translate-y-0.5"
         style={{
           background:

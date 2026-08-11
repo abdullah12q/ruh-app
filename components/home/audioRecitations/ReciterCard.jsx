@@ -15,7 +15,7 @@ export default function ReciterCard({
       variants={cardVariant}
       className={`relative group glass rounded-2xl p-4 transition-all duration-300 ${
         isPlaying
-          ? "border-accent/50 shadow-[0_0_20px_rgba(20,184,166,0.15)]"
+          ? "border-accent/50 shadow-[0_0_20px_rgba(20,184,166,0.15)]!"
           : "hover:border-accent/30"
       }`}
     >

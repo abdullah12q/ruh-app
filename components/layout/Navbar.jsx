@@ -82,6 +82,7 @@ export default function Navbar() {
               alt="Ruh Logo"
               width={35}
               height={35}
+              priority
               className="rounded-full"
             />
             <span className="text-xl font-extrabold font-jakarta text-text-primary tracking-tight group-hover:text-accent transition-colors duration-200">

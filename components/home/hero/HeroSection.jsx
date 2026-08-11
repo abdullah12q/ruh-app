@@ -4,39 +4,98 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
 import { BookOpen, ChevronRight, Sparkles } from "lucide-react";
+import { useMediaQuery } from "@custom-react-hooks/use-media-query";
 
 export default function HeroSection() {
-  const heroTextRef = useRef(null);
+  const heroContainerRef = useRef(null);
+  const videoContainerRef = useRef(null);
+  const videoRef = useRef(null);
+  const videoAnimRef = useRef(null);
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
+  useGSAP(
+    () => {
       const tl = gsap.timeline({ delay: 0.5 });
-      tl.from(".hero-badge", {
-        opacity: 0,
-        y: -16,
-        duration: 0.5,
-        ease: "power3.out",
-      })
-        .from(
+
+      tl.fromTo(
+        ".hero-badge",
+        { opacity: 0, y: -16 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+      )
+        .fromTo(
           ".hero-heading",
-          { opacity: 0, y: 32, duration: 0.8, ease: "power4.out" },
+          { opacity: 0, y: 32 },
+          { opacity: 1, y: 0, duration: 0.8, ease: "power4.out" },
           "-=0.2",
         )
-        .from(
+        .fromTo(
           ".hero-subtext",
-          { opacity: 0, y: 20, duration: 0.6, ease: "power3.out" },
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
           "-=0.4",
         )
-        .from(
+        .fromTo(
           ".hero-cta",
-          { opacity: 0, y: 16, scale: 0.96, duration: 0.5, ease: "power3.out" },
+          { opacity: 0, y: 16, scale: 0.96 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "power3.out" },
+          "-=0.3",
+        )
+        .fromTo(
+          ".hero-video-container",
+          { opacity: 0, scale: 0.95, y: 24 },
+          { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: "power3.out" },
           "-=0.3",
         );
-    }, heroTextRef);
 
-    return () => ctx.revert();
-  }, []);
+      videoAnimRef.current = gsap.fromTo(
+        videoContainerRef.current,
+        { opacity: 0, scale: 0.95, y: 24 },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          paused: true,
+        },
+      );
+    },
+    { scope: heroContainerRef },
+  );
+
+  // Trigger the video-container entrance animation and play when it's 70% visible
+  useEffect(() => {
+    if (!videoContainerRef.current || !videoRef.current) return;
+
+    if (!isMobile) {
+      // On desktop, play immediately
+      videoRef.current
+        .play()
+        .catch((err) => console.log("Video autoplay failed:", err));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            videoAnimRef.current?.play();
+            videoRef.current
+              ?.play()
+              .catch((err) => console.log("Video play failed:", err));
+            observer.disconnect(); // it only should animate and play once
+          }
+        });
+      },
+      { threshold: 0.7 }, // Triggers when at least 70% of the video is visible
+    );
+
+    observer.observe(videoContainerRef.current);
+
+    return () => observer.disconnect();
+  }, [isMobile]);
 
   function scrollToFeatures() {
     const featuresSection = document.getElementById("features");
@@ -57,20 +116,20 @@ export default function HeroSection() {
         <div className="absolute top-3/4 left-1/3 size-48 bg-accent opacity-[0.08] rounded-full blur-2xl" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center w-full py-16">
+      <div
+        ref={heroContainerRef}
+        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center w-full py-16"
+      >
         {/* Left — Text Content */}
-        <div
-          ref={heroTextRef}
-          className="flex flex-col items-center text-center md:items-start md:text-start"
-        >
+        <div className="flex flex-col items-center text-center md:items-start md:text-start">
           {/* Badge */}
-          <div className="hero-badge inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-accent text-xs font-semibold font-jakarta tracking-widest uppercase mb-6 border border-accent/20">
+          <div className="hero-badge opacity-0 inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-accent text-xs font-semibold font-jakarta tracking-widest uppercase mb-6 border border-accent/20">
             <Sparkles size={11} />
             Next-Generation Islamic Platform
           </div>
 
           {/* Main Heading */}
-          <h1 className="hero-heading font-jakarta font-extrabold text-5xl sm:text-6xl xl:text-7xl leading-[1.05] tracking-tight mb-3">
+          <h1 className="hero-heading opacity-0 font-jakarta font-extrabold text-5xl sm:text-6xl xl:text-7xl leading-[1.05] tracking-tight mb-3">
             <span className="text-text-primary">Feed your</span>{" "}
             <span className="gradient-text">soul,</span>
             <br />
@@ -79,7 +138,7 @@ export default function HeroSection() {
 
           {/* Arabic Wordmark */}
           <p
-            className="hero-heading font-arabic-ui text-2xl sm:text-3xl text-text-secondary mb-4 tracking-wide"
+            className="hero-heading opacity-0 font-arabic-ui text-2xl sm:text-3xl text-text-secondary mb-4 tracking-wide"
             dir="rtl"
             lang="ar"
           >
@@ -87,14 +146,14 @@ export default function HeroSection() {
           </p>
 
           {/* Subtext */}
-          <p className="hero-subtext font-inter text-base sm:text-lg text-text-secondary max-w-lg leading-relaxed mb-10">
+          <p className="hero-subtext opacity-0 font-inter text-base sm:text-lg text-text-secondary max-w-lg leading-relaxed mb-10">
             An immersive experience for reading and listening to the Quran,
             tracking prayer times, and exploring Hadith — crafted with
             intentional minimalism to help you find deep focus and tranquility.
           </p>
 
           {/* CTA Buttons */}
-          <div className="hero-cta flex gap-4">
+          <div className="hero-cta opacity-0 flex gap-4">
             <Link
               href="/quran"
               className="flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-accent text-white font-semibold font-jakarta text-sm hover:opacity-90 hover:shadow-[0_0_30px_rgba(20,184,166,0.4)] active:scale-95 transition-all duration-200"
@@ -104,7 +163,7 @@ export default function HeroSection() {
             </Link>
             <button
               onClick={scrollToFeatures}
-              className="flex items-center gap-2 px-6 py-3.5 rounded-2xl glass text-text-primary font-semibold font-jakarta text-sm hover:border-accent/30 active:scale-95 transition-all duration-200 cursor-pointer"
+              className="flex items-center gap-2 px-6 py-3.5 rounded-2xl glass text-text-primary font-semibold font-jakarta text-sm hover:border-accent/30! hover:scale-101 active:scale-95 transition-all duration-400 cursor-pointer"
             >
               Learn More
               <ChevronRight size={16} />
@@ -113,9 +172,12 @@ export default function HeroSection() {
         </div>
 
         {/* Right — Rُuh Logo Video */}
-        <div className="relative w-full lg:pl-8 max-w-lg mx-auto lg:mx-0">
+        <div
+          ref={videoContainerRef}
+          className="hero-video-container opacity-0 relative w-full lg:pl-8 max-w-lg mx-auto lg:mx-0"
+        >
           <video
-            autoPlay
+            ref={videoRef}
             muted
             playsInline
             className="size-full object-cover rounded-3xl"

@@ -30,7 +30,7 @@ export default function QuranBrowser({ surahs }) {
   const verseHint =
     activeTab === "verses" && debouncedQuery.trim().length > 2
       ? isSearchingVerses
-        ? "Searching…"
+        ? "Searching..."
         : `${verseResults.length} ${verseResults.length === 1 ? "match" : "matches"}`
       : undefined;
 
@@ -70,7 +70,7 @@ export default function QuranBrowser({ surahs }) {
           />
 
           {/* Segmented Tab Control */}
-          <div className="inline-flex mt-6 p-1 rounded-full glass border border-white/10 dark:border-white/5">
+          <div className="inline-flex mt-6 p-1 rounded-full glass">
             <button
               onClick={() => setActiveTab("surahs")}
               className={`relative flex items-center gap-2 px-5 py-2 rounded-full font-medium text-sm transition-colors cursor-pointer ${

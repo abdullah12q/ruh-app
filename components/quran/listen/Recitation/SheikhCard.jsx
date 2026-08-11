@@ -45,8 +45,8 @@ export default function SheikhCard({
         onClick={handleClick}
         className={`group relative overflow-hidden glass rounded-2xl p-4 text-left transition-all duration-300 cursor-pointer ${
           isSelected
-            ? "border-accent/50 shadow-[0_0_24px_rgba(20,184,166,0.15)]"
-            : "hover:border-accent/25 hover:shadow-[0_0_16px_rgba(20,184,166,0.08)]"
+            ? "shadow-[0_0_24px_rgba(20,184,166,0.15)]!"
+            : "hover:shadow-[0_0_16px_rgba(20,184,166,0.08)]!"
         }`}
         aria-pressed={isSelected}
       >

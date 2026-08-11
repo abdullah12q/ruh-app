@@ -94,7 +94,7 @@ export default function PrayerCalendar({
           {/* Calendar header: view toggle + navigation */}
           <div className="flex flex-wrap items-center justify-center sm:justify-between gap-4">
             {/* View toggle */}
-            <div className="inline-flex p-1 rounded-full glass border border-white/10">
+            <div className="inline-flex p-1 rounded-full glass">
               {["monthly", "annual"].map((v) => (
                 <button
                   key={v}

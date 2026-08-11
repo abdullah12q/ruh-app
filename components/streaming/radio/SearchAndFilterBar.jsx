@@ -16,12 +16,11 @@ export default function SearchAndFilterBar({
           className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none"
         />
         <input
-          id="radio-search-input"
           type="text"
-          placeholder="Search stations, reciters, countries…"
+          placeholder="Search stations, reciters, countries..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full pl-10 pr-10 py-3 rounded-xl glass border border-white/8 text-text-primary placeholder:text-text-secondary text-sm font-inter focus:outline-none focus:border-accent/40 focus:shadow-[0_0_0_3px_var(--accent-glow)] transition-all duration-200"
+          className="w-full px-10 py-3 rounded-xl glass text-text-primary placeholder:text-text-secondary text-sm font-inter focus:outline-none transition-all duration-200"
         />
         {searchQuery && (
           <button

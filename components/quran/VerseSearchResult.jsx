@@ -41,8 +41,7 @@ function getHighlightSegments(text, query) {
   const start = map[idx];
   const lastCharIdx = idx + normQuery.length - 1;
 
-  // THE FIX: Instead of blindly adding +1, we look at where the NEXT base letter
-  // starts in the original text. If there isn't a next letter, we go to the end of the string.
+  // we look at where the NEXT base letter starts in the original text. If there isn't a next letter, we go to the end of the string.
   // This ensures ALL trailing diacritics are safely included inside the highlight span.
   const end = lastCharIdx + 1 < map.length ? map[lastCharIdx + 1] : text.length;
 
@@ -77,7 +76,7 @@ export default function VerseSearchResult({ result, query, index = 0 }) {
     >
       <Link
         href={`/quran/${surahId}#ayah-${ayahId}`}
-        className="group relative block overflow-hidden rounded-3xl p-6 sm:p-7 glass border border-white/5 bg-background/40 transition-all duration-500 hover:border-accent/30 hover:shadow-[0_0_36px_-8px_var(--accent-glow)]"
+        className="group relative block overflow-hidden rounded-3xl p-6 sm:p-7 glass bg-background/40! transition-all duration-500 hover:shadow-[0_0_36px_-8px_var(--accent-glow)]!"
       >
         {/* Ambient corner glow, only visible on hover */}
         <div className="pointer-events-none absolute -top-16 -right-16 size-40 rounded-full bg-accent/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />

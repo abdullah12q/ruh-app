@@ -22,14 +22,14 @@ export default function ThemeToggle() {
         aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
         className="size-9 flex items-center justify-center rounded-xl text-text-secondary hover:text-accent hover:bg-white/5 transition-all duration-200 cursor-pointer"
       >
-        <AnimatePresence mode="wait" initial={false}>
+        <AnimatePresence mode="popLayout" initial={false}>
           {isDark ? (
             <motion.span
               key="sun"
               initial={{ rotate: -90, opacity: 0 }}
               animate={{ rotate: 0, opacity: 1 }}
               exit={{ rotate: 90, opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.4 }}
             >
               <Sun size={18} />
             </motion.span>
@@ -39,7 +39,7 @@ export default function ThemeToggle() {
               initial={{ rotate: 90, opacity: 0 }}
               animate={{ rotate: 0, opacity: 1 }}
               exit={{ rotate: -90, opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.4 }}
             >
               <Moon size={18} />
             </motion.span>

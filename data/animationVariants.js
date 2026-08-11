@@ -84,3 +84,34 @@ export const itemVariants = {
     transition: { duration: 0.2, ease: "easeIn" },
   },
 };
+
+export const backdropVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.22 } },
+  exit: { opacity: 0, transition: { duration: 0.18 } },
+};
+
+export const panelVariants = {
+  hidden: { opacity: 0, y: 32, scale: 0.96 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { type: "spring", stiffness: 380, damping: 32, mass: 0.8 },
+  },
+  exit: {
+    opacity: 0,
+    y: 24,
+    scale: 0.95,
+    transition: { duration: 0.18, ease: "easeIn" },
+  },
+};
+
+export const reflectionVariants = {
+  hidden: { opacity: 0, x: -12 },
+  visible: (i) => ({
+    opacity: 1,
+    x: 0,
+    transition: { delay: i * 0.06, duration: 0.28, ease: "easeOut" },
+  }),
+};

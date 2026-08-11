@@ -20,13 +20,7 @@ export default function SearchInput({
         }`}
       />
 
-      <div
-        className={`relative flex items-center glass rounded-full overflow-hidden border transition-all duration-300 bg-background/50 ${
-          isFocused
-            ? "border-accent/50 shadow-[0_0_0_1px_var(--accent-glow),0_8px_32px_-4px_var(--accent-glow)]"
-            : "border-white/10 dark:border-white/5"
-        }`}
-      >
+      <div className="relative flex items-center glass rounded-full overflow-hidden border transition-all duration-300 bg-background/50">
         <div
           className={`relative transition-colors duration-300 ${
             isFocused ? "text-accent/65" : "text-text-secondary/60"

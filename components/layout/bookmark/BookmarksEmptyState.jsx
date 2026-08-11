@@ -12,7 +12,7 @@ export default function BookmarksEmptyState({ onClose }) {
     >
       {/* Bookmark Icon */}
       <div className="relative mb-6">
-        <div className="size-20 rounded-3xl glass border border-accent/15 flex items-center justify-center">
+        <div className="size-20 rounded-3xl glass border-accent/15! flex items-center justify-center">
           <Bookmark size={28} className="text-accent/50" strokeWidth={1.5} />
         </div>
         {/* Glow effect */}

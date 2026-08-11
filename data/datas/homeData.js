@@ -11,6 +11,7 @@ import {
   Download,
   Shuffle,
   Radio,
+  UsersRound,
 } from "lucide-react";
 import { cleanTime, timeToMinutes } from "./prayerTimesData";
 
@@ -53,6 +54,16 @@ export const features = [
       "Save your favourite Ayahs with a single tap and revisit them anytime — all in one place.",
     gradient: "from-rose-500/10 to-pink-500/10",
     iconColor: "text-rose-400",
+  },
+  {
+    icon: UsersRound,
+    title: "Halaqah",
+    titleAr: "حلقة",
+    description:
+      "Read together in private Halaqahs. Stay motivated with a weekly Friday progress recap.",
+    href: "/halaqah",
+    gradient: "from-emerald-500/10 to-teal-500/10",
+    iconColor: "text-emerald-400",
   },
   {
     icon: Radio,

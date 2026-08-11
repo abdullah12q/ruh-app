@@ -22,7 +22,6 @@ export default function PrayerTimesSection() {
 
   return (
     <section
-      id="prayer-times"
       aria-label="Daily prayer times"
       className="py-20 px-4 sm:px-6 lg:px-8"
     >

@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function AnimatedRadioIcon({ isPlaying, hasError }) {
   return (
     <AnimatePresence mode="popLayout">
-      <div className="relative shrink-0 size-16 rounded-2xl glass border border-accent/20 flex items-center justify-center overflow-hidden">
+      <div className="relative shrink-0 size-16 rounded-2xl glass border-accent/20! flex items-center justify-center overflow-hidden">
         {isPlaying && !hasError ? (
           <motion.div
             key="eq"

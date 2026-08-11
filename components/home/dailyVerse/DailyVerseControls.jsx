@@ -59,7 +59,6 @@ export default function DailyVerseControls({
       <div className="grid grid-cols-3 items-center">
         {/* Left: secondary action */}
         <motion.button
-          id="daily-verse-refresh"
           whileHover={{ scale: 1.06 }}
           whileTap={{ scale: 0.96 }}
           onClick={onGetNewVerse}
@@ -76,7 +75,6 @@ export default function DailyVerseControls({
 
         {/* Center: primary play/pause, the visual anchor of the row */}
         <motion.button
-          id="daily-verse-play-pause"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={onPlayPauseToggle}

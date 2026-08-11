@@ -51,7 +51,7 @@ export default function PrayerTimesHero({
           {/* Soft outer ring glow on hover */}
           <div className="absolute -inset-0.5 bg-accent/20 rounded-3xl blur-md opacity-40 group-hover:opacity-80 transition duration-700" />
 
-          <div className="relative glass rounded-3xl bg-surface-glass/40 backdrop-blur-xl overflow-hidden shadow-xl px-6 py-5 sm:px-8 sm:py-6">
+          <div className="relative glass rounded-3xl bg-(--surface-glass)/40! backdrop-blur-xl overflow-hidden shadow-xl px-6 py-5 sm:px-8 sm:py-6">
             {/* Ambient corner glows */}
             <div className="pointer-events-none absolute -top-16 -left-16 size-40 rounded-full bg-accent/20 blur-3xl" />
             <div className="pointer-events-none absolute -bottom-16 -right-16 size-40 rounded-full bg-accent/20 blur-3xl" />

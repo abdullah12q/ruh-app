@@ -39,7 +39,7 @@ export function RecentReadCard({ read, index }) {
           setSelectedReciter(read.reciter);
         }}
       >
-        <div className="group relative overflow-hidden glass rounded-2xl p-4 sm:p-5 flex items-center justify-between border border-(--surface-glass-border) hover:border-accent/40 shadow-(--shadow-card) hover:shadow-[0_0_32px_rgba(20,184,166,0.16)] transition-all duration-500 ease-out cursor-pointer hover:-translate-y-0.5">
+        <div className="group relative overflow-hidden glass rounded-2xl p-4 sm:p-5 flex items-center justify-between shadow-(--shadow-card) hover:shadow-[0_0_32px_rgba(20,184,166,0.16)]! transition-all duration-500 ease-out cursor-pointer hover:-translate-y-0.5">
           {/* Surah arabic name */}
           {surah?.name_arabic && (
             <span

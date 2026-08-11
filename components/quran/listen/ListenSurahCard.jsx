@@ -20,7 +20,7 @@ export default function ListenSurahCard({ surah, index }) {
     >
       <Link
         href={`/quran/listen/${surah.id}`}
-        className="group relative overflow-hidden glass rounded-2xl p-5 flex items-center gap-4 hover:border-accent/30 transition-all duration-300 hover:shadow-[0_0_28px_rgba(20,184,166,0.1)]"
+        className="group relative overflow-hidden glass rounded-2xl p-5 flex items-center gap-4 transition-all duration-300 hover:shadow-[0_0_28px_rgba(20,184,166,0.1)]!"
       >
         {/* Top sweep */}
         <span className="absolute top-0 left-0 h-px bg-linear-to-r from-transparent via-accent to-transparent w-0 group-hover:w-full transition-all duration-700 ease-out" />

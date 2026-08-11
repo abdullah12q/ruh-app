@@ -74,7 +74,6 @@ export default function InfoAndControls({
               ? "bg-white/5 text-text-secondary cursor-not-allowed"
               : "bg-accent text-white shadow-[0_0_20px_var(--accent-glow)] hover:scale-110 active:scale-95"
           }`}
-          id="radio-play-pause-btn"
         >
           {isLoading ? (
             <div className="size-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />
@@ -93,12 +92,10 @@ export default function InfoAndControls({
           <button
             onClick={() => setRadioVolume(radioVolume > 0 ? 0 : 1)}
             className="p-2 rounded-lg hover:bg-white/10 text-text-secondary hover:text-text-primary transition-colors cursor-pointer"
-            id="radio-mute-btn"
           >
             <VolumeIcon size={16} />
           </button>
           <input
-            id="radio-volume-slider"
             type="range"
             min="0"
             max="1"

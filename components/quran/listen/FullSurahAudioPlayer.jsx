@@ -316,7 +316,7 @@ export default function FullSurahAudioPlayer({
               onClick={handleDownload}
               title={`Download ${surah.name_simple} - ${fileNameSuffix}`}
               disabled={isDownloading}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-xl glass border border-white/10 text-text-secondary hover:text-accent hover:border-accent/30 transition-all duration-300 text-xs font-semibold font-jakarta cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl glass text-text-secondary hover:text-accent hover:border-accent/30! transition-all duration-300 text-xs font-semibold font-jakarta cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
             >
               {isDownloading ? (
                 <Loader2 size={13} className="animate-spin" />

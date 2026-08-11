@@ -40,7 +40,6 @@ export default function SurahAlKahfSection() {
       {shouldShow && (
         <motion.section
           key="kahf-section"
-          id="surah-al-kahf-reminder"
           aria-label="Surah Al-Kahf Friday reminder"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}

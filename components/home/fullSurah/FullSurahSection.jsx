@@ -169,7 +169,7 @@ export default function FullSurahSection() {
             className="relative"
           >
             {/* Glowing card container */}
-            <div className="glass rounded-3xl p-6 border border-violet-400/20 shadow-[0_0_60px_rgba(139,92,246,0.08)]">
+            <div className="glass rounded-3xl p-6 border border-violet-400/20! shadow-[0_0_60px_rgba(139,92,246,0.08)]!">
               {/* Card header */}
               <div className="flex items-center justify-between mb-5">
                 <div>
