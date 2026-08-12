@@ -122,9 +122,7 @@ export default function CreateJoinModal({ mode, onClose }) {
               copied={copied}
               onCopy={copyCode}
               onEnter={() => {
-                router.push(
-                  `/halaqah/${createdHalaqah.name}?halaqahId=${createdHalaqah.id}`,
-                );
+                router.push(`/halaqah/${createdHalaqah.id}`);
               }}
             />
           ) : (

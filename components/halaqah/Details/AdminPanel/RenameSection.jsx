@@ -2,15 +2,12 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Pencil, Check, Loader2 } from "lucide-react";
 import { useRenameHalaqah } from "@/lib/queries/halaqah";
-import { useRouter } from "next/navigation";
 
 export default function RenameSection({ halaqah, halaqahId }) {
   const [renameValue, setRenameValue] = useState(halaqah.name);
   const [renameError, setRenameError] = useState(null);
   const [renameSuccess, setRenameSuccess] = useState(false);
   const inputRef = useRef(null);
-
-  const router = useRouter();
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -33,12 +30,6 @@ export default function RenameSection({ halaqah, halaqahId }) {
         if (result?.success) {
           setRenameSuccess(true);
           setTimeout(() => setRenameSuccess(false), 2500);
-
-          // encodeURIComponent ensures spaces or special chars in the name don't break the URL.
-          // lw m3mltsh keda, el page htgbly not found page 3shan el url halaqah name et8yr w mb2ash mwgod
-          router.replace(
-            `/halaqah/${encodeURIComponent(trimmed)}?halaqahId=${halaqahId}`,
-          );
         } else {
           setRenameError(result?.error || "Failed to rename.");
         }

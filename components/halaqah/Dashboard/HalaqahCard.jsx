@@ -46,7 +46,7 @@ export default function HalaqahCard({ halaqah, index }) {
       }}
     >
       <Link
-        href={`/halaqah/${halaqah.name}?halaqahId=${halaqah.id}`}
+        href={`/halaqah/${halaqah.id}`}
         className="block group relative overflow-hidden glass rounded-2xl p-6 hover:shadow-[0_0_24px_rgba(20,184,166,0.1)]!"
       >
         {/* Top sweep line on hover */}
