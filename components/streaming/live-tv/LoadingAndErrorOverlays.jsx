@@ -25,7 +25,7 @@ export default function LoadingAndErrorOverlays({
               <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-accent animate-spin" />
             </div>
             <p className="text-text-secondary text-sm font-inter">
-              Connecting to live stream…
+              Connecting to live stream...
             </p>
             <p
               className="font-arabic-ui text-accent/70 text-sm mt-1"

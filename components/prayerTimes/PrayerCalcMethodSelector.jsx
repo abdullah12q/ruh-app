@@ -20,7 +20,7 @@ export default function PrayerCalcMethodSelector() {
       >
         <Settings2 size={15} className="text-accent" />
         <span>
-          {methodsLoading ? "Loading…" : (current?.name ?? "Select method")}
+          {methodsLoading ? "Loading..." : (current?.name ?? "Select method")}
         </span>
         <ChevronDown
           size={12}
@@ -50,7 +50,7 @@ export default function PrayerCalcMethodSelector() {
             >
               {methodsLoading ? (
                 <div className="px-3 py-2 text-xs text-text-secondary font-inter animate-pulse">
-                  Loading methods…
+                  Loading methods...
                 </div>
               ) : (
                 methods?.map((method) => (

@@ -95,7 +95,7 @@ export default function PrayerTimesPageClient() {
                 <div className="text-center space-y-3">
                   <div className="size-10 skeleton rounded-xl mx-auto" />
                   <p className="text-sm text-text-secondary font-inter animate-pulse">
-                    Loading calendar…
+                    Loading calendar...
                   </p>
                 </div>
               </div>

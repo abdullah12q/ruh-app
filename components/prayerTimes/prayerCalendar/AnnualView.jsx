@@ -24,7 +24,7 @@ export default function AnnualView({ coords, method, year }) {
       </p>
     );
 
-  // annualData is keyed by month number ("1"…"12")
+  // annualData is keyed by month number ("1"..."12")
   const months = annualData ? Object.entries(annualData) : [];
 
   return (

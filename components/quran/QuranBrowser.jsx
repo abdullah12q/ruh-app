@@ -1,14 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { BookOpen, ScrollText, Headphones } from "lucide-react";
-import Link from "next/link";
+import { BookOpen, Headphones, ScrollText } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import SurahCard from "./SurahCard";
 import SearchInput from "./SearchInput";
 import VerseSearchResult from "./VerseSearchResult";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useQuranSearch } from "@/lib/queries/quran";
+import Link from "next/link";
 
 export default function QuranBrowser({ surahs }) {
   const [query, setQuery] = useState("");
@@ -35,8 +35,24 @@ export default function QuranBrowser({ surahs }) {
       : undefined;
 
   return (
-    <div className="min-h-screen pt-28 pb-16 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen pt-28 pb-16 px-4 sm:px-6 lg:px-8 animate-fade-up">
       <div className="max-w-6xl mx-auto">
+        {/* Breadcrumb */}
+        <nav className="flex items-center gap-2 text-sm text-text-secondary mb-8 font-jakarta">
+          <span className="text-text-primary flex items-center gap-1">
+            <BookOpen size={13} />
+            Quran
+          </span>
+          <span className="opacity-40">/</span>
+          <Link
+            href="/quran/listen"
+            className="hover:text-accent transition-colors flex items-center gap-1"
+          >
+            <Headphones size={13} />
+            Listen & Download
+          </Link>
+        </nav>
+
         {/* Page Header */}
         <div className="relative text-center mb-8">
           {/* light background keda mktob feha quran bel 3rby */}
@@ -109,92 +125,82 @@ export default function QuranBrowser({ surahs }) {
               <ScrollText size={14} className="relative" />
               <span className="relative">Ayahs</span>
             </button>
-            {/* Listen & Download separate page, uses Link */}
-            <Link
-              href="/quran/listen"
-              className="relative flex items-center gap-2 px-5 py-2 rounded-full font-medium text-sm text-text-secondary hover:text-accent transition-colors"
-            >
-              <Headphones size={14} />
-              <span>Listen</span>
-            </Link>
           </div>
         </div>
 
         {/* Content Area */}
-        <div className="mt-8">
-          <AnimatePresence mode="wait">
-            {activeTab === "surahs" && (
-              <motion.div
-                key="surahs"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-              >
-                {surahs.length === 0 ? (
-                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                    {Array.from({ length: 18 }).map((_, i) => (
-                      <div
-                        key={i}
-                        className="glass rounded-2xl p-5 flex items-center gap-4"
-                      >
-                        <div className="size-11 skeleton rounded-xl shrink-0" />
-                        <div className="flex-1 space-y-2">
-                          <div className="h-3 skeleton rounded w-3/4" />
-                          <div className="h-2 skeleton rounded w-1/2" />
-                        </div>
+        <AnimatePresence mode="wait">
+          {activeTab === "surahs" && (
+            <motion.div
+              key="surahs"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+            >
+              {surahs.length === 0 ? (
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {Array.from({ length: 18 }).map((_, i) => (
+                    <div
+                      key={i}
+                      className="glass rounded-2xl p-5 flex items-center gap-4"
+                    >
+                      <div className="size-11 skeleton rounded-xl shrink-0" />
+                      <div className="flex-1 space-y-2">
+                        <div className="h-3 skeleton rounded w-3/4" />
+                        <div className="h-2 skeleton rounded w-1/2" />
                       </div>
-                    ))}
-                  </div>
-                ) : filteredSurahs.length > 0 ? (
-                  <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-3">
-                    {filteredSurahs.map((surah) => (
-                      <SurahCard key={surah.id} surah={surah} />
-                    ))}
-                  </div>
-                ) : (
-                  <div className="text-center py-20">
-                    <p className="text-text-secondary">
-                      No surahs found for &quot;{query}&quot;
-                    </p>
-                  </div>
-                )}
-              </motion.div>
-            )}
+                    </div>
+                  ))}
+                </div>
+              ) : filteredSurahs.length > 0 ? (
+                <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-3">
+                  {filteredSurahs.map((surah, i) => (
+                    <SurahCard key={surah.id} surah={surah} index={i} />
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center pt-20">
+                  <p className="text-text-secondary">
+                    No surahs found for &quot;{query}&quot;
+                  </p>
+                </div>
+              )}
+            </motion.div>
+          )}
 
-            {activeTab === "verses" && (
-              <motion.div
-                key="verses"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-                className="max-w-4xl mx-auto"
-              >
-                {debouncedQuery.trim().length <= 2 ? (
-                  <div className="text-center py-20 text-text-secondary">
-                    <p>Type at least 3 characters to search verses</p>
-                  </div>
-                ) : verseResults.length > 0 ? (
-                  <div className="space-y-4">
-                    {verseResults.map((result, i) => (
-                      <VerseSearchResult
-                        key={i}
-                        result={result}
-                        query={debouncedQuery}
-                        index={i}
-                      />
-                    ))}
-                  </div>
-                ) : !isSearchingVerses ? (
-                  <div className="text-center py-20 text-text-secondary">
-                    <p>No verses found for &quot;{debouncedQuery}&quot;</p>
-                  </div>
-                ) : null}
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+          {activeTab === "verses" && (
+            <motion.div
+              key="verses"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="max-w-4xl mx-auto"
+            >
+              {debouncedQuery.trim().length <= 2 ? (
+                <div className="text-center pt-20 text-text-secondary">
+                  <p>Type at least 3 characters to search verses</p>
+                </div>
+              ) : verseResults.length > 0 ? (
+                <div className="space-y-4">
+                  {verseResults.map((result, i) => (
+                    <VerseSearchResult
+                      key={i}
+                      result={result}
+                      query={debouncedQuery}
+                      index={i}
+                    />
+                  ))}
+                </div>
+              ) : !isSearchingVerses ? (
+                <div className="text-center py-20 text-text-secondary">
+                  <p>No verses found for &quot;{debouncedQuery}&quot;</p>
+                </div>
+              ) : null}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

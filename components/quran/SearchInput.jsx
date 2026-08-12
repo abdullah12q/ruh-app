@@ -36,7 +36,7 @@ export default function SearchInput({
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           placeholder={placeholder}
-          className="w-full pl-10 pr-4 py-3 outline-none text-text-primary placeholder:text-text-secondary/50 font-inter text-sm sm:text-lg"
+          className="w-full pl-12 pr-4 py-3 outline-none text-text-primary placeholder:text-text-secondary/50 font-inter text-sm sm:text-lg"
         />
 
         <AnimatePresence mode="wait">

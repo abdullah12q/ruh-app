@@ -2,27 +2,25 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { BookOpen, Headphones, Search } from "lucide-react";
+import { BookOpen, Headphones } from "lucide-react";
 import Link from "next/link";
 import ListenSurahCard from "./ListenSurahCard";
-import { useDebounce } from "@/hooks/useDebounce";
+import SearchInput from "../SearchInput";
 
 export default function ListenBrowser({ surahs }) {
   const [query, setQuery] = useState("");
-  const debouncedQuery = useDebounce(query, 300);
 
   const filtered = surahs.filter((surah) => {
-    const q = debouncedQuery.toLowerCase();
+    const q = query.toLowerCase();
     return (
       surah.name_simple.toLowerCase().includes(q) ||
       surah.name_arabic.includes(q) ||
-      surah.translated_name?.name?.toLowerCase().includes(q) ||
       String(surah.id).includes(q)
     );
   });
 
   return (
-    <div className="min-h-screen pt-28 pb-16 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen pt-28 pb-16 px-4 sm:px-6 lg:px-8 animate-fade-up">
       <div className="max-w-6xl mx-auto">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-sm text-text-secondary mb-8 font-jakarta">
@@ -63,29 +61,21 @@ export default function ListenBrowser({ surahs }) {
           </p>
 
           {/* Search */}
-          <div className="relative max-w-md mx-auto">
-            <Search
-              size={16}
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary"
-            />
-            <input
-              type="search"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search by name, Arabic, or number…"
-              className="w-full pl-10 pr-4 py-3 rounded-2xl glass font-inter text-sm text-text-primary placeholder:text-text-secondary/50 outline-none focus:border-accent/40 transition-colors"
-            />
-          </div>
+          <SearchInput
+            value={query}
+            onChange={setQuery}
+            placeholder="Search Surahs by name or number..."
+          />
         </div>
 
         {/* Surah Grid */}
         <AnimatePresence mode="wait">
           <motion.div
-            key={debouncedQuery}
-            initial={{ opacity: 0, y: 16 }}
+            key="surahs"
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: 0.25 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
           >
             {surahs.length === 0 ? (
               // Loading skeleton

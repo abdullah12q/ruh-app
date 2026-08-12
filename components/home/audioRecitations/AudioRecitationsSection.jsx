@@ -231,12 +231,12 @@ export default function AudioRecitationsSection() {
               ))}
             </motion.div>
 
-            {/* …and N more hint */}
+            {/* ...and N more hint */}
             <motion.p
               variants={fadeUp}
               className="mt-4 text-center text-xs text-text-secondary font-inter"
             >
-              …and{" "}
+              ...and{" "}
               <Link
                 href="/quran"
                 className="text-accent hover:underline underline-offset-2"

@@ -98,7 +98,7 @@ export default function ReciterDropdown({
                   type="text"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  placeholder="Search reciter…"
+                  placeholder="Search reciter..."
                   className="bg-transparent text-xs text-text-primary placeholder:text-text-secondary/60 outline-0 flex-1"
                   aria-label="Search reciters"
                 />

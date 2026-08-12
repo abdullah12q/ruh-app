@@ -45,7 +45,7 @@ export default function FullSurahToolbar({
             type="search"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search Sheikh…"
+            placeholder="Search Sheikh..."
             className="pl-8 pr-3 py-1.5 rounded-xl glass font-inter text-xs text-text-primary placeholder:text-text-secondary/50 outline-none focus:border-accent/40 w-40 transition-colors"
           />
         </div>

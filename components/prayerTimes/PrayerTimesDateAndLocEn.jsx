@@ -43,7 +43,7 @@ export default function PrayerTimesDateAndLocEn({
           )}
         </span>
       ) : (
-        <span className="animate-pulse text-sm">Detecting location…</span>
+        <span className="animate-pulse text-sm">Detecting location...</span>
       )}
     </div>
   );

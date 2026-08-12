@@ -39,7 +39,7 @@ export default function MobileMenuOverlay({
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="fixed top-0 right-0 bottom-0 z-50 w-72 glass lg:hidden flex flex-col pt-24 pb-8 px-6"
+            className="fixed top-0 right-0 bottom-0 z-50 w-72 glass lg:hidden flex flex-col gap-y-2 pt-24 pb-8 px-6"
           >
             {/* Close Button */}
             <button
@@ -51,7 +51,7 @@ export default function MobileMenuOverlay({
 
             {/* Mobile Nav Links */}
             <nav>
-              <ul className="space-y-1">
+              <ul className="space-y-5">
                 {navLinks.map(({ href, label, icon: Icon }, i) => (
                   <motion.li
                     key={href}
@@ -63,7 +63,7 @@ export default function MobileMenuOverlay({
                     <Link
                       href={href}
                       onClick={() => setMobileOpen(false)}
-                      className="relative flex items-center gap-3 px-4 py-3 rounded-xl text-text-secondary hover:text-text-primary hover:bg-white/5 transition-all duration-200 font-medium font-jakarta"
+                      className="relative flex items-center gap-3 text-text-secondary font-medium font-jakarta"
                     >
                       <Icon size={18} className="text-accent" />
                       {label}
