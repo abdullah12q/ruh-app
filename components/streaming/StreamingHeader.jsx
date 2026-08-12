@@ -34,7 +34,7 @@ export default function StreamingHeader({
     >
       {/* Decorative Arabic background text */}
       <span
-        className={`font-quran pointer-events-none select-none absolute left-1/2 -translate-x-1/2 text-accent/4 whitespace-nowrap -z-10 ${content.bgClasses}`}
+        className={`font-quran pointer-events-none select-none absolute left-1/2 -translate-x-1/2 text-accent opacity-5 whitespace-nowrap -z-10 ${content.bgClasses}`}
         dir="rtl"
         lang="ar"
         aria-hidden="true"

@@ -41,7 +41,7 @@ export default function ListenBrowser({ surahs }) {
         {/* Page Header */}
         <div className="relative text-center mb-12">
           <span
-            className="pointer-events-none select-none absolute left-1/2 top-2/3 -translate-x-1/2 -translate-y-1/2 font-quran text-[8rem] sm:text-[10rem] text-accent/10 whitespace-nowrap -z-10"
+            className="pointer-events-none select-none absolute left-1/2 top-2/3 -translate-x-1/2 -translate-y-1/2 font-quran text-[8rem] sm:text-[10rem] text-accent opacity-5 whitespace-nowrap -z-10"
             dir="rtl"
             lang="ar"
           >

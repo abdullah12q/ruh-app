@@ -44,7 +44,7 @@ export function RecentReadCard({ read, index }) {
           {surah?.name_arabic && (
             <span
               aria-hidden
-              className="pointer-events-none select-none absolute right-0.5 font-quran text-[3rem] sm:text-[5.5rem] leading-none text-accent/6 group-hover:text-accent/10 group-hover:-translate-x-1 transition-all duration-500 whitespace-nowrap"
+              className="pointer-events-none select-none absolute right-0.5 font-quran text-[3rem] sm:text-[5.5rem] leading-none text-accent opacity-6 group-hover:opacity-10 group-hover:-translate-x-1 transition-all duration-500 whitespace-nowrap"
             >
               {surah.name_arabic}
             </span>

@@ -57,7 +57,7 @@ export default function QuranBrowser({ surahs }) {
         <div className="relative text-center mb-8">
           {/* light background keda mktob feha quran bel 3rby */}
           <span
-            className="pointer-events-none select-none absolute left-1/2 top-2/3 -translate-x-1/2 -translate-y-1/2 font-quran text-[9rem] sm:text-[11rem] text-accent/4 whitespace-nowrap -z-10"
+            className="pointer-events-none select-none absolute left-1/2 top-2/3 -translate-x-1/2 -translate-y-1/2 font-quran text-[9rem] sm:text-[11rem] text-accent opacity-5 whitespace-nowrap -z-10"
             dir="rtl"
             lang="ar"
           >
