@@ -64,7 +64,7 @@ export default function SurahReadingControls() {
 
   return (
     // ── Controls Bar ──
-    <div className="sticky top-16.75 sm:top-16.25 z-30 backdrop-blur-xl flex flex-wrap items-center justify-between glass rounded-2xl px-5 py-3 gap-y-3 mb-6">
+    <div className="sticky top-16.75 sm:top-16.25 z-30 backdrop-blur-xl flex flex-wrap items-center justify-between glass rounded-2xl px-5 py-3 gap-3 mb-6">
       {/* Font Size */}
       <div className="flex items-center gap-1">
         <span className="text-[9px] sm:text-xs text-text-secondary font-jakarta mr-2">
@@ -194,7 +194,7 @@ export default function SurahReadingControls() {
 
       {/* Mushaf Mode Toggle */}
       <button
-        onClick={toggleMushafMode}
+        onClick={() => toggleMushafMode()}
         aria-label={
           mushafMode ? "Switch to Normal Mode" : "Switch to Mushaf Mode"
         }

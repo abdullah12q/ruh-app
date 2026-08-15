@@ -5,7 +5,7 @@ export default function BismillahCard({ surahId }) {
   return (
     <div className="glass rounded-2xl p-6 text-center mb-6">
       <p
-        className="font-quran text-[15px] sm:text-4xl text-center! text-text-secondary"
+        className="font-quran text-sm sm:text-4xl text-center! text-text-secondary"
         dir="rtl"
         lang="ar"
       >
