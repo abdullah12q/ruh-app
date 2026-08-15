@@ -1,32 +1,30 @@
 import { AnimatePresence, motion } from "framer-motion";
 import useUIStore from "@/lib/store/useUIStore";
 import { useAyahTranslation } from "@/lib/queries/quran";
+import { useSurahPlayback } from "@/lib/context/SurahPlaybackProvider";
 import { Bookmark, Play, Pause } from "lucide-react";
 import { FootnoteFormatter } from "@/components/FootnoteFormatter";
-import { useEffect, useMemo } from "react";
-import { formatAudioFileName, formatTime } from "@/data/datas/audioData";
-import { calculateNextVerse } from "@/data/datas/verseData";
-import { useAudioPlayer } from "@/hooks/useAudioPlayer";
+import { formatTime } from "@/data/datas/audioData";
 
-export default function AyahCard({ totalVerses, ayah, surahId }) {
+export default function AyahCard({ ayah, surahId }) {
+  const { fontSize, translationLang, bookmarkedAyahs, toggleBookmarkedAyahs } =
+    useUIStore();
+
+  // Shared playback state — the single global <audio> element lives in SurahPlaybackProvider, msh hena.
   const {
-    fontSize,
-    activeAyah,
-    setActiveAyah,
+    activeAyahNum,
     audioPlaying,
-    setAudioPlaying,
-    translationLang,
-    selectedReciter,
-    bookmarkedAyahs,
-    toggleBookmarkedAyahs,
-  } = useUIStore();
+    currentTime,
+    duration,
+    handleSeek,
+    playAyah,
+    togglePlayPause,
+  } = useSurahPlayback();
 
   const isBookmarked = bookmarkedAyahs.find(
     (verse) =>
       verse.surahNum === surahId && verse.ayahNum === ayah.verse_number,
   );
-
-  const activeAyahNum = activeAyah?.[surahId];
 
   const isActive = activeAyahNum === ayah.verse_number;
 
@@ -38,84 +36,15 @@ export default function AyahCard({ totalVerses, ayah, surahId }) {
     lang,
   } = useAyahTranslation(surahId, ayah.verse_number);
 
-  const audioUrl = useMemo(() => {
-    if (!surahId || !ayah.verse_number || !selectedReciter?.path) return "";
-
-    const fileName = formatAudioFileName(surahId, ayah.verse_number);
-    return `https://everyayah.com/data/${selectedReciter.path}/${fileName}`;
-  }, [surahId, ayah.verse_number, selectedReciter]);
-
-  const {
-    currentTime,
-    setCurrentTime,
-    duration,
-    audioRef,
-    handleSeek,
-    onTimeUpdate,
-    onLoadedMetadata,
-  } = useAudioPlayer({
-    audioUrl,
-    isPlaying: isActive && audioPlaying,
-  });
-
-  // PREFETCHING EFFECT
-  // This calculates the next verse and downloads the JSON and MP3 in the background silently.
-  useEffect(() => {
-    if (!isActive) return;
-    if (!surahId || !activeAyahNum || !selectedReciter?.path) return;
-
-    const { surah: nextSurah, ayah: nextAyah } = calculateNextVerse(
-      surahId,
-      activeAyahNum,
-      totalVerses,
-    );
-
-    // Stop prefetching if we are in the last ayah in the Surah
-    if (nextSurah > surahId) return;
-
-    // Prefetch Audio File
-    const nextFileName = formatAudioFileName(nextSurah, nextAyah);
-    if (nextFileName) {
-      const preloader = new Audio(
-        `https://everyayah.com/data/${selectedReciter.path}/${nextFileName}`,
-      );
-      preloader.preload = "auto"; // This forces the browser to download and cache the MP3
-    }
-  }, [isActive, surahId, activeAyahNum, selectedReciter, totalVerses]);
-
   function handleAyahClick() {
     if (!isActive) {
-      setActiveAyah(surahId, ayah.verse_number);
-      setCurrentTime(0);
-      setAudioPlaying(true);
+      playAyah(ayah.verse_number);
     } else {
-      setAudioPlaying(!audioPlaying);
+      togglePlayPause();
     }
   }
 
-  function handleNextVerse() {
-    if (!surahId || !activeAyahNum) return;
-    setCurrentTime(0);
-    const { surah: nextSurah, ayah: nextAyah } = calculateNextVerse(
-      surahId,
-      activeAyahNum,
-      totalVerses,
-    );
-
-    // Stop if we are in the last ayah in the Surah
-    if (nextSurah > surahId) {
-      setActiveAyah(surahId, activeAyahNum);
-      if (audioPlaying) {
-        setAudioPlaying(false);
-      }
-      return;
-    }
-
-    // Updating this state triggers the hook to fetch the new verse.
-    setActiveAyah(surahId, nextAyah);
-  }
-
-  const timelinePct = duration ? (currentTime / duration) * 100 : 0;
+  const timelinePct = isActive && duration ? (currentTime / duration) * 100 : 0;
 
   return (
     <motion.article
@@ -214,18 +143,6 @@ export default function AyahCard({ totalVerses, ayah, surahId }) {
       >
         {ayah.text_qpc_hafs}
       </p>
-
-      {/* Hidden audio player */}
-      {isActive && (
-        <audio
-          ref={audioRef}
-          src={audioUrl || undefined}
-          autoPlay={audioPlaying}
-          onEnded={handleNextVerse}
-          onTimeUpdate={onTimeUpdate}
-          onLoadedMetadata={onLoadedMetadata}
-        />
-      )}
 
       {/* Divider */}
       <div className="w-full h-px bg-(--surface-glass-border) mb-5" />

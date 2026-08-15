@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import {
   Play,
   Pause,
@@ -9,6 +10,7 @@ import {
   VolumeX,
   Loader2,
   X,
+  BookOpenText,
 } from "lucide-react";
 import { formatTime, getMoshafStyle } from "@/data/datas/audioData";
 import useUIStore from "@/lib/store/useUIStore";
@@ -29,7 +31,8 @@ export default function FullSurahAudioPlayer({
   const audioRef = useRef(null);
   const rafRef = useRef(null);
 
-  const { volume, setVolume, clearGlobalPlayer } = useUIStore();
+  const { volume, setVolume, clearGlobalPlayer, toggleMushafMode } =
+    useUIStore();
 
   const moshafStyle = getMoshafStyle(moshaf?.moshafType);
   const timelinePct = duration ? (currentTime / duration) * 100 : 0;
@@ -194,6 +197,9 @@ export default function FullSurahAudioPlayer({
     }
   }, [audioUrl, surah.name_simple, fileNameSuffix]);
 
+  const baseCSS =
+    "flex items-center gap-1.5 px-3 py-2 rounded-xl glass text-text-secondary hover:text-accent hover:border-accent/30! transition-all duration-300 text-xs font-semibold font-jakarta cursor-pointer";
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 80 }}
@@ -311,12 +317,23 @@ export default function FullSurahAudioPlayer({
               />
             </div>
 
+            {/* Read in Mushaf */}
+            <Link
+              href={`/quran/${surah.id}`}
+              onClick={() => toggleMushafMode(true)}
+              title={`Read ${surah.name_simple} in Mushaf mode`}
+              className={baseCSS}
+            >
+              <BookOpenText size={13} />
+              <span className="hidden sm:inline">Mushaf</span>
+            </Link>
+
             {/* Download */}
             <button
               onClick={handleDownload}
               title={`Download ${surah.name_simple} - ${fileNameSuffix}`}
               disabled={isDownloading}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-xl glass text-text-secondary hover:text-accent hover:border-accent/30! transition-all duration-300 text-xs font-semibold font-jakarta cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
+              className={`${baseCSS} disabled:cursor-not-allowed disabled:opacity-60`}
             >
               {isDownloading ? (
                 <Loader2 size={13} className="animate-spin" />

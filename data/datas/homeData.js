@@ -1,5 +1,6 @@
 import {
   BookOpen,
+  BookOpenText,
   Clock,
   Star,
   Bookmark,
@@ -21,7 +22,7 @@ export const features = [
     title: "Quran",
     titleAr: "القرآن",
     description:
-      "Explore the Holy Quran with word-by-word translations, authentic audio recitations, and more.",
+      "Read in authentic Mushaf layout, follow along verse by verse, or listen to 215+ reciters — all in one place.",
     href: "/quran",
     gradient: "from-[var(--accent)]/10 to-green-700/10",
     iconColor: "text-[var(--accent)]",
@@ -116,7 +117,7 @@ export const audioFeatures = [
     color: "text-violet-400",
     bg: "bg-violet-400/10",
     title: "Browse 54 Reciters",
-    desc: "From legendary scholars to contemporary voices — explore a handpicked collection of authenticated recitations.",
+    desc: "Explore 54 authenticated reciters for ayah-by-ayah listening. Prefer full Surahs? Switch to Listen & Download mode for 215+ exclusive voices.",
   },
 ];
 
@@ -150,6 +151,13 @@ export const CAPABILITIES = [
     bg: "bg-amber-400/10",
     title: "215+ Sheikhs & Tafsir Audio",
     desc: "Access world-renowned reciters unavailable in the verse-by-verse mode and audio Tafsir (تفسير الطبري) — both exclusive to the Listen & Download mode.",
+  },
+  {
+    icon: BookOpenText,
+    color: "text-sky-400",
+    bg: "bg-sky-400/10",
+    title: "Read While You Listen",
+    desc: "Open the authentic Mushaf view while a recitation plays — follow along page by page, just like holding a real Quran.",
   },
 ];
 

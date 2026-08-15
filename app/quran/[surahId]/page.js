@@ -3,10 +3,10 @@ import Link from "next/link";
 import { BookOpen } from "lucide-react";
 
 import SurahHeader from "@/components/quran/surahHeader/SurahHeader";
-import SurahReadingControls from "@/components/quran/surahReadingControls/SurahReadingControls";
-import BismillahCard from "@/components/quran/bismillahCard/BismillahCard";
-import AyahList from "@/components/quran/ayahList/AyahList";
-import SurahNavigation from "@/components/quran/surahNavigation/SurahNavigation";
+import SurahPlaybackProvider from "@/lib/context/SurahPlaybackProvider";
+import SurahReadingControls from "@/components/quran/SurahReadingControls";
+import ReadSurah from "@/components/quran/ReadSurah";
+import SurahNavigation from "@/components/quran/SurahNavigation";
 
 // Fetch Surah metadata from Quran.com API v4.
 export async function getSurah(id) {
@@ -22,7 +22,7 @@ export async function getSurah(id) {
 // Translation is fetched client-side per-ayah via useAyahTranslation.
 async function getVerses(id) {
   const res = await fetch(
-    `https://api.quran.com/api/v4/verses/by_chapter/${id}?language=en&fields=text_qpc_hafs,verse_key,verse_number&per_page=300`,
+    `https://api.quran.com/api/v4/verses/by_chapter/${id}?language=en&fields=text_qpc_hafs,verse_key,verse_number,page_number&per_page=300`,
     { next: { revalidate: 3600 } }, // Cache verses for 1 hour
   );
   if (!res.ok) return [];
@@ -65,9 +65,12 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default async function SurahPage({ params }) {
+export default async function SurahPage({ params, searchParams }) {
   const { surahId } = await params;
   const id = parseInt(surahId);
+
+  const { page } = await searchParams;
+  const activeCurrentMushafPage = parseInt(page, 10) || null;
 
   if (isNaN(id) || id < 1 || id > 114) {
     notFound();
@@ -112,9 +115,18 @@ export default async function SurahPage({ params }) {
           startJuz={startJuz}
           endJuz={endJuz}
         />
-        <SurahReadingControls />
-        <BismillahCard surahId={id} />
-        <AyahList verses={verses} surahId={id} />
+
+        {/* One shared audio element + playback/pagination state for both Normal Mode (AyahCard)
+        and Mushaf Mode (MushafView/MushafPage), plus the Play button in SurahReadingControls. */}
+        <SurahPlaybackProvider
+          surahId={id}
+          verses={verses}
+          activeCurrentMushafPage={activeCurrentMushafPage}
+        >
+          <SurahReadingControls />
+          <ReadSurah surahId={id} verses={verses} />
+        </SurahPlaybackProvider>
+
         <SurahNavigation prevSurah={prevSurah} nextSurah={nextSurah} />
       </div>
     </div>

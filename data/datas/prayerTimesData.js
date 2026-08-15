@@ -1,7 +1,15 @@
+const now = new Date();
+const dayOfWeek = now.getDay(); // 0=Sun,1=Mon,...,4=Thu,5=Fri,6=Sat
+
 export const PRAYER_NAMES = [
   { key: "Fajr", label: "Fajr", labelAr: "الفجر", icon: "🌙" },
   { key: "Sunrise", label: "Sunrise", labelAr: "الشروق", icon: "🌅" },
-  { key: "Dhuhr", label: "Dhuhr", labelAr: "الظهر", icon: "☀️" },
+  {
+    key: "Dhuhr",
+    label: dayOfWeek === 5 ? "Jumu'ah" : "Dhuhr",
+    labelAr: dayOfWeek === 5 ? "الجمعة" : "الظهر",
+    icon: dayOfWeek === 5 ? "🕌" : "☀️",
+  },
   { key: "Asr", label: "Asr", labelAr: "العصر", icon: "🌤️" },
   { key: "Maghrib", label: "Maghrib", labelAr: "المغرب", icon: "🌇" },
   { key: "Isha", label: "Isha", labelAr: "العشاء", icon: "🌃" },

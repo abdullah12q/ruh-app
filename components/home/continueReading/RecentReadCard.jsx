@@ -6,7 +6,8 @@ import useUIStore from "@/lib/store/useUIStore";
 import { useSurah } from "@/lib/queries/quran";
 
 export function RecentReadCard({ read, index }) {
-  const { activeAyah, setSelectedReciter } = useUIStore();
+  const { activeAyah, setSelectedReciter, mushafMode, toggleMushafMode } =
+    useUIStore();
   const { data: surah, isLoading } = useSurah(read.surahId);
 
   // Sanitize the surahId and ayahNumber to prevent hash duplication from corrupted state 3shan s3at kan el url path byb2a "/quran/1#ayah-1#ayah-2" bdl "/quran/1#ayah-1" aw "/quran/1#ayah-2"
@@ -26,6 +27,16 @@ export function RecentReadCard({ read, index }) {
   const CIRCUMFERENCE = 2 * Math.PI * R;
   const dashOffset = CIRCUMFERENCE - (progressPct / 100) * CIRCUMFERENCE;
 
+  const currentPage = read.currentPage;
+
+  const baseUrl = `/quran/${cleanSurahId}`;
+  const extraUrl =
+    read.mushafMode && currentPage
+      ? `?page=${currentPage}`
+      : cleanAyahNum && !read.mushafMode
+        ? `#ayah-${cleanAyahNum}`
+        : "";
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -34,9 +45,10 @@ export function RecentReadCard({ read, index }) {
       transition={{ duration: 0.4, ease: "easeOut", delay: index * 0.1 }}
     >
       <Link
-        href={`/quran/${cleanSurahId}${cleanAyahNum ? `#ayah-${cleanAyahNum}` : ""}`}
+        href={`${baseUrl}${extraUrl}`}
         onClick={() => {
           setSelectedReciter(read.reciter);
+          toggleMushafMode(read.mushafMode);
         }}
       >
         <div className="group relative overflow-hidden glass rounded-2xl p-4 sm:p-5 flex items-center justify-between shadow-(--shadow-card) hover:shadow-[0_0_32px_rgba(20,184,166,0.16)]! transition-all duration-500 ease-out cursor-pointer hover:-translate-y-0.5">

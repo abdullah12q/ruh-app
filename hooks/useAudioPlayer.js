@@ -7,6 +7,7 @@ export function useAudioPlayer({ audioUrl, isPlaying }) {
 
   const audioRef = useRef(null);
   const rafRef = useRef(null);
+  const lastLoadedUrlRef = useRef(null);
 
   const { volume, setVolume } = useUIStore();
 
@@ -17,8 +18,11 @@ export function useAudioPlayer({ audioUrl, isPlaying }) {
     }
   }, [volume]);
 
-  // Play or Pause the audio when the `isPlaying` state changes
-  // Smoothly sync currentTime every frame while playing
+  // Play or Pause the audio when `isPlaying` OR `audioUrl` changes.
+  // `audioUrl` is included here because a single shared <audio> element
+  // (see SurahPlaybackProvider) can swap tracks while `isPlaying` stays
+  // `true` the whole time — without this, .play() would never be called
+  // again for the new source and playback would silently stall.
   useEffect(() => {
     if (!isPlaying) {
       audioRef.current?.pause();
@@ -27,6 +31,12 @@ export function useAudioPlayer({ audioUrl, isPlaying }) {
     }
 
     if (audioRef.current) {
+      // Only call .load() if the track URL has actually changed.
+      // This prevents the audio from resetting to 0 when simply resuming.
+      if (lastLoadedUrlRef.current !== audioUrl) {
+        audioRef.current.load();
+        lastLoadedUrlRef.current = audioUrl;
+      }
       audioRef.current
         .play()
         .catch((err) => console.log("Audio play error:", err));
@@ -43,7 +53,7 @@ export function useAudioPlayer({ audioUrl, isPlaying }) {
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [isPlaying]);
+  }, [isPlaying, audioUrl]);
 
   // Automatically reset the time if the audio URL changes
   useEffect(() => {

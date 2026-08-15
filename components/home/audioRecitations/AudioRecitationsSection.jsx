@@ -129,12 +129,15 @@ export default function AudioRecitationsSection() {
             <span className="gradient-text">your favourite reciter</span>
           </h2>
           <p className="font-inter text-text-secondary max-w-xl mx-auto leading-relaxed">
-            Play, pause, and explore over{" "}
+            Preview any Surah{" "}
+            <span className="text-accent font-semibold">ayah by ayah</span> with{" "}
             <span className="text-accent font-semibold">
               {TOTAL_RECITERS} world-class reciters
             </span>
-            . Favourite the voices that move your heart and return to them
-            anytime.
+            . Want the full Surah experience? The Listen &amp; Download mode
+            gives you{" "}
+            <span className="text-accent font-semibold">215+ reciters</span>{" "}
+            &mdash; all in one unbroken recitation.
           </p>
         </motion.div>
 
@@ -243,7 +246,14 @@ export default function AudioRecitationsSection() {
               >
                 {TOTAL_RECITERS - spotlightReciters.length} more reciters
               </Link>{" "}
-              waiting for you inside the Quran reader.
+              here &mdash; plus{" "}
+              <Link
+                href="/quran/listen"
+                className="text-accent hover:underline underline-offset-2"
+              >
+                215+ exclusive voices
+              </Link>{" "}
+              in full-Surah Listen &amp; Download mode.
             </motion.p>
           </motion.div>
         </div>

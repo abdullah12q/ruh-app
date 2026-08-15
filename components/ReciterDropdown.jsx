@@ -44,10 +44,13 @@ export default function ReciterDropdown({
 
   // Filter and split by favorites
   const q = search.trim().toLowerCase();
-  const filtered = reciters.filter(
-    (r) =>
-      r.name.toLowerCase().includes(q) || r.nameArabic.includes(search.trim()),
-  );
+  const filtered = reciters
+    .filter(
+      (r) =>
+        r.name.toLowerCase().includes(q) ||
+        r.nameArabic.includes(search.trim()),
+    )
+    .sort((a, b) => a.name.localeCompare(b.name));
   const favSet = new Set(favoriteReciters);
   const favoritesInList = filtered.filter((r) => favSet.has(r.id));
   const othersInList = filtered.filter((r) => !favSet.has(r.id));
