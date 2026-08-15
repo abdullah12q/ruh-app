@@ -135,11 +135,12 @@ export default function SurahPlaybackProvider({
   // Playback Controls
   const playAyah = useCallback(
     (ayahNum) => {
-      setActiveAyah(surahId, ayahNum, currentPage);
+      const pageNum = verseToPage.get(ayahNum) || currentPage;
+      setActiveAyah(surahId, ayahNum, pageNum);
       setCurrentTime(0);
       setAudioPlaying(true);
     },
-    [setActiveAyah, surahId, currentPage, setCurrentTime, setAudioPlaying],
+    [setActiveAyah, surahId, currentPage, setCurrentTime, setAudioPlaying, verseToPage],
   );
 
   const togglePlayPause = useCallback(() => {
@@ -195,10 +196,10 @@ export default function SurahPlaybackProvider({
       return;
     }
 
-    setActiveAyah(surahId, nextAyah, currentPage);
+    const nextPage = verseToPage.get(nextAyah);
+    setActiveAyah(surahId, nextAyah, nextPage || currentPage);
 
     // Keep Mushaf Mode's visible page in sync when playback crosses a page boundary.
-    const nextPage = verseToPage.get(nextAyah);
     if (mushafMode && nextPage && nextPage !== currentPage) {
       setDirection(1);
       setCurrentPageState(nextPage);
