@@ -203,6 +203,15 @@ export default function SurahPlaybackProvider({
       return;
     }
 
+    // Auto scroll to next ayah
+    const ayah = document.getElementById(`ayah-${nextAyah}`);
+    if (ayah) {
+      ayah.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+
     const nextPage = verseToPage.get(nextAyah);
     setActiveAyah(surahId, nextAyah, nextPage || currentPage);
 
