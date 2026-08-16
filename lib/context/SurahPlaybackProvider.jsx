@@ -250,7 +250,7 @@ export default function SurahPlaybackProvider({
           block: "center",
         });
       }
-    }, 300);
+    }, 10);
   }, [activeAyahNum]);
 
   // Prefetch the *audio file* for the next verse

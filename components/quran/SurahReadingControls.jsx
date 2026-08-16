@@ -73,12 +73,12 @@ export default function SurahReadingControls() {
   );
 
   function handleToggleMushafModeClick() {
+    toggleMushafMode();
     if (audioPlaying && !mushafMode) {
       handleFromNormalModeToMushafMode();
     } else if (audioPlaying && mushafMode) {
       handleFromMushafModeToNormalMode();
     }
-    toggleMushafMode();
   }
 
   return (
