@@ -7,7 +7,7 @@ import { FootnoteFormatter } from "../../FootnoteFormatter";
 import { itemVariants } from "@/data/animationVariants";
 
 export default function BookmarkItem({ surahNum, ayahNum, index, onClose }) {
-  const { toggleBookmarkedAyahs } = useUIStore();
+  const { toggleBookmarkedAyahs, mushafMode } = useUIStore();
   const { data: verse, isLoading: verseLoading } = useBookmarkVerse(
     surahNum,
     ayahNum,
@@ -23,6 +23,14 @@ export default function BookmarkItem({ surahNum, ayahNum, index, onClose }) {
 
   const arabicText = verse?.text;
   const verseKey = `${surahNum}:${ayahNum}`;
+
+  const baseUrl = `/quran/${surahNum}`;
+  const extraUrl =
+    mushafMode && verse?.page
+      ? `?page=${verse?.page}`
+      : ayahNum && !mushafMode
+        ? `#ayah-${ayahNum}`
+        : "";
 
   return (
     <motion.div
@@ -51,7 +59,7 @@ export default function BookmarkItem({ surahNum, ayahNum, index, onClose }) {
           <div className="flex items-center gap-1 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-200">
             {/* Navigate to ayah */}
             <Link
-              href={`/quran/${surahNum}#ayah-${ayahNum}`}
+              href={`${baseUrl}${extraUrl}`}
               onClick={onClose}
               className="size-7 rounded-lg flex items-center justify-center text-text-secondary hover:text-accent hover:bg-accent/10 transition-all duration-200"
               aria-label={`Go to ${verseKey}`}

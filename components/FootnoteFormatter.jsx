@@ -11,12 +11,12 @@ export function FootnoteFormatter({ text }) {
       {parts.map((part, index) => {
         // If the part matches the "number:number" pattern, render it as a link
         if (part.match(/^\d+:\d+$/)) {
-          const [chapter] = part.split(":");
+          const [chapter, ayah] = part.split(":");
 
           return (
             <Link
               key={index}
-              href={`/quran/${chapter}`}
+              href={`/quran/${chapter}#ayah-${ayah}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-accent hover:underline"

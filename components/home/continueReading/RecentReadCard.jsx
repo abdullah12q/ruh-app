@@ -6,8 +6,7 @@ import useUIStore from "@/lib/store/useUIStore";
 import { useSurah } from "@/lib/queries/quran";
 
 export function RecentReadCard({ read, index }) {
-  const { activeAyah, setSelectedReciter, mushafMode, toggleMushafMode } =
-    useUIStore();
+  const { activeAyah, setSelectedReciter, toggleMushafMode } = useUIStore();
   const { data: surah, isLoading } = useSurah(read.surahId);
 
   // Sanitize the surahId and ayahNumber to prevent hash duplication from corrupted state 3shan s3at kan el url path byb2a "/quran/1#ayah-1#ayah-2" bdl "/quran/1#ayah-1" aw "/quran/1#ayah-2"

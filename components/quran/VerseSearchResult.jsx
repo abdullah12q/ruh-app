@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import useUIStore from "@/lib/store/useUIStore";
 
 // ── Arabic-aware highlighting ──────────────────────────────────
 // The verse text keeps full diacritics (tashkeel) but the user's
@@ -64,6 +65,8 @@ export default function VerseSearchResult({ result, query, index = 0 }) {
 
   const surahName = result.surahName.replace("سُورَةُ", "");
 
+  const { toggleMushafMode } = useUIStore();
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
@@ -76,6 +79,7 @@ export default function VerseSearchResult({ result, query, index = 0 }) {
     >
       <Link
         href={`/quran/${surahId}#ayah-${ayahId}`}
+        onClick={() => toggleMushafMode(false)}
         className="group relative block overflow-hidden rounded-3xl p-6 sm:p-7 glass bg-background/40! transition-all duration-500 hover:shadow-[0_0_36px_-8px_var(--accent-glow)]!"
       >
         {/* Ambient corner glow, only visible on hover */}
