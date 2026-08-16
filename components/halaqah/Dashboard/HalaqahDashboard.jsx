@@ -83,6 +83,104 @@ export default function HalaqahDashboard({ userStudyCircleName }) {
         <EditableUserCircleName userStudyCircleName={userStudyCircleName} />
       </div>
 
+      {/* Quranic Inspiration: Al-Mutaffifin 83:26 */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: "easeOut", delay: 0.15 }}
+        className="relative mb-8 rounded-2xl overflow-hidden"
+        style={{
+          background:
+            "linear-gradient(135deg, rgba(20,184,166,0.12) 0%, rgba(20,184,166,0.04) 50%, rgba(99,102,241,0.08) 100%)",
+          border: "1px solid rgba(20,184,166,0.2)",
+          boxShadow:
+            "0 8px 40px rgba(20,184,166,0.08), inset 0 1px 0 rgba(255,255,255,0.06)",
+        }}
+      >
+        {/* Animated ambient glow */}
+        <motion.div
+          animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.05, 1] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+          className="pointer-events-none absolute -top-10 -right-10 size-48 rounded-full"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(20,184,166,0.18) 0%, transparent 70%)",
+          }}
+        />
+        <motion.div
+          animate={{ opacity: [0.2, 0.45, 0.2], scale: [1, 1.08, 1] }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1.5,
+          }}
+          className="pointer-events-none absolute -bottom-8 -left-8 size-40 rounded-full"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(99,102,241,0.14) 0%, transparent 70%)",
+          }}
+        />
+
+        <div className="relative p-6 sm:px-8 sm:py-7 flex flex-col sm:flex-row items-center gap-5">
+          {/* Surah badge */}
+          <div className="shrink-0 flex flex-col items-center gap-1">
+            <div
+              className="size-12 rounded-xl flex items-center justify-center font-jakarta font-black text-lg text-accent"
+              style={{
+                background: "rgba(20,184,166,0.12)",
+                border: "1px solid rgba(20,184,166,0.25)",
+                boxShadow: "0 0 16px rgba(20,184,166,0.15)",
+              }}
+            >
+              83
+            </div>
+            <span className="text-[10px] font-inter text-text-secondary tracking-wide uppercase">
+              Ayah 26
+            </span>
+          </div>
+
+          {/* Divider */}
+          <div
+            className="hidden sm:block self-stretch w-px"
+            style={{ background: "rgba(20,184,166,0.18)" }}
+          />
+
+          {/* Text content */}
+          <div className="flex-1 text-center sm:text-left">
+            {/* Arabic text */}
+            <p
+              className="font-quran text-center! sm:text-left! text-text-primary"
+              style={{ fontSize: "clamp(1.15rem, 2.5vw, 1.45rem)" }}
+              dir="rtl"
+            >
+              وَفِي ذَٰلِكَ فَلۡيَتَنَافَسِ ٱلۡمُتَنَٰفِسُونَ
+              <span className="text-accent mr-2 text-3xl">٢٦</span>
+            </p>
+
+            {/* English translation */}
+            <p className="text-text-primary font-jakarta font-medium text-sm sm:text-base mb-1 italic">
+              &quot;So for this let the competitors compete.&quot;
+            </p>
+
+            {/* Surah reference */}
+            <p className="text-text-secondary font-inter text-xs tracking-wide">
+              Surah Al-Muṭaffifīn{" "}
+              <span className="font-arabic-ui">المطففين</span> · 83:26
+            </p>
+          </div>
+
+          {/* Right Trophy */}
+          <motion.div
+            animate={{ rotate: [0, 5, -5, 0] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            className="hidden lg:flex shrink-0 text-4xl select-none"
+          >
+            🏆
+          </motion.div>
+        </div>
+      </motion.div>
+
       {/* Circles list */}
       {isLoading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
