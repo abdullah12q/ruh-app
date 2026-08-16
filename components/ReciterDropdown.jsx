@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Search, X, Mic } from "lucide-react";
 import { dropdownVariants } from "@/data/animationVariants";
 import ReciterRow from "./ReciterRow";
+import { useMediaQuery } from "@custom-react-hooks/use-media-query";
 
 export default function ReciterDropdown({
   reciters,
@@ -17,6 +18,8 @@ export default function ReciterDropdown({
   const dropdownRef = useRef(null);
   const searchRef = useRef(null);
 
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   // Close dropdown on outside click
   useEffect(() => {
     const handleClick = (e) => {
@@ -29,12 +32,12 @@ export default function ReciterDropdown({
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
-  // Auto-focus search when dropdown opens
+  // Auto-focus search when dropdown opens for desktop only
   useEffect(() => {
     if (dropdownOpen) {
-      setTimeout(() => searchRef.current?.focus(), 80);
+      if (!isMobile) setTimeout(() => searchRef.current?.focus(), 80);
     }
-  }, [dropdownOpen]);
+  }, [dropdownOpen, isMobile]);
 
   function handleSelect(reciter) {
     onSelect(reciter);
