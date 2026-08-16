@@ -17,6 +17,7 @@ export default function MobileMenuOverlay({
   status,
   user,
   signOut,
+  pathname,
 }) {
   return (
     <AnimatePresence>
@@ -52,45 +53,56 @@ export default function MobileMenuOverlay({
             {/* Mobile Nav Links */}
             <nav>
               <ul className="space-y-7">
-                {navLinks.map(({ href, label, icon: Icon }, i) => (
-                  <motion.li
-                    key={href}
-                    custom={i}
-                    variants={mobileLinkVariants}
-                    initial="hidden"
-                    animate="visible"
-                  >
-                    <Link
-                      href={href}
-                      onClick={() => setMobileOpen(false)}
-                      className="relative flex items-center gap-3 text-text-secondary font-medium font-jakarta"
+                {navLinks.map(({ href, label, icon: Icon }, i) => {
+                  const isActive =
+                    pathname === href ||
+                    (href !== "/" && pathname.startsWith(href));
+
+                  return (
+                    <motion.li
+                      key={href}
+                      custom={i}
+                      variants={mobileLinkVariants}
+                      initial="hidden"
+                      animate="visible"
                     >
-                      <Icon size={18} className="text-accent" />
-                      {label}
-                      {/* Pulsing dot when prayer is (≤ 60 minutes) with HintColor */}
-                      {href === "/prayer-times" && !permissionDenied && (
-                        <AnimatePresence>
-                          {hintColor.text !== "gradient-text" &&
-                            nextPrayerKey && (
-                              <motion.span
-                                key="prayer-dot"
-                                initial={{ opacity: 0, scale: 0 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0 }}
-                                transition={{ type: "spring" }}
-                                className={`absolute right-5 size-2 rounded-full ${hintColor.bg}`}
-                              >
-                                {/* ripple animation */}
-                                <span
-                                  className={`absolute inset-0 rounded-full ${hintColor.bg} animate-ping opacity-75`}
-                                />
-                              </motion.span>
-                            )}
-                        </AnimatePresence>
-                      )}
-                    </Link>
-                  </motion.li>
-                ))}
+                      <Link
+                        href={href}
+                        onClick={() => setMobileOpen(false)}
+                        className={`relative flex items-center gap-3 font-jakarta transition-colors ${isActive ? "text-accent font-bold" : "text-text-secondary font-medium hover:text-text-primary"}`}
+                      >
+                        <Icon
+                          size={18}
+                          className={
+                            isActive ? "text-accent" : "text-text-secondary"
+                          }
+                        />
+                        {label}
+                        {/* Pulsing dot when prayer is (≤ 60 minutes) with HintColor */}
+                        {href === "/prayer-times" && !permissionDenied && (
+                          <AnimatePresence>
+                            {hintColor.text !== "gradient-text" &&
+                              nextPrayerKey && (
+                                <motion.span
+                                  key="prayer-dot"
+                                  initial={{ opacity: 0, scale: 0 }}
+                                  animate={{ opacity: 1, scale: 1 }}
+                                  exit={{ opacity: 0, scale: 0 }}
+                                  transition={{ type: "spring" }}
+                                  className={`absolute right-5 size-2 rounded-full ${hintColor.bg}`}
+                                >
+                                  {/* ripple animation */}
+                                  <span
+                                    className={`absolute inset-0 rounded-full ${hintColor.bg} animate-ping opacity-75`}
+                                  />
+                                </motion.span>
+                              )}
+                          </AnimatePresence>
+                        )}
+                      </Link>
+                    </motion.li>
+                  );
+                })}
               </ul>
             </nav>
 

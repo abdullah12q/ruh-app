@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -28,6 +29,7 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [bookmarksOpen, setBookmarksOpen] = useState(false);
   const navRef = useRef(null);
+  const pathname = usePathname();
 
   const { permissionDenied, nextPrayerKey, countdown } = usePrayerTimes();
 
@@ -96,38 +98,47 @@ export default function Navbar() {
 
           {/* Desktop Nav Links */}
           <ul className="hidden lg:flex items-center gap-1">
-            {navLinks.map(({ href, label }) => (
-              <li key={href}>
-                <Link
-                  href={href}
-                  className="relative px-4 py-2 rounded-xl text-sm font-medium font-jakarta text-text-secondary hover:text-text-primary hover:bg-white/5 transition-all duration-200 group"
-                >
-                  {label}
-                  <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-accent rounded-full group-hover:w-4 transition-all duration-300" />
+            {navLinks.map(({ href, label }) => {
+              const isActive =
+                pathname === href ||
+                (href !== "/" && pathname.startsWith(href));
 
-                  {/* Pulsing dot when prayer is (≤ 60 minutes) with HintColor */}
-                  {href === "/prayer-times" && !permissionDenied && (
-                    <AnimatePresence>
-                      {hintColor.text !== "gradient-text" && nextPrayerKey && (
-                        <motion.span
-                          key="prayer-dot"
-                          initial={{ opacity: 0, scale: 0 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          exit={{ opacity: 0, scale: 0 }}
-                          transition={{ type: "spring" }}
-                          className={`absolute top-2 right-0.5 size-2 rounded-full ${hintColor.bg}`}
-                        >
-                          {/* ripple animation */}
-                          <span
-                            className={`absolute inset-0 rounded-full ${hintColor.bg} animate-ping opacity-75`}
-                          />
-                        </motion.span>
-                      )}
-                    </AnimatePresence>
-                  )}
-                </Link>
-              </li>
-            ))}
+              return (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    className={`relative px-4 py-2 rounded-xl text-sm font-medium font-jakarta transition-all duration-800 group hover:bg-white/5 ${isActive ? "text-text-primary" : "text-text-secondary hover:text-text-primary"}`}
+                  >
+                    {label}
+                    <span
+                      className={`absolute bottom-1 left-1/2 -translate-x-1/2 h-0.5 bg-accent rounded-full transition-all duration-300 ${isActive ? "w-4" : "w-0 group-hover:w-4"}`}
+                    />
+
+                    {/* Pulsing dot when prayer is (≤ 60 minutes) with HintColor */}
+                    {href === "/prayer-times" && !permissionDenied && (
+                      <AnimatePresence>
+                        {hintColor.text !== "gradient-text" &&
+                          nextPrayerKey && (
+                            <motion.span
+                              key="prayer-dot"
+                              initial={{ opacity: 0, scale: 0 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              exit={{ opacity: 0, scale: 0 }}
+                              transition={{ type: "spring" }}
+                              className={`absolute top-2 right-0.5 size-2 rounded-full ${hintColor.bg}`}
+                            >
+                              {/* ripple animation */}
+                              <span
+                                className={`absolute inset-0 rounded-full ${hintColor.bg} animate-ping opacity-75`}
+                              />
+                            </motion.span>
+                          )}
+                      </AnimatePresence>
+                    )}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
 
           {/* Right Actions */}
@@ -167,6 +178,7 @@ export default function Navbar() {
         status={status}
         user={user}
         signOut={signOut}
+        pathname={pathname}
       />
     </>
   );
