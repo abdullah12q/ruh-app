@@ -75,36 +75,40 @@ export default function AnnualView({ coords, method, year }) {
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
                   transition={{ duration: 0.25, ease: "easeInOut" }}
-                  className="overflow-hidden px-2 pb-2"
+                  className="w-full overflow-x-auto pb-2"
                 >
-                  {/* Column headers */}
-                  <div className="flex items-center gap-3 px-4 py-1.5 mb-1">
-                    <div className="w-28 shrink-0">
-                      <span className="text-[10px] text-text-secondary/40 font-jakarta uppercase tracking-wider">
-                        Date
-                      </span>
-                    </div>
-                    <div className="flex-1 grid grid-cols-6 gap-1">
-                      {PRAYER_NAMES.map(({ key }) => (
-                        <span
-                          key={key}
-                          className="text-[10px] text-text-secondary/40 font-jakarta uppercase tracking-wider"
-                        >
-                          {key}
+                  <div className="min-w-137.5 sm:min-w-0">
+                    {/* Column headers */}
+                    <div className="flex items-center gap-3 px-4 pb-1 border-b border-(--surface-glass-border)">
+                      <div className="w-28 shrink-0">
+                        <span className="text-[10px] text-text-secondary/40 font-jakarta uppercase tracking-wider">
+                          Date
                         </span>
-                      ))}
+                      </div>
+                      <div className="flex-1 grid grid-cols-6 gap-1">
+                        {PRAYER_NAMES.map(({ key }) => (
+                          <span
+                            key={key}
+                            className="text-[10px] text-text-secondary/40 font-jakarta uppercase tracking-wider"
+                          >
+                            {key}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                  <div className="space-y-0.5">
-                    {days?.map((day, i) => {
-                      // Aladhan returns date as "DD-MM-YYYY"
-                      const parts = day.date?.gregorian?.date?.split("-");
-                      const iso = parts
-                        ? `${parts[2]}-${parts[1]}-${parts[0]}`
-                        : null; // bdl "DD-MM-YYYY" htb2a "YYYY-MM-DD" 3shan tb2a === todayStr
-                      const isToday = iso === todayStr;
-                      return <DayRow key={i} day={day} isToday={isToday} />;
-                    })}
+
+                    {/* Days nfsha b2a */}
+                    <div className="space-y-0.5">
+                      {days?.map((day, i) => {
+                        // Aladhan returns date as "DD-MM-YYYY"
+                        const parts = day.date?.gregorian?.date?.split("-");
+                        const iso = parts
+                          ? `${parts[2]}-${parts[1]}-${parts[0]}`
+                          : null; // bdl "DD-MM-YYYY" htb2a "YYYY-MM-DD" 3shan tb2a === todayStr
+                        const isToday = iso === todayStr;
+                        return <DayRow key={i} day={day} isToday={isToday} />;
+                      })}
+                    </div>
                   </div>
                 </motion.div>
               )}

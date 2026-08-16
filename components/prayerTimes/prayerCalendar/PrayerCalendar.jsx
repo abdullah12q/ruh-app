@@ -72,6 +72,10 @@ export default function PrayerCalendar({
   const periodLabel =
     view === "monthly" ? `${HIJRI_MONTHS[month - 1]} ${year} AH` : `${year} AH`;
 
+  const today =
+    (view === "monthly" && month === Number(hijriMonth)) ||
+    (view === "annual" && year === Number(hijriYear));
+
   return (
     !isLoading &&
     coords && (
@@ -126,7 +130,9 @@ export default function PrayerCalendar({
               >
                 <ChevronLeft size={14} />
               </button>
-              <span className="font-jakarta font-semibold text-sm text-text-primary min-w-40 text-center">
+              <span
+                className={`font-jakarta font-semibold text-sm ${today ? "text-accent" : "text-text-primary"} transition-colors duration-500 min-w-40 text-center`}
+              >
                 {periodLabel}
               </span>
               <button
