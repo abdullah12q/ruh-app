@@ -26,11 +26,10 @@ export default function MushafPage({ versesInPage, pageNumber }) {
 
   return (
     <div>
-      <div className="space-y-0 mb-6">
-        {[...lines.entries()].map(([lineNum, lineWords], index) => (
+      <div className="flex flex-wrap items-center gap-x-3 w-full" dir="rtl">
+        {[...lines.entries()].map(([lineNum, lineWords]) => (
           <MushafLine
             key={lineNum}
-            index={index}
             lineWords={lineWords}
             fontSize={fontSize}
             activeVerseKey={activeVerseKey}

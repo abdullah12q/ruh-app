@@ -24,7 +24,11 @@ export default function MushafWord({
         aria-label={`End of verse ${word.verse_key}`}
         {...hoverHandlers}
       >
-        <AyahEndMarker text={word.text} isActive={isVerseActive} />
+        <AyahEndMarker
+          text={word.text}
+          isActive={isVerseActive}
+          fontSize={fontSize}
+        />
       </button>
     );
   }
