@@ -53,7 +53,12 @@ export default function SurahReadingControls() {
   } = useUIStore();
 
   // Shared playback state — same audio element used by Normal & Mushaf modes.
-  const { audioPlaying, handlePlayButtonPress } = useSurahPlayback();
+  const {
+    audioPlaying,
+    handlePlayButtonPress,
+    handleFromNormalModeToMushafMode,
+    handleFromMushafModeToNormalMode,
+  } = useSurahPlayback();
 
   const currentIndex = FONT_SIZES.indexOf(fontSize);
 
@@ -66,6 +71,15 @@ export default function SurahReadingControls() {
     },
     [setVolume],
   );
+
+  function handleToggleMushafModeClick() {
+    if (audioPlaying && !mushafMode) {
+      handleFromNormalModeToMushafMode();
+    } else if (audioPlaying && mushafMode) {
+      handleFromMushafModeToNormalMode();
+    }
+    toggleMushafMode();
+  }
 
   return (
     // ── Controls Bar ──
@@ -199,7 +213,7 @@ export default function SurahReadingControls() {
 
       {/* Mushaf Mode Toggle */}
       <button
-        onClick={() => toggleMushafMode()}
+        onClick={handleToggleMushafModeClick}
         aria-label={
           mushafMode ? "Switch to Normal Mode" : "Switch to Mushaf Mode"
         }

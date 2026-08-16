@@ -140,7 +140,14 @@ export default function SurahPlaybackProvider({
       setCurrentTime(0);
       setAudioPlaying(true);
     },
-    [setActiveAyah, surahId, currentPage, setCurrentTime, setAudioPlaying, verseToPage],
+    [
+      setActiveAyah,
+      surahId,
+      currentPage,
+      setCurrentTime,
+      setAudioPlaying,
+      verseToPage,
+    ],
   );
 
   const togglePlayPause = useCallback(() => {
@@ -217,6 +224,26 @@ export default function SurahPlaybackProvider({
     currentPage,
   ]);
 
+  const handleFromNormalModeToMushafMode = useCallback(() => {
+    if (!activeAyahNum) return;
+    const pageNum = verseToPage.get(activeAyahNum) || currentPage;
+    goToPage(pageNum);
+    setCurrentPageState(pageNum);
+  }, [activeAyahNum, verseToPage, currentPage, goToPage]);
+
+  const handleFromMushafModeToNormalMode = useCallback(() => {
+    // We use setTimeout to wait for React to unmount the MushafView and mount the AyahList
+    setTimeout(() => {
+      const ayah = document.getElementById(`ayah-${activeAyahNum}`);
+      if (ayah) {
+        ayah.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }
+    }, 300);
+  }, [activeAyahNum]);
+
   // Prefetch the *audio file* for the next verse
   useEffect(() => {
     if (!activeAyahNum || !surahId || !selectedReciter?.path) return;
@@ -248,6 +275,8 @@ export default function SurahPlaybackProvider({
       playAyah,
       togglePlayPause,
       handlePlayButtonPress,
+      handleFromNormalModeToMushafMode,
+      handleFromMushafModeToNormalMode,
       currentPage,
       firstPage,
       lastPage,
@@ -266,6 +295,8 @@ export default function SurahPlaybackProvider({
       playAyah,
       togglePlayPause,
       handlePlayButtonPress,
+      handleFromNormalModeToMushafMode,
+      handleFromMushafModeToNormalMode,
       currentPage,
       firstPage,
       lastPage,

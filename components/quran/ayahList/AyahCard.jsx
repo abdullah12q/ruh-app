@@ -48,10 +48,9 @@ export default function AyahCard({ ayah, surahId }) {
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
       viewport={{ once: true, amount: 0.6 }}
-      transition={{ type: "spring", damping: 100, stiffness: 300 }}
       className={`group relative glass rounded-2xl p-6 sm:p-8 transition-all duration-300 ${
         isActive && "shadow-[0_0_24px_rgba(20,184,166,0.12)]!"
       }`}
