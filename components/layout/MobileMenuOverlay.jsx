@@ -51,7 +51,7 @@ export default function MobileMenuOverlay({
 
             {/* Mobile Nav Links */}
             <nav>
-              <ul className="space-y-5">
+              <ul className="space-y-7">
                 {navLinks.map(({ href, label, icon: Icon }, i) => (
                   <motion.li
                     key={href}
