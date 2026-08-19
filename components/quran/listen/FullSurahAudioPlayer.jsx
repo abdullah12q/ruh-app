@@ -209,7 +209,7 @@ export default function FullSurahAudioPlayer({
       className="fixed bottom-0 left-0 right-0 z-39"
     >
       {/* Frosted glass player bar */}
-      <div className="glass backdrop-blur-sm border-t border-white/10 dark:border-white/5 px-4 sm:px-6 py-3 shadow-[0_-8px_40px_rgba(0,0,0,0.3)]">
+      <div className="glass backdrop-blur-sm border-t border-white/10 px-4 sm:px-6 py-3 shadow-[0_-8px_40px_rgba(0,0,0,0.3)]">
         {/* Timeline — full width, above controls */}
         <div className="mb-3 flex items-center gap-3">
           <span className="text-[11px] tabular-nums text-text-secondary font-jakarta w-10 text-right shrink-0">

@@ -116,7 +116,7 @@ export default function RegisterForm() {
           className="w-full flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl bg-accent text-white font-bold text-sm hover:opacity-90 hover:shadow-[0_0_24px_rgba(20,184,166,0.4)] active:scale-95 disabled:cursor-not-allowed transition-all duration-200 mt-2 cursor-pointer"
         >
           {isLoading ? (
-            <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+            <div className="size-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
           ) : (
             <UserPlus size={15} />
           )}

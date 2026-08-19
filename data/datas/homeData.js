@@ -13,6 +13,7 @@ import {
   Shuffle,
   Radio,
   UsersRound,
+  Hand,
 } from "lucide-react";
 import { cleanTime, timeToMinutes } from "./prayerTimesData";
 
@@ -32,10 +33,20 @@ export const features = [
     title: "Prayer Times",
     titleAr: "أوقات الصلاة",
     description:
-      "Accurate prayer times for your location with Azan notifications and Qibla direction.",
+      "Accurate Islamic prayer times for your location. Monthly and annual Hijri calendar included.",
     href: "/prayer-times",
     gradient: "from-indigo-500/10 to-violet-500/10",
     iconColor: "text-indigo-400",
+  },
+  {
+    icon: Hand,
+    title: "Azkar",
+    titleAr: "الأذكار",
+    description:
+      "Start your morning and evening with guided Azkar. Track progress and complete your daily wird.",
+    href: "/azkar",
+    gradient: "from-pink-500/10",
+    iconColor: "text-pink-400",
   },
   {
     icon: Star,
