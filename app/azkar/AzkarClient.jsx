@@ -25,9 +25,7 @@ export default function AzkarClient({ categories }) {
 
   const filteredCategories = useMemo(() => {
     if (!searchQuery.trim()) return categories;
-    return categories.filter((cat) =>
-      cat.title.includes(searchQuery.trim())
-    );
+    return categories.filter((cat) => cat.title.includes(searchQuery.trim()));
   }, [categories, searchQuery]);
 
   const validIds = useMemo(
@@ -45,22 +43,25 @@ export default function AzkarClient({ categories }) {
   const handleSelect = useCallback(
     (cat) => {
       setActiveCategory(cat);
+
       // Scroll the main content area to top on category switch
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 10);
     },
     [setActiveCategory],
   );
-
-  if (!safeCategory) return null;
 
   return (
     <div className="min-h-screen py-16 px-4 sm:px-6 lg:px-8" dir="rtl">
       {/* Hero header */}
       <div className="relative overflow-hidden py-16 px-4 text-center">
         {/* Ambient glow */}
-        <div
+        <motion.div
+          animate={{ opacity: [0.5, 1], y: [-20, 0] }}
+          transition={{ duration: 0.6 }}
           aria-hidden
-          className="absolute inset-0 pointer-events-none"
+          className="absolute inset-0 pointer-events-none opacity-0"
           style={{
             background:
               "radial-gradient(ellipse 60% 50% at 50% 0%, var(--accent-glow) 0%, transparent 70%)",
