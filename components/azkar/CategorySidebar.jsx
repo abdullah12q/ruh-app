@@ -1,5 +1,4 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { CATEGORY_ICONS, DEFAULT_ICON } from "./categoryIcons";
 import { RotateCcw, Search, X } from "lucide-react";
 
 export function CategorySidebar({
@@ -72,14 +71,11 @@ export function CategorySidebar({
                   : "text-text-secondary hover:bg-white/5 hover:text-text-primary"
               } cursor-pointer`}
               >
-                <span className="text-base shrink-0">
-                  {CATEGORY_ICONS[cat.title] ?? DEFAULT_ICON}
-                </span>
                 <span className="truncate">{cat.title}</span>
                 {isActive && (
                   <motion.span
                     layoutId="sidebar-indicator"
-                    className="ml-auto w-1.5 h-1.5 rounded-full bg-accent shrink-0"
+                    className="ml-auto size-1.5 rounded-full bg-accent shrink-0"
                   />
                 )}
               </motion.button>

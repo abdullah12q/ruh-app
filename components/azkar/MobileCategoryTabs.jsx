@@ -1,5 +1,4 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { CATEGORY_ICONS, DEFAULT_ICON } from "./categoryIcons";
 import { Search, X } from "lucide-react";
 
 export function MobileCategoryTabs({
@@ -52,7 +51,7 @@ export function MobileCategoryTabs({
                   onClick={() => onSelect(cat)}
                   dir="rtl"
                   className={`
-                  flex items-center gap-2 shrink-0 px-4 py-2 rounded-full whitespace-nowrap transition-all duration-400
+                  px-4 py-2 rounded-full whitespace-nowrap transition-all duration-400
                   ${
                     isActive
                       ? "bg-accent text-white shadow-lg"
@@ -60,8 +59,7 @@ export function MobileCategoryTabs({
                   }
                 `}
                 >
-                  <span>{CATEGORY_ICONS[cat.title] ?? DEFAULT_ICON}</span>
-                  <span>{cat.title}</span>
+                  {cat.title}
                 </motion.button>
               );
             })

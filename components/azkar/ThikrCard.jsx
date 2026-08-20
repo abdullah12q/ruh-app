@@ -59,7 +59,7 @@ export function ThikrCard({ decrementThikr, resetThikr, item }) {
 
       {/* Main Arabic content */}
       <p
-        className="font-arabic-ui text-text-primary text-lg leading-loose mb-3 text-right"
+        className="font-arabic-ui text-text-primary text-lg leading-loose whitespace-pre-line mb-3 text-right"
         dir="rtl"
         lang="ar"
       >
