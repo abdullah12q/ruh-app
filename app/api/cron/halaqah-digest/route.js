@@ -15,7 +15,7 @@ const transporter = nodemailer.createTransport({
 const FROM_EMAIL =
   process.env.EMAIL_FROM ?? '"Rُuh" <ruh.app.official@gmail.com>';
 
-// bb3t email kol youm gom3a esa3a 8 elsob7 by vercel cron defined in vercel.json (5 UTC y3ny 8 elsob7)
+// bb3t email kol youm gom3a esa3a (8 elsob7 summer) w (7 elsob7 winter) by vercel cron defined in vercel.json (5 UTC y3ny 8 elsob7 summer w 7 elsob7 winter)
 export async function POST(req) {
   // Verify the cron secret
   const authHeader = req.headers.get("authorization");
