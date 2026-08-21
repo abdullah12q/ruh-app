@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import { Plus, LogIn, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useUserHalaqahs } from "@/lib/queries/halaqah";
 import HalaqahCard from "./HalaqahCard";
 import CreateJoinModal from "./CreateJoinModal/CreateJoinModal";
 import EditableUserCircleName from "./EditableUserCircleName";
-import Link from "next/link";
+import DigestTipBanner from "./DigestTipBanner";
 
 export default function HalaqahDashboard({ userStudyCircleName }) {
   const { status } = useSession();
@@ -216,13 +217,18 @@ export default function HalaqahDashboard({ userStudyCircleName }) {
           </p>
         </motion.div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <AnimatePresence>
-            {halaqahs.map((h, i) => (
-              <HalaqahCard key={h.id} halaqah={h} index={i} />
-            ))}
-          </AnimatePresence>
-        </div>
+        <>
+          {/* Email spam tip — shown once per browser until dismissed */}
+          <DigestTipBanner />
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <AnimatePresence>
+              {halaqahs.map((h, i) => (
+                <HalaqahCard key={h.id} halaqah={h} index={i} />
+              ))}
+            </AnimatePresence>
+          </div>
+        </>
       )}
 
       {/* Create / Join Modal */}
