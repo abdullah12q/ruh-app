@@ -10,7 +10,7 @@ export default function SearchAndFilterBar({
   return (
     <div className="mb-6 space-y-4">
       {/* Search input */}
-      <div className="relative">
+      <div className="relative max-w-lg mx-auto">
         <Search
           size={16}
           className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none"
@@ -20,7 +20,7 @@ export default function SearchAndFilterBar({
           placeholder="Search stations, reciters, countries..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full px-10 py-3 rounded-xl glass text-text-primary placeholder:text-text-secondary text-sm font-inter focus:outline-none transition-all duration-200"
+          className="w-full glass rounded-full py-3 pl-11 pr-10 text-sm font-inter text-text-primary placeholder:text-text-secondary focus:outline-none focus:border-accent/50! transition-colors duration-400"
         />
         {searchQuery && (
           <button

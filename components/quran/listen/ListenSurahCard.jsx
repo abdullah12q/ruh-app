@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Headphones, Mic } from "lucide-react";
 import { revelationBadge } from "@/data/datas/quranData";
 
-export default function ListenSurahCard({ surah, index }) {
+export default function ListenSurahCard({ surah }) {
   const badge = revelationBadge[surah.revelation_place];
 
   return (

@@ -1,5 +1,6 @@
-import { AnimatePresence, motion } from "framer-motion";
-import { RotateCcw, Search, X } from "lucide-react";
+import { motion } from "framer-motion";
+import { RotateCcw, Search } from "lucide-react";
+import AnimatedSearchCloseIcon from "../AnimatedSearchCloseIcon";
 
 export function CategorySidebar({
   resetAll,
@@ -34,21 +35,11 @@ export function CategorySidebar({
           dir="rtl"
         />
 
-        <AnimatePresence>
-          {searchQuery.trim() && (
-            <motion.button
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0 }}
-              transition={{ duration: 0.2 }}
-              whileTap={{ scale: 0.9 }}
-              className="absolute left-3 top-1/2 -translate-y-1/2 rounded-md p-1 hover:bg-accent/15 transition-colors duration-400 text-text-secondary cursor-pointer"
-              onClick={() => setSearchQuery("")}
-            >
-              <X size={14} />
-            </motion.button>
-          )}
-        </AnimatePresence>
+        <AnimatedSearchCloseIcon
+          value={searchQuery}
+          position="left-3"
+          onChange={setSearchQuery}
+        />
       </div>
 
       <div className="flex flex-col gap-1 overflow-y-auto pl-1 flex-1 custom-scrollbar pb-4">

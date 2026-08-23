@@ -96,8 +96,8 @@ export default function ListenBrowser({ surahs }) {
               </div>
             ) : filtered.length > 0 ? (
               <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-3">
-                {filtered.map((surah, i) => (
-                  <ListenSurahCard key={surah.id} surah={surah} index={i} />
+                {filtered.map((surah) => (
+                  <ListenSurahCard key={surah.id} surah={surah} />
                 ))}
               </div>
             ) : (

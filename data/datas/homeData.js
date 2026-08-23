@@ -53,7 +53,7 @@ export const features = [
     title: "Hadith",
     titleAr: "الحديث",
     description:
-      "Explore authentic Hadiths from the major collections, curated for daily reflection.",
+      "Read and reflect on authentic Hadiths and Sunan from the Prophet Muhammad ﷺ.",
     href: "/hadith",
     gradient: "from-amber-500/10 to-orange-500/10",
     iconColor: "text-amber-400",
