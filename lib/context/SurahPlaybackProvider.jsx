@@ -6,6 +6,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import { useQueryClient } from "@tanstack/react-query";
@@ -47,7 +48,13 @@ export default function SurahPlaybackProvider({
 
   const activeAyahNum = activeAyah?.[surahId];
 
-  // Single Global Audio Source
+  // Stable ref for audioPlaying — lets handleNextVerse read the current value
+  // without being in its dep array, preventing re-creation on every play/pause.
+  const audioPlayingRef = useRef(audioPlaying);
+  useEffect(() => {
+    audioPlayingRef.current = audioPlaying;
+  }, [audioPlaying]);
+
   const audioUrl = useMemo(() => {
     if (!surahId || !activeAyahNum || !selectedReciter?.path) return "";
     return `https://everyayah.com/data/${selectedReciter.path}/${formatAudioFileName(
@@ -56,18 +63,21 @@ export default function SurahPlaybackProvider({
     )}`;
   }, [surahId, activeAyahNum, selectedReciter]);
 
-  const {
-    currentTime,
-    setCurrentTime,
-    duration,
-    audioRef,
-    handleSeek,
-    onTimeUpdate,
-    onLoadedMetadata,
-  } = useAudioPlayer({
-    audioUrl,
-    isPlaying: !!activeAyahNum && audioPlaying,
-  });
+  // Next ayah URL (preloaded into the standby buffer for gapless transition)
+  const nextAudioUrl = useMemo(() => {
+    if (!surahId || !activeAyahNum || !selectedReciter?.path) return "";
+    const { surah: nextSurah, ayah: nextAyah } = calculateNextVerse(
+      surahId,
+      activeAyahNum,
+      verses.length,
+    );
+    // End of surah — no next track to preload
+    if (nextSurah > surahId) return "";
+    return `https://everyayah.com/data/${selectedReciter.path}/${formatAudioFileName(
+      nextSurah,
+      nextAyah,
+    )}`;
+  }, [surahId, activeAyahNum, selectedReciter, verses.length]);
 
   const { firstPage, lastPage } = useMemo(
     () => derivePageRange(verses),
@@ -102,7 +112,58 @@ export default function SurahPlaybackProvider({
     }
   }, [activeCurrentMushafPage, goToPage]);
 
-  // Prefetch every Mushaf page up front so nav feels instant
+  // Auto-advance to the next verse when the current one finishes
+  const handleNextVerse = useCallback(() => {
+    if (!surahId || !activeAyahNum) return;
+
+    const { surah: nextSurah, ayah: nextAyah } = calculateNextVerse(
+      surahId,
+      activeAyahNum,
+      verses.length,
+    );
+
+    // Stop at the last ayah of the Surah rather than jumping to the next one.
+    if (nextSurah > surahId) {
+      setActiveAyah(surahId, activeAyahNum, currentPage);
+      if (audioPlayingRef.current) setAudioPlaying(false);
+      return;
+    }
+
+    // Auto scroll to next ayah
+    const ayah = document.getElementById(`ayah-${nextAyah}`);
+    if (ayah) {
+      ayah.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+
+    const nextPage = verseToPage.get(nextAyah);
+    setActiveAyah(surahId, nextAyah, nextPage || currentPage);
+
+    // Keep Mushaf Mode's visible page in sync when playback crosses a page boundary.
+    if (mushafMode && nextPage && nextPage !== currentPage) {
+      setDirection(1);
+      setCurrentPageState(nextPage);
+    }
+  }, [
+    surahId,
+    activeAyahNum,
+    verses,
+    setActiveAyah,
+    setAudioPlaying,
+    verseToPage,
+    mushafMode,
+    currentPage,
+  ]);
+
+  const { currentTime, setCurrentTime, duration, handleSeek } = useAudioPlayer({
+    audioUrl,
+    nextAudioUrl,
+    isPlaying: !!activeAyahNum && audioPlaying,
+    onTrackEnded: handleNextVerse,
+  });
+
   // Runs once the Surah page mounts, regardless of whether Mushaf Mode is
   // currently active, so by the time the user toggles into it the pages
   // are already warm in the React Query cache.
@@ -185,54 +246,6 @@ export default function SurahPlaybackProvider({
     togglePlayPause,
   ]);
 
-  // Auto-advance to the next verse when the current one finishes
-  const handleNextVerse = useCallback(() => {
-    if (!surahId || !activeAyahNum) return;
-    setCurrentTime(0);
-
-    const { surah: nextSurah, ayah: nextAyah } = calculateNextVerse(
-      surahId,
-      activeAyahNum,
-      verses.length,
-    );
-
-    // Stop at the last ayah of the Surah rather than jumping to the next one.
-    if (nextSurah > surahId) {
-      setActiveAyah(surahId, activeAyahNum, currentPage);
-      if (audioPlaying) setAudioPlaying(false);
-      return;
-    }
-
-    // Auto scroll to next ayah
-    const ayah = document.getElementById(`ayah-${nextAyah}`);
-    if (ayah) {
-      ayah.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
-    }
-
-    const nextPage = verseToPage.get(nextAyah);
-    setActiveAyah(surahId, nextAyah, nextPage || currentPage);
-
-    // Keep Mushaf Mode's visible page in sync when playback crosses a page boundary.
-    if (mushafMode && nextPage && nextPage !== currentPage) {
-      setDirection(1);
-      setCurrentPageState(nextPage);
-    }
-  }, [
-    surahId,
-    activeAyahNum,
-    verses,
-    setActiveAyah,
-    audioPlaying,
-    setAudioPlaying,
-    setCurrentTime,
-    verseToPage,
-    mushafMode,
-    currentPage,
-  ]);
-
   const handleFromNormalModeToMushafMode = useCallback(() => {
     if (!activeAyahNum) return;
     const pageNum = verseToPage.get(activeAyahNum) || currentPage;
@@ -252,26 +265,6 @@ export default function SurahPlaybackProvider({
       }
     }, 10);
   }, [activeAyahNum]);
-
-  // Prefetch the *audio file* for the next verse
-  useEffect(() => {
-    if (!activeAyahNum || !surahId || !selectedReciter?.path) return;
-
-    const { surah: nextSurah, ayah: nextAyah } = calculateNextVerse(
-      surahId,
-      activeAyahNum,
-      verses.length,
-    );
-    if (nextSurah > surahId) return;
-
-    const preloader = new Audio(
-      `https://everyayah.com/data/${selectedReciter.path}/${formatAudioFileName(
-        nextSurah,
-        nextAyah,
-      )}`,
-    );
-    preloader.preload = "auto";
-  }, [activeAyahNum, surahId, selectedReciter, verses]);
 
   const value = useMemo(
     () => ({
@@ -319,14 +312,6 @@ export default function SurahPlaybackProvider({
   return (
     <SurahPlaybackContext.Provider value={value}>
       {children}
-      <audio
-        ref={audioRef}
-        src={audioUrl || undefined}
-        autoPlay={audioPlaying}
-        onEnded={handleNextVerse}
-        onTimeUpdate={onTimeUpdate}
-        onLoadedMetadata={onLoadedMetadata}
-      />
     </SurahPlaybackContext.Provider>
   );
 }

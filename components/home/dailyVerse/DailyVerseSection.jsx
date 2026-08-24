@@ -9,6 +9,8 @@ import {
   useAyahTranslation,
   quranKeys,
   fetchSpecificVerse,
+  fetchEnglishTranslation,
+  fetchArabicTranslation,
   useRandomOrNextVerse,
   useSurah,
 } from "@/lib/queries/quran";
@@ -65,22 +67,22 @@ export default function DailyVerseSection() {
     return `https://everyayah.com/data/${selectedReciter.path}/${fileName}`;
   }, [activeSurahNum, activeAyahNum, selectedReciter]);
 
-  const {
-    currentTime,
-    duration,
-    audioRef,
-    volume,
-    handleSeek,
-    handleVolumeChange,
-    onTimeUpdate,
-    onLoadedMetadata,
-  } = useAudioPlayer({
-    audioUrl,
-    isPlaying,
-  });
+  const nextAudioUrl = useMemo(() => {
+    if (!activeSurahNum || !activeAyahNum || !selectedReciter?.path || !surah)
+      return "";
+    const { surah: nextSurah, ayah: nextAyah } = calculateNextVerse(
+      activeSurahNum,
+      activeAyahNum,
+      surah.verses_count,
+    );
+    return `https://everyayah.com/data/${selectedReciter.path}/${formatAudioFileName(
+      nextSurah,
+      nextAyah,
+    )}`;
+  }, [activeSurahNum, activeAyahNum, selectedReciter, surah]);
 
   // PREFETCHING EFFECT
-  // This calculates the next verse and downloads the JSON and MP3 in the background silently.
+  // This calculates the next verse and downloads the JSON in the background silently.
   useEffect(() => {
     if (!activeSurahNum || !activeAyahNum || !surah || !selectedReciter?.path)
       return;
@@ -97,15 +99,26 @@ export default function DailyVerseSection() {
       queryFn: () => fetchSpecificVerse(nextSurah, nextAyah),
     });
 
-    // Prefetch Audio File
-    const nextFileName = formatAudioFileName(nextSurah, nextAyah);
-    if (nextFileName) {
-      const preloader = new Audio(
-        `https://everyayah.com/data/${selectedReciter.path}/${nextFileName}`,
-      );
-      preloader.preload = "auto"; // This forces the browser to download and cache the MP3
+    // Prefetch Translations
+    if (translationLang === "en") {
+      queryClient.prefetchQuery({
+        queryKey: quranKeys.translationEn(nextSurah, nextAyah),
+        queryFn: () => fetchEnglishTranslation(nextSurah, nextAyah),
+      });
+    } else if (translationLang === "ar") {
+      queryClient.prefetchQuery({
+        queryKey: quranKeys.translationAr(nextSurah, nextAyah),
+        queryFn: () => fetchArabicTranslation(nextSurah, nextAyah),
+      });
     }
-  }, [activeSurahNum, activeAyahNum, surah, selectedReciter, queryClient]);
+  }, [
+    activeSurahNum,
+    activeAyahNum,
+    surah,
+    selectedReciter,
+    queryClient,
+    translationLang,
+  ]);
 
   // Clears the localStorage cache and fetches a brand-new random verse
   async function handleGetNewVerse() {
@@ -136,6 +149,14 @@ export default function DailyVerseSection() {
     // When the new verse arrives, el existing useEffect automatically updates the audioUrl.
     setTargetVerse({ surah: nextSurah, ayah: nextAyah });
   }
+
+  const { currentTime, duration, volume, handleSeek, handleVolumeChange } =
+    useAudioPlayer({
+      audioUrl,
+      nextAudioUrl,
+      isPlaying,
+      onTrackEnded: handleNextVerse,
+    });
 
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8">
@@ -185,17 +206,6 @@ export default function DailyVerseSection() {
                     translationLoading={translationLoading}
                     translationError={translationError}
                     lang={lang}
-                  />
-
-                  {/* Hidden audio player */}
-                  <audio
-                    ref={audioRef}
-                    src={audioUrl || undefined}
-                    autoPlay={isPlaying}
-                    onEnded={handleNextVerse}
-                    onPlay={() => setIsPlaying(true)}
-                    onTimeUpdate={onTimeUpdate}
-                    onLoadedMetadata={onLoadedMetadata}
                   />
 
                   <DailyVerseControls
