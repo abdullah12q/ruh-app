@@ -9,12 +9,12 @@ const LANG_MODES = [
 
 export default function HadithLanguageToggle({ langMode, setLangMode }) {
   return (
-    <div className="flex items-center justify-between mb-6">
+    <div className="sticky top-17.5 z-30 glass rounded-2xl px-3 py-2 backdrop-blur-xl flex items-center justify-between mb-6">
       <div className="flex items-center gap-2 text-text-secondary text-sm font-inter">
         <Languages size={14} />
         <span>Display</span>
       </div>
-      <div className="inline-flex p-1 glass rounded-full gap-0.5">
+      <div className="inline-flex rounded-full gap-0.5">
         {LANG_MODES.map((m) => (
           <button
             key={m.id}

@@ -37,40 +37,41 @@ export default function HadithChapterPage({
   }
 
   return (
-    <div className="min-h-screen pt-28 pb-20 px-4 sm:px-6 lg:px-8 animate-fade-up">
+    <div className="min-h-screen pt-28 pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
         {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-sm text-text-secondary mb-8 font-jakarta flex-wrap">
-          <Link
-            href="/hadith"
-            className="hover:text-accent transition-colors flex items-center gap-1"
-          >
-            <Library size={13} /> Hadith
-          </Link>
-          <span className="opacity-40">/</span>
-          <Link
-            href={`/hadith/${bookInfo.id}`}
-            className="hover:text-accent transition-colors flex items-center gap-1 max-w-30 sm:max-w-none truncate"
-          >
-            <BookOpen size={13} />
-            <span className="truncate">{englishTitle}</span>
-          </Link>
-          <span className="opacity-40">/</span>
-          <span className="text-text-primary max-w-35 sm:max-w-none truncate">
-            {chapterEn}
-          </span>
-        </nav>
-
-        {/* Chapter Header */}
-        <ChapterHeader
-          chapterAr={chapterAr}
-          englishTitle={englishTitle}
-          arabicTitle={arabicTitle}
-          chapterEn={chapterEn}
-          hadiths={hadiths}
-          totalPages={totalPages}
-          page={page}
-        />
+        <div className="animate-fade-up">
+          <nav className="flex items-center gap-2 text-sm text-text-secondary mb-8 font-jakarta flex-wrap">
+            <Link
+              href="/hadith"
+              className="hover:text-accent transition-colors flex items-center gap-1"
+            >
+              <Library size={13} /> Hadith
+            </Link>
+            <span className="opacity-40">/</span>
+            <Link
+              href={`/hadith/${bookInfo.id}`}
+              className="hover:text-accent transition-colors flex items-center gap-1 max-w-30 sm:max-w-none truncate"
+            >
+              <BookOpen size={13} />
+              <span className="truncate">{englishTitle}</span>
+            </Link>
+            <span className="opacity-40">/</span>
+            <span className="text-text-primary max-w-35 sm:max-w-none truncate">
+              {chapterEn}
+            </span>
+          </nav>
+          {/* Chapter Header */}
+          <ChapterHeader
+            chapterAr={chapterAr}
+            englishTitle={englishTitle}
+            arabicTitle={arabicTitle}
+            chapterEn={chapterEn}
+            hadiths={hadiths}
+            totalPages={totalPages}
+            page={page}
+          />
+        </div>
 
         {/* Language Toggle */}
         <HadithLanguageToggle langMode={langMode} setLangMode={setLangMode} />
