@@ -18,6 +18,7 @@ export function useAudioPlayer({
 
   const activeRef = useRef(null); // currently playing
   const standbyRef = useRef(null); // silently preloaded next
+  const freedRef = useRef(null); // finishing its overlap (crossfade)
 
   const rafRef = useRef(null);
 
@@ -29,6 +30,10 @@ export function useAudioPlayer({
   // change `audioUrl`. This flag tells the play/load effect to skip the
   // hard reset because the swap already took care of it.
   const isAutoAdvancingRef = useRef(false);
+
+  // Flag to prevent multiple early triggers for the same track
+  const hasTriggeredNextRef = useRef(false);
+  const OVERLAP_THRESHOLD = 0.13; // seconds of overlap for gapless transition
 
   // Last `currentTime` value committed to state — used by the RAF throttle
   // to skip updates smaller than 10 ms and avoid unnecessary re-renders.
@@ -60,23 +65,81 @@ export function useAudioPlayer({
     el.load();
   }, []);
 
+  // Extracted swap logic so it can be called early via tick or via fallback ended event
+  const triggerNext = useCallback(() => {
+    if (!activeRef.current || !standbyRef.current || !freedRef.current) return;
+
+    const standby = standbyRef.current;
+
+    // If standby has no src (last ayah or not yet loaded), delegate to provider.
+    if (!standby.getAttribute("src")) {
+      activeRef.current.currentTime = 0;
+      setCurrentTime(0);
+      lastCommittedTimeRef.current = 0;
+      onTrackEndedRef.current?.();
+      return;
+    }
+
+    // Pointer swap (3 buffers)
+    const oldActive = activeRef.current;
+    activeRef.current = standby;
+    standbyRef.current = freedRef.current; // The old freed becomes the new standby
+    freedRef.current = oldActive; // The old active goes to freed, allowed to finish overlap!
+
+    const newActive = activeRef.current;
+
+    // Update UI immediately.
+    setCurrentTime(0);
+    lastCommittedTimeRef.current = 0;
+    setDuration(isNaN(newActive.duration) ? 0 : newActive.duration);
+
+    // Readiness guard
+    function doPlay() {
+      newActive.volume = volumeRef.current;
+      newActive.play().catch((err) => console.log("Gapless play error:", err));
+    }
+
+    if (newActive.readyState >= 3) {
+      doPlay();
+    } else {
+      newActive.addEventListener("canplay", doPlay, { once: true });
+    }
+
+    isAutoAdvancingRef.current = true;
+    hasTriggeredNextRef.current = false; // Reset for the new active track!
+    onTrackEndedRef.current?.();
+  }, []);
+
   // Starts (or restarts) the RAF loop that mirrors activeRef's currentTime into
-  // state, throttled to ≥10ms deltas so we don't re-render every frame. Shared
+  // state, throttled to >=50ms deltas so we don't re-render every frame. Shared
   // by both the auto-advance path and the manual play/resume path.
   const startTicking = useCallback(() => {
     if (rafRef.current) cancelAnimationFrame(rafRef.current);
     const tick = () => {
       if (activeRef.current) {
         const t = activeRef.current.currentTime;
-        if (Math.abs(t - lastCommittedTimeRef.current) >= 0.01) {
+        const d = activeRef.current.duration;
+
+        // UI State update
+        if (Math.abs(t - lastCommittedTimeRef.current) >= 0.05) {
           lastCommittedTimeRef.current = t;
           setCurrentTime(t);
+        }
+
+        // Early overlap trigger
+        if (!hasTriggeredNextRef.current && d > 0) {
+          // If track is long enough, trigger early overlap. Otherwise, fallback to 'ended'.
+          const threshold = d > 1.0 ? OVERLAP_THRESHOLD : 0;
+          if (t >= d - threshold) {
+            hasTriggeredNextRef.current = true;
+            triggerNext();
+          }
         }
       }
       rafRef.current = requestAnimationFrame(tick);
     };
     rafRef.current = requestAnimationFrame(tick);
-  }, []);
+  }, [triggerNext]);
 
   const stopTicking = useCallback(() => {
     if (rafRef.current) {
@@ -85,19 +148,18 @@ export function useAudioPlayer({
     }
   }, []);
 
-  // Create both Audio elements once on mount
+  // Create Audio elements once on mount
   useEffect(() => {
     const a = new Audio();
     const b = new Audio();
+    const c = new Audio();
     a.preload = "auto";
     b.preload = "auto";
+    c.preload = "auto";
     activeRef.current = a;
     standbyRef.current = b;
+    freedRef.current = c;
 
-    // loadedmetadata: push duration to UI for the currently active buffer.
-    // The standby buffer's duration doesn't need tracking here — once it
-    // becomes active on swap, its own `.duration` property is already
-    // populated natively, so we just read it directly at that point.
     const onMetadata = (e) => {
       if (e.target === activeRef.current) {
         setDuration(isNaN(e.target.duration) ? 0 : e.target.duration);
@@ -105,87 +167,45 @@ export function useAudioPlayer({
       }
     };
 
-    // ended: gapless swap
-    const onEnded = () => {
-      if (!activeRef.current || !standbyRef.current) return;
-
-      const standby = standbyRef.current;
-
-      // If standby has no src (last ayah or not yet loaded), delegate to provider.
-      // Do NOT set isAutoAdvancingRef here — the provider will call setAudioPlaying(false)
-      // which short-circuits the play/load effect cleanly on its own.
-      if (!standby.getAttribute("src")) {
-        activeRef.current.currentTime = 0;
-        setCurrentTime(0);
-        lastCommittedTimeRef.current = 0;
-        onTrackEndedRef.current?.();
-        return;
+    const onEnded = (e) => {
+      if (e.target === activeRef.current) {
+        // Natural end of the active track (e.g. if track was too short to trigger early overlap)
+        if (!hasTriggeredNextRef.current) {
+          hasTriggeredNextRef.current = true;
+          triggerNext();
+        }
+      } else if (e.target === freedRef.current) {
+        // The old track finished its overlap playback. Clean it up.
+        resetElement(freedRef.current);
       }
-
-      // Pointer swap
-      const freed = activeRef.current;
-      activeRef.current = standby;
-      standbyRef.current = freed;
-
-      const newActive = activeRef.current;
-
-      // Update UI immediately. Duration is read straight off the element —
-      // swapping refs doesn't touch the elements themselves, so its
-      // loadedmetadata-populated `.duration` is already correct.
-      setCurrentTime(0);
-      lastCommittedTimeRef.current = 0;
-      setDuration(isNaN(newActive.duration) ? 0 : newActive.duration);
-
-      // Readiness guard
-      // `readyState >= 3` (HAVE_FUTURE_DATA) means the browser has buffered
-      // enough decoded audio to start playing without a stall. If we're not
-      // there yet, wait for `canplay` before calling .play() to eliminate any
-      // residual gap caused by the browser still decoding compressed frames.
-      function doPlay() {
-        newActive.volume = volumeRef.current;
-        newActive
-          .play()
-          .catch((err) => console.log("Gapless play error:", err));
-      }
-
-      if (newActive.readyState >= 3) {
-        doPlay();
-      } else {
-        newActive.addEventListener("canplay", doPlay, { once: true });
-      }
-
-      // Clear the freed buffer — the nextAudioUrl effect will reload it
-      // with the new next-next URL after the provider state update.
-      resetElement(standbyRef.current);
-
-      // Signal the play/load effect to skip a hard reset on the upcoming
-      // `audioUrl` prop change (caused by the provider advancing its state).
-      isAutoAdvancingRef.current = true;
-
-      // Notify provider → advances activeAyahNum → recomputes nextAudioUrl.
-      onTrackEndedRef.current?.();
     };
 
     a.addEventListener("loadedmetadata", onMetadata);
     b.addEventListener("loadedmetadata", onMetadata);
+    c.addEventListener("loadedmetadata", onMetadata);
     a.addEventListener("ended", onEnded);
     b.addEventListener("ended", onEnded);
+    c.addEventListener("ended", onEnded);
 
     return () => {
       resetElement(a);
       resetElement(b);
+      resetElement(c);
       a.removeEventListener("loadedmetadata", onMetadata);
       b.removeEventListener("loadedmetadata", onMetadata);
+      c.removeEventListener("loadedmetadata", onMetadata);
       a.removeEventListener("ended", onEnded);
       b.removeEventListener("ended", onEnded);
+      c.removeEventListener("ended", onEnded);
       stopTicking();
     };
-  }, [resetElement, stopTicking]);
+  }, [resetElement, stopTicking, triggerNext]);
 
-  // Volume sync (both buffers)
+  // Volume sync (all buffers)
   useEffect(() => {
     if (activeRef.current) activeRef.current.volume = volume;
     if (standbyRef.current) standbyRef.current.volume = volume;
+    if (freedRef.current) freedRef.current.volume = volume;
   }, [volume]);
 
   // Play / Pause + handle manual URL changes
@@ -224,6 +244,7 @@ export function useAudioPlayer({
       lastActiveUrlRef.current = audioUrl;
       setCurrentTime(0);
       setDuration(0);
+      hasTriggeredNextRef.current = false; // Reset for new manual track load
     }
 
     active.play().catch((err) => console.log("Audio play error:", err));
@@ -245,23 +266,27 @@ export function useAudioPlayer({
       return;
     }
 
+    const abortController = new AbortController();
+    let currentObjectUrl = null;
+
     let isCancelled = false;
 
-    fetch(nextAudioUrl)
+    fetch(nextAudioUrl, { signal: abortController.signal })
       .then((res) => res.blob())
       .then((blob) => {
-        if (isCancelled) return;
-        const objectUrl = URL.createObjectURL(blob);
+        if (abortController.signal.aborted) return;
+
+        currentObjectUrl = URL.createObjectURL(blob);
 
         if (standby.src && standby.src.startsWith("blob:")) {
           URL.revokeObjectURL(standby.src);
         }
-        standby.src = objectUrl;
+        standby.src = currentObjectUrl;
         standby.preload = "auto";
         standby.load();
       })
       .catch((err) => {
-        if (isCancelled) return;
+        if (err.name === "AbortError") return; // Ignore aborted requests
         console.log(
           "Blob prefetch failed (likely CORS), falling back to normal src:",
           err,
@@ -272,7 +297,10 @@ export function useAudioPlayer({
       });
 
     return () => {
-      isCancelled = true;
+      abortController.abort(); // Cancels the network request
+      if (currentObjectUrl) {
+        URL.revokeObjectURL(currentObjectUrl); // Cleans up the specific blob
+      }
     };
   }, [nextAudioUrl, resetElement]);
 
@@ -287,6 +315,7 @@ export function useAudioPlayer({
     (newVolume) => {
       if (activeRef.current) activeRef.current.volume = newVolume;
       if (standbyRef.current) standbyRef.current.volume = newVolume;
+      if (freedRef.current) freedRef.current.volume = newVolume;
       setVolume(newVolume);
     },
     [setVolume],
