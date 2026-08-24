@@ -115,3 +115,17 @@ export const reflectionVariants = {
     transition: { delay: i * 0.06, duration: 0.28, ease: "easeOut" },
   }),
 };
+
+export const statCardVariant = {
+  hidden: { opacity: 0, y: 48, scale: 0.92 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      delay: i * 0.12,
+      duration: 0.65,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  }),
+};

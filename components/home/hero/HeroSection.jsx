@@ -41,28 +41,33 @@ export default function HeroSection() {
           { opacity: 0, y: 16, scale: 0.96 },
           { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "power3.out" },
           "-=0.3",
-        )
-        .fromTo(
+        );
+
+      if (!isMobile) {
+        // Desktop: video entrance rides in the same timeline, after the CTA
+        tl.fromTo(
           ".hero-video-container",
           { opacity: 0, scale: 0.95, y: 24 },
           { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: "power3.out" },
           "-=0.3",
         );
-
-      videoAnimRef.current = gsap.fromTo(
-        videoContainerRef.current,
-        { opacity: 0, scale: 0.95, y: 24 },
-        {
-          opacity: 1,
-          scale: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power3.out",
-          paused: true,
-        },
-      );
+      } else {
+        // Mobile: separate paused tween, played later on intersection
+        videoAnimRef.current = gsap.fromTo(
+          videoContainerRef.current,
+          { opacity: 0, scale: 0.95, y: 24 },
+          {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power3.out",
+            paused: true,
+          },
+        );
+      }
     },
-    { scope: heroContainerRef },
+    { scope: heroContainerRef, dependencies: [isMobile] },
   );
 
   // Trigger the video-container entrance animation and play when it's 70% visible

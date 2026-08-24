@@ -4,9 +4,16 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import { useMediaQuery } from "@custom-react-hooks/use-media-query";
+import { useSession } from "next-auth/react";
 
 export default function CTASection() {
   const isMobile = useMediaQuery("(max-width: 768px)");
+
+  const { status } = useSession();
+
+  if (status === "authenticated") {
+    return null;
+  }
 
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8">

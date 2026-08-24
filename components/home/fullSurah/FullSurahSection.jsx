@@ -110,7 +110,7 @@ export default function FullSurahSection() {
               <p className="font-jakarta text-xs font-semibold text-text-secondary uppercase tracking-widest mb-3">
                 Three modes, one app
               </p>
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
                 <div className="rounded-xl bg-accent/8 border border-accent/20 p-3">
                   <div className="flex items-center gap-1.5 mb-1.5">
                     <Headphones size={12} className="text-accent" />
