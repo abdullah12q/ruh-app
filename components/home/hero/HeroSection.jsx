@@ -152,9 +152,8 @@ export default function HeroSection() {
 
           {/* Subtext */}
           <p className="hero-subtext opacity-0 font-inter text-base sm:text-lg text-text-secondary max-w-lg leading-relaxed mb-10">
-            An immersive experience for reading and listening to the Quran,
-            tracking prayer times, and exploring Hadith — crafted with
-            intentional minimalism to help you find deep focus and tranquility.
+            Your all-in-one Islamic space — Quran, Prayer Times, Azkar, Hadith,
+            and more. Built for focus, free from distraction.
           </p>
 
           {/* CTA Buttons */}

@@ -10,9 +10,11 @@ export async function generateMetadata({ params }) {
 
   const halaqah = halaqahData?.halaqah;
 
+  if (!halaqah) return { title: "Study Circle Not Found", description: "This study circle could not be found." };
+
   return {
-    title: `Halaqah - ${halaqah.name}`,
-    description: `Join this halaqah and read the Quran with others`,
+    title: `Study Circle — ${halaqah.name}`,
+    description: `Join "${halaqah.name}" and read the Quran together. Track shared progress and leave reflections on Ayahs with your circle.`,
   };
 }
 

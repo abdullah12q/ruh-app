@@ -6,7 +6,7 @@ import { getBookById } from "@/data/datas/hadithData";
 export async function generateMetadata({ params }) {
   const { bookId, chapterId } = await params;
   const bookInfo = getBookById(bookId);
-  if (!bookInfo) return { title: "Chapter Not Found" };
+  if (!bookInfo) return { title: "Chapter Not Found", description: "This Hadith chapter could not be found. Browse the full Hadith library on Rُuh." };
 
   const data = getChapterHadiths(bookId, chapterId);
   const chapterName = data?.chapter?.english ?? `Chapter ${chapterId}`;

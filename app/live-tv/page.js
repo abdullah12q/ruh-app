@@ -1,15 +1,10 @@
 import LiveTVBrowser from "@/components/streaming/live-tv/LiveTVBrowser";
 
-export async function generateMetadata() {
-  const channels = await getLiveTVChannels();
-  const firstChannel = channels.length > 0 ? channels[0] : null;
-
-  return {
-    title: firstChannel ? `${firstChannel.name} - Live TV` : "Live TV",
-    description:
-      "Watch live Islamic TV channels including Quran Channel and Sunnah Channel, streaming 24/7.",
-  };
-}
+export const metadata = {
+  title: "Islamic Live TV — 24/7 Quran & Sunnah Channels",
+  description:
+    "Watch live Islamic TV channels including Quran Channel and Sunnah Channel, streaming 24/7.",
+};
 
 async function getLiveTVChannels() {
   try {

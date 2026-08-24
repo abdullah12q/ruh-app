@@ -66,7 +66,7 @@ export default function QuranBrowser({ surahs }) {
 
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-accent text-xs font-semibold tracking-wider uppercase mb-6">
             <BookOpen size={12} />
-            Holy Quran
+            Ayah By Ayah Mode
           </div>
           <h1 className="font-jakarta font-extrabold text-4xl sm:text-5xl text-text-primary mb-4">
             The Quran{" "}

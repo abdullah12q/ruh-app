@@ -19,12 +19,17 @@ export const metadata = {
     template: "%s | Rُuh رُوح",
   },
   description:
-    "A next-generation Islamic platform for Quran reading, prayer times, hadith, and more. Designed for deep focus and spiritual immersion.",
+    "A next-generation Islamic platform for Quran reading, Prayer Times, Azkar, Hadith, Islamic radio, live TV, and study circles. Designed for deep focus and spiritual immersion.",
   keywords: [
     "Quran",
     "Islamic",
     "Prayer Times",
+    "Azkar",
     "Hadith",
+    "Islamic Radio",
+    "Live TV",
+    "Study Circle",
+    "Halaqah",
     "رُوح",
     "Rُuh",
     "Muslim",
@@ -41,7 +46,7 @@ export const metadata = {
     siteName: "Rُuh | رُوح",
     title: "Rُuh | رُوح — Feed your soul, distraction-free.",
     description:
-      "A next-generation Islamic platform for deep Quran reading, prayer times, and hadith.",
+      "A next-generation Islamic platform for Quran reading, Prayer Times, Azkar, Hadith, Islamic radio, live TV, and study circles.",
     images: [
       {
         url: "/og-image.png",
