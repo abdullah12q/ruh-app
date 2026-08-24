@@ -50,6 +50,8 @@ export default function SurahReadingControls() {
     toggleFavoriteReciter,
     mushafMode,
     toggleMushafMode,
+    autoScrollToNextAyah,
+    toggleAutoScrollToNextAyah,
   } = useUIStore();
 
   // Shared playback state — same audio element used by Normal & Mushaf modes.
@@ -83,7 +85,7 @@ export default function SurahReadingControls() {
 
   return (
     // ── Controls Bar ──
-    <div className="sticky top-16.75 sm:top-16.25 z-30 backdrop-blur-xl flex flex-wrap items-center justify-between glass rounded-2xl px-5 py-3 gap-x-1 gap-y-3 mb-6">
+    <div className="sticky top-16.75 sm:top-16.25 z-30 backdrop-blur-xl flex flex-wrap items-center justify-center glass rounded-2xl px-5 py-3 gap-x-6 gap-y-3 mb-6">
       {/* Font Size */}
       <div className="flex items-center gap-1">
         <span className="text-[9px] sm:text-xs text-text-secondary font-jakarta mr-2">
@@ -122,6 +124,47 @@ export default function SurahReadingControls() {
       />
 
       <AnimatePresence mode="popLayout">
+        {!mushafMode && (
+          // Auto Scroll Toggle
+          <motion.div
+            key="auto-scroll-toggle"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            transition={{ duration: 0.4 }}
+            className="w-fit"
+          >
+            <label className="flex items-center gap-2 cursor-pointer group select-none">
+              <button
+                type="button"
+                role="switch"
+                aria-checked={autoScrollToNextAyah}
+                aria-label="Toggle auto scroll to next ayah"
+                onClick={() => toggleAutoScrollToNextAyah()}
+                className={`relative shrink-0 w-8 h-4.5 sm:w-9 sm:h-5 rounded-full border transition-colors duration-400 cursor-pointer ${autoScrollToNextAyah ? "bg-accent/25 border-accent/50 shadow-[0_0_10px_var(--accent-glow)]" : "bg-text-secondary/5 border-text-secondary/15 group-hover:border-accent/30"}`}
+              >
+                <motion.span
+                  layout
+                  transition={{ type: "spring", stiffness: 150, damping: 32 }}
+                  className={`absolute top-1/2 -translate-y-1/2 size-3 sm:size-3.5 rounded-full ${autoScrollToNextAyah ? "bg-accent shadow-[0_0_8px_var(--accent-glow)]" : "bg-text-secondary/70"}`}
+                  style={{
+                    left: autoScrollToNextAyah
+                      ? "calc(100% - 0.875rem)"
+                      : "0.0625rem",
+                  }}
+                />
+              </button>
+              <span
+                className={`text-[10px] sm:text-xs font-jakarta font-medium whitespace-nowrap transition-colors duration-400 ${autoScrollToNextAyah ? "text-accent" : "text-text-secondary group-hover:text-text-primary"}`}
+              >
+                Auto Scroll
+              </span>
+            </label>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence mode="popLayout">
         {!mushafMode ? (
           // Language Toggle
           <motion.div
@@ -130,6 +173,7 @@ export default function SurahReadingControls() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
             transition={{ duration: 0.4 }}
+            className="w-fit"
           >
             <LanguageToggle
               translationLang={translationLang}
@@ -219,7 +263,7 @@ export default function SurahReadingControls() {
         }
         aria-pressed={mushafMode}
         className={`
-          flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[11px] sm:text-xs font-jakarta font-medium
+          flex items-center gap-1.5 px-3 py-1.5 rounded-xl w-fit text-[11px] sm:text-xs font-jakarta font-medium
           border transition-all duration-200 cursor-pointer
           ${
             mushafMode

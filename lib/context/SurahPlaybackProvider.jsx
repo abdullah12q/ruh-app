@@ -42,6 +42,7 @@ export default function SurahPlaybackProvider({
     setAudioPlaying,
     selectedReciter,
     mushafMode,
+    autoScrollToNextAyah,
   } = useUIStore();
 
   const queryClient = useQueryClient();
@@ -130,12 +131,14 @@ export default function SurahPlaybackProvider({
     }
 
     // Auto scroll to next ayah
-    const ayah = document.getElementById(`ayah-${nextAyah}`);
-    if (ayah) {
-      ayah.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
+    if (autoScrollToNextAyah && !mushafMode) {
+      const ayah = document.getElementById(`ayah-${nextAyah}`);
+      if (ayah) {
+        ayah.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }
     }
 
     const nextPage = verseToPage.get(nextAyah);
@@ -155,6 +158,7 @@ export default function SurahPlaybackProvider({
     verseToPage,
     mushafMode,
     currentPage,
+    autoScrollToNextAyah,
   ]);
 
   const { currentTime, setCurrentTime, duration, handleSeek } = useAudioPlayer({
