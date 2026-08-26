@@ -80,11 +80,11 @@ export function untilNextPrayerHintColor(countdown, inNav = false) {
       border: inNav ? "border-accent" : "border-accent/25",
     };
 
-  // Between 31 and 60 minutes away
+  // Between >15 and 60 minutes away
   if (
     minsMatch &&
     parseInt(minsMatch[1]) <= 60 &&
-    parseInt(minsMatch[1]) > 30
+    parseInt(minsMatch[1]) > 15
   ) {
     return {
       text: "text-amber-500",
@@ -93,11 +93,11 @@ export function untilNextPrayerHintColor(countdown, inNav = false) {
     };
   }
 
-  // "Now" or 30 minutes or less
+  // "Now" or 15 minutes or less
   if (
     !countdown ||
     countdown === "Now" ||
-    (minsMatch && parseInt(minsMatch[1]) <= 30)
+    (minsMatch && parseInt(minsMatch[1]) <= 15)
   ) {
     return {
       text: "text-rose-600",

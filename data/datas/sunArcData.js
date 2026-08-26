@@ -57,10 +57,10 @@ export function urgencyColor(countdown) {
   // More than 1 hour away
   if (hoursMatch) return "var(--accent)";
 
-  // amber-500 Between 31 and 60 minutes away
-  if (minsMatch && parseInt(minsMatch[1]) <= 60 && parseInt(minsMatch[1]) > 30)
+  // amber-500 Between >15 and 60 minutes away
+  if (minsMatch && parseInt(minsMatch[1]) <= 60 && parseInt(minsMatch[1]) > 15)
     return "#F59E0B";
 
-  // rose-600 "Now" or 30 minutes or less
+  // rose-600 "Now" or 15 minutes or less
   return "#E11D48";
 }
