@@ -4,6 +4,7 @@ import { ThemeProvider } from "next-themes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
 import { SessionProvider } from "next-auth/react";
+import PrayerNotificationManager from "@/components/PrayerNotificationManager";
 
 export default function Providers({ children }) {
   // Create QueryClient inside state so it's not shared across requests (SSR safe)
@@ -32,7 +33,10 @@ export default function Providers({ children }) {
         enableSystem={false}
         disableTransitionOnChange={false}
       >
-        <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+        <QueryClientProvider client={queryClient}>
+          <PrayerNotificationManager />
+          {children}
+        </QueryClientProvider>
       </ThemeProvider>
     </SessionProvider>
   );

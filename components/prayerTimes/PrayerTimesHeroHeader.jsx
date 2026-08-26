@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { fadeUp } from "@/data/animationVariants";
 import { untilNextPrayerHintColor } from "@/data/datas/prayerTimesData";
+import NotificationToggleButton from "./NotificationToggleButton";
 
 export default function PrayerTimesHeroHeader({
   isLoading,
@@ -20,12 +21,17 @@ export default function PrayerTimesHeroHeader({
         {isLoading || !countdown ? (
           <div className="h-11 w-72 skeleton rounded-xl mx-auto" />
         ) : (
-          <h1 className="font-jakarta font-extrabold text-4xl sm:text-6xl text-text-primary drop-shadow-sm">
-            {nextPrayer?.label}{" "}
-            <span className={`${untilNextPrayerHintColor(countdown).text}`}>
-              in {countdown}
-            </span>
-          </h1>
+          <div className="flex items-center justify-center gap-10">
+            <h1 className="font-jakarta font-extrabold text-4xl sm:text-6xl text-text-primary drop-shadow-sm">
+              {nextPrayer?.label}{" "}
+              <span className={`${untilNextPrayerHintColor(countdown).text}`}>
+                in {countdown}
+              </span>
+            </h1>
+
+            {/* Notification Toggle Button */}
+            <NotificationToggleButton />
+          </div>
         )}
       </motion.div>
     </>

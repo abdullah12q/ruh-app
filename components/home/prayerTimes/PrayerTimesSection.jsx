@@ -7,6 +7,7 @@ import { staggerContainer, fadeUp } from "@/data/animationVariants";
 import PrayerCard from "@/components/PrayerCard";
 import PrayerTimesSectionSkeleton from "./PrayerTimesSectionSkeleton";
 import PermissionDenied from "@/components/prayerTimes/PermissionDenied";
+import NotificationToggleButton from "@/components/prayerTimes/NotificationToggleButton";
 
 export default function PrayerTimesSection() {
   const {
@@ -44,9 +45,14 @@ export default function PrayerTimesSection() {
 
           <motion.h2
             variants={fadeUp}
-            className="font-jakarta font-extrabold text-3xl sm:text-4xl text-text-primary mb-3"
+            className="font-jakarta font-extrabold text-3xl sm:text-4xl text-text-primary mb-3 flex items-center justify-center gap-10"
           >
-            Today&apos;s <span className="gradient-text">Salah Schedule</span>
+            <span>
+              Today&apos;s <span className="gradient-text">Salah Schedule</span>
+            </span>
+
+            {/* Notification Toggle Button */}
+            <NotificationToggleButton />
           </motion.h2>
 
           {/* Location row */}
