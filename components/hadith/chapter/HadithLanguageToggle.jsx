@@ -1,5 +1,5 @@
 import { Languages } from "lucide-react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 const LANG_MODES = [
   { id: "both", label: "Both" },
@@ -14,6 +14,7 @@ export default function HadithLanguageToggle({ langMode, setLangMode }) {
         <Languages size={14} />
         <span>Display</span>
       </div>
+
       <div className="inline-flex rounded-full gap-0.5">
         {LANG_MODES.map((m) => (
           <button
@@ -25,15 +26,19 @@ export default function HadithLanguageToggle({ langMode, setLangMode }) {
                 : "text-text-secondary hover:text-text-primary"
             }`}
           >
-            {langMode === m.id && (
-              <motion.div
-                layoutId="lang-active"
-                className="absolute inset-0 bg-accent/10 border border-accent/20 rounded-full"
-                initial={false}
-                transition={{ type: "spring", damping: 22 }}
-              />
-            )}
-            <span className="relative">{m.label}</span>
+            <AnimatePresence>
+              {langMode === m.id && (
+                <motion.div
+                  key="active-language"
+                  className="absolute inset-0 bg-accent/10 border border-accent/20 rounded-full"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ type: "spring", damping: 25 }}
+                />
+              )}
+            </AnimatePresence>
+            <span className="relative z-10">{m.label}</span>
           </button>
         ))}
       </div>
