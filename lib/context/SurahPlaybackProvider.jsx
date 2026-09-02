@@ -290,6 +290,8 @@ export default function SurahPlaybackProvider({
       goToNextPage,
       goToPrevPage,
       goToPage,
+      verses,
+      verseToPage,
     }),
     [
       surahId,
@@ -310,6 +312,8 @@ export default function SurahPlaybackProvider({
       goToNextPage,
       goToPrevPage,
       goToPage,
+      verses,
+      verseToPage,
     ],
   );
 

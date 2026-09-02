@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useRef, useState } from "react";
 import {
   ZoomIn,
   ZoomOut,
@@ -11,6 +11,7 @@ import {
   Layers,
   Pause,
   Play,
+  Search,
 } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import useUIStore from "@/lib/store/useUIStore";
@@ -60,7 +61,39 @@ export default function SurahReadingControls() {
     handlePlayButtonPress,
     handleFromNormalModeToMushafMode,
     handleFromMushafModeToNormalMode,
+    verses,
+    verseToPage,
+    goToPage,
   } = useSurahPlayback();
+
+  const [searchAyah, setSearchAyah] = useState("");
+  const ayahInputRef = useRef(null);
+
+  function handleSearchSubmit(e) {
+    e.preventDefault();
+    const ayahNum = parseInt(searchAyah, 10);
+    if (isNaN(ayahNum) || !verses) return;
+
+    const ayahExists = verses.some((v) => v.verse_number === ayahNum);
+    if (!ayahExists) {
+      setSearchAyah("");
+      return;
+    }
+
+    if (mushafMode) {
+      const pageNum = verseToPage.get(ayahNum);
+      if (pageNum) {
+        goToPage(pageNum);
+      }
+    } else {
+      const ayahEl = document.getElementById(`ayah-${ayahNum}`);
+      if (ayahEl) {
+        ayahEl.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }
+    setSearchAyah("");
+    ayahInputRef.current?.blur();
+  }
 
   const currentIndex = FONT_SIZES.indexOf(fontSize);
 
@@ -113,6 +146,26 @@ export default function SurahReadingControls() {
           <ZoomIn className="size-3 sm:size-4" />
         </button>
       </div>
+
+      {/* Ayah Search */}
+      <form
+        onSubmit={handleSearchSubmit}
+        className="relative flex items-center"
+      >
+        <div className="absolute left-2.5 text-text-secondary">
+          <Search size={14} />
+        </div>
+        <input
+          ref={ayahInputRef}
+          type="number"
+          min={1}
+          max={verses?.length || 286}
+          value={searchAyah}
+          onChange={(e) => setSearchAyah(e.target.value)}
+          placeholder="Ayah..."
+          className="w-26 pl-8 pr-3 py-1.5 glass rounded-xl text-xs focus:outline-none focus:border-accent/50! transition-colors duration-400 text-text-primary placeholder:text-text-secondary/50 font-jakarta"
+        />
+      </form>
 
       {/* Reciter Dropdown */}
       <ReciterDropdown
