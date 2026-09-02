@@ -19,7 +19,7 @@ export const metadata = {
     template: "%s | Rُuh رُوح",
   },
   description:
-    "A next-generation Islamic platform for Quran reading, Prayer Times, Azkar, Hadith, Islamic radio, live TV, and study circles. Designed for deep focus and spiritual immersion.",
+    "A next-generation Islamic platform for Quran Reading, Prayer Times, Azkar, Hadith, Study Circles, Islamic Radio, and Live TV. Designed for deep focus and spiritual immersion.",
   keywords: [
     "Quran",
     "Islamic",
