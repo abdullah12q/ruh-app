@@ -1,3 +1,4 @@
+import AnimatedSearchCloseIcon from "@/components/AnimatedSearchCloseIcon";
 import { Search, Users } from "lucide-react";
 
 export default function FullSurahToolbar({
@@ -42,11 +43,17 @@ export default function FullSurahToolbar({
             className="absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary"
           />
           <input
-            type="search"
+            type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search Sheikh..."
             className="pl-8 pr-3 py-1.5 rounded-xl glass font-inter text-xs text-text-primary placeholder:text-text-secondary/50 outline-none focus:border-accent/40 w-40 transition-colors"
+          />
+
+          <AnimatedSearchCloseIcon
+            value={search}
+            position="right-3"
+            onChange={setSearch}
           />
         </div>
       </div>
