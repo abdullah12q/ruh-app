@@ -141,25 +141,26 @@ export default function SurahReadingControls() {
                 aria-checked={autoScrollToNextAyah}
                 aria-label="Toggle auto scroll to next ayah"
                 onClick={() => toggleAutoScrollToNextAyah()}
-                className={`relative shrink-0 w-8 h-4.5 sm:w-9 sm:h-5 rounded-full border transition-colors duration-400 cursor-pointer ${autoScrollToNextAyah ? "bg-accent/25 border-accent/50 shadow-[0_0_10px_var(--accent-glow)]" : "bg-text-secondary/5 border-text-secondary/15 group-hover:border-accent/30"}`}
+                className={`relative flex items-center p-0.5 shrink-0 w-8 h-4.5 sm:w-9 sm:h-5 rounded-full border transition-colors duration-400 cursor-pointer ${
+                  autoScrollToNextAyah
+                    ? "bg-accent/25 border-accent/50 shadow-[0_0_10px_var(--accent-glow)]"
+                    : "bg-text-secondary/5 border-text-secondary/15 group-hover:border-accent/30"
+                }`}
               >
-                <motion.span
-                  key="auto-scroll-thumb"
-                  animate={{
-                    left: autoScrollToNextAyah
-                      ? "calc(100% - 0.875rem)"
-                      : "0.0625rem",
-                  }}
-                  transition={{ type: "spring", stiffness: 150, damping: 32 }}
-                  className={`absolute top-1/2 -translate-y-1/2 size-3 sm:size-3.5 rounded-full ${
+                <span
+                  className={`size-3 sm:size-3.5 rounded-full transition-transform duration-300 ease-out ${
                     autoScrollToNextAyah
-                      ? "bg-accent shadow-[0_0_8px_var(--accent-glow)]"
-                      : "bg-text-secondary/70"
+                      ? "translate-x-3.5 sm:translate-x-4 bg-accent shadow-[0_0_8px_var(--accent-glow)]"
+                      : "translate-x-0 bg-text-secondary/70"
                   }`}
                 />
               </button>
               <span
-                className={`text-[10px] sm:text-xs font-jakarta font-medium whitespace-nowrap transition-colors duration-400 ${autoScrollToNextAyah ? "text-accent" : "text-text-secondary group-hover:text-text-primary"}`}
+                className={`text-[10px] sm:text-xs font-jakarta font-medium whitespace-nowrap transition-colors duration-400 ${
+                  autoScrollToNextAyah
+                    ? "text-accent"
+                    : "text-text-secondary group-hover:text-text-primary"
+                }`}
               >
                 Auto Scroll
               </span>
