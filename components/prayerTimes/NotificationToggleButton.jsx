@@ -16,9 +16,9 @@ export default function NotificationToggleButton() {
           transition={{ duration: 0.4 }}
           onClick={requestPermission}
           title="Enable desktop notifications"
-          className="glass rounded-full p-2 mt-3 text-text-secondary hover:text-accent transition-colors duration-400 cursor-pointer"
+          className="glass rounded-full p-2 text-text-secondary hover:text-accent transition-colors duration-400 cursor-pointer"
         >
-          <BellOff size={20} />
+          <BellOff size={15} />
         </motion.button>
       )}
       {permission === "granted" && (
@@ -29,9 +29,9 @@ export default function NotificationToggleButton() {
           exit={{ opacity: 0, y: 10 }}
           transition={{ duration: 0.4 }}
           title="Notifications enabled"
-          className="glass rounded-full p-2 mt-3 text-accent"
+          className="glass rounded-full p-2 text-accent"
         >
-          <BellRing size={20} />
+          <BellRing size={15} />
         </motion.div>
       )}
     </AnimatePresence>

@@ -37,22 +37,22 @@ export default function PrayerTimesSection() {
         >
           <motion.div
             variants={fadeUp}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-accent text-xs font-semibold tracking-wider uppercase mb-6"
+            className="flex items-center justify-center gap-2 mb-6"
           >
-            <Clock size={12} />
-            Prayer Times
+            <div className="flex items-center glass gap-2 px-4 py-1.5 rounded-full text-accent text-xs font-semibold tracking-wider uppercase">
+              <Clock size={12} />
+              Prayer Times
+            </div>
+
+            {/* Notification Toggle Button */}
+            <NotificationToggleButton />
           </motion.div>
 
           <motion.h2
             variants={fadeUp}
-            className="font-jakarta font-extrabold text-3xl sm:text-4xl text-text-primary mb-3 flex items-center justify-center gap-10"
+            className="font-jakarta font-extrabold text-3xl sm:text-4xl text-text-primary mb-3"
           >
-            <span>
-              Today&apos;s <span className="gradient-text">Salah Schedule</span>
-            </span>
-
-            {/* Notification Toggle Button */}
-            <NotificationToggleButton />
+            Today&apos;s <span className="gradient-text">Salah Schedule</span>
           </motion.h2>
 
           {/* Location row */}
