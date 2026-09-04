@@ -325,6 +325,7 @@ export function useAudioPlayer({
     currentTime,
     setCurrentTime,
     duration,
+    setDuration,
     volume,
     handleSeek,
     handleVolumeChange,

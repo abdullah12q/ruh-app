@@ -1,13 +1,14 @@
 import { useEffect, useRef, useMemo } from "react";
 import { useNotifications } from "@/hooks/useNotifications";
 import { usePrayerTimes } from "@/hooks/usePrayerTimes";
-
-const ALERT_OFFSETS_MINUTES = [5]; // if e.g [15, 5] this will trigger two reminders one in 15 mins and one in 5 mins
+import useUIStore from "@/lib/store/useUIStore";
 
 export default function PrayerNotificationManager() {
   const { permission, isSupported } = useNotifications();
   const workerRef = useRef(null);
   const { prayers, nextPrayerKey } = usePrayerTimes();
+
+  const { prayerNotificationMode, prayerNotificationOffsets } = useUIStore();
 
   // Calculate the exact timestamp for the next prayer
   const { nextPrayerTime, nextPrayerNameEn, nextPrayerNameAr } = useMemo(() => {
@@ -20,7 +21,11 @@ export default function PrayerNotificationManager() {
 
     const nextPrayer = prayers.find((p) => p.key === nextPrayerKey);
     if (!nextPrayer || !nextPrayer.rawTime)
-      return { nextPrayerTime: null, nextPrayerName: null };
+      return {
+        nextPrayerTime: null,
+        nextPrayerNameEn: null,
+        nextPrayerNameAr: null,
+      };
 
     const [h, m] = nextPrayer.rawTime.split(":").map(Number);
     const now = new Date();
@@ -39,6 +44,7 @@ export default function PrayerNotificationManager() {
     };
   }, [prayers, nextPrayerKey]);
 
+  // Initialize Worker
   useEffect(() => {
     if (!isSupported || permission !== "granted") return;
 
@@ -49,30 +55,42 @@ export default function PrayerNotificationManager() {
       const { type, payload } = event.data;
 
       if (type === "PRAYER_ALERT") {
-        const nameEn = nextPrayerNameEn || "Prayer";
-        const nameAr = nextPrayerNameAr || "الصلاة";
-        const mins = payload.minutesBefore;
+        const { minutesBefore, nameEn, nameAr } = payload;
+
+        // Always get the latest preferences directly from the store to avoid stale closures and without needing to recreate the worker when they change.
+        const state = useUIStore.getState();
+        const mode = state.prayerNotificationMode;
+        const volume = state.prayerNotificationVolume;
+
+        if (mode === "disabled") return;
+
+        const safeNameEn = nameEn || "Prayer";
+        const safeNameAr = nameAr || "الصلاة";
 
         const title =
-          mins === 0
-            ? `${nameEn} Time - حان وقت ${nameAr}`
-            : `${nameEn} in ${mins} min - ${nameAr} خلال ${mins} دقيقة`;
+          minutesBefore === 0
+            ? `${safeNameEn} Time - حان وقت ${safeNameAr}`
+            : `${safeNameEn} in ${minutesBefore} min - ${safeNameAr} خلال ${minutesBefore} دقيقة`;
 
         const body =
-          mins === 0
-            ? `It's time for ${nameEn} prayer. \nحان الآن موعد صلاة ${nameAr}.`
-            : `Next prayer is ${nameEn} in ${mins} minutes. \nالصلاة القادمة هي ${nameAr} خلال ${mins} دقائق.`;
+          minutesBefore === 0
+            ? `It's time for ${safeNameEn} prayer. \nحان الآن موعد صلاة ${safeNameAr}.`
+            : `Next prayer is ${safeNameEn} in ${minutesBefore} minutes. \nالصلاة القادمة هي ${safeNameAr} خلال ${minutesBefore} دقائق.`;
 
         new Notification(title, {
           body: body,
           icon: "/icon.png",
-          tag: `prayer-${nameEn}-${mins}`,
+          tag: `prayer-${safeNameEn}-${minutesBefore}`,
           silent: true, // 3shan feh custom audio hysht8l
         });
 
+        // 'muted' mode: show the notification popup but skip the adhan audio
+        if (mode === "muted") return;
+
         try {
-          const audioPath = `/adhanNotificationAudios/${nameEn ?? "Default"}${mins === 0 ? "_Now" : "_Before"}.mp3`;
+          const audioPath = `/adhanNotificationAudios/${safeNameEn ?? "Default"}${minutesBefore === 0 ? "_Now" : "_Before"}.mp3`;
           const audio = new Audio(audioPath);
+          audio.volume = volume ?? 1.0;
 
           // Browsers require user interaction before playing audio,
           // but usually allow it if notifications are granted.
@@ -102,20 +120,36 @@ export default function PrayerNotificationManager() {
       worker.terminate();
       workerRef.current = null;
     };
-  }, [permission, isSupported, nextPrayerNameEn, nextPrayerNameAr]);
+  }, [permission, isSupported]);
 
+  // Manage Timers
   useEffect(() => {
+    if (prayerNotificationMode === "disabled") {
+      if (workerRef.current) {
+        workerRef.current.postMessage({ type: "STOP_TIMER" });
+      }
+      return;
+    }
+
     if (workerRef.current && nextPrayerTime && permission === "granted") {
       workerRef.current.postMessage({
         type: "START_TIMER",
         payload: {
           prayerTime: nextPrayerTime,
-          prayerName: nextPrayerNameEn,
-          offsetsMinutes: ALERT_OFFSETS_MINUTES,
+          nameEn: nextPrayerNameEn,
+          nameAr: nextPrayerNameAr,
+          offsetsMinutes: prayerNotificationOffsets || [5, 0],
         },
       });
     }
-  }, [nextPrayerTime, nextPrayerNameEn, permission]);
+  }, [
+    nextPrayerTime,
+    nextPrayerNameEn,
+    nextPrayerNameAr,
+    permission,
+    prayerNotificationOffsets,
+    prayerNotificationMode,
+  ]);
 
   return null;
 }

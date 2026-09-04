@@ -1,3 +1,5 @@
+import { AnimatePresence, motion } from "framer-motion";
+
 export default function LanguageToggle({
   translationLang,
   setTranslationLang,
@@ -20,13 +22,26 @@ export default function LanguageToggle({
                 ? "Arabic translation"
                 : "Hide translation"
           }
-          className={`px-3 py-1.5 rounded-lg text-[8px] sm:text-xs font-semibold uppercase tracking-wide transition-colors duration-300 ${
+          className={`relative px-3 py-1.5 rounded-lg text-[8px] sm:text-xs font-semibold uppercase tracking-wide transition-colors duration-300 cursor-pointer ${
             translationLang === l
-              ? "text-white bg-accent"
+              ? "text-white"
               : "text-text-secondary hover:text-text-primary"
-          } cursor-pointer`}
+          }`}
         >
-          {l}
+          <AnimatePresence>
+            {translationLang === l && (
+              <motion.div
+                key="active-bg"
+                className="absolute inset-0 bg-accent rounded-lg"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ type: "spring", damping: 25 }}
+              />
+            )}
+          </AnimatePresence>
+
+          <span className="relative z-10">{l}</span>
         </button>
       ))}
     </div>

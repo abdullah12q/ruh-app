@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import reciters from "@/data/jsons/imam.json";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Search, X, Mic } from "lucide-react";
 import { dropdownVariants } from "@/data/animationVariants";
@@ -6,7 +7,6 @@ import ReciterRow from "./ReciterRow";
 import { useMediaQuery } from "@custom-react-hooks/use-media-query";
 
 export default function ReciterDropdown({
-  reciters,
   selectedReciter,
   favoriteReciters,
   onSelect,
@@ -90,14 +90,14 @@ export default function ReciterDropdown({
             animate="visible"
             exit="exit"
             transition={{ duration: 0.18, ease: "easeOut" }}
-            className={`absolute top-full mt-2 ${!inDailyVerse ? "right-0" : "left-1/2 translate-x-[-50%] sm:left-0 sm:translate-x-0"} z-50 w-72 rounded-2xl overflow-hidden shadow-2xl bg-background border border-white/10`}
+            className={`absolute top-full mt-2 ${!inDailyVerse ? "right-0" : "left-1/2 translate-x-[-50%] sm:left-0 sm:translate-x-0"} z-50 w-72 rounded-2xl overflow-hidden shadow-2xl bg-background border border-text-secondary/10`}
             style={{ backdropFilter: "blur(24px)" }}
             role="listbox"
             aria-label="Reciters list"
           >
             {/* Search bar */}
-            <div className="p-3 border-b border-white/5">
-              <div className="flex items-center px-3 py-2 gap-2 rounded-xl bg-white/5 border-2 border-transparent focus-within:border-accent transition-colors">
+            <div className="p-3 border-b border-text-secondary/5">
+              <div className="flex items-center px-3 py-2 gap-2 rounded-xl bg-text-secondary/5 border-2 border-transparent focus-within:border-accent transition-colors">
                 <Search size={13} className="text-text-secondary shrink-0" />
                 <input
                   ref={searchRef}
@@ -145,7 +145,7 @@ export default function ReciterDropdown({
                     />
                   ))}
                   {othersInList.length > 0 && (
-                    <div className="mx-3 my-2 border-t border-white/5" />
+                    <div className="mx-3 my-2 border-t border-text-secondary/5" />
                   )}
                 </>
               )}

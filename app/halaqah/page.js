@@ -1,5 +1,3 @@
-import { auth } from "@/lib/auth";
-import { getStudyCircleName } from "@/lib/actions/halaqah";
 import { UsersRound } from "lucide-react";
 import HalaqahDashboard from "@/components/halaqah/Dashboard/HalaqahDashboard";
 
@@ -9,10 +7,7 @@ export const metadata = {
     "Read the Quran together. Form a private study circle with friends and family, track shared progress, and leave reflections on Ayahs.",
 };
 
-export default async function HalaqahPage() {
-  const session = await auth();
-  const userStudyCircleName = session ? await getStudyCircleName() : null;
-
+export default function HalaqahPage() {
   return (
     <div className="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8">
       {/* Page Header */}
@@ -34,7 +29,7 @@ export default async function HalaqahPage() {
         </p>
       </div>
 
-      <HalaqahDashboard userStudyCircleName={userStudyCircleName} />
+      <HalaqahDashboard />
     </div>
   );
 }

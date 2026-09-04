@@ -16,7 +16,6 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 import useUIStore from "@/lib/store/useUIStore";
 import { useSurahPlayback } from "@/lib/context/SurahPlaybackProvider";
-import imamList from "@/data/jsons/imam.json";
 import ReciterDropdown from "@/components/ReciterDropdown";
 import LanguageToggle from "@/components/LanguageToggle";
 
@@ -169,7 +168,6 @@ export default function SurahReadingControls() {
 
       {/* Reciter Dropdown */}
       <ReciterDropdown
-        reciters={imamList}
         selectedReciter={selectedReciter}
         favoriteReciters={favoriteReciters}
         onSelect={setSelectedReciter}

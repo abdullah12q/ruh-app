@@ -7,7 +7,7 @@ import { staggerContainer, fadeUp } from "@/data/animationVariants";
 import PrayerCard from "@/components/PrayerCard";
 import PrayerTimesSectionSkeleton from "./PrayerTimesSectionSkeleton";
 import PermissionDenied from "@/components/prayerTimes/PermissionDenied";
-import NotificationToggleButton from "@/components/prayerTimes/NotificationToggleButton";
+import NotificationToggleButton from "@/components/NotificationToggleButton";
 
 export default function PrayerTimesSection() {
   const {
@@ -20,6 +20,14 @@ export default function PrayerTimesSection() {
     permissionDenied,
     refetch,
   } = usePrayerTimes();
+
+  async function refetchLocation() {
+    try {
+      await refetch();
+    } catch (error) {
+      console.error("Failed to fetch location:", error);
+    }
+  }
 
   return (
     <section
@@ -80,7 +88,7 @@ export default function PrayerTimesSection() {
 
         {/* Cards */}
         {permissionDenied ? (
-          <PermissionDenied onRetry={refetch} />
+          <PermissionDenied onRetry={refetchLocation} />
         ) : isLoading ? (
           <PrayerTimesSectionSkeleton />
         ) : isError ? (

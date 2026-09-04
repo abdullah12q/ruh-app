@@ -104,12 +104,31 @@ export default function SurahPlaybackProvider({
       setDirection(page > p ? 1 : -1);
       return page;
     });
+
+    setTimeout(() => {
+      const mushafPageHeader = document.getElementById("mushaf-nav-header");
+      if (mushafPageHeader) {
+        mushafPageHeader.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    }, 10);
   }, []);
 
   useEffect(() => {
     if (activeCurrentMushafPage) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       goToPage(activeCurrentMushafPage);
+      setTimeout(() => {
+        const mushafPageHeader = document.getElementById("mushaf-nav-header");
+        if (mushafPageHeader) {
+          mushafPageHeader.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      }, 10);
     }
   }, [activeCurrentMushafPage, goToPage]);
 
@@ -148,6 +167,15 @@ export default function SurahPlaybackProvider({
     if (mushafMode && nextPage && nextPage !== currentPage) {
       setDirection(1);
       setCurrentPageState(nextPage);
+      setTimeout(() => {
+        const mushafPageHeader = document.getElementById("mushaf-nav-header");
+        if (mushafPageHeader) {
+          mushafPageHeader.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      }, 10);
     }
   }, [
     surahId,

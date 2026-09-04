@@ -123,6 +123,7 @@ export default async function SurahPage({ params, searchParams }) {
           verses={verses}
           activeCurrentMushafPage={activeCurrentMushafPage}
         >
+          <div id="mushaf-nav-header" />
           <SurahReadingControls />
           <ReadSurah surahId={id} verses={verses} />
         </SurahPlaybackProvider>

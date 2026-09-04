@@ -186,26 +186,38 @@ export function usePrayerTimes() {
       !savedCoords && !permissionDenied ? true : queryLoading && !!savedCoords,
     isError,
     refetch: () => {
-      setSavedCoords(null);
-      setSavedLocation(null);
-      setPermissionDenied(false);
+      return new Promise((resolve, reject) => {
+        setSavedCoords(null);
+        setSavedLocation(null);
+        setPermissionDenied(false);
 
-      if (navigator.geolocation) {
+        if (!navigator.geolocation) {
+          setPermissionDenied(true);
+          return reject(new Error("Geolocation not supported by browser."));
+        }
+
         navigator.geolocation.getCurrentPosition(
-          (pos) => {
+          async (pos) => {
             const { latitude: lat, longitude: lon } = pos.coords;
             const newCoords = { lat, lon };
 
             setSavedCoords(newCoords);
 
-            fetchLocation(lat, lon).then((loc) => {
+            try {
+              const loc = await fetchLocation(lat, lon);
               setSavedLocation(loc);
-            });
+              resolve(loc);
+            } catch (error) {
+              reject(error);
+            }
           },
-          () => setPermissionDenied(true),
-          { timeout: 10_000 }, // Timeout after 10 seconds
+          (error) => {
+            setPermissionDenied(true);
+            reject(error);
+          },
+          { timeout: 10_000 },
         );
-      }
+      });
     },
   };
 }

@@ -18,7 +18,6 @@ export default function RadioCard({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.35, delay: index * 0.04, ease: "easeOut" }}
       onClick={onClick}
-      id={`radio-card-${station.id}`}
       className={`relative group w-full text-left rounded-2xl overflow-hidden transition-all duration-300 cursor-pointer ${
         isActive ? "ring-2 ring-accent" : "hover:scale-[1.02] hover:shadow-lg"
       }`}
@@ -80,7 +79,7 @@ export default function RadioCard({
             className={`relative shrink-0 size-9 rounded-full flex items-center justify-center transition-all duration-300 ${
               isActive
                 ? "bg-accent text-white shadow-[0_0_16px_var(--accent-glow)]"
-                : "bg-white/10 text-text-secondary group-hover:bg-accent/20 group-hover:text-accent"
+                : "bg-text-secondary/10 text-text-secondary group-hover:bg-accent/20 group-hover:text-accent"
             }`}
           >
             {isActive && isPlaying ? (

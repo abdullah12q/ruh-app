@@ -14,6 +14,7 @@ import {
   fetchArabicTranslation,
   useRandomOrNextVerse,
   useSurah,
+  cacheDailyVerse,
 } from "@/lib/queries/quran";
 import useUIStore from "@/lib/store/useUIStore";
 
@@ -85,6 +86,10 @@ export default function DailyVerseSection() {
     )}`;
   }, [activeSurahNum, activeAyahNum, selectedReciter, surah]);
 
+  useEffect(() => {
+    if (verse && !verseLoading) cacheDailyVerse(verse);
+  }, [verse, verseLoading]);
+
   // PREFETCHING EFFECT
   // This calculates the next verse and downloads the JSON in the background silently.
   useEffect(() => {
@@ -124,25 +129,7 @@ export default function DailyVerseSection() {
     translationLang,
   ]);
 
-  // Clears the localStorage cache and fetches a brand-new random verse
-  async function handleGetNewVerse() {
-    try {
-      localStorage.removeItem(DAILY_VERSE_KEY);
-    } catch {}
-
-    // Reset back to random mode before refetching
-    setTargetVerse({ surah: null, ayah: null });
-
-    // Refetch the random-verse query directly via the key, instead of the
-    // stale `refetchVerse` closure (which may still point at the old
-    // specific-verse query at the moment this runs)
-    await queryClient.refetchQueries({
-      queryKey: quranKeys.randomVerse(),
-      exact: true,
-    });
-  }
-
-  function handleNextVerse() {
+  async function handleNextVerse() {
     if (!surah) return;
     const { surah: nextSurah, ayah: nextAyah } = calculateNextVerse(
       activeSurahNum,
@@ -154,13 +141,40 @@ export default function DailyVerseSection() {
     setTargetVerse({ surah: nextSurah, ayah: nextAyah });
   }
 
-  const { currentTime, duration, volume, handleSeek, handleVolumeChange } =
-    useAudioPlayer({
-      audioUrl,
-      nextAudioUrl,
-      isPlaying,
-      onTrackEnded: handleNextVerse,
+  const {
+    currentTime,
+    setCurrentTime,
+    duration,
+    setDuration,
+    volume,
+    handleSeek,
+    handleVolumeChange,
+  } = useAudioPlayer({
+    audioUrl,
+    nextAudioUrl,
+    isPlaying,
+    onTrackEnded: handleNextVerse,
+  });
+
+  // Clears the localStorage cache and fetches a brand-new random verse
+  async function handleGetNewVerse() {
+    try {
+      localStorage.removeItem(DAILY_VERSE_KEY);
+    } catch {}
+
+    // Reset back to random mode before refetching
+    setTargetVerse({ surah: null, ayah: null });
+    setCurrentTime(0);
+    setDuration(0);
+
+    // Refetch the random-verse query directly via the key, instead of the
+    // stale `refetchVerse` closure (which may still point at the old
+    // specific-verse query at the moment this runs)
+    await queryClient.refetchQueries({
+      queryKey: quranKeys.randomVerse(),
+      exact: true,
     });
+  }
 
   const isBookmarked = bookmarkedAyahs.find(
     (verse) =>
@@ -193,6 +207,29 @@ export default function DailyVerseSection() {
 
           {/* Glass Card */}
           <div className="glass rounded-3xl px-8 pb-8 pt-4 sm:px-12 sm:pb-12 sm:pt-6 relative">
+            {/* Geometric texture */}
+            <svg
+              className="pointer-events-none absolute inset-0 size-full opacity-[0.05]"
+              aria-hidden="true"
+            >
+              <defs>
+                <pattern
+                  id="ruh-star"
+                  width="48"
+                  height="48"
+                  patternUnits="userSpaceOnUse"
+                >
+                  <path
+                    d="M24 4 L28 20 L44 24 L28 28 L24 44 L20 28 L4 24 L20 20 Z"
+                    fill="none"
+                    stroke="var(--accent)"
+                    strokeWidth="0.75"
+                  />
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#ruh-star)" />
+            </svg>
+
             {verseLoading ? (
               <div className="space-y-2 animate-pulse">
                 <div className="h-3 bg-(--surface-glass-border) rounded-full w-full" />

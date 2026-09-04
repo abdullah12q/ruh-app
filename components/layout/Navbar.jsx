@@ -17,6 +17,7 @@ import ThemeToggle from "./ThemeToggle";
 import AuthButtomDesktop from "./AuthButtomDesktop";
 import MobileMenuToggle from "./MobileMenuToggle";
 import MobileMenuOverlay from "./MobileMenuOverlay";
+import ProfileDrawer from "./profile/ProfileDrawer";
 import { usePrayerTimes } from "@/hooks/usePrayerTimes";
 import { untilNextPrayerHintColor } from "@/data/datas/prayerTimesData";
 import DesktopNavLinks from "./DesktopNavLinks";
@@ -28,6 +29,7 @@ export default function Navbar() {
   const user = session?.user;
   const [mobileOpen, setMobileOpen] = useState(false);
   const [bookmarksOpen, setBookmarksOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   const navRef = useRef(null);
   const pathname = usePathname();
 
@@ -56,13 +58,32 @@ export default function Navbar() {
     return () => ctx.revert();
   }, []);
 
-  // Lock body scroll when mobile menu or bookmarks drawer is open
+  // Lock body scroll when any overlay is open
   useEffect(() => {
-    document.body.style.overflow = mobileOpen || bookmarksOpen ? "hidden" : "";
+    document.body.style.overflow =
+      mobileOpen || bookmarksOpen || profileOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [mobileOpen, bookmarksOpen]);
+  }, [mobileOpen, bookmarksOpen, profileOpen]);
+
+  // Listen for custom event coming from NotificationToggleButton to open profile drawer
+  useEffect(() => {
+    function handleOpenProfile(e) {
+      setProfileOpen(true);
+      if (e.detail?.scrollTo) {
+        setTimeout(() => {
+          const el = document.getElementById(e.detail.scrollTo);
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 300); // 300ms to allow drawer to animate in
+      }
+    }
+    window.addEventListener("open-profile-drawer", handleOpenProfile);
+    return () =>
+      window.removeEventListener("open-profile-drawer", handleOpenProfile);
+  }, []);
 
   const hintColor = untilNextPrayerHintColor(countdown, true);
 
@@ -114,7 +135,11 @@ export default function Navbar() {
             <ThemeToggle />
 
             {/* Auth Button (Desktop) */}
-            <AuthButtomDesktop status={status} user={user} signOut={signOut} />
+            <AuthButtomDesktop
+              status={status}
+              user={user}
+              onOpenProfile={() => setProfileOpen(true)}
+            />
 
             {/* Mobile Menu Toggle */}
             <MobileMenuToggle
@@ -131,6 +156,13 @@ export default function Navbar() {
         onClose={() => setBookmarksOpen(false)}
       />
 
+      {/* Profile Drawer */}
+      <ProfileDrawer
+        isOpen={profileOpen}
+        onClose={() => setProfileOpen(false)}
+        onOpenBookmarks={() => setBookmarksOpen(true)}
+      />
+
       {/* Mobile Menu Overlay */}
       <MobileMenuOverlay
         navLinks={navLinks}
@@ -143,6 +175,7 @@ export default function Navbar() {
         user={user}
         signOut={signOut}
         pathname={pathname}
+        onOpenProfile={() => setProfileOpen(true)}
       />
     </>
   );

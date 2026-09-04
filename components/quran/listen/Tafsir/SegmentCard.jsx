@@ -15,7 +15,6 @@ export default function SegmentCard({ seg, i, handlePlay, isActive }) {
       }}
       onClick={() => handlePlay(seg)}
       aria-pressed={isActive}
-      id={`tafsir-segment-${seg.id}`}
       className={`group relative w-full glass rounded-2xl px-5 py-4 flex items-center gap-4 text-left transition-all duration-300 cursor-pointer overflow-hidden ${
         isActive
           ? "border-accent/50 shadow-[0_0_20px_rgba(20,184,166,0.12)]!"

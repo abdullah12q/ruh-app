@@ -33,7 +33,7 @@ export async function GET(req) {
   try {
     await connectDB();
 
-    const result = await Halaqah.updateOne(
+    const updatedHalaqah = await Halaqah.findOneAndUpdate(
       {
         _id: halaqahId,
         "members.userId": userId,
@@ -43,7 +43,7 @@ export async function GET(req) {
       },
     );
 
-    if (result.matchedCount === 0) {
+    if (!updatedHalaqah) {
       return new NextResponse(
         buildHTML(
           "Already Removed",

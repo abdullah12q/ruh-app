@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { fadeUp } from "@/data/animationVariants";
 import { untilNextPrayerHintColor } from "@/data/datas/prayerTimesData";
-import NotificationToggleButton from "./NotificationToggleButton";
+import NotificationToggleButton from "../NotificationToggleButton";
 
 export default function PrayerTimesHeroHeader({
   isLoading,

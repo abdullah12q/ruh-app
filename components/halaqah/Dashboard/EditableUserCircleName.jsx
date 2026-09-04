@@ -1,19 +1,34 @@
 import { useEffect, useRef, useState } from "react";
 import { Loader2, Pencil, Check, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import { updateStudyCircleName } from "@/lib/actions/halaqah";
+import {
+  getStudyCircleName,
+  updateStudyCircleName,
+} from "@/lib/actions/halaqah";
+import { useQuery } from "@tanstack/react-query";
+import { useSession } from "next-auth/react";
 
-export default function EditableUserCircleName({ userStudyCircleName }) {
+export default function EditableUserCircleName() {
+  const { data: session } = useSession();
+  const user = session?.user;
+
+  const { data: name, isFetching } = useQuery({
+    queryKey: ["my-circle-name"],
+    queryFn: () => getStudyCircleName(),
+  });
+
   const inputRef = useRef(null);
-  const [oldName, setOldName] = useState(userStudyCircleName);
-  const [newName, setNewName] = useState(userStudyCircleName);
+  const [oldName, setOldName] = useState(name ?? "");
+  const [newName, setNewName] = useState(name ?? "");
   const [isSavingName, setIsSavingName] = useState(false);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setNewName(userStudyCircleName);
-    setOldName(userStudyCircleName);
-  }, [userStudyCircleName]);
+    if (!isFetching) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setNewName(name);
+      setOldName(name);
+    }
+  }, [name, isFetching]);
 
   async function handleSaveName(e) {
     e.preventDefault();
@@ -42,18 +57,23 @@ export default function EditableUserCircleName({ userStudyCircleName }) {
           My Circle Name
         </span>
 
-        <form onSubmit={handleSaveName}>
-          <input
-            ref={inputRef}
-            type="text"
-            value={newName}
-            onChange={(e) => setNewName(e.target.value)}
-            disabled={isSavingName}
-            maxLength={60}
-            className="w-full bg-transparent border-b border-b-transparent focus:border-b focus:border-accent text-sm font-jakarta text-text-primary focus:outline-none py-0.5 placeholder-text-secondary/50 transition-colors duration-500"
-            placeholder="Enter your display name..."
-          />
-        </form>
+        {isFetching ? (
+          <div className="h-6 w-42 glass rounded animate-pulse" />
+        ) : (
+          <form onSubmit={handleSaveName}>
+            <input
+              ref={inputRef}
+              type="text"
+              value={newName}
+              onChange={(e) => setNewName(e.target.value)}
+              disabled={isSavingName}
+              maxLength={60}
+              aria-label="Edit study circle name"
+              placeholder={`eg. ${user?.name || "Your Name"}`}
+              className="w-full bg-transparent border-b border-b-transparent focus:border-b focus:border-accent text-sm font-jakarta text-text-primary focus:outline-none py-0.5 placeholder-text-secondary/50 transition-colors duration-500"
+            />
+          </form>
+        )}
       </div>
 
       <AnimatePresence mode="popLayout">

@@ -6,12 +6,18 @@ import {
   Calendar,
   Check,
   Copy,
+  BellRing,
+  BellOff,
+  Loader2,
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import { toggleEmailSubscription } from "@/lib/actions/halaqah";
 
 export default function HalaqahCard({ halaqah, index }) {
   const [copied, setCopied] = useState(false);
+  const [isToggling, setIsToggling] = useState(false);
+  const [optimisticOptOut, setOptimisticOptOut] = useState(halaqah.emailOptOut);
 
   const isAdmin = halaqah.myRole === "admin";
 
@@ -30,6 +36,32 @@ export default function HalaqahCard({ halaqah, index }) {
     navigator.clipboard.writeText(halaqah.inviteCode);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  }
+
+  async function handleToggleEmail(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (isToggling) return;
+
+    setIsToggling(true);
+
+    // Immediately update UI locally
+    const newOptOutState = !optimisticOptOut;
+    setOptimisticOptOut(newOptOutState);
+
+    try {
+      const result = await toggleEmailSubscription(halaqah.id, newOptOutState);
+      if (!result.success) {
+        // Revert the UI if the server failed
+        setOptimisticOptOut(!newOptOutState);
+        console.error(result.error);
+      }
+    } catch (err) {
+      // Revert on network error
+      setOptimisticOptOut(!newOptOutState);
+    } finally {
+      setIsToggling(false);
+    }
   }
 
   return (
@@ -71,7 +103,7 @@ export default function HalaqahCard({ halaqah, index }) {
           />
         </div>
         {/* Stats row */}
-        <div className="flex items-center gap-4 text-xs text-text-secondary font-inter">
+        <div className="flex items-center gap-4 text-xs text-text-secondary font-inter mb-4">
           <span className="flex items-center gap-1.5">
             <UsersRound size={12} className="text-accent/70" />
             {halaqah.memberCount}{" "}
@@ -84,13 +116,40 @@ export default function HalaqahCard({ halaqah, index }) {
             </span>
           )}
         </div>
-        {/* Invite code badge */}
-        <div className="mt-4 pt-4 border-t border-(--surface-glass-border) flex items-center justify-between">
-          <span className="text-xs text-text-secondary font-inter">Code:</span>
+
+        {/* Actions row */}
+        <div className="pt-4 border-t border-(--surface-glass-border) flex items-center justify-between gap-2">
+          <button
+            onClick={handleToggleEmail}
+            disabled={isToggling}
+            className={`flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1.5 rounded-lg border transition-all duration-300 cursor-pointer ${
+              optimisticOptOut
+                ? "bg-text-secondary/5 text-text-secondary border-text-secondary/10 hover:bg-text-secondary/10 hover:text-text-primary"
+                : "bg-accent/5 text-accent border-accent/10 hover:bg-accent/10 hover:border-accent/30"
+            }`}
+            title={
+              optimisticOptOut
+                ? "Turn on Email Digests"
+                : "Turn off Email Digests"
+            }
+          >
+            {isToggling ? (
+              <Loader2 size={12} className="animate-spin" />
+            ) : optimisticOptOut ? (
+              <BellOff size={12} />
+            ) : (
+              <BellRing size={12} />
+            )}
+            {optimisticOptOut ? "Emails Off" : "Emails On"}
+          </button>
+
           <button
             onClick={handleCopy}
-            className="flex items-center gap-2 text-xs font-mono font-bold tracking-widest text-accent bg-accent/10 px-2.5 py-1 rounded-lg border border-accent/20 cursor-pointer hover:bg-accent/20 hover:text-accent hover:border-accent transition-all duration-500"
+            className="flex items-center gap-1.5 text-[11px] font-mono font-bold tracking-widest text-accent bg-accent/10 px-2.5 py-1.5 rounded-lg border border-accent/20 cursor-pointer hover:bg-accent/20 hover:text-accent hover:border-accent transition-all duration-500"
           >
+            <span className="text-text-secondary font-inter font-normal tracking-normal">
+              Code:
+            </span>
             {halaqah.inviteCode}
             <AnimatePresence mode="popLayout">
               {copied ? (

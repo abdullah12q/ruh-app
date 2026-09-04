@@ -11,7 +11,7 @@ import CreateJoinModal from "./CreateJoinModal/CreateJoinModal";
 import EditableUserCircleName from "./EditableUserCircleName";
 import DigestTipBanner from "./DigestTipBanner";
 
-export default function HalaqahDashboard({ userStudyCircleName }) {
+export default function HalaqahDashboard() {
   const { status } = useSession();
   const [modal, setModal] = useState(null);
 
@@ -23,7 +23,7 @@ export default function HalaqahDashboard({ userStudyCircleName }) {
     };
   }, [modal]);
 
-  const { data: halaqahs, isLoading, isError, refetch } = useUserHalaqahs();
+  const { data: halaqahs, isFetching, isError, refetch } = useUserHalaqahs();
   if (status === "loading") {
     return (
       <div className="max-w-7xl mx-auto flex items-center justify-center py-32">
@@ -81,7 +81,7 @@ export default function HalaqahDashboard({ userStudyCircleName }) {
         </div>
 
         {/* Editable User Study Circle Name */}
-        <EditableUserCircleName userStudyCircleName={userStudyCircleName} />
+        <EditableUserCircleName />
       </div>
 
       {/* Quranic Inspiration: Al-Mutaffifin 83:26 */}
@@ -183,7 +183,7 @@ export default function HalaqahDashboard({ userStudyCircleName }) {
       </motion.div>
 
       {/* Circles list */}
-      {isLoading ? (
+      {isFetching ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {[...Array(3)].map((_, i) => (
             <div key={i} className="skeleton h-44 rounded-2xl" />

@@ -14,7 +14,6 @@ export default function ModeToggle({ activeMode, setActiveMode }) {
         {MODES.map((mode) => (
           <button
             key={mode.key}
-            id={`mode-toggle-${mode.key}`}
             onClick={() => setActiveMode(mode.key)}
             className={`relative z-10 flex items-center gap-2 px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold font-jakarta transition-all duration-300 cursor-pointer ${
               activeMode === mode.key

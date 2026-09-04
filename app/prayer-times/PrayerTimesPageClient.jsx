@@ -28,6 +28,14 @@ export default function PrayerTimesPageClient() {
     refetch,
   } = usePrayerTimes();
 
+  async function refetchLocation() {
+    try {
+      await refetch();
+    } catch (error) {
+      console.error("Failed to fetch location:", error);
+    }
+  }
+
   if (isError && !isLoading) {
     return (
       <div className="min-h-screen pt-28 pb-24 px-4 sm:px-6 lg:px-8">
@@ -40,7 +48,7 @@ export default function PrayerTimesPageClient() {
             The Aladhan API is unavailable. Please try again.
           </p>
           <button
-            onClick={refetch}
+            onClick={refetchLocation}
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl glass text-sm text-text-secondary hover:text-accent transition-colors cursor-pointer"
           >
             <RotateCcw size={14} />
@@ -56,7 +64,7 @@ export default function PrayerTimesPageClient() {
       <div className="max-w-6xl mx-auto">
         {/* Hero */}
         {permissionDenied ? (
-          <PermissionDenied onRetry={refetch} />
+          <PermissionDenied onRetry={refetchLocation} />
         ) : (
           <>
             <PrayerTimesHero
@@ -70,7 +78,7 @@ export default function PrayerTimesPageClient() {
               countdown={countdown}
               nextPrayerKey={nextPrayerKey}
               isLoading={isLoading}
-              onRefetch={refetch}
+              onRefetch={refetchLocation}
             />
 
             {/* Today's prayers */}

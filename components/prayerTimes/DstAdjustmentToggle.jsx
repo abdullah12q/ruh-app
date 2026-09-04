@@ -29,7 +29,6 @@ export default function DstAdjustmentToggle() {
           return (
             <button
               key={opt.value}
-              id={`dst-option-${opt.value}`}
               title={opt.title}
               aria-pressed={isActive}
               onClick={() => setDstAdjustment(opt.value)}

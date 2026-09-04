@@ -14,7 +14,7 @@ import SurahAlKahfHadith from "./SurahAlKahfHadith";
 import SurahAlKahfSource from "./SurahAlKahfSource";
 
 export default function SurahAlKahfSection() {
-  const { prayers, isLoading } = usePrayerTimes();
+  const { permissionDenied, prayers, isLoading } = usePrayerTimes();
   const [mounted, setMounted] = useState(false);
 
   // Avoid hydration mismatch — only run on client
@@ -37,7 +37,7 @@ export default function SurahAlKahfSection() {
 
   return (
     <AnimatePresence>
-      {shouldShow && (
+      {shouldShow && !permissionDenied && (
         <motion.section
           key="kahf-section"
           aria-label="Surah Al-Kahf Friday reminder"
