@@ -16,7 +16,7 @@ export default function ReadingStatsSection({ onClose }) {
   const favCount = favoriteReciters.length;
 
   // Most recent read
-  const latestRead = recentReads?.[0] ?? lastRead;
+  const latestRead = recentReads?.[0] ?? lastRead ?? null;
   const lastSurah = latestRead
     ? surahMeta.find((s) => s.id === latestRead.surahId)
     : null;
@@ -38,14 +38,14 @@ export default function ReadingStatsSection({ onClose }) {
     },
   ];
 
-  const currentPage = latestRead.currentPage;
+  const currentPage = latestRead?.currentPage ?? null;
 
-  const baseUrl = `/quran/${lastSurah.id}`;
+  const baseUrl = `/quran/${lastSurah?.id}`;
   const extraUrl =
     mushafMode && currentPage
       ? `?page=${currentPage}`
-      : latestRead.ayahNumber && !mushafMode
-        ? `#ayah-${latestRead.ayahNumber}`
+      : latestRead?.ayahNumber && !mushafMode
+        ? `#ayah-${latestRead?.ayahNumber}`
         : "";
 
   return (
