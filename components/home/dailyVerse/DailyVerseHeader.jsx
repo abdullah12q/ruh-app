@@ -21,7 +21,7 @@ export default function DailyVerseHeader({
         favoriteReciters={favoriteReciters}
         onSelect={onSelectReciter}
         onToggleFavorite={onToggleFavoriteReciter}
-        inDailyVerse
+        isPositionCentered
       />
       <div className="flex gap-2">
         <LanguageToggle

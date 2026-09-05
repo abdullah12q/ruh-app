@@ -172,6 +172,7 @@ export default function SurahReadingControls() {
         favoriteReciters={favoriteReciters}
         onSelect={setSelectedReciter}
         onToggleFavorite={toggleFavoriteReciter}
+        isPositionCentered
       />
 
       <AnimatePresence mode="popLayout">
