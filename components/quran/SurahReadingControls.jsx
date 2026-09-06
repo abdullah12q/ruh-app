@@ -122,10 +122,7 @@ export default function SurahReadingControls() {
   return (
     // ── Controls Bar ──
     <div className="sticky top-16.75 sm:top-16.25 z-30 mb-6 w-full">
-      <motion.div
-        layout
-        className="backdrop-blur-xl glass rounded-2xl overflow-hidden shadow-lg"
-      >
+      <div className="backdrop-blur-xl glass rounded-2xl overflow-hidden shadow-lg">
         {/* Toggle Button */}
         <button
           onClick={toggleIsExpandedReadingControls}
@@ -394,7 +391,7 @@ export default function SurahReadingControls() {
             </motion.div>
           )}
         </AnimatePresence>
-      </motion.div>
+      </div>
     </div>
   );
 }
