@@ -9,7 +9,6 @@ self.addEventListener("message", (event) => {
       nameEn,
       nameAr,
       offsetsMinutes, // e.g. [5, 0] for two reminders
-      graceMs = 60 * 1000, // still fire if we wake up up to this late
     } = payload;
 
     const now = Date.now();
@@ -30,7 +29,7 @@ self.addEventListener("message", (event) => {
       const fireAt = prayerTime - minutesBefore * 60 * 1000;
       const delay = fireAt - now;
 
-      if (delay < -graceMs) return; // too late, skip silently
+      if (delay < 0) return; // already past, skip silently
 
       const timeoutId = setTimeout(
         () => {
@@ -45,7 +44,7 @@ self.addEventListener("message", (event) => {
           // Remove from tracking array once fired
           timers = timers.filter((t) => t.timeoutId !== timeoutId);
         },
-        Math.max(delay, 0),
+        delay,
       );
 
       timers.push({ id, timeoutId });
