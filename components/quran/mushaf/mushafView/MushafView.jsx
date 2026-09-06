@@ -20,7 +20,6 @@ export default function MushafView() {
   const canGoPrev = currentPage > firstPage;
   const canGoNext = currentPage < lastPage;
 
-  // Simple, smoothed slide — no page-flip, just a softer spring + a hint of scale.
   const variants = {
     enter: (dir) => ({ opacity: 0, x: dir === 1 ? -16 : 16, scale: 0.99 }),
     center: { opacity: 1, x: 0, scale: 1 },
@@ -30,17 +29,7 @@ export default function MushafView() {
   return (
     <div className="space-y-5">
       {/* Navigation Header */}
-      <div className="flex items-center justify-between px-1 font-jakarta">
-        <button
-          onClick={goToNextPage}
-          disabled={!canGoNext}
-          aria-label="Next Mushaf page"
-          className="group flex items-center gap-1.5 px-3 py-1.5 rounded-full glass text-sm text-text-secondary hover:text-accent disabled:opacity-25 disabled:cursor-not-allowed transition-all duration-200 cursor-pointer"
-        >
-          <ChevronLeft className="size-4 transition-transform duration-200 group-hover:-translate-x-0.5" />
-          Next
-        </button>
-
+      <div className="w-fit mx-auto text-center font-jakarta">
         {/* Page medallion */}
         <div className="flex items-center gap-2 px-4 py-1.5 glass border-accent/20! rounded-full font-inter">
           <motion.span
@@ -58,17 +47,6 @@ export default function MushafView() {
             </span>
           )}
         </div>
-
-        {/* Previous Button is physically on the RIGHT side of the screen */}
-        <button
-          onClick={goToPrevPage}
-          disabled={!canGoPrev}
-          aria-label="Previous Mushaf page"
-          className="group flex items-center gap-1.5 px-3 py-1.5 rounded-full glass text-sm text-text-secondary hover:text-accent disabled:opacity-25 disabled:cursor-not-allowed transition-all duration-200 cursor-pointer"
-        >
-          Previous
-          <ChevronRight className="size-4 transition-transform duration-200 group-hover:translate-x-0.5" />
-        </button>
       </div>
 
       {/* Page area with animated transition */}
@@ -91,6 +69,28 @@ export default function MushafView() {
             <PageLoader pageNumber={currentPage} />
           </motion.div>
         </AnimatePresence>
+      </div>
+
+      <div className="flex items-center justify-between px-1 font-jakarta">
+        <button
+          onClick={goToNextPage}
+          disabled={!canGoNext}
+          aria-label="Next Mushaf page"
+          className="group flex items-center gap-1.5 px-3 py-1.5 rounded-full glass text-sm text-text-secondary hover:text-accent disabled:opacity-25 disabled:cursor-not-allowed transition-all duration-200 cursor-pointer"
+        >
+          <ChevronLeft className="size-4 transition-transform duration-200 group-hover:-translate-x-0.5" />
+          Next
+        </button>
+
+        <button
+          onClick={goToPrevPage}
+          disabled={!canGoPrev}
+          aria-label="Previous Mushaf page"
+          className="group flex items-center gap-1.5 px-3 py-1.5 rounded-full glass text-sm text-text-secondary hover:text-accent disabled:opacity-25 disabled:cursor-not-allowed transition-all duration-200 cursor-pointer"
+        >
+          Previous
+          <ChevronRight className="size-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+        </button>
       </div>
 
       {/* Tasbih-style dot pagination */}
